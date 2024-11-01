@@ -1,7 +1,7 @@
 package com.walking.intensive.chapter3.task11;
 
 /**
- * Условие: <a href="https://geometry-math.ru/homework/Java-Subarray.html">Подмассив</a>
+ * Условие: <a href="https://geometry-math.ru/homework/Java-Subarray.html">Подмассив</a>.
  */
 public class Task11 {
     public static void main(String[] args) {

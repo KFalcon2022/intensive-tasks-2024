@@ -1,7 +1,7 @@
 package com.walking.intensive.chapter3.task12;
 
 /**
- * Условие: <a href="https://geometry-math.ru/homework/Java-balls.html">МЯЧИКИ</a>
+ * Условие: <a href="https://geometry-math.ru/homework/Java-balls.html">МЯЧИКИ</a>.
  */
 public class Task12 {
     public static void main(String[] args) {

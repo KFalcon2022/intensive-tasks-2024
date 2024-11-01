@@ -1,7 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
 /**
- * Условие: <a href="https://geometry-math.ru/homework/Java-Circle.html">КРУГИ</a>
+ * Условие: <a href="https://geometry-math.ru/homework/Java-Circle.html">КРУГИ</a>.
  */
 public class Task14 {
     public static void main(String[] args) {
