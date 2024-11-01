@@ -37,6 +37,14 @@ public class Task2 {
 
     }
 
+    /**
+     * Метод определяющий расположение квартиры на этаже.
+     *
+     * @param floorAmount количество этажей в доме
+     * @param entranceAmount количество подъездов в доме
+     * @param flatNumber номер квартиры
+     * @return подъезд, этаж и расположение нужной квартиры на этаже(или отсутствие решения)
+     */
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         //        Место для вашего кода
 

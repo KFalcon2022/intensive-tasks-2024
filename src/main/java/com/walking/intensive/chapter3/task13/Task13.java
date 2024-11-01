@@ -1,7 +1,7 @@
 package com.walking.intensive.chapter3.task13;
 
 /**
- * Условие: <a href="https://geometry-math.ru/Java-Watering-Plants.html">ПОЛИВ РАСТЕНИЙ</a>
+ * Условие: <a href="https://geometry-math.ru/Java-Watering-Plants.html">ПОЛИВ РАСТЕНИЙ</a>.
  */
 public class Task13 {
     public static void main(String[] args) {
