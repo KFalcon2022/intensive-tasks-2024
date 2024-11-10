@@ -21,9 +21,6 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        if (age > 0) {
-            return "Вам меньше 0";
-        }
         return "Вам 31 год";
     }
 }
