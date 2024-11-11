@@ -21,8 +21,7 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        return "33"; // Заглушка. При реализации - удалить
     }
 }
