@@ -34,12 +34,13 @@ jobs:
           MODIFIED_TASK_CLASSES=$(echo "$MODIFIED_FILES" | grep 'Task' || true)
           TEST_CLASSES=""
           for file in $MODIFIED_TASK_CLASSES; do
-            TEST_CLASSES="$TEST_CLASSES ${file%.java}Test.java"
+            test_class=$(echo "${file%.java}Test.java" | sed 's|^src/main/java/||')
+            TEST_CLASSES="$TEST_CLASSES --tests $test_class"
           done
           echo "TEST_CLASSES=$TEST_CLASSES" >> $GITHUB_ENV
 
       - name: Run Checkstyle and Tests
         run: |
           if [[ -n "$TEST_CLASSES" ]]; then
-            ./gradlew checkstyleMain test --tests "$TEST_CLASSES"
+            ./gradlew checkstyleMain test "$TEST_CLASSES"
           fi
