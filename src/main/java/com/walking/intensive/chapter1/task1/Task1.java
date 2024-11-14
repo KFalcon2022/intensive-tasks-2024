@@ -22,7 +22,9 @@ public class Task1 {
 
     static String getAgeString(int age) {
 //        Место для вашего кода
-
+        if (age == 3){
+            throw new SecurityException();
+        }
         return null; // Заглушка. При реализации - удалить
     }
 }
