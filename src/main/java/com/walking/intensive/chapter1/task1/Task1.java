@@ -21,8 +21,16 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
+        int modulo = age%100;
 
-        return null; // Заглушка. При реализации - удалить
+        if (modulo == 11 || modulo == 12 || modulo == 13 || modulo == 14) {
+            return "Вам %d лет".formatted(age);
+        }
+
+        return switch (age % 10) {
+            case 1 -> "Вам %d год".formatted(age);
+            case 2, 3, 4 -> "Вам %d года".formatted(age);
+            default -> "Вам %d лет".formatted(age);
+        };
     }
 }
