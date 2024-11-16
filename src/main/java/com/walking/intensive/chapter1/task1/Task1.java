@@ -21,7 +21,7 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
+//        asssМесто для вашего кода
 
         return null; // Заглушка. При реализации - удалить
     }
