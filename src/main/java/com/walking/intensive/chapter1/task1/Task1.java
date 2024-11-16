@@ -23,6 +23,6 @@ public class Task1 {
     static String getAgeString(int age) {
 //        asssМесто для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        return "asd"; // Заглушка. При реализации - удалить
     }
 }
