@@ -15,14 +15,23 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
+        int age = 14;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
+        String s;
+      if (age==1 || age==21 || age==31 || age==41 || age==51 || age==61 || age==71 || age==81 || age==91 || age==101){
+             s = "Вам "+age+" год";
+      }else if ((age>=2 && age<=4) || (age>=22 && age<=24) || (age>=32 && age<=34) || (age>=42 && age<=44) || (age>=52 && age<=54) || (age>=62 && age<=64) || (age>=72 && age<=74) || (age>=82 && age<=84) || (age>=92 && age<=94) || (age>=102 && age<=104)){
+             s = "Вам "+age+" года";
+     } else if ((age>=5 && age<=20) || (age>=25 && age<=30) || (age>=35 && age<=40) || (age>=45 && age<=50) || (age>=55 && age<=60) || (age>=65 && age<=70) || (age>=75 && age<=80) || (age>=85 && age<=90) || (age>=95 && age<=100) || (age>=115 && age<=120)){
+             s = "Вам "+age+" лет";
+      } else {
+          s = "Некорректный ввод";
+      }
 
-        return null; // Заглушка. При реализации - удалить
+      return s;
     }
 }
