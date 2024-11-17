@@ -15,7 +15,7 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 
-        int age = 0;
+        int age = 22;
 
         System.out.println(getAgeString(age));
     }
@@ -26,7 +26,7 @@ public class Task1 {
 
         if (toModuloDivideByTen == 1 && toModuloDivideByOneHundred != 11) {
             return "Вам " + age + " " + "год";
-        } else if (toModuloDivideByTen >= 2 && toModuloDivideByOneHundred <= 4 && (toModuloDivideByOneHundred < 12 || toModuloDivideByOneHundred > 14)) {
+        } else if (toModuloDivideByTen >= 2 && toModuloDivideByTen <= 4 && (toModuloDivideByOneHundred < 12 || toModuloDivideByOneHundred > 14)) {
             return "Вам " + age + " " + "года";
         } else if (age >= 5 || age <= 20 || toModuloDivideByTen > 5) {
             return "Вам " + age + " " + "лет";
