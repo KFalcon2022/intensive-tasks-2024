@@ -21,16 +21,16 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        if (age%10==1 && age%100!=11){
+        int toModuloDivideByTen = age % 10;
+        int toModuloDivideByOneHundred = age % 100;
+
+        if (toModuloDivideByTen == 1 && toModuloDivideByOneHundred != 11) {
             return "Вам " + age + " " + "год";
-        }
-        else if (age%10>=2 && age%10<=4 && (age%100<12 || age%100>14)){
+        } else if (toModuloDivideByTen >= 2 && toModuloDivideByOneHundred <= 4 && (toModuloDivideByOneHundred < 12 || toModuloDivideByOneHundred > 14)) {
             return "Вам " + age + " " + "года";
-        }
-        else if(age>=5 || age<=20 || age%10>5){
+        } else if (age >= 5 || age <= 20 || toModuloDivideByTen > 5) {
             return "Вам " + age + " " + "лет";
-        }
-        else {
+        } else {
             return "Не корректный ввод";
         }
 
