@@ -21,16 +21,8 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        if (age < 0) {
+        if (age < 0 || age > 127) {
             return "Некорректный ввод";
-        }
-
-        if (age == 0) {
-            return "Вам 0 лет";
-        }
-
-        if (age == 1) {
-            return "Вам 1 год";
         }
 
         int lastDigit = age % 10;
