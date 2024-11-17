@@ -21,8 +21,19 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        String year_type;
+
+        if (10 <= (age % 100)  && (age % 100) < 15) {
+            year_type = " лет";
+        } else if (age == 1 | age % 10 == 1 | age % 100 == 1) {
+            year_type = " год";
+        } else if (1 < (age % 10) && (age % 10) < 5) {
+            year_type = " года";
+        } else {
+            year_type = " лет";
+        }
+
+        return "Вам " + age + year_type;
     }
 }
