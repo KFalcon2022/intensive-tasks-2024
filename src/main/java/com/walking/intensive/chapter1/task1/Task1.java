@@ -23,6 +23,22 @@ public class Task1 {
     static String getAgeString(int age) {
 //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        String ageString;
+
+        String yearPrefix = switch (age) {
+            case 1, 21, 31, 41, 51, 61, 71, 81, 91, 101, 121 -> "год";
+            case 2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84,
+                 92, 93, 94, 102, 103, 104, 122, 123, 124 -> "года";
+            default -> "лет";
+        };
+
+        if (age < 0){
+            ageString = "Некорректный ввод";
+        }
+        else {
+            ageString = "Вам " + age + " " + yearPrefix;
+        }
+
+        return ageString;
     }
 }
