@@ -37,29 +37,33 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+        int flatsPerFloor = 4;
+
+        if (validateInput(floorAmount, entranceAmount, flatNumber, flatsPerFloor)) {
             return "Такой квартиры не существует";
         }
 
-        int totalFlats = 4 * floorAmount * entranceAmount;
-        int flatsPerEntrance = floorAmount * 4;
-
-        if (flatNumber > totalFlats) {
-            return "Такой квартиры не существует";
-        }
+        int flatsPerEntrance = floorAmount * flatsPerFloor;
+        int flatInEntrance = (flatNumber - 1) % flatsPerEntrance;
 
         int entrance = (flatNumber - 1) / flatsPerEntrance + 1;
-        int floor = (flatNumber - 1) % flatsPerEntrance / 4 + 1;
-        int positionOnFloor = (flatNumber - 1) % flatsPerEntrance % 4;
+        int floor = flatInEntrance / flatsPerFloor + 1;
 
-        String sideOfElevator = switch (positionOnFloor) {
+        int floorPosition = flatInEntrance % flatsPerFloor;
+
+        String elevatorSide = switch (floorPosition) {
             case 0 -> "слева от лифта, влево";
             case 1 -> "слева от лифта, вправо";
             case 2 -> "справа от лифта, влево";
             case 3 -> "справа от лифта, вправо";
-            default -> throw new IllegalStateException("Unexpected value: " + positionOnFloor);
+            default -> "Некорректные входные данные";
         };
 
-        return "%d кв - %d подъезд, %d этаж, %s".formatted(flatNumber, entrance, floor, sideOfElevator);
+        return "%d кв - %d подъезд, %d этаж, %s".formatted(flatNumber, entrance, floor, elevatorSide);
+    }
+
+    private static boolean validateInput(int floorAmount, int entranceAmount, int flatNumber, int flatsPerFloor) {
+        int totalFlats = flatsPerFloor * floorAmount * entranceAmount;
+        return floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0 || flatNumber > totalFlats;
     }
 }
