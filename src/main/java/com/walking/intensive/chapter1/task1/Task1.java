@@ -21,22 +21,20 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
-
         String ageString;
+        int remainderFromHundred = age % 100;
+        int remainderFromTen = age % 10;
 
-        String yearPrefix = switch (age) {
-            case 1, 21, 31, 41, 51, 61, 71, 81, 91, 101, 121 -> "год";
-            case 2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84,
-                 92, 93, 94, 102, 103, 104, 122, 123, 124 -> "года";
-            default -> "лет";
-        };
-
-        if (age < 0){
+        if (age < 0) {
             ageString = "Некорректный ввод";
-        }
-        else {
-            ageString = "Вам " + age + " " + yearPrefix;
+        } else if (remainderFromHundred >= 11 && remainderFromHundred <= 20) {
+            ageString = "Вам " + age + " лет";
+        } else if (remainderFromTen == 1) {
+            ageString = "Вам " + age + " год";
+        } else if (remainderFromTen == 2 || remainderFromTen == 3 || remainderFromTen == 4) {
+            ageString = "Вам " + age + " года";
+        } else {
+            ageString = "Вам " + age + " лет";
         }
 
         return ageString;
