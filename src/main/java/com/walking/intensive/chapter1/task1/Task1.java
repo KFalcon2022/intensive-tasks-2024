@@ -30,13 +30,13 @@ public class Task1 {
             return String.format("Вам %s лет", age);
 
         } else if (age % 10 == 1) {
-            return String.format("Вам %s год", age); // Нахожу вывод тескта с окончанием "год".
+            return String.format("Вам %s год", age);
 
         } else if (age % 10 == 2 || age % 10 == 3 || age % 10 == 4) {
-            return String.format("Вам %s года", age); // Нахожу вывод текста с окончанием "года".
+            return String.format("Вам %s года", age);
 
         } else {
-            return String.format("Вам %s лет", age); // Всё оставшееся множество оканчивается на "лет".
+            return String.format("Вам %s лет", age);
         }
 
     }
