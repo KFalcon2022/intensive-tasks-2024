@@ -18,29 +18,24 @@ public class Task1 {
         int age = 114343422;
 
         System.out.println(getAgeString(age));
-
     }
 
     static String getAgeString(int age) {
 //        Место для вашего кода
         if (age < 0) {
-
             return "Некорректный ввод";
+        }
 
-        } else if (age % 10 == 1 && age / 10 % 10 != 1) {
-
+        if (age % 10 == 1 && age / 10 % 10 != 1) {
             return "Вам " + age + " год";
+        }
 
-        } else if (age % 10 == 2 || age % 10 == 3 || age % 10 == 4 && age / 10 % 10 != 1) {
-
+        if (age % 10 >= 2 && age % 10 <= 4 && age / 10 % 10 != 1) {
             return "Вам " + age + " года";
-
         }
 
         return "Вам " + age + " лет";
-
     }
-
 }
 
 
