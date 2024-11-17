@@ -21,7 +21,7 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
-        if (age < 1 || age > 120) {
+        if (age < 0) {
             return "Некорректный ввод";
         }
 
