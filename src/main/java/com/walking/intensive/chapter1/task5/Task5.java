@@ -23,9 +23,13 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
+        if (isInvalidTriangle(a, b, c)) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double p = (a + b + c) / 2;
+
+        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
     /**
@@ -36,9 +40,22 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if (isInvalidTriangle(a, b, c)) {
+            return new double[0];
+        }
+
+        double S = getAreaByHeron(a, b, c);
+        double[] result = new double[3];
+        double maxSide = Math.max(Math.max(a, b), c);
+        double minSide = Math.min(Math.min(a, b), c);
+        double mediumSide = a + b + c - maxSide - minSide;
+
+        result[0] = 2 * S / maxSide;
+        result[1] = 2 * S / mediumSide;
+        result[2] = 2 * S / minSide;
+
+        return result;
     }
 
     /**
@@ -49,9 +66,21 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if (isInvalidTriangle(a, b, c)) {
+            return new double[0];
+        }
+
+        double m1 = Math.sqrt(2 * a * a + 2 * b * b - c * c) / 2;
+        double m2 = Math.sqrt(2 * b * b + 2 * c * c - a * a) / 2;
+        double m3 = Math.sqrt(2 * a * a + 2 * c * c - b * b) / 2;
+
+        double[] result = new double[3];
+        result[0] = Math.min(Math.min(m1, m2), m3);
+        result[2] = Math.max(Math.max(m1, m2), m3);
+        result[1] = m1 + m2 + m3 - result[0] - result[2];
+
+        return result;
     }
 
     /**
@@ -62,9 +91,21 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if (isInvalidTriangle(a, b, c)) {
+            return new double[0];
+        }
+
+        double b1 = Math.sqrt(b * c * (b * b + 2 * b * c + c * c - a * a) / (b + c));
+        double b2 = Math.sqrt(a * c * (a * a + 2 * a * c + c * c - b * b) / (a + c));
+        double b3 = Math.sqrt(a * b * (a * a + 2 * a * b + b * b - c * c) / (a + b));
+
+        double[] result = new double[3];
+        result[0] = Math.min(Math.min(b1, b2), b3);
+        result[2] = Math.max(Math.max(b1, b2), b3);
+        result[1] = b1 + b2 + b3 - result[0] - result[2];
+
+        return result;
     }
 
     /**
@@ -75,9 +116,22 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if (isInvalidTriangle(a, b, c)) {
+            return new double[0];
+        }
+
+        double S = getAreaByHeron(a, b, c);
+        double A = Math.asin(2*S/b/c);
+        double B = Math.asin(2*S/a/c);
+        double C = Math.asin(2*S/a/b);
+
+        double[] result = new double[3];
+        result[0] = Math.min(Math.min(A, B), C);
+        result[2] = Math.max(Math.max(A, B), C);
+        result[1] = A + B + C - result[0] - result[2];
+
+        return result;
     }
 
     /**
@@ -88,9 +142,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        if (isInvalidTriangle(a, b, c)) {
+            return -1;
+        }
+
+        return getAreaByHeron(a, b, c) / (a + b + c) * 2;
     }
 
     /**
@@ -101,9 +158,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        if (isInvalidTriangle(a, b, c)) {
+            return -1;
+        }
+
+        return a * b * c / 4 / getAreaByHeron(a, b, c);
     }
 
     /**
@@ -121,8 +181,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        if (isInvalidTriangle(a, b, c)) {
+            return -1;
+        }
+
+        double cosA = (c * c - a * a - b * b) / 2 / a / b;
+        double sinA = Math.sqrt(1 - cosA * cosA);
+
+        return b * c * sinA / 2;
+    }
+
+    static boolean isInvalidTriangle(double a, double b, double c) {
+        return a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a;
     }
 }
