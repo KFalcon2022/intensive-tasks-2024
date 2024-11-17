@@ -33,12 +33,33 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getFlatLocation(5, 3, 28));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            return "Такой квартиры не существует";
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        int totalFlats = 4 * floorAmount * entranceAmount;
+        int flatsPerEntrance = floorAmount * 4;
+
+        if (flatNumber > totalFlats) {
+            return "Такой квартиры не существует";
+        }
+
+        int entrance = (flatNumber - 1) / flatsPerEntrance + 1;
+        int floor = (flatNumber - 1) % flatsPerEntrance / 4 + 1;
+        int positionOnFloor = (flatNumber - 1) % flatsPerEntrance % 4;
+
+        String sideOfElevator = switch (positionOnFloor) {
+            case 0 -> "слева от лифта, влево";
+            case 1 -> "слева от лифта, вправо";
+            case 2 -> "справа от лифта, влево";
+            case 3 -> "справа от лифта, вправо";
+            default -> throw new IllegalStateException("Unexpected value: " + positionOnFloor);
+        };
+
+        return "%d кв - %d подъезд, %d этаж, %s".formatted(flatNumber, entrance, floor, sideOfElevator);
     }
 }
