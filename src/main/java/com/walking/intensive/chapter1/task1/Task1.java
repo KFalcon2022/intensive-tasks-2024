@@ -18,18 +18,17 @@ import java.util.Arrays;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 109;
-
+        int age = 112;
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
 //        Место для вашего кода
-        Integer[] array = {2,3,4};
-        ArrayList<Integer> myList = new ArrayList<Integer>(Arrays.asList(array));
-        if (age % 10 == 1) {
+        int remainder = age % 10;
+        int remainder2 = age % 100;
+        if (remainder == 1 && age != 11) {
             return ("Вам " + age + " год");
-        } else if (myList.contains(age % 10)) {
+        } else if ((remainder == 2 || remainder == 3 || remainder == 4) && !(age > 11 && age < 15) && !(remainder2 > 11 && remainder2 < 15)) {
             return ("Вам " + age + " года");
         }
         else {
