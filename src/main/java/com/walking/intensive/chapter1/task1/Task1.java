@@ -27,23 +27,20 @@ public class Task1 {
 
             return "Некорректный ввод";
 
-        }
-
-        int remain = age % 10;
-
-        int remainDivisions = age / 10 % 10;
-
-        if (remain == 1 && remainDivisions != 1) {
+        } else if (age % 10 == 1 && age / 10 % 10 != 1) {
 
             return "Вам " + age + " год";
 
-        } else if (remain == 2 || remain == 3 || remain == 4 && remainDivisions != 1) {
+        } else if (age % 10 == 2 || age % 10 == 3 || age % 10 == 4 && age / 10 % 10 != 1) {
 
             return "Вам " + age + " года";
 
         }
+
         return "Вам " + age + " лет";
+
     }
+
 }
 
 
