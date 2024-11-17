@@ -21,9 +21,9 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        int modulo = age%100;
+        int modulo = age % 100;
 
-        if (modulo == 11 || modulo == 12 || modulo == 13 || modulo == 14) {
+        if (modulo >= 11 && modulo <= 14) {
             return "Вам %d лет".formatted(age);
         }
 
