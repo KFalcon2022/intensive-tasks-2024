@@ -17,7 +17,7 @@ import javax.swing.*;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 12;
+        int age = 11;
 
         System.out.println(getAgeString(age));
     }
@@ -31,7 +31,7 @@ public class Task1 {
             return "Вам " + age + " год";
         }
 
-        if ((age % 10 >= 2 && age % 10 <= 4) && age <= 12 && age >= 14) {
+        if ((age % 10 >= 2 && age % 10 <= 4) && (age <= 12 && age >= 14)) {
             return "Вам " + age + " года";
         } else {
             return "Вам " + age + " лет";
