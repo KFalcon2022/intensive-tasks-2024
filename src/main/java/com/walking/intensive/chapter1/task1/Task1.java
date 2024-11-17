@@ -26,17 +26,13 @@ public class Task1 {
             return "Некорректный ввод";
         }
 
-        String ending = " лет";
-
-        int rest = age % 10;
-
-        if (rest > 0 && rest < 5 && (age % 100 < 11 || age % 100 > 14)) {
-            ending = " год";
-            if (rest > 1) {
-                ending += "а";
-            }
+        if (age % 100 > 10 && age % 100 < 15) {
+            return "Вам " + age + " лет";
+        } else if (age % 10 > 1 && age % 10 < 5) {
+            return "Вам " + age + " года";
+        } else if (age % 10 == 1) {
+            return "Вам " + age + " год";
         }
-
-        return "Вам " + age + ending;
+        return "Вам " + age + " лет";
     }
 }
