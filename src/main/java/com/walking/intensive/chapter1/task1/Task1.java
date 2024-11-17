@@ -22,7 +22,7 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
-        String ageStr = "";                 // Создаю и инициализирую переменную для удобства.
+        String ageStr;                // Создаю и инициализирую переменную для удобства.
 
         if (age < 0) {
             ageStr = "Некорректный ввод";   // Исключаю множество некорректных значений.
