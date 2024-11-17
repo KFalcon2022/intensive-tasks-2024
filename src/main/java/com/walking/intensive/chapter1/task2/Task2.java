@@ -44,36 +44,33 @@ public class Task2 {
             return "Некорректные входные данные";
         }
 
-        if (flatNumber > floorAmount * entranceAmount * 4) {
+        final int flourCount = 4;
+        if (flatNumber > floorAmount * entranceAmount * flourCount) {
             return "Такой квартиры не существует";
         }
 
-        int entranceNumber = flatNumber / (floorAmount  * 4);
-        if (flatNumber % (floorAmount  * 4) != 0) {
+        int entranceNumber = flatNumber / (floorAmount * flourCount);
+        if (flatNumber % (floorAmount * flourCount) != 0) {
             entranceNumber++;
         }
 
-        int remainder = flatNumber % (floorAmount * 4);
+        int remainder = flatNumber % (floorAmount * flourCount);
         int floorNumber;
         if (remainder == 0) {
             floorNumber = floorAmount;
-        } else if (remainder % 4 == 0) {
-            floorNumber = remainder / 4;
+        } else if (remainder % flourCount == 0) {
+            floorNumber = remainder / flourCount;
         } else {
-            floorNumber = remainder / 4 + 1;
+            floorNumber = remainder / flourCount + 1;
         }
 
-        String direction = "";
-        switch (remainder % 4) {
-            case 0:
-                direction = "справа от лифта, вправо";
-            case 1:
-                direction = "слева от лифта, влево";
-            case 2:
-                direction = "слева от лифта, вправо";
-            case 3:
-                direction = "справа от лифта, влево";
-        }
+        String direction = switch (remainder % flourCount) {
+            case 0 -> "справа от лифта, вправо";
+            case 1 -> "слева от лифта, влево";
+            case 2 -> "слева от лифта, вправо";
+            case 3 -> "справа от лифта, влево";
+            default -> "";
+        };
 
         return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + direction;
     }
