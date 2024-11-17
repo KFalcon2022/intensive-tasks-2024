@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task2;
 
+import java.util.Scanner;
+
 /**
  * Реализуйте метод getFlatLocation(), который будет принимать параметрами следующие данные:
  * <ul>
@@ -33,12 +35,33 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        Scanner in = new Scanner(System.in);
+        int floorAmount = in.nextInt();
+        int entranceAmount = in.nextInt();
+        int flatNumber = in.nextInt();
+        System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        int flatOnFloor = 4;
+        int countAllFlats = flatOnFloor * floorAmount * entranceAmount;
+        int countFlatOnEnt = flatOnFloor * floorAmount;
 
-        return null; // Заглушка. При реализации - удалить
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            System.out.println("Некорректные входные данные");
+        }
+
+        if (countAllFlats >= flatNumber && flatNumber >= 1) {
+            int numberOfEnt = flatNumber / (double) countFlatOnEnt % 1 == 0 ? flatNumber / countFlatOnEnt : (flatNumber / countFlatOnEnt) + 1;
+            double numberOfFloor = (double) (flatNumber - (countFlatOnEnt * (numberOfEnt - 1))) / flatOnFloor;
+            int numberFloor = numberOfFloor % 1 == 0 ? (int) numberOfFloor : (int) (numberOfFloor + 1);
+            int sideForSide = (flatNumber - (countFlatOnEnt * (numberOfEnt - 1))) % flatOnFloor;
+            String side = sideForSide <= 2 & sideForSide != 0 ? " слева от лифта," : " справа от лифта,";
+            String sideOnFloor = flatNumber % 2 == 0 ? " вправо" : " влево";
+
+            return flatNumber + " кв - " + numberOfEnt + " подъезд, " + numberFloor + " этаж," + side + sideOnFloor;
+        } else {
+            return "Такой квартиры не существует";
+        }
     }
 }
