@@ -37,8 +37,34 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            return "Некорректные входные данные";
+        }
+
+        if (flatNumber > floorAmount * entranceAmount * 4) {
+            return "Такой квартиры не существует";
+        }
+
+        int entrance = (flatNumber - 1) / (4 * floorAmount) + 1;
+        int floor = ((flatNumber - 1) / 4) % floorAmount + 1;
+        String direction = "";
+
+        switch (flatNumber % 4) {
+            case 0:
+                direction = "справа от лифта, вправо";
+                break;
+            case 1:
+                direction = "слева от лифта, влево";
+                break;
+            case 2:
+                direction = "слева от лифта, вправо";
+                break;
+            case 3:
+                direction = "справа от лифта, влево";
+        }
+
+        return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + direction;
+
     }
 }
