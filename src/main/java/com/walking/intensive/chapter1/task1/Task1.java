@@ -16,13 +16,35 @@ public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int age = 0;
-
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
 //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        //проверка корректности переданного значения
+        if (age < 0) {
+            return "Некорректный ввод";
+        }
+        int part = age/10;
+        int perem = age - (part*10);
+
+        String text = "";
+        if (age==11||age==111||age==0) { //0,11,111
+            text = "Вам "+age + " лет";
+        } else if (age>11&&age<=20) { //12-20
+            text = "Вам "+age + " лет";
+        } else if (age>111&&age<=120) { //112-120
+            text = "Вам "+age + " лет";
+        } else if (perem==1) { //x1
+            text = "Вам "+age + " год";
+        } else if (perem>1&&perem<=4) { //x2-x4
+            text = "Вам "+age + " года";
+        } else if (perem>4&&perem<=9) { //x5-x9
+            text = "Вам "+age + " лет";
+        } else if (perem==0) { //x0
+            text = "Вам "+age + " лет";
+        }
+        return text;
     }
 }
