@@ -21,7 +21,6 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
         if (age < 0) {
             return "Некорректный ввод";
         } else if ((age == 1) || ((age > 20) && (age%10==1) && (age!=111))) {
@@ -35,9 +34,6 @@ public class Task1 {
                         } else  {
                             return "Вам " + age + " лет";
         }
-
-
-        // Заглушка. При реализации - удалить
 
     }
 }
