@@ -25,7 +25,9 @@ public class Task1 {
         int lastDigitAge = age % 10;
         int twoLastDigitsAge = age % 100;
 
-        if (twoLastDigitsAge == 11 || twoLastDigitsAge == 12 || twoLastDigitsAge == 13 || twoLastDigitsAge == 14) {
+        if (age < 0) {
+            return "Некорректный ввод";
+        } else if (twoLastDigitsAge == 11 || twoLastDigitsAge == 12 || twoLastDigitsAge == 13 || twoLastDigitsAge == 14) {
             return "Вам " + age + " лет";
         } else if (lastDigitAge == 1) {
             return "Вам " + age + " год";
