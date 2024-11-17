@@ -21,8 +21,22 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        String suffix;
+        int lastlastTwoDigits = age % 100;
+        if (age < 0) {
+            return "Некорректный ввод";
+        } else if (lastlastTwoDigits > 10 && lastlastTwoDigits < 20){
+            suffix = "лет";
+        } else {
+            suffix = switch (lastlastTwoDigits % 10) {
+                case 1:
+                    yield "год";
+                case 2, 3, 4:
+                    yield "года";
+                default:
+                    yield "лет";
+            };
+        }
+        return "Вам " + age + " " + suffix;
     }
 }
