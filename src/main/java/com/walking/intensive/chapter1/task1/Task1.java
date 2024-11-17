@@ -14,15 +14,33 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
+
+        int age = 1;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        String ageStr = "";                 // Создаю и инициализирую переменную для удобства.
+
+        if (age < 0) {
+            ageStr = "Некорректный ввод";   // Исключаю множество некорректных значений.
+
+        } else if (age == 11 || age == 12 || age == 13 || age == 14
+                || age == 111 || age == 112 || age == 113 || age == 114) {
+            ageStr = String.format("Вам %s лет", age); // Исключаю особые случаи (надеюсь, что перенос строки - это
+            // правильное решение. Если нет, то извините).
+        } else if (age % 10 == 1) {
+            ageStr = String.format("Вам %s год", age); // Нахожу вывод тескта с окончанием "год".
+
+        } else if (age % 10 == 2 || age % 10 == 3 || age % 10 == 4) {
+            ageStr = String.format("Вам %s года", age); // Нахожу вывод текста с окончанием "года".
+
+        } else {
+            ageStr = String.format("Вам %s лет", age); // Всё оставшееся множество оканчивается на "лет".
+        }
+
+        return ageStr;
     }
 }
