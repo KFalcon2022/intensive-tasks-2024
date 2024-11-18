@@ -14,10 +14,11 @@ class Task2Test {
 
     @ParameterizedTest
     @MethodSource("dataSource")
-    void getFlatLocationTest(String expected, int floorAmount, int entranceAmount, int flatNumber) {
+    void getFlatLocationTest(String expected,  int floorAmount, int entranceAmount, int flatNumber) {
         String flatLocation = getFlatLocation(floorAmount, entranceAmount, flatNumber);
         assertEquals(expected, flatLocation);
     }
+
 
     static Stream<Arguments> dataSource() {
         return Stream.of(
