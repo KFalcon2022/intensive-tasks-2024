@@ -15,23 +15,25 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 
-        int age = 22;
+        int age = 1;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-        int toModuloDivideByTen = age % 10;
-        int toModuloDivideByOneHundred = age % 100;
+        int modResult10 = age % 10;
+        int modResult100 = age % 100;
 
-        if (toModuloDivideByTen == 1 && toModuloDivideByOneHundred != 11) {
-            return "Вам " + age + " " + "год";
-        } else if (toModuloDivideByTen >= 2 && toModuloDivideByTen <= 4 && (toModuloDivideByOneHundred < 12 || toModuloDivideByOneHundred > 14)) {
-            return "Вам " + age + " " + "года";
-        } else if (age >= 5 || age <= 20 || toModuloDivideByTen > 5) {
-            return "Вам " + age + " " + "лет";
-        } else {
+        if (age < 0) {
             return "Не корректный ввод";
+        } else if (modResult10 == 1 && modResult100 != 11) {
+            return "Вам " + age + " " + "год";
+        } else if (modResult10 >= 2 && modResult10 <= 4 && (modResult100 < 12 || modResult100 > 14)) {
+            return "Вам " + age + " " + "года";
+        } else if (age >= 5 || age <= 20 || modResult10 > 5 || modResult100<20) {
+            return "Вам " + age + " " + "лет";
+        }else {
+            return "лет";
         }
 
     }
