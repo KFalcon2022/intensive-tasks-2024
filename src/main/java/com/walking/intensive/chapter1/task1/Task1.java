@@ -22,20 +22,15 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
-        String ageTextForm;
-
-        if (age < 0) {
+        if (age < 0 || age > 127) {
             return "Некорректный ввод";
-        } else if (age % 100 >= 11 && age % 100 <= 14) {
-            ageTextForm = " лет";
-        } else if (age % 10 == 1) {
-            ageTextForm = " год";
-        } else if (age % 10 >= 2 && age % 10 <= 4) {
-            ageTextForm = " года";
-        } else {
-            ageTextForm = " лет";
         }
-
-        return "Вам " + age + ageTextForm;
+        if ((age % 100 >= 11 && age % 100 <= 14) || age % 10 >= 5 || age % 10 == 0) {
+            return "Вам " + age + " лет";
+        }
+        if (age % 10 == 1) {
+            return "Вам " + age + " год";
+        }
+        return "Вам " + age + " года";
     }
 }
