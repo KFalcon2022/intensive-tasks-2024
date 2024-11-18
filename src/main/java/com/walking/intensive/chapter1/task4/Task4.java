@@ -49,11 +49,14 @@ public class Task4 {
 
         if (discriminant > 0) {
             double sqrtDiscriminant = Math.sqrt(discriminant);
+
             double root1 = (-b - sqrtDiscriminant) / (2 * a);
             double root2 = (-b + sqrtDiscriminant) / (2 * a);
+
             double min = Math.min(root1, root2);
             double max = Math.max(root1, root2);
-            return "Количество решений: 2. Корни: " + formatNumber(min)  + ";" + formatNumber(max) ;
+
+            return "Количество решений: 2. Корни: " + formatNumber(min) + ";" + formatNumber(max);
         } else if (discriminant == 0) {
             double result = -b / (2 * a);
             return "Количество решений: 1. Корень: " + formatNumber(result);
