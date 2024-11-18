@@ -20,17 +20,16 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        if (age < 0 || age > 99) {
+        if (age < 0 || age > 127) {
             return "Некорректный ввод";
         }
 
-        if (age == 11 || age == 12 || age == 13 || age == 14) {
+        if (age == 11 || age == 12 || age == 13 || age == 14 ||
+                age == 111 || age == 112 || age == 113 || age == 114) {
             return String.format("Вам %d лет", age);
         }
 
-        int temp = age % 10;
-
-        return switch (temp) {
+        return switch (age % 10) {
             case 1 -> String.format("Вам %d год", age);
             case 2, 3, 4 -> String.format("Вам %d года", age);
             default -> String.format("Вам %d лет", age);
