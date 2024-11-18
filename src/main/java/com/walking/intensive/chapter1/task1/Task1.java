@@ -15,14 +15,29 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
+        int age = 12;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
 //        Место для вашего кода
+        if (age < 0) {
+            return "Некорректный ввод";
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        String result = "Вам " + age + " ";
+
+        if (age % 100 > 10 && age % 100 < 20) {
+            return result + "лет";
+        }
+
+        switch (age % 10) {
+            case 1 -> result += "год";
+            case 2, 3, 4 -> result += "года";
+            default -> result += "лет";
+        }
+
+        return result;
     }
 }
