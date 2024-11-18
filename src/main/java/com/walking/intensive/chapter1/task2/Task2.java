@@ -39,6 +39,6 @@ public class Task2 {
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить1
+        return null; // Заглушка. При реализации - удалить
     }
 }
