@@ -17,7 +17,7 @@ import javax.swing.*;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 102;
+        int age = 100;
 
         System.out.println(getAgeString(age));
     }
@@ -25,18 +25,12 @@ public class Task1 {
     static String getAgeString(int age) {
         String AgeSuffix = "";
         if (age < 0 || age > 120) {
-            AgeSuffix = "Так не бывает!!!";
+            return "Так не бывает!!!";
+        } else if (((age >= 2 && age <= 4) || (age % 10 >= 2 && age % 10 <= 4)) && (age != 12 && age != 13 && age != 14)) {
+            return "Vam " + age + " goda";
+        } else if ((age == 1 || age % 10 == 1) && (age % 100 != 11)) {
+            return "Vam " + age + " god";
         }
-
-        if ((age % 10 == 1) && (age % 100 != 11)) {
-            AgeSuffix = "Вам " + age + " год god";
-        }
-
-        if (age % 10 >= 2){// && age % 10 <= 4 && age <= 12 && age >= 14) {
-            AgeSuffix = "Вам " + age + " года goda";
-        } else {
-            AgeSuffix = "Вам " + age + " лет let";
-        }
-        return AgeSuffix;
+        return "Vam " + age + " let";
     }
 }
