@@ -25,14 +25,14 @@ public class Task1 {
         int modResult100 = age % 100;
 
         if (age < 0) {
-            return "Не корректный ввод";
+            return "Некорректный ввод";
         } else if (modResult10 == 1 && modResult100 != 11) {
             return "Вам " + age + " " + "год";
         } else if (modResult10 >= 2 && modResult10 <= 4 && (modResult100 < 12 || modResult100 > 14)) {
             return "Вам " + age + " " + "года";
-        } else if (age >= 5 || age <= 20 || modResult10 > 5 || modResult100<20) {
+        } else if (age >= 5 || age <= 20 || modResult10 > 5 || modResult100 < 20) {
             return "Вам " + age + " " + "лет";
-        }else {
+        } else {
             return "лет";
         }
 
