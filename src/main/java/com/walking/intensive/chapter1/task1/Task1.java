@@ -17,17 +17,19 @@ import static javax.management.Query.or;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 1134;
+        int age = 1014;
+        if (age >= 0) {
+            System.out.println(getAgeString(age));
+        } else {
+            System.out.println("Некорректный ввод");
+        }
 
-        System.out.println(getAgeString(age));
     }
-  /*  если возраст оканчивается на ноль (20, 10, 30, 40 и т. д.), на числа 5, 6, 7, 8, 9, а также на числа от 11 до 14, то вам нужно слово «лет»;
-    если возраст заканчивается на любое число с единицей на конце (1, 31, 41), используйте слово «год»;
-    все остальные варианты возраста употребляются со словом «года».*/
+
 
     static String getAgeString(int age) {
 //        Место для вашего кода
-        if ((age % 10 >= 5 && age % 10 <= 14 || age % 10 == 0 || age % 100 >= 11 && age % 100 <=14) || (age >= 5 && age < 10) || (age >= 11 && age <= 14)) {
+        if ((age % 10 >= 5 || age % 10 == 0 || age % 100 >= 11 && age % 100 <= 14) || (age >= 5 && age < 10) || (age >= 11 && age <= 14)) {
             return "Вам" + " " + age + " " + "лет";
         }
         if (age % 10 == 1) {
