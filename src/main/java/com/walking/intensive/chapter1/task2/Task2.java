@@ -35,7 +35,7 @@ public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         System.out.println(
-                getFlatLocation(8, 4, 115)
+                getFlatLocation(2, 3, 8)
         );
     }
 
@@ -45,17 +45,25 @@ public class Task2 {
             return "Некорректные входные данные";
         }
 
-        int totalFlatCount = 4 * floorAmount * entranceAmount;
+        int totalFloorsCount = floorAmount * entranceAmount;
 
-        if (flatNumber > totalFlatCount) {
+        if (flatNumber > 4 * totalFloorsCount) {
             return "Такой квартиры не существует";
         }
 
-        int floorNum = flatNumber / 4 % floorAmount;
-        if (flatNumber / 4 > 0) {
-            floorNum++;
-        }
+        int flatsOnFloor = 4;
+        int flatsOnEntrance = flatsOnFloor * floorAmount;
 
+        int entrance = (flatNumber - 1) / flatsOnEntrance + 1;
+        int floor = (flatNumber - (flatsOnFloor * (entrance - 1))) / flatsOnFloor;
 
+        String direction = switch (flatNumber % 4) {
+            case 1 -> "слева от лифта, влево";
+            case 2 -> "слева от лифта, вправо";
+            case 3 -> "справа от лифта, влево";
+            default -> "справа от лифта, вправо";
+        };
+
+        return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + direction;
     }
 }
