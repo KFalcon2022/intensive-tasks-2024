@@ -34,8 +34,66 @@ public class Task4 {
     }
 
     static String solveEquation(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        double x1, x2;
+        String zeroResult = "Количество решений: 0.";
+
+        if (a == 0) {
+            if (b == c && c == 0) {
+                return "Бесконечное множество решений.";
+            } else if (b == 0 || c == 0) {
+                return zeroResult;
+            } else {
+                x1 = -c / b;
+                return formatResult(1, x1);
+            }
+        }
+
+        if (b == 0) {
+            if (c == 0) {
+                return formatResult(1, 0);
+            } else {
+                return zeroResult;
+            }
+        }
+
+        if (c == 0) {
+            x1 = 0;
+            x2 = -b / a;
+            return formatResult(2, x1, x2);
+        }
+
+        double d = Math.pow(b, 2) - 4 * a * c;
+
+        if (d < 0) {
+            return zeroResult;
+        }
+
+        x1 = (-b + Math.sqrt(d)) / 2 / a;
+
+        if (d == 0) {
+            return formatResult(1, x1);
+        } else {
+            x2 = (-b - Math.sqrt(d)) / 2 / a;
+            return formatResult(2, x1, x2);
+        }
+    }
+
+    static String formatResult(int counter, double... result) {
+
+        String formattedResult = Integer.toString((int) result[0]);
+
+        if (result.length > 1) {
+            formattedResult = String.format("%d;%d",
+                    (int) Math.min(result[0], result[1]),
+                    (int) Math.max(result[0], result[1]));
+        }
+
+        String text = "Корни";
+
+        if (counter == 1) {
+            text = "Корень";
+        }
+        return String.format("Количество решений: %d. %s: %s", counter, text, formattedResult);
     }
 }
