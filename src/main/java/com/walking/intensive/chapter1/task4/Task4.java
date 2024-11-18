@@ -30,8 +30,8 @@ public class Task4 {
         double c = -3;
         System.out.println(solveEquation(a, b, c));
 
-        double number1 = 0.5;
-        System.out.println(number1 % 1 == 0 ? (Object) (int) number1 : number1);
+        double number = 0.5;
+        System.out.println(number % 1 == 0 ? (Object) (int) number : number);
 
     }
 
@@ -69,10 +69,10 @@ public class Task4 {
         double root1 = (-b - sqrtDiscriminant) / (2 * a);
         double root2 = (-b + sqrtDiscriminant) / (2 * a);
 
-        double min = Math.min(root1, root2);
-        double max = Math.max(root1, root2);
+        double minRoot = Math.min(root1, root2);
+        double maxRoot = Math.max(root1, root2);
 
-        return "Количество решений: 2. Корни: " + formatNumber(min) + ";" + formatNumber(max);
+        return "Количество решений: 2. Корни: " + formatNumber(minRoot) + ";" + formatNumber(maxRoot);
     }
 
 
