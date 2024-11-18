@@ -59,8 +59,7 @@ public class Task4 {
         if (b == 0) {
             return (c == 0) ? "Бесконечное множество решений." : "Количество решений: 0.";
         } else {
-            double result = -c / b;
-            return "Количество решений: 1. Корень: " + formatNumber(result);
+            return "Количество решений: 1. Корень: " + formatNumber(-c / b);
         }
     }
 
@@ -76,9 +75,9 @@ public class Task4 {
         return "Количество решений: 2. Корни: " + formatNumber(min) + ";" + formatNumber(max);
     }
 
+
     private static String solveWithOneRoot(double a, double b) {
-        double result = -b / (2 * a);
-        return "Количество решений: 1. Корень: " + formatNumber(result);
+        return "Количество решений: 1. Корень: " + formatNumber(-b / (2 * a));
     }
 
     private static Object formatNumber(double number) {
