@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task2;
 
+import java.util.Scanner;
+
 /**
  * Реализуйте метод getFlatLocation(), который будет принимать параметрами следующие данные:
  * <ul>
@@ -32,13 +34,65 @@ package com.walking.intensive.chapter1.task2;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task2 {
+    static final int FLATS_ON_THE_FLOR = 4;
+
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter floor amount:");
+        int floorAmount = scanner.nextInt();
+
+        System.out.println("Enter entrance amount:");
+        int entranceAmount = scanner.nextInt();
+
+        System.out.println("Enter flat number:");
+        int flatNumber = scanner.nextInt();
+
+        scanner.close();
+
+        System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        if (!validate(floorAmount, entranceAmount, flatNumber)) {
+            return "Некорректные входные данные";
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        int quantityAllFlats = floorAmount * entranceAmount * FLATS_ON_THE_FLOR;
+
+        if (flatNumber > quantityAllFlats) {
+            return "Такой квартиры не существует";
+        }
+
+        int flatsInEntrance = floorAmount * FLATS_ON_THE_FLOR;
+        int currentEntrance = (int) Math.ceil((double) flatNumber / flatsInEntrance);
+        int currentFloor = (int) Math.ceil((double) (flatNumber - (flatsInEntrance * (currentEntrance - 1))) / FLATS_ON_THE_FLOR);
+
+        return printFlatLocation(currentEntrance, currentFloor, flatNumber);
+    }
+
+    static String printFlatLocation(int currentEntrance, int currentFloor, int flatNumber) {
+        String flatLocation = flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + " этаж, ";
+
+        switch (flatNumber % FLATS_ON_THE_FLOR) {
+            case 1:
+                flatLocation += "слева от лифта, влево";
+                break;
+            case 2:
+                flatLocation += "слева от лифта, вправо";
+                break;
+            case 3:
+                flatLocation += "справа от лифта, влево";
+                break;
+            case 0:
+                flatLocation += "справа от лифта, вправо";
+        }
+
+
+        return flatLocation;
+    }
+
+    static boolean validate(int floorAmount, int entranceAmount, int flatNumber) {
+        return floorAmount > 0 && entranceAmount > 0 && flatNumber > 0;
     }
 }
