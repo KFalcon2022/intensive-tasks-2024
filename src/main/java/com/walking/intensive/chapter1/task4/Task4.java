@@ -35,34 +35,50 @@ public class Task4 {
 
     }
 
-    static String solveEquation(double a, double b, double c) {
+    public static String solveEquation(double a, double b, double c) {
         if (a == 0) {
-            if (b == 0) {
-                return (c == 0) ? "Бесконечное множество решений." : "Количество решений: 0.";
-            } else {
-                double result = -c / b;
-                return "Количество решений: 1. Корень: " + formatNumber(result);
-            }
+            return solveLinearEquation(b, c);
         }
 
-        double discriminant = b * b - 4 * a * c;
+        double discriminant = calculateDiscriminant(a, b, c);
 
         if (discriminant > 0) {
-            double sqrtDiscriminant = Math.sqrt(discriminant);
-
-            double root1 = (-b - sqrtDiscriminant) / (2 * a);
-            double root2 = (-b + sqrtDiscriminant) / (2 * a);
-
-            double min = Math.min(root1, root2);
-            double max = Math.max(root1, root2);
-
-            return "Количество решений: 2. Корни: " + formatNumber(min) + ";" + formatNumber(max);
+            return solveWithTwoRoots(a, b, discriminant);
         } else if (discriminant == 0) {
-            double result = -b / (2 * a);
-            return "Количество решений: 1. Корень: " + formatNumber(result);
+            return solveWithOneRoot(a, b);
         } else {
             return "Количество решений: 0.";
         }
+    }
+
+    private static double calculateDiscriminant(double a, double b, double c) {
+        return b * b - 4 * a * c;
+    }
+
+    private static String solveLinearEquation(double b, double c) {
+        if (b == 0) {
+            return (c == 0) ? "Бесконечное множество решений." : "Количество решений: 0.";
+        } else {
+            double result = -c / b;
+            return "Количество решений: 1. Корень: " + formatNumber(result);
+        }
+    }
+
+    private static String solveWithTwoRoots(double a, double b, double discriminant) {
+        double sqrtDiscriminant = Math.sqrt(discriminant);
+
+        double root1 = (-b - sqrtDiscriminant) / (2 * a);
+        double root2 = (-b + sqrtDiscriminant) / (2 * a);
+
+        double min = Math.min(root1, root2);
+        double max = Math.max(root1, root2);
+
+        return "Количество решений: 2. Корни: " + formatNumber(min) + ";" + formatNumber(max);
+    }
+
+    private static String solveWithOneRoot(double a, double b) {
+        double result = -b / (2 * a);
+        return "Количество решений: 1. Корень: " + formatNumber(result);
     }
 
     private static Object formatNumber(double number) {
