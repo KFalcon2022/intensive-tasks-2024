@@ -23,7 +23,6 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        String AgeSuffix = "";
         if (age < 0 || age > 120) {
             return "Так не бывает!!!";
         } else if (((age >= 2 && age <= 4) || (age % 10 >= 2 && age % 10 <= 4)) && (age != 12 && age != 13 && age != 14)) {
