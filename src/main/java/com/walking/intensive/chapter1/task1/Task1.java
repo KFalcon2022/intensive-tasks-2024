@@ -17,7 +17,7 @@ import static javax.management.Query.or;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
+        int age = 9;
 
         System.out.println(getAgeString(age));
 
@@ -33,7 +33,7 @@ public class Task1 {
             if (age % 10 == 1) {
                 return "Вам" + " " + age + " " + "год";
             }
-            if ((age % 10 >= 2 && age % 10 <= 4) || (age >= 2 && age <= 4)) {
+            if ((age % 10 >= 2) || (age >= 2)) {
                 return "Вам" + " " + age + " " + "года";
             } else {
                 return "Некорректный ввод";
