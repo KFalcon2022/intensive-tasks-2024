@@ -35,7 +35,7 @@ public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         System.out.println(
-                getFlatLocation(2, 3, 8)
+                getFlatLocation(2, 2, 5)
         );
     }
 
@@ -55,7 +55,7 @@ public class Task2 {
         int flatsOnEntrance = flatsOnFloor * floorAmount;
 
         int entrance = (flatNumber - 1) / flatsOnEntrance + 1;
-        int floor = (flatNumber - (flatsOnFloor * (entrance - 1))) / flatsOnFloor;
+        int floor = ((flatNumber - 1) % flatsOnEntrance) / flatsOnFloor + 1;
 
         String direction = switch (flatNumber % 4) {
             case 1 -> "слева от лифта, влево";
