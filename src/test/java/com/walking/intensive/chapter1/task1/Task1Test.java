@@ -21,7 +21,7 @@ class Task1Test {
 
     static Stream<Arguments> dataSource() {
         return Stream.of(
-                of("Некорректный ввод", -10),
+                of("Некорректный ввод1", -10),
                 of("Некорректный ввод", -100),
                 of("Некорректный ввод", -10000),
                 of("Вам 0 лет", 0),
