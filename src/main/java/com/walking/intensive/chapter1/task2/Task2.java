@@ -37,13 +37,13 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        if (floorAmount < 1 || entranceAmount < 1) {
+        if (floorAmount < 1 || entranceAmount < 1 || flatNumber < 1) {
             return "Некорректные входные данные";
         }
 
         int apartments = floorAmount * entranceAmount * 4;
 
-        if (flatNumber > apartments || flatNumber < 1) {
+        if (flatNumber > apartments) {
             return "Такой квартиры не существует";
         }
 
