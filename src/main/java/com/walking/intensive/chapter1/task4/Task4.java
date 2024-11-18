@@ -39,23 +39,22 @@ public class Task4 {
             if (b == 0) {
                 if (c == 0) {
                     return "Бесконечное множество решений.";
-                } else {
-                    return "Количество решений: 0.";
                 }
-            } else {
-                return "Количество решений: 1. Корень: " + (-c / b);
+                return "Количество решений: 0.";
             }
+            return "Количество решений: 1. Корень: " + (-c / b);
         }
 
-        double D = b * b - 4 * a * c;
-        if (D < 0) {
+        double determinant = b * b - 4 * a * c;
+        if (determinant < 0) {
             return "Количество решений: 0.";
-        } else if (D == 0) {
+        }
+        if (determinant == 0) {
             return "Количество решений: 1. Корень: " + -b / 2 / a;
         }
 
-        double x1 = (-b - Math.sqrt(D)) / 2 / a;
-        double x2 = (-b + Math.sqrt(D)) / 2 / a;
+        double x1 = (-b - Math.sqrt(determinant)) / 2 / a;
+        double x2 = (-b + Math.sqrt(determinant)) / 2 / a;
 
         return "Количество решений: 2. Корни: " + Math.min(x1, x2) + ";" + Math.max(x1, x2);
     }
