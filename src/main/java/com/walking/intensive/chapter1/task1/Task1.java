@@ -21,19 +21,8 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        int remainderFromHundred = age % 100;
-        int remainderFromTen = age % 10;
+//        Место для вашего кода
 
-        if (age < 0) {
-            return "Некорректный ввод";
-        } else if (remainderFromHundred >= 11 && remainderFromHundred <= 20) {
-            return "Вам " + age + " лет";
-        } else if (remainderFromTen == 1) {
-            return "Вам " + age + " год";
-        } else if (remainderFromTen == 2 || remainderFromTen == 3 || remainderFromTen == 4) {
-            return "Вам " + age + " года";
-        } else {
-            return "Вам " + age + " лет";
-        }
+        return null; // Заглушка. При реализации - удалить
     }
 }
