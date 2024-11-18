@@ -18,23 +18,20 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        String toYou = "Вам ";
+        final String TO_YOU = "Вам ";
 
         if (age < 0) {
             return "Некорректный ввод";
         }
 
-        int lastDigit = age % 10;
-        int lastTwoDigits = age % 100;
-
-        if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
-            return toYou + age + " лет";
+        if (age > 10 && age < 15) {
+            return TO_YOU + age + " лет";
         }
 
-        return switch (lastDigit) {
-            case 1 -> toYou + age + " год";
-            case 2, 3, 4 -> toYou + age + " года";
-            default -> toYou + age + " лет";
+        return switch (age % 10) {
+            case 1 -> TO_YOU + age + " год";
+            case 2, 3, 4 -> TO_YOU + age + " года";
+            default -> TO_YOU + age + " лет";
         };
     }
 }
