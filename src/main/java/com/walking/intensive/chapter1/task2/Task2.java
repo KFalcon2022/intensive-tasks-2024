@@ -33,12 +33,31 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        if (floorAmount < 0 || entranceAmount < 0 || flatNumber < 0) {
+            return "Некорректные входные данные";
+        }
+        if ((floorAmount * entranceAmount * 4) < flatNumber) {
+            return "Такой квартиры не существует";
+        }
+        int nomerPodezda = (flatNumber - 1) / (4 * floorAmount) + 1;
+        int nomerEtaza = ((flatNumber - 1) / 4) % floorAmount + 1;
+        int a = (flatNumber % 4);
+        if (a%4==0) {
+            return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + "справа от лифта, вправо";
+        }
+        if (a%4==1) {
+            return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + "слева от лифта, влево";
+        }
+        if (a%4==2) {
+            return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + "слева от лифта, вправо";
+        }
+        else {
+            return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + "справа от лифта, влево";
+        }
 
-        return null; // Заглушка. При реализации - удалить
     }
 }
