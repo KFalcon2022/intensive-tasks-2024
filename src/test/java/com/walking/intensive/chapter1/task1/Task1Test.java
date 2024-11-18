@@ -19,7 +19,7 @@ class Task1Test {
         assertEquals(expected, getAgeString(value));
     }
 
-    static Stream<Arguments> dataSource() {
+    static Stream<Arguments>   dataSource() {
         return Stream.of(
                 of("Некорректный ввод1", -10),
                 of("Некорректный ввод", -100),

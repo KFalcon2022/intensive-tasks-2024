@@ -20,7 +20,7 @@ public class Task1 {
         System.out.println(getAgeString(age));
     }
 
-    static String   getAgeString(int age) {
+    static String getAgeString(int age) {
 //        Место для вашего кода
 
         return null; // Заглушка. При реализации - удалить1
