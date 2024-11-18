@@ -22,18 +22,20 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
-        String year_type;
+        String yearType;
+        int remainderOfDivision10 = age % 10;
+        int remainderOfDivision100 = age % 100;
 
-        if (10 <= (age % 100)  && (age % 100) < 15) {
-            year_type = " лет";
-        } else if (age == 1 | age % 10 == 1 | age % 100 == 1) {
-            year_type = " год";
-        } else if (1 < (age % 10) && (age % 10) < 5) {
-            year_type = " года";
+        if (10 <= remainderOfDivision100  && remainderOfDivision100 < 15) {
+            yearType = " лет";
+        } else if (age == 1 | remainderOfDivision10 == 1 | remainderOfDivision100 == 1) {
+            yearType = " год";
+        } else if (1 < remainderOfDivision10 && remainderOfDivision10 < 5) {
+            yearType = " года";
         } else {
-            year_type = " лет";
+            yearType = " лет";
         }
 
-        return "Вам " + age + year_type;
+        return "Вам " + age + yearType;
     }
 }
