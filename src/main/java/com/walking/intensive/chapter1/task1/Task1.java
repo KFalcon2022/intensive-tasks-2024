@@ -15,44 +15,36 @@ import java.util.Scanner;
  */
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
         Scanner scanner = new Scanner(System.in);
         int age = scanner.nextInt();
 
-        System.out.println(getAgeString(age));
+        if (age >= 0 && age <= 127){
+            System.out.println(getAgeString(age));
+        } else {
+            System.out.println("Некорректный ввод");
+        }
     }
 
     static String getAgeString(int age) {
-        String yeartext = "-1";
-        int ageunit = 1;
-        if (age >= 5 && age <= 20) {
-            yeartext = "лет";
-        } else if (age > 20 && age <= 100) {
-            ageunit = (age % 10);
-            switch (ageunit) {
-                case 0:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                    yeartext = "лет";
-                    break;
-                case 1:
-                    yeartext = "год";
-                    break;
-                case 2:
-                case 3:
-                case 4:
-                    yeartext = "года";
-                    break;
 
-            }
-        }
-        if (yeartext == "-1") {
-            return "Некорректный ввод";
+        String yeartext = "";
+        int ageunit;
+
+        if (age >= 100) {
+            ageunit = ((age - 100) % 10);
         } else {
-            return "Вам " + age + " " + yeartext; // Заглушка. При реализации - удалить
+            ageunit = (age % 10);
         }
+
+        if ((age >= 5 && age <= 20) || (age >= 105 && age <= 120) || (ageunit == 0 || (ageunit >= 5 && ageunit <= 9))) {
+            yeartext = "лет";
+        } else if (ageunit == 1) {
+            yeartext = "год";
+        } else {
+            yeartext = "года";
+        }
+
+        return "Вам " + age + " " + yeartext;
     }
 }
