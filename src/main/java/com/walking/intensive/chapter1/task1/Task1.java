@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter1.task1;
 
-import java.util.List;
-
 /**
  * Реализуйте метод getAgeString(), который будет принимать параметром целое число (возраст) и возвращать строку
  * вида: "Вам N лет". Программа должна учитывать правила русского языка.
@@ -31,7 +29,7 @@ public class Task1 {
             return "Некорректный ввод";
         }
 
-        if ((lastTwoDigits > 10 && lastTwoDigits < 15) || List.of(5, 6, 7, 8, 9, 0).contains(lastDigit)) {
+        if ((lastTwoDigits > 10 && lastTwoDigits < 15) || lastDigit == 0 || lastDigit > 4) {
             return "Вам " + age + " лет";
         }
 
@@ -39,10 +37,7 @@ public class Task1 {
             return "Вам " + age + " год";
         }
 
-        if (lastDigit > 1 && lastDigit < 5) {
-            return "Вам " + age + " года";
-        }
+        return "Вам " + age + " года";
 
-        return "Вам " + age + " лет";
     }
 }
