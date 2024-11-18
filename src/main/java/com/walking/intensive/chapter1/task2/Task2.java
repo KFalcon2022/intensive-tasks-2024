@@ -66,10 +66,10 @@ public class Task2 {
             finalTurn = "влево";
         }
 
-        return flatNumber + " кв - " +
-                entrance + " подъезд, " +
-                floor + " этаж, " +
-                turnFromElevator +
-                finalTurn;
+        return flatNumber + " кв - "
+                + entrance + " подъезд, "
+                + floor + " этаж, "
+                + turnFromElevator
+                + finalTurn;
     }
 }
