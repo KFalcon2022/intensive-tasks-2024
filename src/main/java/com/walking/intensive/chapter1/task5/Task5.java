@@ -10,7 +10,7 @@ package com.walking.intensive.chapter1.task5;
  */
 public class Task5 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getAreaAdvanced(3, 4, 5));
     }
 
     /**
@@ -27,9 +27,9 @@ public class Task5 {
             return -1;
         }
 
-        double p = (a + b + c) / 2;
+        double semiperimeter = (a + b + c) / 2;
 
-        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        return Math.sqrt(semiperimeter * (semiperimeter - a) * (semiperimeter - b) * (semiperimeter - c));
     }
 
     /**
@@ -45,15 +45,15 @@ public class Task5 {
             return new double[0];
         }
 
-        double S = getAreaByHeron(a, b, c);
+        double area = getAreaByHeron(a, b, c);
         double[] result = new double[3];
         double maxSide = Math.max(Math.max(a, b), c);
         double minSide = Math.min(Math.min(a, b), c);
         double mediumSide = a + b + c - maxSide - minSide;
 
-        result[0] = 2 * S / maxSide;
-        result[1] = 2 * S / mediumSide;
-        result[2] = 2 * S / minSide;
+        result[0] = 2 * area / maxSide;
+        result[1] = 2 * area / mediumSide;
+        result[2] = 2 * area / minSide;
 
         return result;
     }
@@ -96,9 +96,9 @@ public class Task5 {
             return new double[0];
         }
 
-        double b1 = Math.sqrt(b * c * (b * b + 2 * b * c + c * c - a * a) / (b + c));
-        double b2 = Math.sqrt(a * c * (a * a + 2 * a * c + c * c - b * b) / (a + c));
-        double b3 = Math.sqrt(a * b * (a * a + 2 * a * b + b * b - c * c) / (a + b));
+        double b1 = Math.sqrt(b * c * (b * b + 2 * b * c + c * c - a * a)) / (b + c);
+        double b2 = Math.sqrt(a * c * (a * a + 2 * a * c + c * c - b * b)) / (a + c);
+        double b3 = Math.sqrt(a * b * (a * a + 2 * a * b + b * b - c * c)) / (a + b);
 
         double[] result = new double[3];
         result[0] = Math.min(Math.min(b1, b2), b3);
@@ -121,15 +121,15 @@ public class Task5 {
             return new double[0];
         }
 
-        double S = getAreaByHeron(a, b, c);
-        double A = Math.asin(2*S/b/c);
-        double B = Math.asin(2*S/a/c);
-        double C = Math.asin(2*S/a/b);
+        double area = getAreaByHeron(a, b, c);
+        double angleA = Math.asin(2 * area / b / c) * 180 / Math.PI;
+        double angleB = Math.asin(2 * area / a / c) * 180 / Math.PI;
+        double angleC = Math.asin(2 * area / a / b) * 180 / Math.PI;
 
         double[] result = new double[3];
-        result[0] = Math.min(Math.min(A, B), C);
-        result[2] = Math.max(Math.max(A, B), C);
-        result[1] = A + B + C - result[0] - result[2];
+        result[0] = Math.min(Math.min(angleA, angleB), angleC);
+        result[2] = Math.max(Math.max(angleA, angleB), angleC);
+        result[1] = angleA + angleB + angleC - result[0] - result[2];
 
         return result;
     }
@@ -186,10 +186,10 @@ public class Task5 {
             return -1;
         }
 
-        double cosA = (c * c - a * a - b * b) / 2 / a / b;
-        double sinA = Math.sqrt(1 - cosA * cosA);
+        double cosC = (a * a + b * b - c * c) / 2 / a / b;
+        double sinC = Math.sqrt(1 - cosC * cosC);
 
-        return b * c * sinA / 2;
+        return a * b * sinC / 2;
     }
 
     static boolean isInvalidTriangle(double a, double b, double c) {
