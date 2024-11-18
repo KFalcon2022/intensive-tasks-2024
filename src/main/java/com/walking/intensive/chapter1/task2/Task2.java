@@ -34,11 +34,45 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int floorAmount = 10; //Количество этажей в доме
+        int entranceAmount = 3; //количество подъездов
+        int flatNumber = 108; //Номер нужной квартиры
+        System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        int maxFlatsOnEntrance = floorAmount * 4;
+        int maxflatNumber = maxFlatsOnEntrance * entranceAmount;
+        int floorNumber = 0;
+        String fullResult = "";
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0 || flatNumber > maxflatNumber) {
+            System.out.println("Неверные вводные параметры!!!");
+        } else {
+            if (flatNumber <= maxFlatsOnEntrance) {
+                floorNumber = flatNumber / 4;
+                if(floorNumber == 0)//не сходится по этажам из-за округления int
+                {
+                    floorNumber+=1;
+                }
+            } else {
+                floorNumber = (flatNumber - (maxFlatsOnEntrance * ((flatNumber / maxFlatsOnEntrance)))) / 4;
+            }
+            fullResult = flatNumber + " кв – " + ((flatNumber / maxFlatsOnEntrance) + 1) + " подъезд, " + floorNumber;
+            switch (flatNumber % 4) {
+                case 1:// 4 кв – 1 подъезд, 1 этаж, справа от лифта, вправо
+                    fullResult += "этаж, слева от лифта, влево ll";
+                    break;
+                case 2:
+                    fullResult += "слева от лифта, вправо lr";
+                    break;
+                case 3:
+                    fullResult += "справа от лифта, влево rl";
+                    break;
+                default:
+                    fullResult += "справа от лифта, вправо rr";
+                    break;
+            }
+        }
+        return fullResult;
     }
 }
