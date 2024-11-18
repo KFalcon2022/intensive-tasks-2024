@@ -20,22 +20,18 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        String answer = "";
-
-        if (age > -1) {
-            if (age % 10 > 4 || age % 10 == 0) {
-                answer = "Вам " + age + " лет";
-            } else if (age % 100 > 10 && age % 100 < 20) {
-                answer = "Вам " + age + " лет";
-            } else if (age % 10 >= 2) {
-                answer = "Вам " + age + " года";
-            } else {
-                answer = "Вам " + age + " год";
-            }
-        } else {
-            answer = "Некорректный ввод";
+        if (age < 0) {
+            return "Некорректный ввод";
         }
 
-        return answer;
+        if (age % 10 > 4 || age % 10 == 0) {
+            return "Вам " + age + " лет";
+        } else if (age % 100 > 10 && age % 100 < 20) {
+            return "Вам " + age + " лет";
+        } else if (age % 10 >= 2) {
+            return "Вам " + age + " года";
+        }
+
+        return "Вам " + age + " год";
     }
 }
