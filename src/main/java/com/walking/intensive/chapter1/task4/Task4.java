@@ -46,9 +46,9 @@ public class Task4 {
             return solveWithTwoRoots(a, b, discriminant);
         } else if (discriminant == 0) {
             return solveWithOneRoot(a, b);
-        } else {
-            return "Количество решений: 0.";
         }
+
+        return "Количество решений: 0.";
     }
 
     private static double calculateDiscriminant(double a, double b, double c) {
@@ -58,9 +58,9 @@ public class Task4 {
     private static String solveLinearEquation(double b, double c) {
         if (b == 0) {
             return (c == 0) ? "Бесконечное множество решений." : "Количество решений: 0.";
-        } else {
-            return "Количество решений: 1. Корень: " + formatNumber(-c / b);
         }
+
+        return "Количество решений: 1. Корень: " + formatNumber(-c / b);
     }
 
     private static String solveWithTwoRoots(double a, double b, double discriminant) {
