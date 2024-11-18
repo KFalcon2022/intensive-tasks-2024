@@ -25,17 +25,44 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 0;
-        double b = 0;
-        double c = 0;
-
+        double a = 2;
+        double b = 5;
+        double c = -3;
         System.out.println(solveEquation(a, b, c));
+
+        double number1 = 0.5;
+        System.out.println(number1 % 1 == 0 ? (Object) (int) number1 : number1);
 
     }
 
     static String solveEquation(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a == 0) {
+            if (b == 0) {
+                return (c == 0) ? "Бесконечное множество решений." : "Количество решений: 0.";
+            } else {
+                double result = -c / b;
+                return "Количество решений: 1. Корень: " + formatNumber(result);
+            }
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double discriminant = b * b - 4 * a * c;
+
+        if (discriminant > 0) {
+            double sqrtDiscriminant = Math.sqrt(discriminant);
+            double root1 = (-b - sqrtDiscriminant) / (2 * a);
+            double root2 = (-b + sqrtDiscriminant) / (2 * a);
+            double min = Math.min(root1, root2);
+            double max = Math.max(root1, root2);
+            return "Количество решений: 2. Корни: " + formatNumber(min)  + ";" + formatNumber(max) ;
+        } else if (discriminant == 0) {
+            double result = -b / (2 * a);
+            return "Количество решений: 1. Корень: " + formatNumber(result);
+        } else {
+            return "Количество решений: 0.";
+        }
+    }
+
+    private static Object formatNumber(double number) {
+        return number % 1 == 0 ? (Object) (int) number : number;
     }
 }
