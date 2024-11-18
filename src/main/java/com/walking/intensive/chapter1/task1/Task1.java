@@ -22,7 +22,7 @@ public class Task1 {
 
     static String getAgeString(int age) {
 //        Место для вашего кода
-        if (age < 0) return "Некорректный ввод";
+        if (age < 0 || age > 122) return "Некорректный ввод";
 
         int remains = age % 10;
         String supplement = "";
