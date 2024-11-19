@@ -53,13 +53,10 @@ public class Task2 {
             } else {
                 return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, вправо";
             }
-        } else if (flatNumber % 4 == 3 || flatNumber % 4 == 0) {
-            if (flatNumber % 4 == 3) {
-                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, влево";
-            } else {
-                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, вправо";
-            }
+        } else if (flatNumber % 4 == 3) {
+            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, влево";
+        } else {
+            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, вправо";
         }
-        return null;
     }
 }
