@@ -3,26 +3,29 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 
-        int age = 12;
+        int age = 1111;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
 
-        if (age >= 0) {
-            String result = "Вам " + age;
-            if (age % 10 == 1 && age != 11) {
-                result = result + " год";
-            } else if ((age % 10 == 2 || age % 10 == 3 || age % 10 == 4) && age != 12 && age != 13 && age != 14) {
-                result = result + " года";
-            } else {
-                result = result + " лет";
-            }
-            return result;
-        } else {
+        String result = "Вам " + age;
+        int m = age % 10;
+        int o = age % 100;
+
+        if (age < 0) {
             return "Некорректный ввод";
         }
-
+        if (m == 1 && o != 11) {
+            result = result + " год";
+        } else if ((m == 2 || m == 3 || m == 4) && o != 12 && o != 13 && o != 14)
+            result = result + " года";
+        else {
+            result = result + " лет";
+        }
+        return result;
     }
+
 }
+
