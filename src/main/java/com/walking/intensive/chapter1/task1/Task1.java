@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task1;
 
+import java.util.Scanner;
+
 /**
  * Реализуйте метод getAgeString(), который будет принимать параметром целое число (возраст) и возвращать строку
  * вида: "Вам N лет". Программа должна учитывать правила русского языка.
@@ -12,17 +14,27 @@ package com.walking.intensive.chapter1.task1;
  *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
+
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
 
-        System.out.println(getAgeString(age));
-    }
-
-    static String getAgeString(int age) {
-//        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+// ввод возраста
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите возраст: ");
+        int age = in.nextInt();
+        {
+            switch (age){
+                case 0:
+                    System.out.println("Вам " + age + " лет");
+                    break;
+                case 1:
+                    System.out.println("Вам " + age + " год");
+                    break;
+                case 2:
+                    System.out.println("Вам " + age + " года");
+                    break;
+            }
+        }
+        in.close();
     }
 }
