@@ -63,7 +63,7 @@ public class Task2 {
         if (flatNumber % numberFlat > 0) {
             numberFloor++;
         }
-        if (numberFloor > floorAmount){
+        if (numberFloor > floorAmount){ // ?????
             numberFloor = (entranceAmount * floorAmount) - numberFloor;
         }
 
