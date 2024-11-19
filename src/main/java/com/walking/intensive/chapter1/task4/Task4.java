@@ -39,22 +39,21 @@ public class Task4 {
         String zeroResult = "Количество решений: 0.";
 
         if (a == 0) {
-            if (b == c && c == 0) {
-                return "Бесконечное множество решений.";
-            } else if (b == 0 || c == 0) {
+            if (b == a) {
+                if (c == a) {
+                    return "Бесконечное множество решений.";
+                }
                 return zeroResult;
-            } else {
-                x1 = -c / b;
-                return formatResult(1, x1);
             }
+            x1 = -c / b;
+            return formatResult(1, x1);
         }
 
         if (b == 0) {
-            if (c == 0) {
+            if (c == b) {
                 return formatResult(1, 0);
-            } else {
-                return zeroResult;
             }
+            return zeroResult;
         }
 
         if (c == 0) {
@@ -73,10 +72,9 @@ public class Task4 {
 
         if (d == 0) {
             return formatResult(1, x1);
-        } else {
-            x2 = (-b - Math.sqrt(d)) / 2 / a;
-            return formatResult(2, x1, x2);
         }
+        x2 = (-b - Math.sqrt(d)) / 2 / a;
+        return formatResult(2, x1, x2);
     }
 
     static String formatResult(int counter, double... result) {
