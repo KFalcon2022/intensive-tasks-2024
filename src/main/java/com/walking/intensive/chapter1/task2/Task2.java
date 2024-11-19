@@ -41,29 +41,28 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {//проверка корректности данных
-            return "Некорректные данные";
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            return "Некорректные входные данные";
         }
 
-        int apartPerFloor = floorAmount * 4; //Количество квартир в подъезде
-        int totalApparts = apartPerFloor * entranceAmount;//Общее количество квартир в доме
+        int apartPerFloor = floorAmount * 4;
+        int totalApparts = apartPerFloor * entranceAmount;
 
-        if (flatNumber > totalApparts) { // Проверка на существование квартиры
+        if (flatNumber > totalApparts) {
             return "Такой квартиры не существует";
         }
 
-        int approach = (flatNumber - 1) / apartPerFloor + 1;// подъезд
+        int approach = (flatNumber - 1) / apartPerFloor + 1;
 
 
         int floorPositon = (flatNumber - 1) % apartPerFloor;
-        int floor = floorPositon / 4 + 1;//этаж
+        int floor = floorPositon / 4 + 1;
 
-        // Определение положения относительно лифта
         int positionOnFloor = floorPositon % 4;
-        String sideOfElevation = (positionOnFloor < 2) ? "Слева от лифта" : "Справа от лифта";
-        String direction = (positionOnFloor % 2 == 0) ? "Влево" : "Вправо";
+        String sideOfElevation = (positionOnFloor < 2) ? "слева от лифта" : "справа от лифта";
+        String direction = (positionOnFloor % 2 == 0) ? "влево" : "вправо";
 
-        return String.format("%d подъезд, %d этаж, %s %s", approach, floor, sideOfElevation, direction);
+        return String.format("%d квартира, %d подъезд, %d этаж, %s, %s", flatNumber, approach, floor, sideOfElevation, direction);
 
     }
 }
