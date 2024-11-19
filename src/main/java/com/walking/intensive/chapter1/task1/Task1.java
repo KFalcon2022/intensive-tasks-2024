@@ -20,19 +20,16 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
+        int lastCharOfAge = age % 10;
+        int secondToLastCharOfAge = age % 100;
+
         if (age < 0) {
             return "Некорректный ввод";
-        } else if (age % 100 == 10 ||
-                age % 100 == 11 ||
-                age % 100 == 12 ||
-                age % 100 == 13 ||
-                age % 100 == 14) {
+        } else if (secondToLastCharOfAge >= 10 && secondToLastCharOfAge <= 14) {
             return "Вам " + age + " лет";
-        } else if (age % 10 == 2 ||
-                age % 10 == 3 ||
-                age % 10 == 4) {
+        } else if (lastCharOfAge >= 2 && lastCharOfAge <= 4) {
             return "Вам " + age + " года";
-        } else if (age % 10 == 1) {
+        } else if (lastCharOfAge == 1) {
             return "Вам " + age + " год";
         } else {
             return "Вам " + age + " лет";
