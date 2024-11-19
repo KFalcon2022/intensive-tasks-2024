@@ -14,18 +14,17 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-        int age = 14;
-
-        System.out.println(getAgeString(age));
+        for (int i = 0; i < 10_000_000; i++) {
+            System.out.println(getAgeString(i));
+        }
     }
 
     static String getAgeString(int age) {
-        if (age < 0 || age > 127) {
+        if (age < 0) {
             return "Некорректный ввод";
         }
 
-        if (age == 11 || age == 12 || age == 13 || age == 14 ||
-                age == 111 || age == 112 || age == 113 || age == 114) {
+        if (isNumbers(age)) {
             return String.format("Вам %d лет", age);
         }
 
@@ -34,5 +33,19 @@ public class Task1 {
             case 2, 3, 4 -> String.format("Вам %d года", age);
             default -> String.format("Вам %d лет", age);
         };
+    }
+
+    private static boolean isNumbers(int age) {
+        int temp = 0;
+
+        for (int i = 0; i < 2; i++) {
+            temp += age % 10;
+            temp *= 10;
+            age /= 10;
+        }
+
+        temp /= 10;
+
+        return temp == 11 || temp == 21 || temp == 31 || temp == 41;
     }
 }
