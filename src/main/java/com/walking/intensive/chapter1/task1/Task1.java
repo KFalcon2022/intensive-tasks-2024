@@ -38,22 +38,11 @@ public class Task1 {
             return ("Вам " + age + " лет");
         }
 
-        if (lastDigit == 1) {
-            return ("Вам " + age + " год");
-        }
+        return switch (lastTwoDigits) {
+            case 1 -> ("Вам " + age + " год");
+            case 2, 3, 4 -> ("Вам " + age + " года");
+            default -> "Вам " + age + " лет";
+        };
 
-        if (lastDigit == 2) {
-            return ("Вам " + age + " года");
-        }
-
-        if (lastDigit == 3) {
-            return ("Вам " + age + " года");
-        }
-
-        if (lastDigit == 4) {
-            return ("Вам " + age + " года");
-        }
-
-        return "Вам " + age + " лет";
     }
 }
