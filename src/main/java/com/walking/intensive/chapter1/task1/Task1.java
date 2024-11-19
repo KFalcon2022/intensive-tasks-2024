@@ -30,7 +30,7 @@ public class Task1 {
 
         analyzedAge %= 10;
 
-        if (is11To14Years == true || analyzedAge == 0) {
+        if (is11To14Years || analyzedAge == 0) {
             return result + "лет";
         } else if (analyzedAge >= 2 && analyzedAge <= 4) {
             return result + "года";
