@@ -25,9 +25,9 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 2;
-        double b = -8;
-        double c = 6;
+        double a = 1;
+        double b = -4;
+        double c = 4;
 
         System.out.println(solveEquation(a, b, c));
 
@@ -55,7 +55,7 @@ public class Task4 {
 
         } else if (d == 0) {
             x = -b / 2 * a;
-            return d + "количество решений: 1 " + "x";
+            return d + "количество решений: 1 " + x;
         }
 
         return d + "нет корней";
