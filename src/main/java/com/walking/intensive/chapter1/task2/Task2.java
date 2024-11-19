@@ -36,7 +36,7 @@ public class Task2 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int floorAmount = 10; //Количество этажей в доме
         int entranceAmount = 3; //количество подъездов
-        int flatNumber = 108; //Номер нужной квартиры
+        int flatNumber = 103; //Номер нужной квартиры
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
@@ -45,6 +45,7 @@ public class Task2 {
         int maxflatNumber = maxFlatsOnEntrance * entranceAmount;
         int floorNumber = 0;
         String fullResult = "";
+//        System.out.println(floorNumber+" "+flatNumber+" "+flatNumber / 4 +" "+flatNumber % 4);
         if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0 || flatNumber > maxflatNumber) {
             System.out.println("Неверные вводные параметры!!!");
         } else {
