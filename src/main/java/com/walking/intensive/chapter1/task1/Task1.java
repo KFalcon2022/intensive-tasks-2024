@@ -25,8 +25,8 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        if (age < 0) { // отсекаем отрицательные значения
-            return ("Некорректный ввод (отрицательное значение)");
+        if (age < 0 || age > 127) { // отсекаем отрицательные значения
+            return ("Некорректный ввод");
         }
 
         int lastDigit = age % 10;//получаем последний символ
@@ -36,7 +36,7 @@ public class Task1 {
             return ("Вам " + age + " лет");
         }
 
-        return switch (lastTwoDigits) {
+        return switch (lastDigit) {
             case 1 -> ("Вам " + age + " год");
             case 2, 3, 4 -> ("Вам " + age + " года");
             default -> "Вам " + age + " лет";
