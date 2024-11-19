@@ -53,10 +53,10 @@ public class Task5 {
         double h2 = getAreaByHeron(a, b, c) * 2 / b;
         double h3 = getAreaByHeron(a, b, c) * 2 / c;
 
-        double[] result = {h1, h2, h3};
-        Arrays.sort(result);
+        double[] heights = {h1, h2, h3};
+        Arrays.sort(heights);
 
-        return result;
+        return heights;
     }
 
     /**
@@ -76,10 +76,10 @@ public class Task5 {
         double mb = sqrt(2 * pow(c, 2) + 2 * pow(a, 2) - pow(b, 2)) / 2;
         double mc = sqrt(2 * pow(a, 2) + 2 * pow(b, 2) - pow(c, 2)) / 2;
 
-        double[] result = {ma, mb, mc};
-        Arrays.sort(result);
+        double[] medians = {ma, mb, mc};
+        Arrays.sort(medians);
 
-        return result;
+        return medians;
     }
 
     /**
@@ -99,10 +99,10 @@ public class Task5 {
         double bb = sqrt(a * c * (a + c + b) * (a + c - b)) / (a + c);
         double bc = sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
 
-        double[] result = {ba, bb, bc};
-        Arrays.sort(result);
+        double[] bisectors = {ba, bb, bc};
+        Arrays.sort(bisectors);
 
-        return result;
+        return bisectors;
     }
 
     /**
@@ -126,10 +126,10 @@ public class Task5 {
         double angleB = Math.toDegrees(Math.acos(cosB));
         double angleC = Math.toDegrees(Math.acos(cosC));
 
-        double[] result = {angleA, angleB, angleC};
-        Arrays.sort(result);
+        double[] angles = {angleA, angleB, angleC};
+        Arrays.sort(angles);
 
-        return result;
+        return angles;
     }
 
     /**
@@ -145,8 +145,8 @@ public class Task5 {
             return -1;
         }
 
-        double p = (a + b + c) / 2;
-        return sqrt((p - a) * (p - b) * (p - c) / p);
+        double halfPerimeter = (a + b + c) / 2;
+        return getAreaByHeron(a, b, c) / halfPerimeter;
     }
 
     /**
@@ -162,7 +162,7 @@ public class Task5 {
             return -1;
         }
 
-        return (a * b * c) / sqrt((a + b + c) * (b + c - a) * (c + a - b) * (a + b - c));
+        return (a * b * c) / (4 * getAreaByHeron(a, b, c));
     }
 
     /**
