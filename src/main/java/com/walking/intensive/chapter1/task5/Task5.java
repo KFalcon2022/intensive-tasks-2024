@@ -16,7 +16,6 @@ import static java.lang.Math.pow;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        System.out.println(getMedians(17, 1, 1));
     }
 
     /**
@@ -30,12 +29,11 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-        double p = (a + b + c) / 2;
-
-        if (!isTriangleExists(a, b, c)) {
+        if (!isTrianglePossible(a, b, c)) {
             return -1;
         }
 
+        double p = (a + b + c) / 2;
         return sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
@@ -48,7 +46,7 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
         //        Место для вашего кода
-        if (!isTriangleExists(a, b, c)) {
+        if (!isTrianglePossible(a, b, c)) {
             return new double[0];
         }
         double h1 = getAreaByHeron(a, b, c) * 2 / a;
@@ -70,7 +68,7 @@ public class Task5 {
      */
     static double[] getMedians(double a, double b, double c) {
         //        Место для вашего кода
-        if (!isTriangleExists(a, b, c)) {
+        if (!isTrianglePossible(a, b, c)) {
             return new double[0];
         }
 
@@ -93,8 +91,18 @@ public class Task5 {
      */
     static double[] getBisectors(double a, double b, double c) {
         //        Место для вашего кода
+        if (!isTrianglePossible(a, b, c)) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double ba = sqrt(b * c * (b + c + a) * (b + c - a)) / (b + c);
+        double bb = sqrt(a * c * (a + c + b) * (a + c - b)) / (a + c);
+        double bc = sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
+
+        double[] result = {ba, bb, bc};
+        Arrays.sort(result);
+
+        return result;
     }
 
     /**
@@ -106,8 +114,22 @@ public class Task5 {
      */
     static double[] getAngles(double a, double b, double c) {
         //        Место для вашего кода
+        if (!isTrianglePossible(a, b, c)) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double cosA = (pow(b, 2) + pow(c, 2) - pow(a, 2)) / (2 * b * c);
+        double cosB = (pow(a, 2) + pow(c, 2) - pow(b, 2)) / (2 * a * c);
+        double cosC = (pow(a, 2) + pow(b, 2) - pow(c, 2)) / (2 * a * b);
+
+        double angleA = Math.toDegrees(Math.acos(cosA));
+        double angleB = Math.toDegrees(Math.acos(cosB));
+        double angleC = Math.toDegrees(Math.acos(cosC));
+
+        double[] result = {angleA, angleB, angleC};
+        Arrays.sort(result);
+
+        return result;
     }
 
     /**
@@ -119,8 +141,12 @@ public class Task5 {
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
         //        Место для вашего кода
+        if (!isTrianglePossible(a, b, c)) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double p = (a + b + c) / 2;
+        return sqrt((p - a) * (p - b) * (p - c) / p);
     }
 
     /**
@@ -132,8 +158,11 @@ public class Task5 {
      */
     static double getCircumradius(double a, double b, double c) {
         //        Место для вашего кода
+        if (!isTrianglePossible(a, b, c)) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        return (a * b * c) / sqrt((a + b + c) * (b + c - a) * (c + a - b) * (a + b - c));
     }
 
     /**
@@ -152,11 +181,16 @@ public class Task5 {
      */
     static double getAreaAdvanced(double a, double b, double c) {
         //        Место для вашего кода
+        if (!isTrianglePossible(a, b, c)) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double cosA = (pow(b, 2) + pow(c, 2) - pow(a, 2)) / (2 * b * c);
+        double sinA = sqrt(1 - pow(cosA, 2));
+        return b * c / 2 * sinA;
     }
 
-    static boolean isTriangleExists(double a, double b, double c) {
+    static boolean isTrianglePossible(double a, double b, double c) {
         // проверка возможности существования треугольника
         return a + b > c && b + c > a && c + a > b;
     }
