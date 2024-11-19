@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task5;
 
+import java.lang.Math;
+
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
  * треугольника окружностей является центральной в Геометрии.
@@ -24,8 +26,13 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
+        double p = (a + b + c) / 2;
 
-        return 0; // Заглушка. При реализации - удалить
+        if (p - a < 0 || p - b < 0 || p - c < 0) {
+            return -1;
+        }
+
+        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
     /**
