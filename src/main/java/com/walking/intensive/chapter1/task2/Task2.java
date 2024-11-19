@@ -12,7 +12,7 @@ public class Task2 {
         if (floorAmount < 1 || entranceAmount < 1 || flatNumber < 1) {
             return "Некорректные входные данные";
         }
-        if (flatNumber < 1 || flatNumber > entranceAmount * flatInEntrance) {
+        if (flatNumber > entranceAmount * flatInEntrance) {
             return "Такой квартиры не существует";
         }
 
