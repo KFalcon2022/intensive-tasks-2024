@@ -25,7 +25,7 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        if (age < 0 || age > 127) { // отсекаем отрицательные значения
+        if (age < 0 || age > 127) { // отсекаем невозможные значения
             return ("Некорректный ввод");
         }
 
