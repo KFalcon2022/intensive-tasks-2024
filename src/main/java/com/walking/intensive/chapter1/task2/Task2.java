@@ -33,9 +33,9 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        int floorAmount = 2; // количество этажей
-        int entranceAmount = 2; // количество подъездов
-        int flatNumber = 8; // номер квартиры
+        int floorAmount = 2;
+        int entranceAmount = 2;
+        int flatNumber = 8;
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
