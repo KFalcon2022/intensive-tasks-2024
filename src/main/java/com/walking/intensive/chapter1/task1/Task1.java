@@ -22,13 +22,13 @@ public class Task1 {
 
     static String getAgeString(int age) {
         String suffix;
-        int lastlastTwoDigits = age % 100;
+        int lastTwoDigits = age % 100;
         if (age < 0) {
             return "Некорректный ввод";
-        } else if (lastlastTwoDigits > 10 && lastlastTwoDigits < 20){
+        } else if (lastTwoDigits > 10 && lastTwoDigits < 20) {
             suffix = "лет";
         } else {
-            suffix = switch (lastlastTwoDigits % 10) {
+            suffix = switch (lastTwoDigits % 10) {
                 case 1:
                     yield "год";
                 case 2, 3, 4:
