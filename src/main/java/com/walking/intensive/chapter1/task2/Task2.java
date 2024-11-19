@@ -41,20 +41,20 @@ public class Task2 {
         int countNumberByFloor = 4;
 
         if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
-            flatLocation = "Некорректные входные данные";
+            return "Некорректные входные данные";
         } else if (floorAmount * entranceAmount * countNumberByFloor < flatNumber) {
-            flatLocation = "Такой квартиры не существует";
+            return "Такой квартиры не существует";
         } else {
-            int countFlatInOneEntrance = floorAmount * countNumberByFloor;
-            int entranceNumber = (flatNumber - 1) / countFlatInOneEntrance + 1;
+            int countFlatOneEntrance = floorAmount * countNumberByFloor;
+            int entranceNumber = (flatNumber - 1) / countFlatOneEntrance + 1;
             int floorNumber =
-                    (flatNumber - (entranceNumber - 1) * countFlatInOneEntrance - 1) / 4 + 1;
-            int remainderOfDivideByFour = flatNumber % 4;
+                    (flatNumber - (entranceNumber - 1) * countFlatOneEntrance - 1) / 4 + 1;
+            int remainderDivideFour = flatNumber % 4;
 
             flatLocation = flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber
                     + " этаж, ";
 
-            if (remainderOfDivideByFour == 1 || remainderOfDivideByFour == 2) {
+            if (remainderDivideFour == 1 || remainderDivideFour == 2) {
                 flatLocation = flatLocation + "слева от лифта, ";
             } else {
                 flatLocation = flatLocation + "справа от лифта, ";
@@ -64,8 +64,7 @@ public class Task2 {
             } else {
                 flatLocation = flatLocation + "влево";
             }
+            return flatLocation;
         }
-
-        return flatLocation;
     }
 }
