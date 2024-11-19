@@ -20,21 +20,25 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
+        String result;
+
         if (age < 0) {
-            return "Некорректный ввод";
+            result = "Некорректный ввод";
         } else {
             int remainderOfDivideByTen = age % 10;
             int remainderOfDivideByOneHundred = age % 100;
             if ((remainderOfDivideByOneHundred > 10 && remainderOfDivideByOneHundred < 15) ||
                     remainderOfDivideByTen == 0 || remainderOfDivideByTen > 4) {
-                return "Вам " + age + " лет";
+                result = "Вам " + age + " лет";
             } else {
                 if (remainderOfDivideByTen == 1) {
-                    return "Вам " + age + " год";
+                    result = "Вам " + age + " год";
                 } else {
-                    return "Вам " + age + " года";
+                    result = "Вам " + age + " года";
                 }
             }
         }
+
+        return result;
     }
 }
