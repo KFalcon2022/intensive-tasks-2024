@@ -19,7 +19,7 @@ public class Task1 {
 
     static String getAgeString(int age) {
         if (age <= 0) {
-            return "Вы ввели Некорректную дату";
+            return "Некорректный ввод";
         }
         if (age == 1 | (age > 20 && age % 10 == 1)) {
             return "Вам " + age + " год";
