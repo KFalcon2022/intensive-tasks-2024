@@ -25,9 +25,9 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 1;
+        double a = 0;
         double b = 0;
-        double c = -1;
+        double c = 0;
 
         System.out.println(solveEquation(a, b, c));
 
@@ -38,33 +38,17 @@ public class Task4 {
         double x1, x2;
         String zeroResult = "Количество решений: 0.";
 
+        if (a == 0 && b == 0 && c == 0) {
+            return "Бесконечное множество решений.";
+        }
+
+        if (a == 0 && b == 0) {
+            return zeroResult;
+        }
+
         if (a == 0) {
-            if (b == a) {
-                if (c == a) {
-                    return "Бесконечное множество решений.";
-                }
-                return zeroResult;
-            }
             x1 = -c / b;
             return formatResult(1, x1);
-        }
-
-        if (b == 0) {
-            if (c == b) {
-                return formatResult(1, 0);
-            }
-            double powX = -c / a;
-            if (powX < 0) {
-                return zeroResult;
-            }
-            x1 = Math.sqrt(powX);
-            return formatResult(2, x1, -x1);
-        }
-
-        if (c == 0) {
-            x1 = 0;
-            x2 = -b / a;
-            return formatResult(2, x1, x2);
         }
 
         double d = Math.pow(b, 2) - 4 * a * c;
