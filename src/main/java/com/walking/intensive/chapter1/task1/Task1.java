@@ -14,15 +14,34 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
-
-        System.out.println(getAgeString(age));
+        System.out.println(getAgeString(1));
+        System.out.println(getAgeString(2));
+        System.out.println(getAgeString(5));
+        System.out.println(getAgeString(21));
+        System.out.println(getAgeString(-5));
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
+        if (age < 0) {
+            return "Некорректный ввод";
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        int lastDigit = age % 10;
+        int lastTwoDigits = age % 100;
+
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+            return "Вам " + age + " лет";
+        }
+
+        switch (lastDigit) {
+            case 1:
+                return "Вам " + age + " год";
+            case 2:
+            case 3:
+            case 4:
+                return "Вам " + age + " года";
+            default:
+                return "Вам " + age + " лет";
+        }
     }
 }
