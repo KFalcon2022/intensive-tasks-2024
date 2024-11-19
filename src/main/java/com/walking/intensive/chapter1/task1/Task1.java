@@ -15,31 +15,28 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 1;
+        int age = 128;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
 
-        int ageLength = Integer.toString(age).length();
-        int analyzedAge = ageLength > 2 ? age % (int) Math.pow(10, ageLength - 1) : age;
-
-        boolean is11To14Years = analyzedAge >= 11 && analyzedAge <= 14;
-        String result = "Вам " + age + " ";
-
-        analyzedAge %= 10;
-
-        if (is11To14Years || analyzedAge == 0) {
-            return result + "лет";
-        } else if (analyzedAge >= 2 && analyzedAge <= 4) {
-            return result + "года";
-        } else if (analyzedAge >= 5 && analyzedAge <= 9) {
-            return result + "лет";
-        } else if (analyzedAge == 1) {
-            return result + "год";
-        } else {
+        if (age < 0 || age > 127) {
             return "Некорректный ввод";
         }
+
+        int analyzedAge = age % 100;
+        int analyzedLastDigit = age % 10;
+
+        if (analyzedAge >= 11 && analyzedAge <= 14
+                || analyzedLastDigit == 0
+                || analyzedLastDigit >= 5 && analyzedLastDigit <= 9) {
+            return "Вам " + age + " лет";   //  result + "лет";
+        }
+        if (analyzedLastDigit >= 2 & analyzedLastDigit <= 4) {
+            return "Вам " + age + " года";
+        }
+        return "Вам " + age + " год";
     }
 }
