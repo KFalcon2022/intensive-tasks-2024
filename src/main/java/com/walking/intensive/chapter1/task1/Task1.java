@@ -23,14 +23,14 @@ public class Task1 {
     static String getAgeString(int age) {
         if (age < 0) {
             return "Некорректный ввод";
-        } else {
-            if (age % 10 == 0 || (age > 10 && age < 15) || age % 10 > 4 || (age > 110 && age < 115)) {
-                return "Вам " + age + " лет";
-            } else if (age % 10 == 1) {
-                return "Вам " + age + " год";
-            } else {
-                return "Вам " + age + " года";
-            }
         }
+        if (age % 10 == 0 || (age > 10 && age < 15) || age % 10 > 4 || (age > 110 && age < 115)) {
+            return "Вам " + age + " лет";
+        } else if (age % 10 == 1) {
+            return "Вам " + age + " год";
+        } else {
+            return "Вам " + age + " года";
+        }
+
     }
 }
