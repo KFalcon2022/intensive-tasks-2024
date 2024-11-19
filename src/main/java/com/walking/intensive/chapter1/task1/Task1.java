@@ -17,24 +17,24 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 
-        int age = 79;
+        int age = 0;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-        if (age <= 0) {
+        if (age < 0) {
             return "Некорректный ввод";
         }
         String ending;
-        int Digit = age % 10;
+        int firstDigit = age % 10;
         int secondDigit = (age / 10) % 10;
 
         if (secondDigit == 1) {
             ending = " лет";
-        } else if (Digit == 1) {
+        } else if (firstDigit == 1) {
             ending = " год";
-        } else if (Digit >= 2 && Digit <= 4) {
+        } else if (firstDigit >= 2 && firstDigit <= 4) {
             ending = " года";
         } else {
             ending = " лет";
