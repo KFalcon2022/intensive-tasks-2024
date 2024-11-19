@@ -36,7 +36,7 @@ public class Task2 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int floorAmount = 10; //Количество этажей в доме
         int entranceAmount = 3; //количество подъездов
-        int flatNumber = 103; //Номер нужной квартиры
+        int flatNumber = 114; //Номер нужной квартиры
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
@@ -45,32 +45,32 @@ public class Task2 {
         int maxflatNumber = maxFlatsOnEntrance * entranceAmount;
         int floorNumber = 0;
         String fullResult = "";
-//        System.out.println(floorNumber+" "+flatNumber+" "+flatNumber / 4 +" "+flatNumber % 4);
         if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0 || flatNumber > maxflatNumber) {
             System.out.println("Неверные вводные параметры!!!");
-        } else {
+        }
+        if (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0 && flatNumber <= maxflatNumber) {
             if (flatNumber <= maxFlatsOnEntrance) {
                 floorNumber = flatNumber / 4;
-                if(floorNumber == 0)//не сходится по этажам из-за округления int
-                {
-                    floorNumber+=1;
+                if (floorNumber % 4 == 0) {
+                    floorNumber += 1;
                 }
-            } else {
-                floorNumber = (flatNumber - (maxFlatsOnEntrance * ((flatNumber / maxFlatsOnEntrance)))) / 4;
+            }
+            if (flatNumber > maxFlatsOnEntrance) {
+                floorNumber = ((flatNumber - (maxFlatsOnEntrance * ((flatNumber / maxFlatsOnEntrance)))) / 4) + 1;
             }
             fullResult = flatNumber + " кв – " + ((flatNumber / maxFlatsOnEntrance) + 1) + " подъезд, " + floorNumber;
             switch (flatNumber % 4) {
-                case 1:// 4 кв – 1 подъезд, 1 этаж, справа от лифта, вправо
-                    fullResult += "этаж, слева от лифта, влево ll";
+                case 1://Пример вывода: 4 кв – 1 подъезд, 1 этаж, справа от лифта, вправо
+                    fullResult += "этаж, слева от лифта, влево";
                     break;
                 case 2:
-                    fullResult += "слева от лифта, вправо lr";
+                    fullResult += "слева от лифта, вправо";
                     break;
                 case 3:
-                    fullResult += "справа от лифта, влево rl";
+                    fullResult += "справа от лифта, влево";
                     break;
                 default:
-                    fullResult += "справа от лифта, вправо rr";
+                    fullResult += "справа от лифта, вправо";
                     break;
             }
         }
