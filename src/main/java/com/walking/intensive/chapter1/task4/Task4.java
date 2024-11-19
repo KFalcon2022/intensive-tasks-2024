@@ -28,9 +28,9 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 2;
-        double b = -9;
-        double c = 4;
+        double a = 1;
+        double b = 0;
+        double c = 0;
 
         System.out.println(solveEquation(a, b, c));
 
@@ -39,41 +39,24 @@ public class Task4 {
     static String solveEquation(double a, double b, double c) {
 
         double root1, root2;
-// Неполное уравнение
-        if (a == 0) {
-            if (b == 0) {
-                return c == 0 ? "Бесконечное множество решений." : "Количество решений: 0.";
-            } else {
-                return "Количество решений: 1. Корень: " + (-c / b);
-            }
-        }
-
-        if (b == 0) {
-            if (c == 0) {
-                return "Количество решений: 1. Корень: 0.0";
-            }
-            if (-c / a >= 0) {
-                root1 = Math.sqrt(-c / a);
-                return "Количество решений: 2. Корни: " + (-root1) + ";" + root1 + ".";
-            } else {
-                return "Количество решений: 0.";
-            }
-        }
-
-        if (c == 0) {
-            root1 = -b / a;
-            return 0 < root1 ? "Количество решений: 2. Корни: 0;" + root1 + "." :
-                    "Количество решений: 2. Корни: " + root1 + ";0";
-        }
-// Полное уравнение
         double discriminant = b * b - 4 * a * c;
 
-        if (discriminant < 0) {
+        if (a == 0 && b == 0 && c == 0) {
+            return "Бесконечное множество решений.";
+        }
+
+        if (b == 0 && (a == 0 || (-c / a) < 0) || discriminant < 0) {
             return "Количество решений: 0.";
         }
 
-        if (discriminant == 0) {
-            return "Количество решений: 1. Корень: " + (-b / (2 * a));
+        if (b == 0) {
+            root1 = 0;
+            return "Количество решений: 1. Корень: " + root1;
+        }
+
+        if (a == 0 || discriminant == 0) {
+            root1 = a == 0 ? -c / b : -b / (2 * a);
+            return "Количество решений: 1. Корень: " + root1;
         }
 
         root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
