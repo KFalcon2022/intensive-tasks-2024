@@ -26,8 +26,8 @@ public class Task4 {
     public static void main(String[] args) {
 
         double a = 0;
-        double b = -2;
-        double c = 2;
+        double b = 0;
+        double c = 0;
 
         System.out.println(solveEquation(a, b, c));
 
