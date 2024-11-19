@@ -34,18 +34,18 @@ import java.util.Scanner;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task2 {
-    static final int FLATS_ON_THE_FLOR = 4;
+    static final int FLATS_ON_THE_FLOOR = 4;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter floor amount:");
+        System.out.println("Введите количество этажей:");
         int floorAmount = scanner.nextInt();
 
-        System.out.println("Enter entrance amount:");
+        System.out.println("введите количество подъездов:");
         int entranceAmount = scanner.nextInt();
 
-        System.out.println("Enter flat number:");
+        System.out.println("Введите номер искомой квартиры:");
         int flatNumber = scanner.nextInt();
 
         scanner.close();
@@ -58,15 +58,17 @@ public class Task2 {
             return "Некорректные входные данные";
         }
 
-        int quantityAllFlats = floorAmount * entranceAmount * FLATS_ON_THE_FLOR;
+        int quantityAllFlats = floorAmount * entranceAmount * FLATS_ON_THE_FLOOR;
 
         if (flatNumber > quantityAllFlats) {
             return "Такой квартиры не существует";
         }
 
-        int flatsInEntrance = floorAmount * FLATS_ON_THE_FLOR;
+        int flatsInEntrance = floorAmount * FLATS_ON_THE_FLOOR;
         int currentEntrance = (int) Math.ceil((double) flatNumber / flatsInEntrance);
-        int currentFloor = (int) Math.ceil((double) (flatNumber - (flatsInEntrance * (currentEntrance - 1))) / FLATS_ON_THE_FLOR);
+        int currentFloor = (int) Math.ceil((double) (flatNumber
+                - (flatsInEntrance * (currentEntrance - 1)))
+                / FLATS_ON_THE_FLOOR);
 
         return printFlatLocation(currentEntrance, currentFloor, flatNumber);
     }
@@ -74,7 +76,9 @@ public class Task2 {
     static String printFlatLocation(int currentEntrance, int currentFloor, int flatNumber) {
         String flatLocation = flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + " этаж, ";
 
-        switch (flatNumber % FLATS_ON_THE_FLOR) {
+        switch (flatNumber % FLATS_ON_THE_FLOOR) {
+            case 0:
+                flatLocation += "справа от лифта, вправо";
             case 1:
                 flatLocation += "слева от лифта, влево";
                 break;
@@ -84,10 +88,9 @@ public class Task2 {
             case 3:
                 flatLocation += "справа от лифта, влево";
                 break;
-            case 0:
-                flatLocation += "справа от лифта, вправо";
+            default:
+                return "Такой квартиры не существует";
         }
-
 
         return flatLocation;
     }
