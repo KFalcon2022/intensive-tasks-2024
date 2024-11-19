@@ -27,7 +27,7 @@ public class Task1 {
 
         int last = age % 10;
 
-        if (last == 1 || age == 1 && age != 11) {
+        if (last == 1 || age == 1) {
             return "Вам " + age + " год.";
         }
         if (last == 2 || last == 3 || last == 4) {
