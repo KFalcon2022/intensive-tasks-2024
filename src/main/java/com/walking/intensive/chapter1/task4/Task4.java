@@ -27,15 +27,39 @@ public class Task4 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         double a = 0;
         double b = 0;
-        double c = 0;
+        double c = -10;
 
         System.out.println(solveEquation(a, b, c));
 
     }
 
     static String solveEquation(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if (a == 0 && b == 0 && c == 0) {
+            return "Бесконечное множество решений.";
+        }
+
+        if (a == 0 && b != 0) {
+            return "Количество решений: 1. Корень: " + (int)(-c / b);
+        }
+
+        double discriminant = (b * b) - (4 * a * c);
+        if (discriminant < 0 || a == 0) {
+            return "Количество решений: 0.";
+        } else if (discriminant == 0) {
+            return "Количество решений: 1. Корень: " + (int)((-b / a) / 2);
+        }
+
+        double discriminantSqrt = Math.sqrt(discriminant);
+        double firstRoot = (-b + discriminantSqrt) / (2 * a);
+        double secondRoot = (-b - discriminantSqrt) / (2 * a);
+        int firstRootInt = (int)firstRoot;
+        int secondRootInt = (int)secondRoot;
+
+        if (firstRootInt > secondRootInt) {
+            return "Количество решений: 2. Корни: " + secondRootInt + ";" + firstRootInt;
+        } else {
+            return "Количество решений: 2. Корни: " + firstRootInt + ";" + secondRootInt;
+        }
     }
 }
