@@ -21,8 +21,20 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if (age < 0) {
+            return "Некорректный ввод";
+        }
+        if (age == 0) {
+            return "Вам 0 лет";
+        }
+        String str = "Вам " + age + " ";
+        if (age % 100 >= 11 && age % 100 <= 14 || (age % 10 == 0 || age % 10 >= 5)) {
+            return str + "лет";
+        }
+        if (age % 10 == 1) {
+            return str + "год";
+        } else {
+            return str + "года";
+        }
     }
 }
