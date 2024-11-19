@@ -34,39 +34,35 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        // System.out.println(getFlatLocation(4, 2, 16));
+        System.out.println(getFlatLocation(4, 2, 16));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
         if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
             return "Некорректные входные данные";
-        } else if (flatNumber - (floorAmount * 4 * entranceAmount) > 0) {
+        }
+
+        if (flatNumber - (floorAmount * 4 * entranceAmount) > 0) {
             return "Такой квартиры не существует";
         }
 
         int flatPerFloor = 4;
         int flatAmountSingleEntrance = floorAmount * flatPerFloor;
         boolean isLastFlatInEntrance = (flatNumber % flatAmountSingleEntrance) == 0;
-        int entranceNumber;
-
-        if (isLastFlatInEntrance) {
-            entranceNumber = (flatNumber / flatAmountSingleEntrance);
-        } else {
-            entranceNumber = (flatNumber / flatAmountSingleEntrance) + 1;
-        }
-
+        int entranceNumber = isLastFlatInEntrance ?
+                (flatNumber / flatAmountSingleEntrance) : (flatNumber / flatAmountSingleEntrance) + 1;
         int floorNumber = (flatNumber - 1) % flatAmountSingleEntrance / flatPerFloor + 1;
-        int flatPositionOnFloor = flatNumber % flatPerFloor;
+        int flatNumberOnFloor = flatNumber % flatPerFloor;
 
-        if (flatPositionOnFloor == 1) {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, влево";
-        } else if (flatPositionOnFloor == 2) {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, вправо";
-        } else if (flatPositionOnFloor == 3) {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, влево";
-        } else {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, вправо";
+        String flatPositionOnFloor;
+        switch (flatNumberOnFloor) {
+            case 1 -> flatPositionOnFloor = " этаж, слева от лифта, влево";
+            case 2 -> flatPositionOnFloor = " этаж, слева от лифта, вправо";
+            case 3 -> flatPositionOnFloor = " этаж, справа от лифта, влево";
+            default -> flatPositionOnFloor = " этаж, справа от лифта, вправо";
         }
+
+        return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + flatPositionOnFloor;
     }
 }
