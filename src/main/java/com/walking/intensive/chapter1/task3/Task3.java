@@ -32,6 +32,6 @@ public class Task3 {
     static boolean isLeap(int year) {
 
 
-        return (year <= 0) ? false : (year % 400) == 0 ? true : (year % 100) == 0 ? false : (year % 4) == 0;
+        return year > 0 && (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0));
     }
 }
