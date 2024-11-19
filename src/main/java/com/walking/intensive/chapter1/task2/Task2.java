@@ -1,4 +1,5 @@
 package com.walking.intensive.chapter1.task2;
+
 import static java.lang.Math.ceil;
 
 /**
@@ -35,22 +36,41 @@ import static java.lang.Math.ceil;
 public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int floorAmount = 5; // кол-во этажей
-        int entranceAmount = 7; //кол-во подъездов
-        int flatNumber = 1; //номер квартиры
+        int floorAmount = 10; // кол-во этажей
+        int entranceAmount = 3; //кол-во подъездов
+        int flatNumber = 88; //номер квартиры
 
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        int flatAmount = 4; //кол-во квартир на этаже
+        double flatAmount = 4; //кол-во квартир на этаже
+        String side1;
+        String side2;
 
-        int entranceNumber = (int) Math.ceil((double) flatNumber/flatAmount/floorAmount); //подъезд
-        int floorNumber = (int) Math.ceil((double)  (flatNumber - (flatAmount*floorAmount*(entranceNumber-1)))/flatAmount); //этаж
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            return "Некорректные входные данные";
+        } else {
+            if (flatNumber <= (flatAmount * floorAmount * entranceAmount)) {
+                int entranceNumber = (int) Math.ceil((double) flatNumber / flatAmount / floorAmount); //подъезд
+                int floorNumber = (int) Math.ceil((double) (flatNumber - (flatAmount * floorAmount * (entranceNumber - 1))) / flatAmount); //этаж
+                double angleCoefficient = (flatNumber / flatAmount) - Math.floor(flatNumber / flatAmount);
 
+                if (angleCoefficient != 0 & angleCoefficient <= 0.5) {
+                    side1 = "слева от лифта,";
+                } else {
+                    side1 = "справа от лифта,";
+                }
 
-        return flatNumber + " кв" + " - " + entranceNumber + " подъезд" + "," + " " + floorNumber + " этаж";
-
-
+                if (angleCoefficient == 0 || angleCoefficient == 0.5) {
+                    side2 = " вправо";
+                } else {
+                    side2 = " влево";
+                }
+                return flatNumber + " кв" + " - " + entranceNumber + " подъезд" + "," + " " + floorNumber + " этаж" + ", " + side1 + side2;
+            } else {
+                return "Такой квартиры не существует";
+            }
+        }
     }
 }
