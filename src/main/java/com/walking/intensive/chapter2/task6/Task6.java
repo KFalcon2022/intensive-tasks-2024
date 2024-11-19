@@ -69,13 +69,14 @@ public class Task6 {
         if (isInvalidNumbers(m, n)) {
             return -1;
         }
+        return getGcdRecursive(m, n);
+    }
 
-        while (n != 0) {
-            int temp = m % n;
-            m = n;
-            n = temp;
+    private static int getGcdRecursive(int m, int n) {
+        if (n == 0) {
+            return m;
         }
-        return m;
+        return getGcdRecursive(n, m % n);
     }
 
     private static boolean isInvalidNumbers(int m, int n) {
