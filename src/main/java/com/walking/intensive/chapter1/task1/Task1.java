@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter1.task1;
 
-import java.util.Scanner;
-
 /**
  * Реализуйте метод getAgeString(), который будет принимать параметром целое число (возраст) и возвращать строку
  * вида: "Вам N лет". Программа должна учитывать правила русского языка.
@@ -16,30 +14,35 @@ import java.util.Scanner;
 
 public class Task1 {
     public static void main(String[] args) {
-
-        Scanner in = new Scanner(System.in);//использовал модуль "Scanner" чтобы вводить данные из консоли
-        System.out.print("Введите возраст: ");
-        int age = in.nextInt();
-
-        System.out.println(getAgeString(age));
+        System.out.println(getAgeString(-1));
+        System.out.println(getAgeString(0));
+        System.out.println(getAgeString(1));
+        System.out.println(getAgeString(2));
+        System.out.println(getAgeString(5));
+        System.out.println(getAgeString(11));
+        System.out.println(getAgeString(21));
+        System.out.println(getAgeString(22));
+        System.out.println(getAgeString(25));
+        System.out.println(getAgeString(127));
+        System.out.println(getAgeString(128));
     }
 
     static String getAgeString(int age) {
-        if (age < 0 || age > 127) { // отсекаем невозможные значения
+        if (age < 0 || age > 127) {
             return ("Некорректный ввод");
         }
 
-        int lastDigit = age % 10;//получаем последний символ
-        int lastTwoDigits = age % 100;//получаем последние 2 символа
+        int lastDigit = age % 10;
+        int lastTwoDigits = age % 100;
 
-        if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 14 || lastDigit >= 5 || lastDigit == 0) {
             return ("Вам " + age + " лет");
         }
 
         return switch (lastDigit) {
             case 1 -> ("Вам " + age + " год");
             case 2, 3, 4 -> ("Вам " + age + " года");
-            default -> "Вам " + age + " лет";
+            default -> "";
         };
 
     }
