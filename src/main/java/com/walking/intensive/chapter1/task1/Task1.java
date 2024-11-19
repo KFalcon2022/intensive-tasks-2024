@@ -11,13 +11,11 @@ import java.util.Scanner;
  *
  * <p>Также необходимо учесть негативные сценарии. Например, попытку передать в метод невалидное значение - например,
  * отрицательное число. В таких случаях ожидается, что метод вернет строку "Некорректный ввод".
- *
- * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
+ * * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
 
         Scanner in = new Scanner(System.in);//использовал модуль "Scanner" чтобы вводить данные из консоли
         System.out.print("Введите возраст: ");
