@@ -18,6 +18,7 @@ public class Task1 {
 
         for (int i = -2; i < 128; i++) {
             System.out.println(getAgeString(i));
+
         }
     }
 
