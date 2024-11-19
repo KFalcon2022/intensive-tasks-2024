@@ -49,19 +49,22 @@ public class Task2 {
 
         int flatPerFloor = 4;
         int flatAmountSingleEntrance = floorAmount * flatPerFloor;
-        boolean isLastFlatInEntrance = (flatNumber % flatAmountSingleEntrance) == 0;
-        int entranceNumber = isLastFlatInEntrance ?
-                (flatNumber / flatAmountSingleEntrance) : (flatNumber / flatAmountSingleEntrance) + 1;
+        boolean isLastFlatInEntrance = flatNumber % flatAmountSingleEntrance == 0;
+
+        int entranceNumber = isLastFlatInEntrance
+                ? flatNumber / flatAmountSingleEntrance
+                : flatNumber / flatAmountSingleEntrance + 1;
+
         int floorNumber = (flatNumber - 1) % flatAmountSingleEntrance / flatPerFloor + 1;
         int flatNumberOnFloor = flatNumber % flatPerFloor;
 
-        String flatPositionOnFloor;
-        switch (flatNumberOnFloor) {
-            case 1 -> flatPositionOnFloor = " этаж, слева от лифта, влево";
-            case 2 -> flatPositionOnFloor = " этаж, слева от лифта, вправо";
-            case 3 -> flatPositionOnFloor = " этаж, справа от лифта, влево";
-            default -> flatPositionOnFloor = " этаж, справа от лифта, вправо";
-        }
+        String flatPositionOnFloor = switch (flatNumberOnFloor) {
+            case 1 -> " этаж, слева от лифта, влево";
+            case 2 -> " этаж, слева от лифта, вправо";
+            case 3 -> " этаж, справа от лифта, влево";
+            case 0 -> " этаж, справа от лифта, вправо";
+            default -> "Ошибка в вычислении позиции квартиры относительно лифта.";
+        };
 
         return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + flatPositionOnFloor;
     }
