@@ -32,8 +32,17 @@ public class Task7 {
 //        for (int i = 0; i < 285; i++) {
 //            System.out.print(getFriendlyPair(i));
 //        }
-        System.out.println(getFriendlyPair(285));
+//        System.out.println(getFriendlyPair(285));
 
+        // Какая жесть это ваше программирование. Уйду в проститутки.
+        long before = System.currentTimeMillis();
+        System.out.println(getFriendlyPair(100_000));
+        System.out.println(System.currentTimeMillis() - before + " ms");
+
+        long before1 = System.currentTimeMillis();
+        System.out.println(getFriendlyPair(1_000_000));
+        System.out.println(System.currentTimeMillis() - before1 + " ms");
+        // Пятикласснику Ване здоровья.
     }
 
     static int getFriendlyPair(int n) {
@@ -63,22 +72,26 @@ public class Task7 {
     private static int dividersSum(int number) {
         int sum = 1;
 
-        for (int i = 2; i <= number / 2; i++) {
+        int sqrtNum = (int) Math.sqrt(number);
+
+        for (int i = 2; i <= sqrtNum; i++) {
             if (number % i == 0) {
                 sum += i;
+
+                int divider = number / i;
+                if (divider != i && divider != number) {
+                    sum += divider;
+                }
             }
         }
-
         return sum;
     }
 
     private static boolean isFriendlyPair(int i, int sumDivI, int n) {
-
         if (sumDivI > i && sumDivI < n) {
             int sumDivJ = dividersSum(sumDivI);
             return sumDivJ == i;
         }
-
         return false;
     }
 }
