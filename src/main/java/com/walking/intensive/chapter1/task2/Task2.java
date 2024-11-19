@@ -40,27 +40,29 @@ public class Task2 {
 
     static String getFlatLocation(int floors, int entrances, int flatNumber) {
         //        Место для вашего кода
+        final int FLATS_PER_FLOOR = 4;
+        final int INDEX_OFFSET = 1;
         if (floors <= 0 || entrances <= 0 || flatNumber <= 0) {
             return "Некорректные входные данные";
         }
 
-        int flatsPerEntrance = floors * 4;
+        int flatsPerEntrance = floors * FLATS_PER_FLOOR;
 
         if (flatNumber > flatsPerEntrance * entrances) {
             return "Такой квартиры не существует";
         }
 
-        int entrance = (flatNumber - 1) / flatsPerEntrance + 1;
-        int flatWithinEntrance = (flatNumber - 1) % flatsPerEntrance + 1;
-        int floor = (flatWithinEntrance - 1) / 4 + 1;
-        int positionOnFloor = (flatWithinEntrance - 1) % 4;
+        int entrance = (flatNumber - INDEX_OFFSET) / flatsPerEntrance + 1;
+        int flatWithinEntrance = (flatNumber - INDEX_OFFSET) % flatsPerEntrance + 1;
+        int floor = (flatWithinEntrance - INDEX_OFFSET) / 4 + 1;
+        int positionOnFloor = (flatWithinEntrance - INDEX_OFFSET) % 4;
 
 // Вычисляю сторону относительно лифта
         String side;
-        if (positionOnFloor < 2) {
-            side = "слева от лифта"; // Первая и вторая квартира на этаже
-        } else {
-            side = "справа от лифта"; // Третья и четвёртая квартира на этаже
+        switch (positionOnFloor) {
+            case 0, 1 -> side = "слева от лифта";
+            case 2, 3 -> side = "справа от лифта";
+            default -> side = "ты не туда попал";
         }
 
 // Определяю направление (влево или вправо)
