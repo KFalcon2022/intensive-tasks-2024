@@ -18,33 +18,31 @@ public class Task1 {
 
         Scanner scanner = new Scanner(System.in);
         int age = scanner.nextInt();
+        System.out.println(getAgeString(age));
 
-        if (age >= 0 && age <= 127){
-            System.out.println(getAgeString(age));
-        } else {
-            System.out.println("Некорректный ввод");
-        }
     }
 
     static String getAgeString(int age) {
 
-        String yeartext = "";
-        int ageunit;
+        if (age >= 0 && age <= 127) {
+            int ageunit;
+            if (age >= 100) {
+                ageunit = ((age - 100) % 10);
+            } else {
+                ageunit = (age % 10);
+            }
 
-        if (age >= 100) {
-            ageunit = ((age - 100) % 10);
+            String yeartext;
+            if ((age >= 5 && age <= 20) || (age >= 105 && age <= 120) || (ageunit == 0 || (ageunit >= 5 && ageunit <= 9))) {
+                yeartext = "лет";
+            } else if (ageunit == 1) {
+                yeartext = "год";
+            } else {
+                yeartext = "года";
+            }
+            return "Вам " + age + " " + yeartext;
         } else {
-            ageunit = (age % 10);
+            return "Некорректный ввод";
         }
-
-        if ((age >= 5 && age <= 20) || (age >= 105 && age <= 120) || (ageunit == 0 || (ageunit >= 5 && ageunit <= 9))) {
-            yeartext = "лет";
-        } else if (ageunit == 1) {
-            yeartext = "год";
-        } else {
-            yeartext = "года";
-        }
-
-        return "Вам " + age + " " + yeartext;
     }
 }
