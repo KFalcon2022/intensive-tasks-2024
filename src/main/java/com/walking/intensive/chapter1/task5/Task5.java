@@ -30,7 +30,9 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
 
-        if (a + b <= c || a + c <= b || b + c <= a) return -1;
+        if (isWrongTriangle(a, b, c)) {
+            return -1;
+        }
 
         double p = (a + b + c) / 2;
 
@@ -46,11 +48,12 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
 
-        if (a + b <= c || a + c <= b || b + c <= a) return new double[0];
+        if (isWrongTriangle(a, b, c)) {
+            return new double[0];
+        }
 
         double[] heights = new double[3];
         double area = getAreaByHeron(a, b, c);
-
         heights[0] = 2 * area / a;
         heights[1] = 2 * area / b;
         heights[2] = 2 * area / c;
@@ -58,7 +61,6 @@ public class Task5 {
         Arrays.sort(heights);
 
         return heights;
-
     }
 
     /**
@@ -70,7 +72,9 @@ public class Task5 {
      */
     static double[] getMedians(double a, double b, double c) {
 
-        if (a + b <= c || a + c <= b || b + c <= a) return new double[0];
+        if (isWrongTriangle(a, b, c)) {
+            return new double[0];
+        }
 
         double[] medians = new double[3];
 
@@ -92,7 +96,9 @@ public class Task5 {
      */
     static double[] getBisectors(double a, double b, double c) {
 
-        if (a + b <= c || a + c <= b || b + c <= a) return new double[0];
+        if (isWrongTriangle(a, b, c)) {
+            return new double[0];
+        }
 
         double[] bisectors = new double[3];
 
@@ -114,7 +120,9 @@ public class Task5 {
      */
     static double[] getAngles(double a, double b, double c) {
 
-        if (a + b <= c || a + c <= b || b + c <= a) return new double[0];
+        if (isWrongTriangle(a, b, c)) {
+            return new double[0];
+        }
 
         double[] angels = new double[3];
 
@@ -136,7 +144,9 @@ public class Task5 {
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
 
-        if (a + b <= c || a + c <= b || b + c <= a) return -1;
+        if (isWrongTriangle(a, b, c)) {
+            return -1;
+        }
 
         return getAreaByHeron(a, b, c) * 2 / (a + b + c);
     }
@@ -150,7 +160,9 @@ public class Task5 {
      */
     static double getCircumradius(double a, double b, double c) {
 
-        if (a + b <= c || a + c <= b || b + c <= a) return -1;
+        if (isWrongTriangle(a, b, c)) {
+            return -1;
+        }
 
         return a * b * c / (4 * getAreaByHeron(a, b, c));
     }
@@ -171,11 +183,17 @@ public class Task5 {
      */
     static double getAreaAdvanced(double a, double b, double c) {
 
-        if (a + b <= c || a + c <= b || b + c <= a) return -1;
+        if (isWrongTriangle(a, b, c)) {
+            return -1;
+        }
 
         double cosA = (b * b + c * c - a * a) / (2 * b * c);
         double sinA = Math.sqrt(1 - cosA * cosA);
 
         return (b * c * sinA) / 2;
+    }
+
+    static boolean isWrongTriangle(double a, double b, double c) {
+        return (a == 0 || b == 0 || c == 0 || a + b <= c || a + c <= b || b + c <= a);
     }
 }
