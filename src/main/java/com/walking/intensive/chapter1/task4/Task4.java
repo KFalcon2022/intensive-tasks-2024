@@ -25,9 +25,9 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 0;
+        double a = 1;
         double b = 0;
-        double c = 0;
+        double c = -1;
 
         System.out.println(solveEquation(a, b, c));
 
@@ -53,7 +53,12 @@ public class Task4 {
             if (c == b) {
                 return formatResult(1, 0);
             }
-            return zeroResult;
+            double powX = -c / a;
+            if (powX < 0) {
+                return zeroResult;
+            }
+            x1 = Math.sqrt(powX);
+            return formatResult(2, x1, -x1);
         }
 
         if (c == 0) {
