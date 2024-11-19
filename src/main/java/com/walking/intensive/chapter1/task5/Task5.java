@@ -1,6 +1,9 @@
 package com.walking.intensive.chapter1.task5;
 
-import java.lang.Math;
+import java.util.Arrays;
+
+import static java.lang.Math.sqrt;
+import static java.lang.Math.pow;
 
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
@@ -13,6 +16,7 @@ import java.lang.Math;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getMedians(17, 1, 1));
     }
 
     /**
@@ -28,11 +32,11 @@ public class Task5 {
         //        Место для вашего кода
         double p = (a + b + c) / 2;
 
-        if (p - a < 0 || p - b < 0 || p - c < 0) {
+        if (!isTriangleExists(a, b, c)) {
             return -1;
         }
 
-        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        return sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
     /**
@@ -44,8 +48,17 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
         //        Место для вашего кода
+        if (!isTriangleExists(a, b, c)) {
+            return new double[0];
+        }
+        double h1 = getAreaByHeron(a, b, c) * 2 / a;
+        double h2 = getAreaByHeron(a, b, c) * 2 / b;
+        double h3 = getAreaByHeron(a, b, c) * 2 / c;
 
-        return null; // Заглушка. При реализации - удалить
+        double[] result = {h1, h2, h3};
+        Arrays.sort(result);
+
+        return result;
     }
 
     /**
@@ -57,8 +70,18 @@ public class Task5 {
      */
     static double[] getMedians(double a, double b, double c) {
         //        Место для вашего кода
+        if (!isTriangleExists(a, b, c)) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double ma = sqrt(2 * pow(b, 2) + 2 * pow(c, 2) - pow(a, 2)) / 2;
+        double mb = sqrt(2 * pow(c, 2) + 2 * pow(a, 2) - pow(b, 2)) / 2;
+        double mc = sqrt(2 * pow(a, 2) + 2 * pow(b, 2) - pow(c, 2)) / 2;
+
+        double[] result = {ma, mb, mc};
+        Arrays.sort(result);
+
+        return result;
     }
 
     /**
@@ -131,5 +154,10 @@ public class Task5 {
         //        Место для вашего кода
 
         return 0; // Заглушка. При реализации - удалить
+    }
+
+    static boolean isTriangleExists(double a, double b, double c) {
+        // проверка возможности существования треугольника
+        return a + b > c && b + c > a && c + a > b;
     }
 }
