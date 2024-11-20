@@ -29,8 +29,11 @@ public class Task3 {
     }
 
     static boolean isLeap(int year) {
-        //Место для вашего кода
 
-        return false; // Заглушка. При реализации - удалить
+        boolean condition1 = year > 1581; // будем считать, что до Григорианского календаря стандартные расчетны неприменимы
+        boolean condition2 = year % 100 == 0 & year % 400 != 0;
+        boolean condition3 = year % 4 == 0;
+
+        return condition1 & !condition2 & condition3;
     }
 }
