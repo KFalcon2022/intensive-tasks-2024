@@ -38,7 +38,29 @@ public class Task2 {
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         //        Место для вашего кода
-
+        if (flatNumber <= 0 | entranceAmount <= 0 | flatNumber <= 0 ) {
+            return "Некорректный ввод";
+        }
+        else if (age > 10 && age < 15) {
+            return "Вам "+ age +" лет";
+        }
+        else if (age > 110 && age < 115) {
+            return "Вам "+ age +" лет";
+        }
+        int lastNum = age % 10;
+        switch (lastNum) {
+            case 0:
+                return "Вам "+ age +" лет";
+            case 1:
+                return "Вам "+ age +" год";
+            case 2:
+                return "Вам "+ age +" года";
+            case 3:
+                return "Вам "+ age +" года";
+            case 4:
+                return "Вам "+ age +" года";
+            default:
+                return "Вам "+ age +" лет";
         return null; // Заглушка. При реализации - удалить
     }
 }
