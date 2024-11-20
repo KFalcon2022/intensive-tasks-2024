@@ -26,7 +26,6 @@ public class Task1 {
         String ageMessage = null;
 
         if (age >= 0 && age <= 130) {
-
             if (lastNumber == 0 || lastNumber == 5 || lastNumber == 6 || lastNumber == 7 || lastNumber == 8 ||
                     lastNumber == 9 || (age % 100 >= 10 && age % 100 < 15)) {
                 ageMessage = "Вам " + age + " лет";
