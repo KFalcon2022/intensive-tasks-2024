@@ -7,13 +7,11 @@ public class Task1 {
     }
     static String getAgeString(int age) {
         if (age < 0) {
-            return "Некорректный ввод";
-        }
-        else if (age > 10 && age < 15) {
-            return "Вам "+ age +" лет";
-        }
-        else if (age > 110 && age < 115) {
-            return "Вам "+ age +" лет";
+                return "Некорректный ввод";
+        }   if (age > 10 && age < 15) {
+                return "Вам "+ age +" лет";
+        }   if (age > 110 && age < 115) {
+                return "Вам "+ age +" лет";
         }
         int lastNum = age % 10;
         switch (lastNum) {
