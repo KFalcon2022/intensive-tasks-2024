@@ -33,9 +33,9 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        int floorAmount = 0;
+        int floorAmount = 10;
         int entranceAmount = 3;
-        int flatNumber = 17;
+        int flatNumber = 20;
 
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
@@ -57,17 +57,18 @@ public class Task2 {
 
         int flatFloor = (flatNumber - 1) % 4 + 1;
 
+        String call = flatNumber + " кв" + " - " + entranceNumber + " подъезд, " + floorNumber + " этаж, ";
+
         if (flatNumber > flatExists || flatNumber <= 0) {
             return "Такой квартиры не существует";
         } else if (flatFloor == 1) {
-            return flatNumber + " кв" + " - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, влево";
+            return call + "слева от лифта, влево";
         } else if (flatFloor == 2) {
-            return flatNumber + " кв" + " - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, вправо";
+            return call + "слева от лифта, вправо";
         } else if (flatFloor == 3) {
-            return flatNumber + " кв" + " - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, влево";
-        } else if (flatFloor == 4) {
-            return flatNumber + " кв" + " - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, вправо";
+            return call + "справа от лифта, влево";
+        } else {
+            return call + "справа от лифта, вправо";
         }
-        return "Некорректные входные данные";
     }
 }
