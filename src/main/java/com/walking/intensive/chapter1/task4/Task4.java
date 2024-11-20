@@ -82,7 +82,7 @@ public class Task4 {
         return "Количество решений: 1. Корень: " + formatNumber(-b / (2 * a));
     }
 
-    private static Object formatNumber(double number) {
-        return number % 1 == 0 ? (Object) (int) number : number;
+    private static double formatNumber(double number) {
+        return number == -0.0 ? 0.0 : number;
     }
 }
