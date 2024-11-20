@@ -36,44 +36,46 @@ public class Task2 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int floorAmount = 10; //Количество этажей в доме
         int entranceAmount = 3; //количество подъездов
-        int flatNumber = 114; //Номер нужной квартиры
+        int flatNumber = 62; //Номер нужной квартиры
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        int maxFlatsOnEntrance = floorAmount * 4;
+        int flatsOnFloor = 4;
+        int maxFlatsOnEntrance = floorAmount * flatsOnFloor;
         int maxflatNumber = maxFlatsOnEntrance * entranceAmount;
         int floorNumber = 0;
-        String fullResult = "";
+        String FlatLocation = "";
+
         if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0 || flatNumber > maxflatNumber) {
-            System.out.println("Неверные вводные параметры!!!");
+            return "Неверные вводные параметры!!!";
         }
-        if (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0 && flatNumber <= maxflatNumber) {
-            if (flatNumber <= maxFlatsOnEntrance) {
-                floorNumber = flatNumber / 4;
-                if (floorNumber % 4 == 0) {
-                    floorNumber += 1;
-                }
-            }
-            if (flatNumber > maxFlatsOnEntrance) {
-                floorNumber = ((flatNumber - (maxFlatsOnEntrance * ((flatNumber / maxFlatsOnEntrance)))) / 4) + 1;
-            }
-            fullResult = flatNumber + " кв – " + ((flatNumber / maxFlatsOnEntrance) + 1) + " подъезд, " + floorNumber;
-            switch (flatNumber % 4) {
-                case 1://Пример вывода: 4 кв – 1 подъезд, 1 этаж, справа от лифта, вправо
-                    fullResult += "этаж, слева от лифта, влево";
-                    break;
-                case 2:
-                    fullResult += "слева от лифта, вправо";
-                    break;
-                case 3:
-                    fullResult += "справа от лифта, влево";
-                    break;
-                default:
-                    fullResult += "справа от лифта, вправо";
-                    break;
+
+        if (flatNumber <= maxFlatsOnEntrance) {
+            floorNumber = flatNumber / flatsOnFloor;
+            if (floorNumber % 4 == 0) {
+                floorNumber += 1;
             }
         }
-        return fullResult;
+
+        if (flatNumber > maxFlatsOnEntrance) {
+            floorNumber = ((flatNumber - (maxFlatsOnEntrance * ((flatNumber / maxFlatsOnEntrance)))) / flatsOnFloor) + 1;
+        }
+        FlatLocation = flatNumber + " кв – " + ((flatNumber / maxFlatsOnEntrance) + 1) + " подъезд, " + floorNumber;
+        switch (flatNumber % flatsOnFloor) {
+            case 1://Пример вывода: 4 кв – 1 подъезд, 1 этаж, справа от лифта, вправо
+                FlatLocation += "этаж, слева от лифта, влево";
+                break;
+            case 2:
+                FlatLocation += "слева от лифта, вправо";
+                break;
+            case 3:
+                FlatLocation += "справа от лифта, влево";
+                break;
+            default:
+                FlatLocation += "справа от лифта, вправо";
+                break;
+        }
+        return FlatLocation;
     }
 }
