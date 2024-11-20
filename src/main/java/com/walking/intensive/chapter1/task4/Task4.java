@@ -41,15 +41,19 @@ public class Task4 {
 
         if (a == 0 && b == 0 && c == 0) {
             return "Бесконечное множество решений.";
-        } else if (b == 0 && c == 0) {
+        }
+        if (b == 0 && c == 0) {
             return "Количество решений: 1. Корень: 0.0";
-        } else if (discriminant > 0) {
+        }
+        if (discriminant > 0) {
             if (a == 0) {
                 return "Количество решений: 1. Корень: " + Math.abs(c / b);
             } else {
                 firstRoot = (-b - Math.sqrt(discriminant)) / (2 * a);
                 secondRoot = (-b + Math.sqrt(discriminant)) / (2 * a);
-                return "Количество решений: 2. Корни: " + Math.min(firstRoot, secondRoot) + ";" + Math.max(firstRoot, secondRoot);
+                return "Количество решений: 2. Корни: "
+                        + Math.min(firstRoot, secondRoot) + ";"
+                        + Math.max(firstRoot, secondRoot);
             }
         } else if (discriminant == 0) {
             if (a == 0) {
@@ -57,10 +61,8 @@ public class Task4 {
             } else {
                 return "Количество решений: 1. Корень: " + (-b / (2 * a));
             }
-        } else if (discriminant < 0) {
-            return "Количество решений: 0.";
         } else {
-            return "";
+            return "Количество решений: 0.";
         }
     }
 }
