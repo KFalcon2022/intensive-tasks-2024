@@ -59,9 +59,7 @@ public class Task2 {
         int numDirection = (int) Math.ceil(1.0 * flatNumber - (numEntrance - 1) * floorAmount * 4
                 - (numFloor - 1) * 4) % 2;
         String nameDirection = numDirection == 0 ? "вправо" : "влево";
-
-        //return String.valueOf(flatNumber) + " кв - " + String.valueOf(numEntrance) + " подъезд, "
-        //        + String.valueOf(numFloor) + " этаж, " + nameElevatorDirection + ", " + nameDirection;
+        
         return String.format("%d кв - %d подъезд, %d этаж, %s, %s",
                 flatNumber, numEntrance, numFloor, nameElevatorDirection, nameDirection);
     }
