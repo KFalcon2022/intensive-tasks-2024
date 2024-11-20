@@ -41,10 +41,10 @@ public class Task2 {
         if (flatNumber <= 0 | entranceAmount <= 0 | flatNumber <= 0 ) {
             return "Некорректный ввод";
         }
-        else if (age > 10 && age < 15) {
+        if (age > 10 && age < 15) {
             return "Вам "+ age +" лет";
         }
-        else if (age > 110 && age < 115) {
+        if (age > 110 && age < 115) {
             return "Вам "+ age +" лет";
         }
         int lastNum = age % 10;
