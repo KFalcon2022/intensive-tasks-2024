@@ -38,26 +38,31 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        if (flatNumber < 1) {
+        if (flatNumber < 1 || floorAmount < 1 || entranceAmount < 1) {
             return "Некорректные входные данные";
         }
+
         int flatNumberMath = flatNumber - 1;
         int entranceNumber = (flatNumberMath) / (floorAmount * 4) + 1;
+        int floorNumber = ((flatNumberMath) % (floorAmount * 4)) / 4 + 1;
+
         if (entranceNumber > entranceAmount) {
             return "Такой квартиры не существует";
         }
-        int flatPosition = flatNumber % 4;
-        int floorNumber = ((flatNumberMath) % (floorAmount * 4)) / 4 + 1;
-        String flatRoute = switch (flatPosition) {
+
+        String flatRoute = switch (flatNumber % 4) {
             case 1:
                 yield "слева от лифта, влево";
             case 2:
                 yield "слева от лифта, вправо";
             case 3:
                 yield "справа от лифта, влево";
-            default:
+            case 0:
                 yield "справа от лифта, вправо";
+            default:
+                yield "Направление неизвестно";
         };
-        return String.format("%d кв - %d подъезд, %d этаж, %s", flatNumber, entranceNumber, floorNumber, flatRoute);
+
+        return "%d кв - %d подъезд, %d этаж, %s".formatted(flatNumber, entranceNumber, floorNumber, flatRoute);
     }
 }
