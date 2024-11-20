@@ -35,7 +35,9 @@ public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
     }
-
+    int floorAmount = 5;
+    int entranceAmount = 3;
+    int flatNumber = 31;
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         //        Место для вашего кода
         if (flatNumber <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
@@ -44,10 +46,12 @@ public class Task2 {
         if (floorAmount * entranceAmount * 4 < flatNumber) {
             return "Такой квартиры не существует";
         }
-        int maxFlat = floorAmount * entranceAmount * 4;
-        int oneEnterance = maxFlat / entranceAmount;
+        int maxFlat = floorAmount * entranceAmount * 4; //всего квартир
+        int oneEnterance = maxFlat / entranceAmount; //квартир в одном подьезде
+        int numberEnterance = (flatNumber / oneEnterance) + 1; //номер подьезда
+        return /*maxFlat, oneEnterance, numberEnterance;*/
 
-        return "";
+
     }}
     /*
 
