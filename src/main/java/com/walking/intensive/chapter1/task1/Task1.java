@@ -2,7 +2,7 @@ package com.walking.intensive.chapter1.task1;
 
 public class Task1 {
     public static void main(String[] args) {
-        int age = 5;
+        int age = 3;
         System.out.println(getAgeString(age));
     }
     static String getAgeString(int age) {
@@ -20,6 +20,10 @@ public class Task1 {
             case 1:
                 return "Вам "+ age +" год";
             case 2 | 3 | 4:
+                return "Вам "+ age +" года";
+            case 3:
+                return "Вам "+ age +" года";
+            case 4:
                 return "Вам "+ age +" года";
             default:
                 return "Вам "+ age +" лет";
