@@ -2,7 +2,7 @@ package com.walking.intensive.chapter1.task1;
 
 public class Task1 {
     public static void main(String[] args) {
-        int age = 3;
+        int age = 5;
         System.out.println(getAgeString(age));
     }
     static String getAgeString(int age) {
