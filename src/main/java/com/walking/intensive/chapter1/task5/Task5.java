@@ -11,9 +11,9 @@ package com.walking.intensive.chapter1.task5;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 3.0;
+        double a = 21.0;
         double b = 6.0;
-        double c = 9.0;
+        double c = 19.0;
         System.out.println(getAreaByHeron(a, b, c));
     }
 
@@ -34,7 +34,6 @@ public class Task5 {
         }
         double semiPerimeter = (a + b + c) / 2;
         double sTriangle = Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
-
         return sTriangle;
     }
 
