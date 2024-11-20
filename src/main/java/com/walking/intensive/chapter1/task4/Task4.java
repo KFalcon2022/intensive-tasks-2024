@@ -45,30 +45,26 @@ public class Task4 {
         }
 
 
-    double discriminant = b * b - 4 * a * c;
+        double discriminant = b * b - 4 * a * c;
 
-        if(discriminant >0)
+        if (discriminant > 0) {
+            double sqrtD = Math.sqrt(discriminant);
+            double x1 = (-b + sqrtD) / (2 * a);
+            double x2 = (-b - sqrtD) / (2 * a);
 
-    {
-        double sqrtD = Math.sqrt(discriminant);
-        double x1 = (-b + sqrtD) / (2 * a);
-        double x2 = (-b - sqrtD) / (2 * a);
-
-        if (x1 > x2) {
-            double temp = x1;
-            x1 = x2;
-            x2 = temp;
+            if (x1 > x2) {
+                double temp = x1;
+                x1 = x2;
+                x2 = temp;
+            }
+            return String.format("Количество решений: 2. Корни: %.6f;%.6f", x1, x2);
         }
-        return String.format("Количество решений: 2. Корни: %.6f;%.6f", x1, x2);
-    } else if(discriminant ==0)
 
-    {
-        double x = -b / (2 * a);
-        return String.format("Количество решений: 1. Корень: %.6f", x);
-    } else
+        if (discriminant == 0) {
+            double x = -b / (2 * a);
+            return String.format("Количество решений: 1. Корень: %.6f", x);
+        }
 
-    {
         return "Количество решений: 0.";
     }
-}
 }
