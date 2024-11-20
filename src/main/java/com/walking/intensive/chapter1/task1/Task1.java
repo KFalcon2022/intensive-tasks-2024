@@ -19,12 +19,12 @@ public class Task1 {
                 return "Вам "+ age +" лет";
             case 1:
                 return "Вам "+ age +" год";
-            case 2:
+            case 2 | 3 | 4:
                 return "Вам "+ age +" года";
-            case 3:
+            /*case 3:
                 return "Вам "+ age +" года";
             case 4:
-                return "Вам "+ age +" года";
+                return "Вам "+ age +" года";*/
             default:
                 return "Вам "+ age +" лет";
 
