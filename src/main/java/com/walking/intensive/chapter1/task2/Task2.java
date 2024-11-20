@@ -35,7 +35,7 @@ public class Task2 {
     public static void main(String[] args) {
         int floorAmount = 10;
         int entranceAmount = 3;
-        int flatNumber = -1;
+        int flatNumber = 3;
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
@@ -44,7 +44,7 @@ public class Task2 {
             return "Такой квартиры не существует";
         }
 
-        if (flatNumber <= 0) {
+        if (flatNumber <= 0 || floorAmount <= 0 || entranceAmount <= 0) {
             return "Некорректные входные данные";
         }
 
@@ -60,7 +60,9 @@ public class Task2 {
                 - (numFloor - 1) * 4) % 2;
         String nameDirection = numDirection == 0 ? "вправо" : "влево";
 
-        return String.valueOf(flatNumber) + " кв - " + String.valueOf(numEntrance) + " подъезд, "
-                + String.valueOf(numFloor) + " этаж, " + nameElevatorDirection + ", " + nameDirection;
+        //return String.valueOf(flatNumber) + " кв - " + String.valueOf(numEntrance) + " подъезд, "
+        //        + String.valueOf(numFloor) + " этаж, " + nameElevatorDirection + ", " + nameDirection;
+        return String.format("%d кв - %d подъезд, %d этаж, %s, %s",
+                flatNumber, numEntrance, numFloor, nameElevatorDirection, nameDirection);
     }
 }
