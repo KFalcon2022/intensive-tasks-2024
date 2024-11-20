@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task4;
 
+import java.util.Locale;
+
 /**
  * Дано уравнение:
  *
@@ -24,9 +26,9 @@ package com.walking.intensive.chapter1.task4;
  */
 public class Task4 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
         double a = 0;
-        double b = 0;
+        double b = 4;
         double c = 0;
 
         System.out.println(solveEquation(a, b, c));
@@ -34,8 +36,32 @@ public class Task4 {
     }
 
     static String solveEquation(double a, double b, double c) {
-        //        Место для вашего кода
+        Locale.setDefault(Locale.ENGLISH);
 
-        return null; // Заглушка. При реализации - удалить
+        double x1;
+        double x2;
+        double D = Math.pow(b, 2) - 4 * a * c;
+
+        if (a == 0 & b == 0 & c == 0) {
+            return "Бесконечное множество решений.";
+        } else if (a == 0 & b != 0) {
+            return "Количество решений: 1. Корень: " + getPrettyNull(-c / b);
+        } else if (D < 0 || (a == 0 & b == 0 & c != 0)) {
+            return "Количество решений: 0.";
+        } else if (D == 0) {
+            return "Количество решений: 1. Корень: " + getPrettyNull(-b / (2 * a));
+        }
+        x1 = getPrettyNull((-b + Math.sqrt(D)) / (2 * a));
+        x2 = getPrettyNull((-b - Math.sqrt(D)) / (2 * a));
+        return String.format("Количество решений: 2. Корни: %1$.1f;%2$.1f", Double.min(x1, x2), Double.max(x1, x2));
+    }
+
+    //костыль для избавления от -0.0
+    static double getPrettyNull(double a) {
+        if (a == -0.0) {
+            return 0.0;
+        } else {
+            return a;
+        }
     }
 }
