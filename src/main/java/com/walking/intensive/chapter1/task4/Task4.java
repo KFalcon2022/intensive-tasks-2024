@@ -36,33 +36,36 @@ public class Task4 {
     static String solveEquation(double a, double b, double c) {
 
         double discriminant = Math.pow(b, 2) - (4 * a * c);
-        double firstRoot;
-        double secondRoot;
 
         if (a == 0 && b == 0 && c == 0) {
             return "Бесконечное множество решений.";
         }
+
         if (b == 0 && c == 0) {
             return "Количество решений: 1. Корень: 0.0";
         }
-        if (discriminant > 0) {
-            if (a == 0) {
-                return "Количество решений: 1. Корень: " + Math.abs(c / b);
-            } else {
-                firstRoot = (-b - Math.sqrt(discriminant)) / (2 * a);
-                secondRoot = (-b + Math.sqrt(discriminant)) / (2 * a);
-                return "Количество решений: 2. Корни: "
-                        + Math.min(firstRoot, secondRoot) + ";"
-                        + Math.max(firstRoot, secondRoot);
-            }
-        } else if (discriminant == 0) {
-            if (a == 0) {
-                return "Количество решений: 0.";
-            } else {
-                return "Количество решений: 1. Корень: " + (-b / (2 * a));
-            }
-        } else {
+
+        if (a == 0 && b == 0 && c != 0) {
             return "Количество решений: 0.";
         }
+
+        if (a == 0 && b != 0) {
+            return "Количество решений: 1. Корень: " + Math.abs(c / b);
+        }
+
+        if (discriminant > 0) {
+            double firstRoot = (-b - Math.sqrt(discriminant)) / (2 * a);
+            double secondRoot = (-b + Math.sqrt(discriminant)) / (2 * a);
+
+            return "Количество решений: 2. Корни: "
+                    + Math.min(firstRoot, secondRoot) + ";"
+                    + Math.max(firstRoot, secondRoot);
+        }
+
+        if (discriminant == 0) {
+            return "Количество решений: 1. Корень: " + (-b / (2 * a));
+        }
+
+        return "Количество решений: 0.";
     }
 }
