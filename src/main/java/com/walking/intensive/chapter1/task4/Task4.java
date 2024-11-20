@@ -29,11 +29,10 @@ public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         double a = 1;
-        double b = 0;
-        double c = 0;
+        double b = -1;
+        double c = -1;
 
         System.out.println(solveEquation(a, b, c));
-
     }
 
     static String solveEquation(double a, double b, double c) {
@@ -45,17 +44,17 @@ public class Task4 {
             return "Бесконечное множество решений.";
         }
 
-        if (b == 0 && (a == 0 || (-c / a) < 0) || discriminant < 0) {
-            return "Количество решений: 0.";
-        }
-
-        if (b == 0) {
-            root1 = 0;
+        if (a == 0 && b != 0) {
+            root1 = -c / b;
             return "Количество решений: 1. Корень: " + root1;
         }
 
-        if (a == 0 || discriminant == 0) {
-            root1 = a == 0 ? -c / b : -b / (2 * a);
+        if (a == 0 || discriminant < 0) {
+            return "Количество решений: 0.";
+        }
+
+        if (discriminant == 0) {
+            root1 = b == 0 ? 0 : -b / (2 * a);
             return "Количество решений: 1. Корень: " + root1;
         }
 
