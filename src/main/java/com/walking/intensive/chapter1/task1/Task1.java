@@ -27,14 +27,13 @@ public class Task1 {
         if (age == 0) {
             return "Вам 0 лет";
         }
-        String str = "Вам " + age + " ";
+        String result = "Вам " + age + " ";
         if (age % 100 >= 11 && age % 100 <= 14 || (age % 10 == 0 || age % 10 >= 5)) {
-            return str + "лет";
+            return result + "лет";
         }
         if (age % 10 == 1) {
-            return str + "год";
-        } else {
-            return str + "года";
+            return result + "год";
         }
+        return result + "года";
     }
 }
