@@ -23,18 +23,15 @@ public class Task1 {
     static String getAgeString(int age) {
 
         int num = age % 10;
-        String text;
 
         if (num == 0 || num >= 5) {
-            text = " лет.";
+            return String.format("Вам %d лет", age);
         } else if (num == 1) {
-            text = " год.";
+            return String.format("Вам %d год", age);
         } else if (num >= 2) {
-            text = " года.";
+            return String.format("Вам %d года", age);
         } else {
             return "Некорректный ввод";
         }
-
-        return "Вам " + age + text;
     }
 }

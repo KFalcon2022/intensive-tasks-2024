@@ -23,13 +23,9 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
+        //        Место для вашего кода
 
-        if (a <= 0 || b <= 0 || c <= 0) {
-            return -1;
-        }
-
-        double p = (a + b + c) / 2;
-        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        return -1; // Заглушка. При реализации - удалить
     }
 
     /**
@@ -40,15 +36,9 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
+        //        Место для вашего кода
 
-        if (a <= 0 || b <= 0 || c <= 0) {
-            return new double[0];
-        }
-
-        double s = getAreaByHeron(a, b, c);
-        double[] values = {2 * s / a, 2 * s / b, 2 * s / c};
-
-
+        return null; // Заглушка. При реализации - удалить
     }
 
     /**
