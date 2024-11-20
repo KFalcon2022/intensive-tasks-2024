@@ -11,6 +11,10 @@ package com.walking.intensive.chapter1.task5;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        double a = 3.0;
+        double b = 6.0;
+        double c = 9.0;
+        System.out.println(getAreaByHeron(a, b, c));
     }
 
     /**
@@ -22,10 +26,16 @@ public class Task5 {
      *
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
+    // s =(a+b+c)/2 - полупириметр;        a= s*(s-a)*(s-b)*(s-c) площадь      sTriangle = Math.sqrt(a);
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
+        if ((a <= 0 || b <= 0 || c <= 0) || (a + b <= c || a + c <= b || c + b <= a)) {
+            return -1;
+        }
+        double semiPerimeter = (a + b + c) / 2;
+        double sTriangle = Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
 
-        return 0; // Заглушка. При реализации - удалить
+        return sTriangle;
     }
 
     /**
