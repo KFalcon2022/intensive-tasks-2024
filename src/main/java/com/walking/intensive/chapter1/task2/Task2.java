@@ -53,14 +53,17 @@ public class Task2 {
 
         if (flatNumber <= maxFlatsOnEntrance) {
             floorNumber = flatNumber / flatsOnFloor;
+
             if (floorNumber % 4 == 0) {
                 floorNumber += 1;
             }
+
         }
 
         if (flatNumber > maxFlatsOnEntrance) {
             floorNumber = ((flatNumber - (maxFlatsOnEntrance * ((flatNumber / maxFlatsOnEntrance)))) / flatsOnFloor) + 1;
         }
+
         FlatLocation = flatNumber + " кв – " + ((flatNumber / maxFlatsOnEntrance) + 1) + " подъезд, " + floorNumber;
         switch (flatNumber % flatsOnFloor) {
             case 1://Пример вывода: 4 кв – 1 подъезд, 1 этаж, справа от лифта, вправо
