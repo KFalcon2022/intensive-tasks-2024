@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter1.task5;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 
 /**
@@ -27,9 +25,10 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        if (validTriangle(a, b, c)) {
+        if (validateTriangle(a, b, c)) {
             return -1;
         }
+
         double p = (a + b + c) / 2;
         return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
@@ -46,18 +45,19 @@ public class Task5 {
         if (s == -1) {
             return new double[0];
         }
-        double h1 = 2 * s / a;
-        double h2 = 2 * s / b;
-        double h3 = 2 * s / c;
+
+        double h1 = getHeight(s, a);
+        double h2 = getHeight(s, b);
+        double h3 = getHeight(s, c);
+
         double[] heights = {h1, h2, h3};
         Arrays.sort(heights);
         return heights;
     }
 
-//    private static double getRoundedNumber(double number) {
-//        BigDecimal bd = new BigDecimal(number);
-//        return bd.setScale(3, RoundingMode.HALF_UP).doubleValue();
-//    }
+    private static double getHeight(double s, double side) {
+        return 2 * s / side;
+    }
 
     /**
      * Реализуйте метод, который будет возвращать медианы треугольника по возрастанию.
@@ -67,20 +67,26 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        if (validTriangle(a, b, c)) {
+        if (validateTriangle(a, b, c)) {
             return new double[0];
         }
-        double h1 = Math.sqrt(2 * Math.pow(a, 2) + 2 * Math.pow(b, 2) - Math.pow(c, 2)) / 2;
-        double h2 = Math.sqrt(2 * Math.pow(b, 2) + 2 * Math.pow(c, 2) - Math.pow(a, 2)) / 2;
-        double h3 = Math.sqrt(2 * Math.pow(a, 2) + 2 * Math.pow(c, 2) - Math.pow(b, 2)) / 2;
+
+        double h1 = getHeight(a, b, c);
+        double h2 = getHeight(b, c, a);
+        double h3 = getHeight(a, c, b);
+
         double[] medians = {h1, h2, h3};
         Arrays.sort(medians);
         return medians;
     }
 
-    private static boolean validTriangle(double a, double b, double c) {
-        return (a <= 0 || b <= 0 || c <= 0) ||
-                (a + b <= c || a + c <= b || b + c <= a);
+    private static double getHeight(double a, double b, double c) {
+        return Math.sqrt(2 * Math.pow(a, 2) + 2 * Math.pow(b, 2) - Math.pow(c, 2)) / 2;
+    }
+
+    private static boolean validateTriangle(double a, double b, double c) {
+        return a <= 0 || b <= 0 || c <= 0
+                || a + b <= c || a + c <= b || b + c <= a;
     }
 
     /**
@@ -91,15 +97,21 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        if (validTriangle(a, b, c)) {
+        if (validateTriangle(a, b, c)) {
             return new double[0];
         }
-        double l1 = Math.sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
-        double l2 = Math.sqrt(a * c * (a + c + b) * (a + c - b)) / (a + c);
-        double l3 = Math.sqrt(c * b * (c + b + a) * (c + b - a)) / (c + b);
+
+        double l1 = getBisector(a, b, c);
+        double l2 = getBisector(a, c, b);
+        double l3 = getBisector(c, b, a);
+
         double[] bisectors = {l1, l2, l3};
         Arrays.sort(bisectors);
         return bisectors;
+    }
+
+    private static double getBisector(double a, double b, double c) {
+        return Math.sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
     }
 
     /**
@@ -110,15 +122,21 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        if (validTriangle(a, b, c)) {
+        if (validateTriangle(a, b, c)) {
             return new double[0];
         }
-        double alpha = Math.toDegrees(Math.acos((b * b + c * c - a * a) / (2 * b * c)));
-        double beta = Math.toDegrees(Math.acos((a * a + c * c - b * b) / (2 * a * c)));
-        double gamma = Math.toDegrees(Math.acos((a * a + b * b - c * c) / (2 * a * b)));
+
+        double alpha = getAngle(a, b, c);
+        double beta = getAngle(b, a, c);
+        double gamma = getAngle(c, a, b);
+
         double[] angles = {alpha, beta, gamma};
         Arrays.sort(angles);
         return angles;
+    }
+
+    private static double getAngle(double a, double b, double c) {
+        return Math.toDegrees(Math.acos((b * b + c * c - a * a) / (2 * b * c)));
     }
 
     /**
@@ -129,9 +147,10 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if (validTriangle(a, b, c)) {
+        if (validateTriangle(a, b, c)) {
             return -1;
         }
+
         double p = (a + b + c) / 2;
         return Math.sqrt((p - a) * (p - b) * (p - c) / p);
 
@@ -145,9 +164,10 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        if (validTriangle(a, b, c)) {
+        if (validateTriangle(a, b, c)) {
             return -1;
         }
+
         double s = getAreaByHeron(a, b, c);
         return (a * b * c) / (4 * s);
     }
@@ -167,12 +187,14 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        if (validTriangle(a, b, c)) {
+        if (validateTriangle(a, b, c)) {
             return -1;
         }
 
-        double beta = Math.toDegrees(Math.acos((a * a + c * c - b * b) / (2 * a * c)));
-        double betaInRadians = beta * Math.PI / 180;
-        return (a * c * Math.sin(betaInRadians)) / 2;
+        return (a * c * Math.sin(convertedToRadians(getAngle(b,a,c)))) / 2;
+    }
+
+    private static double convertedToRadians(double angle){
+        return angle * Math.PI / 180;
     }
 }
