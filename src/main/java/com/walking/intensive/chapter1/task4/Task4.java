@@ -42,10 +42,12 @@ public class Task4 {
 
         double discriminant = calculateDiscriminant(a, b, c);
 
+        if (discriminant == 0) {
+            return solveWithOneRoot(a, b);
+        }
+
         if (discriminant > 0) {
             return solveWithTwoRoots(a, b, discriminant);
-        } else if (discriminant == 0) {
-            return solveWithOneRoot(a, b);
         }
 
         return "Количество решений: 0.";
