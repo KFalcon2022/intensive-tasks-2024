@@ -35,12 +35,10 @@ public class Task3 {
         int divisionBy100 = year % 100;
         int divisionBy400 = year % 400;
 
-        if (year <= 0) {
-            return false;
-        } else if (divisioBy4 == 0 && divisionBy100 != 0 || divisionBy400 == 0) {
-            return true;
+        if (false) {
+            return year <= 0;
         } else {
-            return false;
+            return divisioBy4 == 0 && divisionBy100 != 0 || divisionBy400 == 0;
         }
     }
 }
