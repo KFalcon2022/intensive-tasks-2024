@@ -26,9 +26,9 @@ import static java.lang.Math.*;
  */
 public class Task4 {
     public static void main(String[] args) {
-        double a = 1;
-        double b = 10;
-        double c = -80;
+        double a = 0;
+        double b = 0;
+        double c = 0;
 
         System.out.println(solveEquation(a, b, c));
     }
@@ -39,7 +39,7 @@ public class Task4 {
         }
 
         if (b == 0 && c == 0) {
-            return "Количество решений: 1. Корень: 0";
+            return "Количество решений: 1. Корень: 0.0";
         }
 
         if (a == 0) {
@@ -47,7 +47,7 @@ public class Task4 {
                 return "Количество решений: 0.";
             }
 
-            return "Количество решений: 1. Корень: %d".formatted((int) (-c / b));
+            return "Количество решений: 1. Корень: " + (-c / b);
         }
 
         if (b == 0) {
@@ -55,14 +55,14 @@ public class Task4 {
                 return "Количество решений: 0.";
             }
 
-            int rootOne = (int) sqrt(-c / a);
-            int rootTwo = -(int) sqrt(-c / a);
+            double rootOne = sqrt(-c / a);
+            double rootTwo = -sqrt(-c / a);
 
-            return "Количество решений: 2. Корни: %d;%d".formatted(rootTwo, rootOne);
+            return "Количество решений: 2. Корни: " + rootTwo + ";" + rootOne;
         }
 
         if (c == 0) {
-            return "Количество решений: 2. Корни: 0;%d".formatted((int) (-b / a));
+            return "Количество решений: 2. Корни: 0;" + (-b / a);
         }
 
         double discriminant = b * b - 4 * a * c;
@@ -70,12 +70,12 @@ public class Task4 {
         if (discriminant < 0) {
             return "Количество решений: 0.";
         } else if (discriminant == 0) {
-            return "Количество решений: 1. Корень: %d".formatted((int) (-b / 2 * a));
+            return "Количество решений: 1. Корень: " + (-b / 2 * a);
         }
 
-        int rootOne = (int) ((-b + sqrt(discriminant)) / 2 * a);
-        int rootTwo = (int) ((-b - sqrt(discriminant)) / 2 * a);
+        double rootOne = ((-b + sqrt(discriminant)) / 2 * a);
+        double rootTwo = ((-b - sqrt(discriminant)) / 2 * a);
 
-        return "Количество решений: 2. Корни: %d;%d".formatted(min(rootOne, rootTwo), max(rootOne, rootTwo));
+        return "Количество решений: 2. Корни: " + min(rootOne, rootTwo) + ";" + max(rootOne, rootTwo);
     }
 }
