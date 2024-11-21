@@ -48,10 +48,7 @@ public class Task2 {
         String side1;
         String side2;
 
-        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
-            return "Некорректные входные данные";
-        }
-        {
+        if (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0) {
             if (flatNumber <= (flatAmount * floorAmount * entranceAmount)) {
                 int entranceNumber = (int) Math.ceil((double) flatNumber / flatAmount / floorAmount); //подъезд
                 int floorNumber = (int) Math.ceil((double) (flatNumber - (flatAmount * floorAmount * (entranceNumber - 1))) / flatAmount); //этаж
@@ -76,9 +73,8 @@ public class Task2 {
                 }
                 return flatNumber + " кв" + " - " + entranceNumber + " подъезд" + "," + " " + floorNumber + " этаж" + ", " + side1 + side2;
             }
-            {
-                return "Такой квартиры не существует";
-            }
+            return "Такой квартиры не существует";
         }
+        return "Некорректные входные данные";
     }
 }
