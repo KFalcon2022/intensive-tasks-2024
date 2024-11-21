@@ -18,12 +18,12 @@ public class Task5 {
         double a = 5.0;
         double b = 6.0;
         double c = 7.0;
-        // System.out.println(getAreaByHeron(a, b, c));
-        //System.out.println(Arrays.toString(getHeights(a, b, c)));
-        //System.out.println(Arrays.toString(getMedians(a, b, c)));
-        //System.out.println(Arrays.toString(getBisectors(a, b, c)));
-        //System.out.println(Arrays.toString(getAngles(a, b, c)));
-        //System.out.println(getInscribedCircleRadius(a, b, c));
+        System.out.println(getAreaByHeron(a, b, c));
+        System.out.println(Arrays.toString(getHeights(a, b, c)));
+        System.out.println(Arrays.toString(getMedians(a, b, c)));
+        System.out.println(Arrays.toString(getBisectors(a, b, c)));
+        System.out.println(Arrays.toString(getAngles(a, b, c)));
+        System.out.println(getInscribedCircleRadius(a, b, c));
         System.out.println(getCircumradius(a, b, c));
     }
 
@@ -125,13 +125,13 @@ public class Task5 {
     static double[] getAngles(double a, double b, double c) {
         //        Место для вашего кода
         if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
-            double radiansang1 = Math.acos((((b * b) + (c * c)) - (a * a)) / (2 * b * c));
-            double degreesang1 = Math.toDegrees(radiansang1);
-            double radiansang2 = Math.acos((((a * a) + (c * c)) - (b * b)) / (2 * a * c));
-            double degreesang2 = Math.toDegrees(radiansang2);
-            double radiansang3 = Math.acos((((a * a) + (b * b)) - (c * c)) / (2 * a * b));
-            double degreesang3 = Math.toDegrees(radiansang3);
-            double[] angles = {degreesang1, degreesang2, degreesang3};
+            double radiansAng1 = Math.acos((((b * b) + (c * c)) - (a * a)) / (2 * b * c));
+            double degreesAng1 = Math.toDegrees(radiansAng1);
+            double radiansAng2 = Math.acos((((a * a) + (c * c)) - (b * b)) / (2 * a * c));
+            double degreesAng2 = Math.toDegrees(radiansAng2);
+            double radiansAng3 = Math.acos((((a * a) + (b * b)) - (c * c)) / (2 * a * b));
+            double degreesAng3 = Math.toDegrees(radiansAng3);
+            double[] angles = {degreesAng1, degreesAng2, degreesAng3};
             Arrays.sort(angles);
             return angles;
         }
