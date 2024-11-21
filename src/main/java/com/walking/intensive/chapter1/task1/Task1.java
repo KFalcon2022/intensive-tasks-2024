@@ -15,7 +15,7 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 
-        int age = 0;
+        int age = 13;
 
         System.out.println(getAgeString(age));
     }
@@ -25,17 +25,15 @@ public class Task1 {
         int lastNumber = age % 10;
         String ageMessage = null;
 
-        if (age >= 0 && age <= 130) {
-            if (lastNumber == 0 || lastNumber == 5 || lastNumber == 6 || lastNumber == 7 || lastNumber == 8 ||
-                    lastNumber == 9 || (age % 100 >= 10 && age % 100 < 15)) {
-                ageMessage = "Вам " + age + " лет";
-            } else if (lastNumber == 1) {
-                ageMessage = "Вам " + age + " год";
-            } else if (lastNumber == 2 || lastNumber == 3 || lastNumber == 4) {
-                ageMessage = "Вам " + age + " года";
-            }
-        } else {
-            ageMessage = "Некорректный ввод";
+        if (age < 0 || age > 130)
+            return "Некорректный ввод";
+
+        if (lastNumber == 0 || lastNumber >= 5 || (age % 100 >= 10 && age % 100 < 15)) {
+            ageMessage = "Вам " + age + " лет";
+        } else if (lastNumber == 1) {
+            ageMessage = "Вам " + age + " год";
+        } else if (lastNumber == 2 || lastNumber == 3 || lastNumber == 4) {
+            ageMessage = "Вам " + age + " года";
         }
         return ageMessage;
     }
