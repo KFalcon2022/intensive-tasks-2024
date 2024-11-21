@@ -23,7 +23,7 @@ public class Task1 {
         String let = "лет";
         String god = "год";
         String goda = "года";
-        String result = "Некорректный ввод ";
+        String result = "Некорректный ввод";
 
         if (age < 0 || age > 122) {
             return result;
