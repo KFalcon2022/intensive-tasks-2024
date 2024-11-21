@@ -15,15 +15,16 @@ import java.util.Arrays;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 7.0;
-        double b = 5.0;
-        double c = 6.0;
+        double a = 5.0;
+        double b = 6.0;
+        double c = 7.0;
         // System.out.println(getAreaByHeron(a, b, c));
         //System.out.println(Arrays.toString(getHeights(a, b, c)));
         //System.out.println(Arrays.toString(getMedians(a, b, c)));
         //System.out.println(Arrays.toString(getBisectors(a, b, c)));
         //System.out.println(Arrays.toString(getAngles(a, b, c)));
-        System.out.println(getInscribedCircleRadius(a, b, c));
+        //System.out.println(getInscribedCircleRadius(a, b, c));
+        System.out.println(getCircumradius(a, b, c));
     }
 
     /**
@@ -162,11 +163,18 @@ public class Task5 {
      * <p>Входные параметры - длина сторон треугольника.
      *
      * <p>Если входные данные некорректны - метод должен возвращать -1.
+     * <p>
+     * r=(a*b*c)/(4*s)
      */
     static double getCircumradius(double a, double b, double c) {
         //        Место для вашего кода
-
-        return 0; // Заглушка. При реализации - удалить
+        if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
+            double p = (a + b + c) / 2;
+            double sTriangle = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+            double r = (a * b * c) / (4 * sTriangle);
+            return r;
+        }
+        return -1;
     }
 
     /**
