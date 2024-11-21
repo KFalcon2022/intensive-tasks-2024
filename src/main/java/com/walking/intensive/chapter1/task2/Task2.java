@@ -33,12 +33,56 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int flatNumber = 5;
+        int entranceAmount = 4;
+        int floorAmount = 5;
+
+        System.out.println(getFlatLocation(floorAmount,entranceAmount,flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        int x = 4; // количество квартир на этаже
+        int num = (floorAmount * x); // количество квартир в одном подъезде
+        int flatLimit = entranceAmount * num; // максимальное количество квартир в доме
+
+        if (flatNumber > flatLimit) {
+            return "Такой квартиры нет в этом доме";
+        }
+
+        for (int k = 1; k <= entranceAmount; k++) {
+            if (flatNumber > 0 && flatNumber <= num * k) {
+                System.out.print(k + " подъезд, ");
+                //k++;
+                break;
+            }
+
+        }
+        if (flatNumber % num == 0) {
+            System.out.print(floorAmount + " этаж, ");
+
+        } else if (flatNumber % num % x != 0 ) {
+            System.out.print((flatNumber % num / x + 1) + " этаж, ");
+        } else {
+            System.out.print((flatNumber % num / x) + " этаж, ");
+        }
+
+
+        switch (flatNumber % 4) {
+            case 1:
+                System.out.println("слева, влево");
+                break;
+            case 2:
+                System.out.println("слева, вправо");
+                break;
+            case 3:
+                System.out.println("справа, влево");
+                break;
+            case 0:
+                System.out.println("справа, вправо");
+                break;
+
+        }
+        return "";
     }
 }
