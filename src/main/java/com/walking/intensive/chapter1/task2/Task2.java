@@ -72,10 +72,6 @@ public class Task2 {
             floorNumber = (flatNumber - (entranceNumber - 1) * flatInEntrance) / 4 + 1;
         }
 
-        if (flatNumber % 4 == 1 || flatNumber % 4 == 2) {
-            boolean left = true;
-        }
-
         if (flatNumber > flatAmount) {
             return "Такой квартиры не существует";
 
