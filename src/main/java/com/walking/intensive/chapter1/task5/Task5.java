@@ -22,7 +22,8 @@ public class Task5 {
         //System.out.println(Arrays.toString(getHeights(a, b, c)));
         //System.out.println(Arrays.toString(getMedians(a, b, c)));
         //System.out.println(Arrays.toString(getBisectors(a, b, c)));
-        System.out.println(Arrays.toString(getAngles(a, b, c)));
+        //System.out.println(Arrays.toString(getAngles(a, b, c)));
+        System.out.println(getInscribedCircleRadius(a, b, c));
     }
 
     /**
@@ -51,6 +52,7 @@ public class Task5 {
      * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с высотами треугольника.
      *
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
+     * <p>
      * p =(a+b+c)/2 - полупириметр;   высота - (2/a)*Math.sqrt(p*(p-a)*(p-b)*(p-c))
      */
     static double[] getHeights(double a, double b, double c) {
@@ -73,6 +75,7 @@ public class Task5 {
      * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с медианами треугольника.
      *
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
+     * <p>
      * Ma=(Math.sqrt(2*b*b + 2*c*c - a*a))/2
      */
     static double[] getMedians(double a, double b, double c) {
@@ -91,8 +94,10 @@ public class Task5 {
      * Реализуйте метод, который будет возвращать биссектрисы треугольника по возрастанию.
      *
      * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с биссектрисами треугольника.
-     * bis=(Math.sqrt(b*c*((b+c)*(b+c)-a*a))/(b+c) - биссектриса
+     *
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
+     * <p>
+     * bis=(Math.sqrt(b*c*((b+c)*(b+c)-a*a))/(b+c) - биссектриса
      */
     static double[] getBisectors(double a, double b, double c) {
         //        Место для вашего кода
@@ -111,8 +116,10 @@ public class Task5 {
      * Реализуйте метод, который будет возвращать углы треугольника (в градусах) по возрастанию.
      *
      * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с углами треугольника.
-     * ang=arccos((a*a+b*b-c*c)/2*a*b))
+     *
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
+     * <p>
+     * ang=arccos((a*a+b*b-c*c)/2*a*b))
      */
     static double[] getAngles(double a, double b, double c) {
         //        Место для вашего кода
@@ -136,11 +143,17 @@ public class Task5 {
      * <p>Входные параметры - длина сторон треугольника.
      *
      * <p>Если входные данные некорректны - метод должен возвращать -1.
+     * <p>
+     * p =(a+b+c)/2 - полупириметр;   высота - Math.sqrt((p-a)*(p-b)*(p-c))/p)
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
         //        Место для вашего кода
-
-        return 0; // Заглушка. При реализации - удалить
+        if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
+            double p = (a + b + c) / 2;
+            double inscrRadius = Math.sqrt(((p - a) * (p - b) * (p - c)) / p);
+            return inscrRadius;
+        }
+        return -1;
     }
 
     /**
