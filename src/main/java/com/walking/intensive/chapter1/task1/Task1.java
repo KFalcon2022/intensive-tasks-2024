@@ -41,8 +41,8 @@ public class Task1 {
                 case 91:
                 case 101:
                 case 121:
-                    System.out.println("Вам " + age + " год.");
-                    break;
+                    return "Вам " + age + " год.";
+
                 case 2:
                 case 3:
                 case 4:
@@ -76,16 +76,15 @@ public class Task1 {
                 case 122:
                 case 123:
                 case 124:
-                    System.out.println("Вам " + age + " года.");
-                    break;
+                    return "Вам " + age + " года.";
+
                 default:
-                    System.out.println("Вам " + age + " лет.");
-            }
-        }else{
-                System.out.println("Некорректный ввод.");
+                    return "Вам " + age + " лет.";
             }
 
-    return "";
+        }else{
+                return "Некорректный ввод.";
+            }
 
     }
 }
