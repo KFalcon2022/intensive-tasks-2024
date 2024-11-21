@@ -40,15 +40,28 @@ public class Task2 {
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
+
         System.out.println("Количество этажей: ");
         int floorAmount = in.nextInt();
+
         System.out.println("Количество подъездов: ");
         int entranceAmount = in.nextInt();
+
         System.out.println("Номер нужной квартиры: ");
         int flatNumber = in.nextInt();
 
+        System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
+    }
+
     static String getFlatLocation (int floorAmount, int entranceAmount, int flatNumber) {
 
+        int flatQuantity = floorAmount * entranceAmount * 4;
+        int flatInEntrance = floorAmount * 4;
+        int entranceNumber =
+
+        if (flatNumber > 0 && flatNumber <= flatQuantity) {
+
+        }
 
         return "Некорректные входные данные";
     }
