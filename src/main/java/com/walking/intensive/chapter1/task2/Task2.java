@@ -41,13 +41,13 @@ public class Task2 {
 
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Количество этажей: ");
+        System.out.print("Количество этажей: ");
         int floorAmount = in.nextInt();
 
-        System.out.println("Количество подъездов: ");
+        System.out.print("Количество подъездов: ");
         int entranceAmount = in.nextInt();
 
-        System.out.println("Номер нужной квартиры: ");
+        System.out.print("Номер нужной квартиры: ");
         int flatNumber = in.nextInt();
 
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
@@ -55,18 +55,28 @@ public class Task2 {
 
     static String getFlatLocation (int floorAmount, int entranceAmount, int flatNumber) {
 
-        int flatQuantity = floorAmount * entranceAmount * 4;
+        int flatAmount = floorAmount * entranceAmount * 4;
         int flatInEntrance = floorAmount * 4;
-        int entranceNumber = ;
-        int floorNumber = ;
+        int entranceNumber;
+        int floorNumber;
 
-
-        if (flatNumber < 1 || flatNumber > flatQuantity) {
-            System.out.println("Такой квартиры не существует");
-
+        if (flatNumber % flatInEntrance != 0) {
+            entranceNumber = flatNumber / flatInEntrance + 1;
         } else {
+            entranceNumber = flatNumber / flatInEntrance;
+        }
 
-            System.out.println(flatNumber + "кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, ");
+        if (flatNumber % 4 == 0) {
+            floorNumber = (flatNumber - (entranceNumber - 1) * flatInEntrance) / 4;
+        } else {
+            floorNumber = (flatNumber - (entranceNumber - 1) * flatInEntrance) / 4 + 1;
+        }
+        if (flatNumber > flatAmount) {
+            return "Такой квартиры не существует";
+
+        } else if (flatNumber > 0) {
+
+            return flatNumber + "кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, ";
         }
 
         return "Некорректные входные данные";
