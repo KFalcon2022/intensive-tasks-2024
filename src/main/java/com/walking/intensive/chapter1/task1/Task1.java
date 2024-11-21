@@ -33,12 +33,12 @@ public class Task1 {
         } else if (age % 10 == 1) {
             return "Вам " + age + " год";
 
-        }else if (age % 10 == 2 || age % 10 == 3 || age % 10 == 4) {
+        } else if (age % 10 == 2 || age % 10 == 3 || age % 10 == 4) {
             return "Вам " + age + " года";
 
-        }else if (age >= 0){
+        } else if (age >= 0) {
                     return "Вам " + age + " лет";
-            }
+        }
 
         return "Некорректный ввод";
     }
