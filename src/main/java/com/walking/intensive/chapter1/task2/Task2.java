@@ -34,17 +34,19 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 
-        System.out.println(getFlatLocation(10, 3, 88));
+        System.out.println(getFlatLocation(1, 1, -2));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
-        boolean isNonExistentFlat = floorAmount * entranceAmount * 4 < flatNumber;
+        final int FLATS_PER_FLOOR_NUMBER = 4;
+
+        boolean isNonExistentFlat = floorAmount * entranceAmount * FLATS_PER_FLOOR_NUMBER < flatNumber;
         boolean isNegativeNumber = floorAmount < 0 || entranceAmount < 0 || flatNumber < 0;
         boolean isZero = floorAmount == 0 || entranceAmount == 0 || flatNumber == 0;
 
-        int entranceNumber = (flatNumber - 1) / (floorAmount * 4) + 1;
-        int floorNumber = (flatNumber - 1) % (floorAmount * 4) / 4 + 1;
+        int entranceNumber = (flatNumber - 1) / (floorAmount * FLATS_PER_FLOOR_NUMBER) + 1;
+        int floorNumber = (flatNumber - 1) % (floorAmount * FLATS_PER_FLOOR_NUMBER) / FLATS_PER_FLOOR_NUMBER + 1;
 
         if (isNonExistentFlat) {
             return "Такой квартиры не существует";
@@ -69,16 +71,7 @@ public class Task2 {
                     + floorNumber + " этаж, справа от лифта, влево";
         }
 
-        if (flatNumber % 4 == 4) {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, "
-                    + floorNumber + " этаж, справа от лифта, влево";
-        }
-
-        if (flatNumber % 4 + 4 == 4) {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, "
-                    + floorNumber + " этаж, справа от лифта, вправо";
-        }
-
-        return "Некорректные входные данные";
+        return flatNumber + " кв - " + entranceNumber + " подъезд, "
+                + floorNumber + " этаж, справа от лифта, вправо";
     }
 }
