@@ -75,9 +75,17 @@ public class Task2 {
         if (flatNumber > flatAmount) {
             return "Такой квартиры не существует";
 
-        } else if (flatNumber > 0) {
+        } else if (flatNumber > 0 && flatNumber % 4 == 1) {
+            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, влево";
 
-            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, ";
+        } else if (flatNumber > 0 && flatNumber % 4 == 2) {
+            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, вправо";
+
+        } else if (flatNumber > 0 && flatNumber % 4 == 3) {
+            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, влево";
+
+        } else if (flatNumber > 0 && flatNumber % 4 == 0) {
+            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, вправо";
         }
 
         return "Некорректные входные данные";
