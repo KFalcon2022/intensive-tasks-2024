@@ -1,5 +1,10 @@
 package com.walking.intensive.chapter1.task5;
 
+import java.util.Arrays;
+
+import static java.lang.Math.*;
+
+
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
  * треугольника окружностей является центральной в Геометрии.
@@ -10,7 +15,17 @@ package com.walking.intensive.chapter1.task5;
  */
 public class Task5 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        double a = 3, b = 4, c = 5;
+
+        print("Треугольник - a = 3, b = 4, c = 5");
+        print("Площадь треугольника формулой Герона - " + getAreaByHeron(a, b, c));
+        print("Высоты треугольника - " + Arrays.toString(getHeights(a, b, c)));
+        print("Медианы треугольника - " + Arrays.toString(getMedians(a, b, c)));
+        print("Биссектрисы треугольника - " + Arrays.toString(getBisectors(a, b, c)));
+        print("Углы треугольника - " + Arrays.toString(getAngles(a, b, c)));
+        print("Длина радиуса вписанной в треугольник окружности - " + getInscribedCircleRadius(a, b, c));
+        print("Длина радиуса описанной вокруг треугольника окружности - " + getCircumradius(a, b, c));
+        print("Площадь треугольника - " + getAreaAdvanced(a, b, c));
     }
 
     /**
@@ -23,9 +38,13 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a < 2 || b < 2 || c < 2) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double p = (a + b + c) / 2;
+
+        return sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
     /**
@@ -36,9 +55,20 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a < 2 || b < 2 || c < 2) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double s = getAreaByHeron(a, b, c);
+
+        double[] heights = new double[3];
+        heights[0] = (2.0 * s) / a;
+        heights[1] = (2.0 * s) / b;
+        heights[2] = (2.0 * s) / c;
+
+        sort(heights);
+
+        return heights;
     }
 
     /**
@@ -49,9 +79,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a < 2 || b < 2 || c < 2) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double[] medians = new double[3];
+        medians[0] = sqrt((b * b * 2) + (c * c * 2) - (a * a)) / 2;
+        medians[1] = sqrt((a * a * 2) + (c * c * 2) - (b * b)) / 2;
+        medians[2] = sqrt((b * b * 2) + (a * a * 2) - (c * c)) / 2;
+
+        sort(medians);
+
+        return medians;
     }
 
     /**
@@ -62,9 +101,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a < 2 || b < 2 || c < 2) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double[] bisectors = new double[3];
+        bisectors[0] = sqrt(b * c * (b + c + a) * (b + c - a)) / (b + c);
+        bisectors[1] = sqrt(a * c * (a + c + b) * (a + c - b)) / (a + c);
+        bisectors[2] = sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
+
+        sort(bisectors);
+
+        return bisectors;
     }
 
     /**
@@ -75,9 +123,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a < 2 || b < 2 || c < 2) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double[] angles = new double[3];
+        angles[0] = toDegrees(acos(((b * b) + (c * c) - (a * a)) / (2 * b * c)));
+        angles[1] = toDegrees(acos(((a * a) + (c * c) - (b * b)) / (2 * a * c)));
+        angles[2] = toDegrees(acos(((a * a) + (b * b) - (c * c)) / (2 * a * b)));
+
+        sort(angles);
+
+        return angles;
     }
 
     /**
@@ -88,9 +145,13 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a < 2 || b < 2 || c < 2) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double s = getAreaByHeron(a, b, c);
+
+        return 2 * s / (a + b + c);
     }
 
     /**
@@ -101,9 +162,13 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a < 2 || b < 2 || c < 2) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double s = getAreaByHeron(a, b, c);
+
+        return (a * b * c) / (4 * s);
     }
 
     /**
@@ -121,8 +186,31 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a < 2 || b < 2 || c < 2) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double cosines = ((c * c) + (b * b) - (a * a)) / (2 * c * b);
+        double sinus = sqrt(1 - (cosines * cosines));
+
+        return ((b * c * sinus) / 2);
+    }
+
+    private static <E> void print(E e) {
+        System.out.println(e);
+    }
+
+    private static void sort(double[] array) {
+        for (int i = 0; i < array.length; i++) {
+            double min = array[i];
+
+            for (int j = i; j < array.length; j++) {
+                if (array[j] < min) {
+                    min = array[j];
+                    array[j] = array[i];
+                    array[i] = min;
+                }
+            }
+        }
     }
 }
