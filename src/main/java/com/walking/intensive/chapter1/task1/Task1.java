@@ -14,7 +14,7 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-        int age = 34;
+        int age = 120;
 
         System.out.println(getAgeString(age));
     }
@@ -31,7 +31,7 @@ public class Task1 {
             return "Вам " + age + " год.";
         }
 
-        if (last >= 5 || age >= 5 && age <= 20) {
+        if (last >= 5 || age >= 5 && age <= 20 || last == 0) {
             return "Вам " + age + " лет.";
         }
 
