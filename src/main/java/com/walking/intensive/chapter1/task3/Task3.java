@@ -24,16 +24,13 @@ package com.walking.intensive.chapter1.task3;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task3 {
+
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
     }
 
     static boolean isLeap(int year) {
 
-        boolean condition1 = year > 1581; // будем считать, что до Григорианского календаря стандартные расчетны неприменимы
-        boolean condition2 = year % 100 == 0 & year % 400 != 0;
-        boolean condition3 = year % 4 == 0;
-
-        return condition1 & !condition2 & condition3;
+        return year > 1581 && !(year % 100 == 0 && year % 400 != 0) & year % 4 == 0;
     }
 }
