@@ -22,20 +22,20 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
+        if (age < 0) {
+            return "Некорректный ввод";
+        }
+
         int ageLastDigit = age % 10;
         boolean isException = (age % 100 >= 11) && (age % 100 <= 14);
         String ageInWords;
 
-        if (ageLastDigit == 1) {
-            ageInWords = " год";
-        } else if (ageLastDigit == 0 || ageLastDigit >= 5 ) {
+        if (isException || ageLastDigit == 0 || ageLastDigit >= 5) {
             ageInWords = " лет";
+        } else if (ageLastDigit == 1) {
+            ageInWords = " год";
         } else {
             ageInWords = " года";
-        }
-
-        if (isException) {
-            ageInWords = " лет";
         }
 
         return "Вам " + age + ageInWords;
