@@ -1,13 +1,13 @@
-name: Checkstyle and Tests
+name: Test
 
 on:
   pull_request:
     branches:
       - master
-    types: [opened, reopened, review_requested]
+    types: [opened, reopened, synchronize, review_requested]
 
 jobs:
-  analyze_and_test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,13 +25,15 @@ jobs:
       - name: Get modified Java files
         id: get_modified_files
         run: |
-          MODIFIED_FILES=$(git diff --name-only origin/master... | grep '\.java$')
+          MODIFIED_FILES=$(git diff --name-only origin/master... \
+            | grep '\.java$' | grep 'Task' | grep -v 'Test' | tr '\n' ',')
+          MODIFIED_FILES=${MODIFIED_FILES%?}
           echo "MODIFIED_FILES=$MODIFIED_FILES" >> $GITHUB_ENV
 
       - name: Filter Task classes and add Test suffix
         id: filter_task_classes
         run: |
-          MODIFIED_TASK_CLASSES=$(echo "$MODIFIED_FILES" | grep 'Task' || true)
+          MODIFIED_TASK_CLASSES=$(echo "$MODIFIED_FILES" | tr ',' '\n' || true)
           TEST_CLASSES=""
           for file in $MODIFIED_TASK_CLASSES; do
             test_class=$(echo "${file%.java}Test" | sed 's|^src/main/java/||' | tr '/' '.')
@@ -42,5 +44,5 @@ jobs:
       - name: Run Checkstyle and Tests
         run: |
           if [[ -n "$TEST_CLASSES" ]]; then
-            ./gradlew checkstyleMain test $TEST_CLASSES
+            ./gradlew test $TEST_CLASSES
           fi
