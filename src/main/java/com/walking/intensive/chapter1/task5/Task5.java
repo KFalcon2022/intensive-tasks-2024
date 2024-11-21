@@ -1,5 +1,9 @@
 package com.walking.intensive.chapter1.task5;
 
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.Arrays;
+
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
  * треугольника окружностей является центральной в Геометрии.
@@ -11,10 +15,11 @@ package com.walking.intensive.chapter1.task5;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 21.0;
-        double b = 6.0;
-        double c = 19.0;
-        System.out.println(getAreaByHeron(a, b, c));
+        double a = 12.0;
+        double b = 13.0;
+        double c = 5.0;
+        //    System.out.println(getAreaByHeron(a, b, c));
+        System.out.println(Arrays.toString(getHeights(a, b, c)));
     }
 
     /**
@@ -26,15 +31,15 @@ public class Task5 {
      *
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
-    // s =(a+b+c)/2 - полупириметр;        a= s*(s-a)*(s-b)*(s-c) площадь      sTriangle = Math.sqrt(a);
+    // s =(a+b+c)/2 - полупириметр;        a= s*(s-a)*(s-b)*(s-c) площадь;
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-        if ((a <= 0 || b <= 0 || c <= 0) || (a + b <= c || a + c <= b || c + b <= a)) {
-            return -1;
+        if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
+            double p = (a + b + c) / 2;
+            double sTriangle = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+            return sTriangle;
         }
-        double semiPerimeter = (a + b + c) / 2;
-        double sTriangle = Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
-        return sTriangle;
+        return -1;
     }
 
     /**
@@ -43,11 +48,26 @@ public class Task5 {
      * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с высотами треугольника.
      *
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
+     * p =(a+b+c)/2 - полупириметр;   высота - (2/a)*Math.sqrt(p*(p-a)*(p-b)*(p-c))
      */
     static double[] getHeights(double a, double b, double c) {
         //        Место для вашего кода
+        if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
+            double p = (a + b + c) / 2.0;
+            double h1 = (2.0 / a) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
+            double h2 = (2.0 / b) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
+            double h3 = (2.0 / c) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
-        return null; // Заглушка. При реализации - удалить
+            /*DecimalFormat df = new DecimalFormat("#.###");
+            String formatH1 = df.format(h1);
+            double formath1 = Double.parseDouble(formatH1);*/
+
+            double[] height = {h1, h2, h3};
+            Arrays.sort(height);
+
+            return height;
+        }
+        return new double[0];
     }
 
     /**
