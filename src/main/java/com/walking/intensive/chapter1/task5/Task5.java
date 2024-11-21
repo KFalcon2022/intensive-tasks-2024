@@ -21,7 +21,8 @@ public class Task5 {
         // System.out.println(getAreaByHeron(a, b, c));
         //System.out.println(Arrays.toString(getHeights(a, b, c)));
         //System.out.println(Arrays.toString(getMedians(a, b, c)));
-        System.out.println(Arrays.toString(getBisectors(a, b, c)));
+        //System.out.println(Arrays.toString(getBisectors(a, b, c)));
+        System.out.println(Arrays.toString(getAngles(a, b, c)));
     }
 
     /**
@@ -96,9 +97,9 @@ public class Task5 {
     static double[] getBisectors(double a, double b, double c) {
         //        Место для вашего кода
         if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
-            double bis1 = (Math.sqrt(b * c * ((b + c) * (b + c) - (a * a)))) / (b + c);
-            double bis2 = (Math.sqrt(a * c * ((a + c) * (a + c) - (b * b)))) / (a + c);
-            double bis3 = (Math.sqrt(a * b * ((a + b) * (a + b) - (c * c)))) / (a + b);
+            double bis1 = (Math.sqrt(b * c * (((b + c) * (b + c)) - (a * a)))) / (b + c);
+            double bis2 = (Math.sqrt(a * c * (((a + c) * (a + c)) - (b * b)))) / (a + c);
+            double bis3 = (Math.sqrt(a * b * (((a + b) * (a + b)) - (c * c)))) / (a + b);
             double[] bisector = {bis1, bis2, bis3};
             Arrays.sort(bisector);
             return bisector;
@@ -110,13 +111,23 @@ public class Task5 {
      * Реализуйте метод, который будет возвращать углы треугольника (в градусах) по возрастанию.
      *
      * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с углами треугольника.
-     *
+     * ang=arccos((a*a+b*b-c*c)/2*a*b))
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
         //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
+            double radiansang1 = Math.acos((((b * b) + (c * c)) - (a * a)) / (2 * b * c));
+            double degreesang1 = Math.toDegrees(radiansang1);
+            double radiansang2 = Math.acos((((a * a) + (c * c)) - (b * b)) / (2 * a * c));
+            double degreesang2 = Math.toDegrees(radiansang2);
+            double radiansang3 = Math.acos((((a * a) + (b * b)) - (c * c)) / (2 * a * b));
+            double degreesang3 = Math.toDegrees(radiansang3);
+            double[] angles = {degreesang1, degreesang2, degreesang3};
+            Arrays.sort(angles);
+            return angles;
+        }
+        return new double[0];
     }
 
     /**
