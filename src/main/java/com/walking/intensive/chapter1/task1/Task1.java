@@ -12,17 +12,80 @@ package com.walking.intensive.chapter1.task1;
  *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
+
+import java.util.Scanner;
+
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Укажите ваш возраст: ");
+        int age = in.nextInt();
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if (age >= 1 && age < 130) {
+
+            switch (age) {
+                case 1:
+                case 21:
+                case 31:
+                case 41:
+                case 51:
+                case 61:
+                case 71:
+                case 81:
+                case 91:
+                case 101:
+                case 121:
+                    System.out.println("Вам " + age + " год.");
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 22:
+                case 23:
+                case 24:
+                case 32:
+                case 33:
+                case 34:
+                case 42:
+                case 43:
+                case 44:
+                case 52:
+                case 53:
+                case 54:
+                case 62:
+                case 63:
+                case 64:
+                case 72:
+                case 73:
+                case 74:
+                case 82:
+                case 83:
+                case 84:
+                case 92:
+                case 93:
+                case 94:
+                case 102:
+                case 103:
+                case 104:
+                case 122:
+                case 123:
+                case 124:
+                    System.out.println("Вам " + age + " года.");
+                    break;
+                default:
+                    System.out.println("Вам " + age + " лет.");
+            }
+        }else{
+                System.out.println("Некорректный ввод.");
+            }
+
+    return "";
+
     }
 }
