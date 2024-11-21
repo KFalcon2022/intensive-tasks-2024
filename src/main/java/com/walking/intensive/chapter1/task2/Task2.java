@@ -57,10 +57,16 @@ public class Task2 {
 
         int flatQuantity = floorAmount * entranceAmount * 4;
         int flatInEntrance = floorAmount * 4;
-        int entranceNumber =
+        int entranceNumber = ;
+        int floorNumber = ;
 
-        if (flatNumber > 0 && flatNumber <= flatQuantity) {
 
+        if (flatNumber < 1 || flatNumber > flatQuantity) {
+            System.out.println("Такой квартиры не существует");
+
+        } else {
+
+            System.out.println(flatNumber + "кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, ");
         }
 
         return "Некорректные входные данные";
