@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task5;
 
+import java.util.Arrays;
+
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
  * треугольника окружностей является центральной в Геометрии.
@@ -11,7 +13,35 @@ package com.walking.intensive.chapter1.task5;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+
+
+        System.out.println(getAreaByHeron(a, b, c));
+        System.out.println();
+
+        double[] heights = getHeights(a, b, c);
+        for (double height : heights) {
+            System.out.println(height);
+        }
+        System.out.println();
+
+        double[] medians = getMedians(a,b,c);
+        for (double median : medians) {
+            System.out.println(median);
+        }
+        System.out.println();
+
+        double[] bisectors = getBisectors(a, b, c);
+        for (double bisector : bisectors) {
+            System.out.println(bisector);
+        }
     }
+
+    static double a = 3;
+    static double b = 4;
+    static double c = 5;
+
+    static double areaByHeron = getAreaByHeron(a, b, c);
+
 
     /**
      * Частным случаем Tеоремы Брахмагупты является формула Герона.
@@ -24,8 +54,10 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
+        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a,b,c)) return -1;
+        double perimeter = (a + b + c) / 2;
 
-        return 0; // Заглушка. При реализации - удалить
+        return Math.sqrt(perimeter * (perimeter - a) * (perimeter - b) * (perimeter - c));
     }
 
     /**
@@ -36,9 +68,22 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a,b,c)) return new double[0];
 
-        return null; // Заглушка. При реализации - удалить
+        double[] heights = new double[3];
+
+        heights[0] = 2 * areaByHeron / a;
+        heights[1] = 2 * areaByHeron / b;
+        heights[2] = 2 * areaByHeron / c;
+
+        Arrays.sort(heights);
+
+        return heights;
+    }
+
+    public static boolean isTriangle(double a, double b, double c) {
+
+        return (a + b > c) && (a + c > b) && (b + c > a);
     }
 
     /**
@@ -49,9 +94,17 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a,b,c)) return new double[0];
 
-        return null; // Заглушка. При реализации - удалить
+        double medianA = Math.sqrt((2 * b * b + 2 * c * c - a * a)) / 2;
+        double medianB = Math.sqrt((2 * a * a + 2 * c * c - b * b)) / 2;
+        double medianC = Math.sqrt((2 * a * a + 2 * b * b - c * c)) / 2;
+
+        double[] medians = {medianA, medianB, medianC};
+
+        Arrays.sort(medians);
+
+        return medians;
     }
 
     /**
@@ -62,9 +115,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a,b,c)) return new double[0];
 
-        return null; // Заглушка. При реализации - удалить
+
+        double bisectorA = Math.sqrt(b * c * (1 - a * a / Math.pow(b + c, 2)));
+        double bisectorB = Math.sqrt(a * c * (1 - b * b / Math.pow(a + c, 2)));
+        double bisectorC = Math.sqrt(a * b * (1 - c * c / Math.pow(a + b, 2)));
+
+        double[] bisectors = {bisectorA, bisectorB, bisectorC};
+
+        Arrays.sort(bisectors);
+
+        return bisectors;
     }
 
     /**
