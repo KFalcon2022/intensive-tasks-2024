@@ -46,6 +46,7 @@ public class Task1 {
 
 
         System.out.println("Вам " + age + " " + result);
+        return ("Вам " + age + " " + result);
 
     }
 }
