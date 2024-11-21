@@ -25,27 +25,23 @@ package com.walking.intensive.chapter1.task3;
  */
 public class Task3 {
     public static void main(String[] args) {
-        int year = 2024;
+     int year = 2024;
+     // boolean a = true;
         System.out.println(isLeap(year));
     }
+   // static int year = 2024;
+
 
     static boolean isLeap(int year) {
-        System.out.println("Является ли " + year + " год високосным?" );
-     boolean a = true;
+            System.out.println("Является ли " + year + " год високосным?" );
+           // boolean a = true;
         if (year%400==0){
-            return a;
+            return true;
         }
         else if (year%100==0){
-            a = false;
-            return a;
+           // a = false;
+            return false;
         }
-        else if (year%4==0){
-            return a;
-        }
-        else {
-            a = false;
-            return a;
-        }
-        return a;
+        else return year % 4 == 0;
     }
 }
