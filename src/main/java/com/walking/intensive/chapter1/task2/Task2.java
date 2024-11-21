@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task2;
 
+import java.util.Scanner;
+
 /**
  * Реализуйте метод getFlatLocation(), который будет принимать параметрами следующие данные:
  * <ul>
@@ -31,14 +33,23 @@ package com.walking.intensive.chapter1.task2;
  *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
+
+import java.util.Scanner;
+
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-    }
 
-    static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        Scanner in = new Scanner(System.in);
+        System.out.println("Количество этажей: ");
+        int floorAmount = in.nextInt();
+        System.out.println("Количество подъездов: ");
+        int entranceAmount = in.nextInt();
+        System.out.println("Номер нужной квартиры: ");
+        int flatNumber = in.nextInt();
 
-        return null; // Заглушка. При реализации - удалить
+    static String getFlatLocation (int floorAmount, int entranceAmount, int flatNumber) {
+
+
+        return "Некорректные входные данные";
     }
 }
