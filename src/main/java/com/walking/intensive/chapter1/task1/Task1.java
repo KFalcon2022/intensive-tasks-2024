@@ -27,7 +27,7 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
-        if (age >= 1 && age < 130) {
+        if (age >= 0 && age < 127) {
 
             switch (age) {
                 case 1:
