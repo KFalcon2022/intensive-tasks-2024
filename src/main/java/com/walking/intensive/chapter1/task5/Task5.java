@@ -18,7 +18,7 @@ public class Task5 {
         double a = 12.0;
         double b = 13.0;
         double c = 5.0;
-        //    System.out.println(getAreaByHeron(a, b, c));
+        System.out.println(getAreaByHeron(a, b, c));
         System.out.println(Arrays.toString(getHeights(a, b, c)));
     }
 
@@ -57,14 +57,8 @@ public class Task5 {
             double h1 = (2.0 / a) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
             double h2 = (2.0 / b) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
             double h3 = (2.0 / c) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
-
-            /*DecimalFormat df = new DecimalFormat("#.###");
-            String formatH1 = df.format(h1);
-            double formath1 = Double.parseDouble(formatH1);*/
-
             double[] height = {h1, h2, h3};
             Arrays.sort(height);
-
             return height;
         }
         return new double[0];
