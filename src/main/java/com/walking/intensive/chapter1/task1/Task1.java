@@ -15,7 +15,7 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = -1;
+        int age = 0;
         System.out.println(getAgeString(age));
     }
 
@@ -23,7 +23,7 @@ public class Task1 {
         String let = "лет";
         String god = "год";
         String goda = "года";
-        String result = "Некорректный ввод";
+        String result = "Некорректный ввод ";
 
         if (age < 0 || age > 122) {
             return result;
