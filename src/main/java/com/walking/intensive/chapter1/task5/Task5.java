@@ -15,12 +15,13 @@ import java.util.Arrays;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 12.0;
-        double b = 13.0;
-        double c = 5.0;
+        double a = 7.0;
+        double b = 5.0;
+        double c = 6.0;
         // System.out.println(getAreaByHeron(a, b, c));
         //System.out.println(Arrays.toString(getHeights(a, b, c)));
-        System.out.println(Arrays.toString(getMedians(a, b, c)));
+        //System.out.println(Arrays.toString(getMedians(a, b, c)));
+        System.out.println(Arrays.toString(getBisectors(a, b, c)));
     }
 
     /**
@@ -89,13 +90,20 @@ public class Task5 {
      * Реализуйте метод, который будет возвращать биссектрисы треугольника по возрастанию.
      *
      * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с биссектрисами треугольника.
-     *
+     * bis=(Math.sqrt(b*c*((b+c)*(b+c)-a*a))/(b+c) - биссектриса
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
         //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
+            double bis1 = (Math.sqrt(b * c * ((b + c) * (b + c) - (a * a)))) / (b + c);
+            double bis2 = (Math.sqrt(a * c * ((a + c) * (a + c) - (b * b)))) / (a + c);
+            double bis3 = (Math.sqrt(a * b * ((a + b) * (a + b) - (c * c)))) / (a + b);
+            double[] bisector = {bis1, bis2, bis3};
+            Arrays.sort(bisector);
+            return bisector;
+        }
+        return new double[0];
     }
 
     /**
