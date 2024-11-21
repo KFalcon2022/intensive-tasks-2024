@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task1;
 
+import java.sql.SQLOutput;
+
 /**
  * Реализуйте метод getAgeString(), который будет принимать параметром целое число (возраст) и возвращать строку
  * вида: "Вам N лет". Программа должна учитывать правила русского языка.
@@ -15,14 +17,29 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
+        int age = 54;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if (age < 0){
+            return "Некорректный ввод";
+        }
+        else if (age > 4 && age < 21){
+            return "Вам " + age + " лет";
+        }
+        int remnant_age = age % 10;
+        switch (remnant_age) {
+            case 1 -> {
+                return "Вам " + age + " год";
+            }
+            case 2, 3, 4 -> {
+                return "Вам " + age + " года";
+            }
+            default -> {
+                return "Вам " + age + " лет";
+            }
+        }
     }
 }
