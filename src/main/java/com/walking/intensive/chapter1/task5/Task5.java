@@ -17,7 +17,7 @@ public class Task5 {
     public static void main(String[] args) {
         double a = 3, b = 4, c = 5;
 
-        print("Треугольник - a = 3, b = 4, c = 5");
+        print("Треугольник - a = " + a + ", b = " + b + ", c = " + c);
         print("Площадь треугольника формулой Герона - " + getAreaByHeron(a, b, c));
         print("Высоты треугольника - " + Arrays.toString(getHeights(a, b, c)));
         print("Медианы треугольника - " + Arrays.toString(getMedians(a, b, c)));
