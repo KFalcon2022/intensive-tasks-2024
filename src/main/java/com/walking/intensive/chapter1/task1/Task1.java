@@ -27,7 +27,7 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
-        if (age % 100 >=11 && age % 100 < 15) {
+        if (age % 100 >= 11 && age % 100 < 15) {
             return "Вам " + age + " лет";
 
         } else if (age % 10 == 1) {
