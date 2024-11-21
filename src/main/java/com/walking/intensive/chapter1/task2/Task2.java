@@ -76,7 +76,7 @@ public class Task2 {
 
         } else if (flatNumber > 0) {
 
-            return flatNumber + "кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, ";
+            return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, ";
         }
 
         return "Некорректные входные данные";
