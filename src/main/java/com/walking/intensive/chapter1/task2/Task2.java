@@ -32,29 +32,32 @@ package com.walking.intensive.chapter1.task2;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task2 {
+
     public static void main(String[] args) {
 
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
-        boolean isArgsCorrect = floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0;
-        boolean isFlatOnFloor = floorAmount * entranceAmount * 4 < flatNumber;
+        int flatsOnFloor = 4;
+        String flatLocation;
 
-        if (isArgsCorrect) {
-            return "Некорректные входные данные";
-        } else if (isFlatOnFloor) {
-            return "Такой квартиры не существует";
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            flatLocation = "Некорректные входные данные";
+        } else if (floorAmount * entranceAmount * flatsOnFloor < flatNumber) {
+            flatLocation = "Такой квартиры не существует";
+        } else {
+            flatLocation = getResultString(floorAmount, flatNumber, flatsOnFloor);
         }
-            return getResultString(floorAmount, flatNumber);
+        return flatLocation;
     }
 
-    static String getResultString(int floorAmount, int flatNumber){
+    static String getResultString(int floorAmount, int flatNumber, int flatsOnFloor) {
 
-        int entrance = (flatNumber - 1) / (4 * floorAmount) + 1;
-        int floor = (flatNumber - 1 - (entrance - 1) * floorAmount * 4) / 4 + 1;
+        int entrance = (flatNumber - 1) / (flatsOnFloor * floorAmount) + 1;
+        int floor = (flatNumber - 1 - (entrance - 1) * floorAmount * flatsOnFloor) / flatsOnFloor + 1;
 
-        String place = switch (flatNumber % 4) {
+        String place = switch (flatNumber % flatsOnFloor) {
             case 1 -> "слева от лифта, влево";
             case 2 -> "слева от лифта, вправо";
             case 3 -> "справа от лифта, влево";
