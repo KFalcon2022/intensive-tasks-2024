@@ -33,7 +33,7 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        int floorAmount = 10;
+        int floorAmount = 0;
         int entranceAmount = 3;
         int flatNumber = 40;
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
@@ -41,23 +41,25 @@ public class Task2 {
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         int flatAmount = floorAmount * entranceAmount * 4;
-        if (flatAmount < flatNumber) {
-            return "Такой квартиры не существует";
-        }
         if (floorAmount < 1 || entranceAmount < 1 || flatNumber < 1) {
             return "Некорректные входные данные";
         }
+        if (flatAmount < flatNumber) {
+            return "Такой квартиры не существует";
+        }
         int entranceNumber = 1 + (flatNumber - 1) / (flatAmount / entranceAmount);
         int floorNumber = 1 + ((flatNumber - 1) % (flatAmount / entranceAmount) / 4);
-        String option1 = " этаж, слева от лифта, влево";
-        String option2 = " этаж, слева от лифта, вправо";
-        String option3 = " этаж, справа от лифта, влево";
-        String option4 = " этаж, справа от лифта, вправо";
-        return switch (flatNumber % 4) {
-            case 1 -> flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + option1;
-            case 2 -> flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + option2;
-            case 3 -> flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + option3;
-            default -> flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + option4;
+        String result = switch (flatNumber % 4) {
+            case 0 -> " этаж, справа от лифта, вправо";
+
+            case 1 -> " этаж, слева от лифта, влево";
+
+            case 2 -> " этаж, слева от лифта, вправо";
+
+            case 3 -> " этаж, справа от лифта, влево";
+
+            default -> "Ошибка";
         };
+    return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + result;
     }
 }
