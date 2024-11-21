@@ -27,7 +27,7 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
-        if (age >= 0 && age < 127) {
+        if (age >= 0 && age < 128) {
 
             switch (age) {
                 case 1:
@@ -41,7 +41,7 @@ public class Task1 {
                 case 91:
                 case 101:
                 case 121:
-                    return "Вам " + age + " год.";
+                    return "Вам " + age + " год";
 
                 case 2:
                 case 3:
@@ -76,14 +76,14 @@ public class Task1 {
                 case 122:
                 case 123:
                 case 124:
-                    return "Вам " + age + " года.";
+                    return "Вам " + age + " года";
 
                 default:
-                    return "Вам " + age + " лет.";
+                    return "Вам " + age + " лет";
             }
 
         }else{
-                return "Некорректный ввод.";
+                return "Некорректный ввод";
             }
 
     }
