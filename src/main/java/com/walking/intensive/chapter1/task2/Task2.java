@@ -56,22 +56,15 @@ public class Task2 {
             return "Некорректные входные данные";
         }
 
-        if (flatNumber % 4 == 1) {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, "
+        return switch (flatNumber % FLATS_PER_FLOOR_NUMBER) {
+            case 1 -> flatNumber + " кв - " + entranceNumber + " подъезд, "
                     + floorNumber + " этаж, слева от лифта, влево";
-        }
-
-        if (flatNumber % 4 == 2) {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, "
+            case 2 -> flatNumber + " кв - " + entranceNumber + " подъезд, "
                     + floorNumber + " этаж, слева от лифта, вправо";
-        }
-
-        if (flatNumber % 4 == 3) {
-            return flatNumber + " кв - " + entranceNumber + " подъезд, "
+            case 3 -> flatNumber + " кв - " + entranceNumber + " подъезд, "
                     + floorNumber + " этаж, справа от лифта, влево";
-        }
-
-        return flatNumber + " кв - " + entranceNumber + " подъезд, "
-                + floorNumber + " этаж, справа от лифта, вправо";
+            default -> flatNumber + " кв - " + entranceNumber + " подъезд, "
+                    + floorNumber + " этаж, справа от лифта, вправо";
+        };
     }
 }
