@@ -18,8 +18,9 @@ public class Task5 {
         double a = 12.0;
         double b = 13.0;
         double c = 5.0;
-        System.out.println(getAreaByHeron(a, b, c));
-        System.out.println(Arrays.toString(getHeights(a, b, c)));
+        // System.out.println(getAreaByHeron(a, b, c));
+        //System.out.println(Arrays.toString(getHeights(a, b, c)));
+        System.out.println(Arrays.toString(getMedians(a, b, c)));
     }
 
     /**
@@ -70,11 +71,18 @@ public class Task5 {
      * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с медианами треугольника.
      *
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
+     * Ma=(Math.sqrt(2*b*b + 2*c*c - a*a))/2
      */
     static double[] getMedians(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
+            double m1 = (Math.sqrt(2 * b * b + 2 * c * c - a * a)) / 2;
+            double m2 = (Math.sqrt(2 * a * a + 2 * c * c - b * b)) / 2;
+            double m3 = (Math.sqrt(2 * a * a + 2 * b * b - c * c)) / 2;
+            double[] height = {m1, m2, m3};
+            Arrays.sort(height);
+            return height;
+        }
+        return new double[0];
     }
 
     /**
