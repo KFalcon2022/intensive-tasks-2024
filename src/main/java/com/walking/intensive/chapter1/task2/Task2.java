@@ -33,12 +33,33 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getFlatLocation(4, 3, 28));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        if ((floorAmount <= 0 || floorAmount > 163) || (entranceAmount <= 0 || entranceAmount > 156) || flatNumber <= 0)
+            return "Некорректные входные данные";
 
-        return null; // Заглушка. При реализации - удалить
+        int totalQuantityOfFlats = floorAmount * entranceAmount * 4;
+        if (flatNumber > totalQuantityOfFlats)
+            return "Такой квартиры не существует";
+
+        int flatsInEntrance = floorAmount * 4; // кол-во квартир в 1 подъезде
+        int entranceNumber = ((flatNumber - 1) / flatsInEntrance) + 1; // номер подъезда
+        int floor = 1 + (flatNumber - 1) % flatsInEntrance / 4; // этаж
+        int flatNumberOnFloor = (flatNumber - (flatsInEntrance * (entranceNumber - 1))) % 4; // расположение квартиры
+
+        return switch (flatNumberOnFloor) {
+            case 1 ->
+                    String.format("%d кв - %d подъезд, %d этаж, слева от лифта, влево", flatNumber, entranceNumber, floor);
+            case 2 ->
+                    String.format("%d кв - %d подъезд, %d этаж, слева от лифта, вправо", flatNumber, entranceNumber, floor);
+            case 3 ->
+                    String.format("%d кв - %d подъезд, %d этаж, справа от лифта, влево", flatNumber, entranceNumber, floor);
+            case 0 ->
+                    String.format("%d кв - %d подъезд, %d этаж, справа от лифта, вправо", flatNumber, entranceNumber, floor);
+            default -> null;
+        };
     }
 }
+
