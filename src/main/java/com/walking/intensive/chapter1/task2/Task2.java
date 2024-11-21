@@ -51,7 +51,10 @@ public class Task2 {
         }
         int maxFlat = floorAmount * entranceAmount * 4; //всего квартир
         int oneEnterance = maxFlat / entranceAmount; //квартир в одном подьезде
-        int numberEnterance = (flatNumber / oneEnterance) + 1; //номер подьезда
+        int numberEnterance = (flatNumber / oneEnterance); //номер подьезда
+        if (maxFlat % oneEnterance != 0){
+        numberEnterance = numberEnterance + 1;
+        }
         return "Налево" + maxFlat + "всего квартир" + oneEnterance + "квартир в одном подьезде" + numberEnterance + "номер подьезда";
 
     }}
