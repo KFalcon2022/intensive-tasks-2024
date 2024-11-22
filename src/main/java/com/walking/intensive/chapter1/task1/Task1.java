@@ -35,7 +35,7 @@ public class Task1 {
         } else if (age % 10 >= 2 && age % 10 <= 4) {
             res = "года";
 
-        } else if (age == 0 || age % 10 >= 5 && age % 10 <= 9) {
+        } else if (age % 10 >= 5 && age % 10 <= 9) {
             res = "лет";
 
         } else if (age >= 1) {
