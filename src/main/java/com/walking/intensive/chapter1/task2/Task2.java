@@ -38,7 +38,7 @@ public class Task2 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int floorAmount = 5; // кол-во этажей
         int entranceAmount = 7; //кол-во подъездов
-        int flatNumber = 138; //номер квартиры
+        int flatNumber = 140; //номер квартиры
 
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
@@ -49,7 +49,7 @@ public class Task2 {
         String side2;
 
         //Проверка входных данных
-        if (floorAmount < 0 || entranceAmount < 0 || flatNumber < 0) {
+        if (floorAmount < 0 || entranceAmount < 0 || flatNumber <= 0) {
             return "Некорректные входные данные";
         }
 
