@@ -23,16 +23,21 @@ public class Task1 {
     static String getAgeString(int age) {
 
             if (age > 0 && age < 128) {
-                if ((age % 10 != 2 || age == 112 || age == 12) && (age % 10 != 3 || age == 113 || age == 13) && (age % 10 != 4 || age == 114 || age == 14)) {
+                if ((age % 10 != 2 || age == 112 || age == 12) &&
+                    (age % 10 != 3 || age == 113 || age == 13) &&
+                    (age % 10 != 4 || age == 114 || age == 14)) {
+
                     if (age % 10 != 1 || (age == 11 || age == 111) && age != 1) {
-                        System.out.println("Вам " + age + " лет");
-                    } else {
+                        System.out.println("Вам " + age + " лет"); }
+                    else {
                         System.out.println("Вам " + age + " год");
-                    }
-                } else {
+                    }}
+
+                else {
                     System.out.println("Вам " + age + " года");
-                }
-            } else {
+                }}
+
+            else {
                 System.out.println("Некорректный ввод");
             }
 
