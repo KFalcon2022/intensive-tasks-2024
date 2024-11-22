@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter1.task2;
 
-import org.w3c.dom.ls.LSOutput;
-
 /**
  * Реализуйте метод getFlatLocation(), который будет принимать параметрами следующие данные:
  * <ul>
@@ -33,31 +31,37 @@ import org.w3c.dom.ls.LSOutput;
  *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
+@SuppressWarnings("checkstyle:WhitespaceAround")
 public class Task2 {
     public static void main(String[] args) {
+        /*getFlatLocation(10,-3,41);*/
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getFlatLocation(10,3,40));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         //        Место для вашего кода
-        /*floorAmount = 5;
-        entranceAmount = -3;
-        flatNumber = 31;*/
         if (flatNumber <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
-            return "Некорректные входные данные" + floorAmount + entranceAmount + flatNumber;
+            return "Некорректные входные данные";
         }
         if (floorAmount * entranceAmount * 4 < flatNumber) {
             return "Такой квартиры не существует";
         }
         int maxFlat = floorAmount * entranceAmount * 4; //всего квартир
         int oneEnterance = maxFlat / entranceAmount; //квартир в одном подьезде
-        int numberEnterance = (flatNumber / oneEnterance); //номер подьезда
-        if (maxFlat % oneEnterance != 0){
-        numberEnterance = numberEnterance + 1;
+        int numberEnterance = flatNumber / oneEnterance; //подьезд
+        if (flatNumber % oneEnterance > 0) {
+            numberEnterance = numberEnterance + 1;
         }
-        return "Налево" + maxFlat + "всего квартир" + oneEnterance + "квартир в одном подьезде" + numberEnterance + "номер подьезда";
+        int level = (flatNumber / 4) % floorAmount;
+        if ((flatNumber % 4) >= 0) {
+            level = ++level;
+        }
+        String s =  maxFlat + "всего квартир" + oneEnterance + "квартир в одном подьезде" + numberEnterance + "подьезд";
+        return s + "\n Этаж" + level;
 
-    }}
+    }
+}
     /*
 
         if (age > 10 && age < 15) {
