@@ -25,20 +25,20 @@ package com.walking.intensive.chapter1.task3;
  */
 public class Task3 {
     public static void main(String[] args) {
-        int year = 2014;
+        int year = 2025;
 
         System.out.println(isLeap(year));
     }
 
     static boolean isLeap(int year) {
-        int divisioBy4 = year % 4;
+        int divisionBy4 = year % 4;
         int divisionBy100 = year % 100;
         int divisionBy400 = year % 400;
 
-        if (false) {
-            return year <= 0;
-        } else {
-            return divisioBy4 == 0 && divisionBy100 != 0 || divisionBy400 == 0;
+        if (year <= 0) {
+            return false;
         }
+        return (divisionBy4 == 0 && divisionBy100 != 0) || divisionBy400 == 0;
+
     }
 }
