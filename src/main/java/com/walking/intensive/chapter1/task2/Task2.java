@@ -60,6 +60,10 @@ public class Task2 {
         int entranceNumber;
         int floorNumber;
 
+       if (flatNumber <= 0) {
+           return "Некорректные входные данные";
+       }
+
         if (flatNumber % flatInEntrance != 0) {
             entranceNumber = flatNumber / flatInEntrance + 1;
         } else {
@@ -74,9 +78,10 @@ public class Task2 {
 
         if (flatNumber > flatAmount) {
             return "Такой квартиры не существует";
-
         }
+
         if (flatNumber > 0) {
+
             switch (flatNumber % 4) {
                 case 1:
                     return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, влево";
@@ -87,11 +92,10 @@ public class Task2 {
                 case 3:
                     return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, влево";
 
-                case 0:
-                    return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, вправо";
             }
         }
 
-        return "Некорректные входные данные";
+        return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, вправо";
+
     }
 }
