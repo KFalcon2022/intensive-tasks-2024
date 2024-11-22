@@ -11,20 +11,18 @@ import java.util.Arrays;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task5 {
-    private static final int COUNT_SIDES = 3;
-    public static final double[] NULL_ARRAY = new double[0];
-
     public static void main(String[] args) {
         double a = 12;
         double b = 13;
         double c = 5;
 
-        System.out.println(Arrays.toString(getBisectors(a, b, c)));
+        System.out.println(Arrays.toString(getAngles(a, b, c)));
+        //System.out.println(Arrays.toString(getHeights(a, b, c)));
         //System.out.println(getAreaByHeron(a, b, c));
     }
 
     private static boolean getIsNotCorrectInput(double a, double b, double c) {
-        return !(a > Math.abs(b - c) && b > Math.abs(a - c) && c > Math.abs(a - b));
+        return a < Math.abs(b - c) || b < Math.abs(a - c) || c < Math.abs(a - b);
     }
 
     /**
@@ -58,16 +56,15 @@ public class Task5 {
     static double[] getHeights(double a, double b, double c) {
 
         if (getIsNotCorrectInput(a, b, c)) {
-            return NULL_ARRAY;
+            return new double[0];
         }
 
         double[] sides = {a, b, c};
-        double[] heights = new double[COUNT_SIDES];
-        double halfPerimeter = getAreaByHeron(a, b, c);
+        double[] heights = new double[3];
+        double area = getAreaByHeron(a, b, c);
 
         for (int i = 0; i < sides.length; i++) {
-            heights[i] = 2 * Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c))
-                    / sides[i];
+            heights[i] = 2 * area / sides[i];
         }
 
         Arrays.sort(heights);
@@ -85,10 +82,10 @@ public class Task5 {
     static double[] getMedians(double a, double b, double c) {
 
         if (getIsNotCorrectInput(a, b, c)) {
-            return NULL_ARRAY;
+            return new double[0];
         }
 
-        double[] medians = new double[COUNT_SIDES];
+        double[] medians = new double[3];
 
         medians[0] = 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
         medians[1] = 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a);
@@ -109,10 +106,10 @@ public class Task5 {
     static double[] getBisectors(double a, double b, double c) {
 
         if (getIsNotCorrectInput(a, b, c)) {
-            return NULL_ARRAY;
+            return new double[0];
         }
 
-        double[] bisectors = new double[COUNT_SIDES];
+        double[] bisectors = new double[3];
         bisectors[0] = Math.sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
         bisectors[1] = Math.sqrt(a * c * (a + b + c) * (a + c - b)) / (a + c);
         bisectors[2] = Math.sqrt(b * c * (a + b + c) * (b + c - a)) / (b + c);
@@ -132,18 +129,18 @@ public class Task5 {
     static double[] getAngles(double a, double b, double c) {
 
         if (getIsNotCorrectInput(a, b, c)) {
-            return NULL_ARRAY;
+            return new double[0];
         }
 
-        double[] angles = new double[COUNT_SIDES];
+        double[] angles = new double[3];
         double area = getAreaByHeron(a, b, c);
-        angles[0] = Math.asin(2 * area / a / b);
-        angles[1] = Math.asin(2 * area / a / c);
-        angles[2] = Math.asin(2 * area / b / c);
+        angles[0] = Math.toDegrees(Math.asin(2 * area / a / b));
+        angles[1] = Math.toDegrees(Math.asin(2 * area / a / c));
+        angles[2] = Math.toDegrees(Math.asin(2 * area / b / c));
 
         Arrays.sort(angles);
 
-        return angles; // Заглушка. При реализации - удалить
+        return angles;
     }
 
     /**
@@ -159,9 +156,7 @@ public class Task5 {
             return -1;
         }
 
-        double halfPerimeter = 0.5 * (a + b + c);
-
-        return Math.sqrt((halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c) / halfPerimeter);
+        return getAreaByHeron(a, b, c) * 2 /  (a + b + c);
     }
 
     /**
@@ -177,9 +172,7 @@ public class Task5 {
             return -1;
         }
 
-        double halfPerimeter = 0.5 * (a + b + c);
-
-        return a * b * c / Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c)) / 4;
+        return a * b * c / getAreaByHeron(a, b, c) / 4;
     }
 
     /**
