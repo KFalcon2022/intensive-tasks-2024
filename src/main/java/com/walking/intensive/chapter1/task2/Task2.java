@@ -53,16 +53,16 @@ public class Task2 {
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
-    static String getFlatLocation (int floorAmount, int entranceAmount, int flatNumber) {
+    static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
         int flatAmount = floorAmount * entranceAmount * 4;
         int flatInEntrance = floorAmount * 4;
         int entranceNumber;
         int floorNumber;
 
-       if (flatNumber <= 0) {
-           return "Некорректные входные данные";
-       }
+        if (flatNumber <= 0) {
+            return "Некорректные входные данные";
+        }
 
         if (flatNumber % flatInEntrance != 0) {
             entranceNumber = flatNumber / flatInEntrance + 1;
@@ -80,19 +80,16 @@ public class Task2 {
             return "Такой квартиры не существует";
         }
 
-        if (flatNumber > 0) {
+        switch (flatNumber % 4) {
+            case 1:
+                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, влево";
 
-            switch (flatNumber % 4) {
-                case 1:
-                    return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, влево";
+            case 2:
+                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, вправо";
 
-                case 2:
-                    return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, слева от лифта, вправо";
+            case 3:
+                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, влево";
 
-                case 3:
-                    return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, влево";
-
-            }
         }
 
         return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, справа от лифта, вправо";
