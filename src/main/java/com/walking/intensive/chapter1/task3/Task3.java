@@ -26,21 +26,17 @@ package com.walking.intensive.chapter1.task3;
 public class Task3 {
     public static void main(String[] args) {
 
-        int year = 2021;
+        int year = 1582;
 
-        if (isLeap(year)) {
-            System.out.println(year + " - високосный год");
-        } else {
-            System.out.println(year + " - невисокосный год");
-        }
+//        if (isLeap(year)) {
+//            System.out.println(year + " - високосный год");
+//        } else {
+//            System.out.println(year + " - невисокосный год");
+//        }
     }
 
     static boolean isLeap(int year) {
 
-        if (year < 1) {
-            return false;
-        }
-
-        return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
+        return year > 0 && year % 400 == 0 || year > 0 && year % 4 == 0 && year % 100 != 0;
     }
 }
