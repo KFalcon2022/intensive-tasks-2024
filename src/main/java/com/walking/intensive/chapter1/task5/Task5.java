@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter1.task5;
 
-import java.text.DecimalFormat;
-import java.text.Format;
 import java.util.Arrays;
 
 /**
@@ -15,17 +13,26 @@ import java.util.Arrays;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 5.0;
+        double a = -15.0;
         double b = 6.0;
         double c = 7.0;
 
         System.out.println(getAreaByHeron(a, b, c));
-        System.out.println(Arrays.toString(getHeights(a, b, c)));
+       /* System.out.println(Arrays.toString(getHeights(a, b, c)));
         System.out.println(Arrays.toString(getMedians(a, b, c)));
         System.out.println(Arrays.toString(getBisectors(a, b, c)));
         System.out.println(Arrays.toString(getAngles(a, b, c)));
         System.out.println(getInscribedCircleRadius(a, b, c));
-        System.out.println(getCircumradius(a, b, c));
+        System.out.println(getCircumradius(a, b, c));*/
+        //System.out.println(conditionExistTriangle(a, b, c));
+    }
+
+    static String conditionExistTriangle(double a, double b, double c) {
+
+        if ((a < 0 || b < 0 || c < 0) || (a + b < c || a + c < b || c + b < a)) {
+            return "Negative";
+        }
+        return "Positive";
     }
 
     /**
@@ -40,8 +47,8 @@ public class Task5 {
     // s =(a+b+c)/2 - полупириметр;        a= s*(s-a)*(s-b)*(s-c) площадь;
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-        if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
-            double p = (a + b + c) / 2;
+        double p = (a + b + c) / 2;
+        if (conditionExistTriangle(a,b,c).equals("Positive")) {
             double sTriangle = Math.sqrt(p * (p - a) * (p - b) * (p - c));
             return sTriangle;
         }
@@ -60,12 +67,14 @@ public class Task5 {
     static double[] getHeights(double a, double b, double c) {
         //        Место для вашего кода
         if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
-            double p = (a + b + c) / 2.0;
-            double h1 = (2.0 / a) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
-            double h2 = (2.0 / b) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
-            double h3 = (2.0 / c) * Math.sqrt(p * (p - a) * (p - b) * (p - c));
+            double s = getAreaByHeron(a, b, c);
+            double h1 = (2.0 / a) * s;
+            double h2 = (2.0 / b) * s;
+            double h3 = (2.0 / c) * s;
+
             double[] height = {h1, h2, h3};
             Arrays.sort(height);
+
             return height;
         }
         return new double[0];
@@ -85,8 +94,10 @@ public class Task5 {
             double m1 = (Math.sqrt(2 * b * b + 2 * c * c - a * a)) / 2;
             double m2 = (Math.sqrt(2 * a * a + 2 * c * c - b * b)) / 2;
             double m3 = (Math.sqrt(2 * a * a + 2 * b * b - c * c)) / 2;
+
             double[] height = {m1, m2, m3};
             Arrays.sort(height);
+
             return height;
         }
         return new double[0];
@@ -107,8 +118,10 @@ public class Task5 {
             double bis1 = (Math.sqrt(b * c * (((b + c) * (b + c)) - (a * a)))) / (b + c);
             double bis2 = (Math.sqrt(a * c * (((a + c) * (a + c)) - (b * b)))) / (a + c);
             double bis3 = (Math.sqrt(a * b * (((a + b) * (a + b)) - (c * c)))) / (a + b);
+
             double[] bisector = {bis1, bis2, bis3};
             Arrays.sort(bisector);
+
             return bisector;
         }
         return new double[0];
@@ -128,12 +141,16 @@ public class Task5 {
         if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
             double radiansAng1 = Math.acos((((b * b) + (c * c)) - (a * a)) / (2 * b * c));
             double degreesAng1 = Math.toDegrees(radiansAng1);
+
             double radiansAng2 = Math.acos((((a * a) + (c * c)) - (b * b)) / (2 * a * c));
             double degreesAng2 = Math.toDegrees(radiansAng2);
+
             double radiansAng3 = Math.acos((((a * a) + (b * b)) - (c * c)) / (2 * a * b));
             double degreesAng3 = Math.toDegrees(radiansAng3);
+
             double[] angles = {degreesAng1, degreesAng2, degreesAng3};
             Arrays.sort(angles);
+
             return angles;
         }
         return new double[0];
@@ -153,6 +170,7 @@ public class Task5 {
         if ((a > 0 && b > 0 && c > 0) && (a + b > c && a + c > b && c + b > a)) {
             double p = (a + b + c) / 2;
             double inscrRadius = Math.sqrt(((p - a) * (p - b) * (p - c)) / p);
+
             return inscrRadius;
         }
         return -1;
@@ -173,6 +191,7 @@ public class Task5 {
             double p = (a + b + c) / 2;
             double sTriangle = Math.sqrt(p * (p - a) * (p - b) * (p - c));
             double circRadius = (a * b * c) / (4 * sTriangle);
+
             return circRadius;
         }
         return -1;
