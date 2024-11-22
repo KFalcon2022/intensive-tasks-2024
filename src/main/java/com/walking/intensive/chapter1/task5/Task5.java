@@ -18,6 +18,7 @@ public class Task5 {
         double a = 5.0;
         double b = 6.0;
         double c = 7.0;
+
         System.out.println(getAreaByHeron(a, b, c));
         System.out.println(Arrays.toString(getHeights(a, b, c)));
         System.out.println(Arrays.toString(getMedians(a, b, c)));
