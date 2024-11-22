@@ -12,6 +12,9 @@ import java.util.Arrays;
  */
 public class Task5 {
     public static void main(String[] args) {
+        double a = 3;
+        double b = 4;
+        double c = 5;
         System.out.println(getAreaByHeron(a, b, c));
         System.out.println();
 
@@ -48,12 +51,6 @@ public class Task5 {
         System.out.println(getAreaAdvanced(a, b, c));
     }
 
-    static double a = 3;
-    static double b = 4;
-    static double c = 5;
-
-    static double areaByHeron = getAreaByHeron(a, b, c);
-
 
     /**
      * Частным случаем Tеоремы Брахмагупты является формула Герона.
@@ -66,7 +63,7 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a, b, c)) {
+        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return -1;
         }
 
@@ -83,11 +80,13 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a, b, c)) {
+        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return new double[0];
         }
 
         double[] heights = new double[3];
+
+        double areaByHeron = getAreaByHeron(a, b, c);
 
         heights[0] = 2 * areaByHeron / a;
         heights[1] = 2 * areaByHeron / b;
@@ -103,6 +102,11 @@ public class Task5 {
         return (a + b > c) && (a + c > b) && (b + c > a);
     }
 
+    public static boolean paramIsNegative(double a, double b, double c) {
+
+        return (a <= 0 || b <= 0 || c <= 0);
+    }
+
     /**
      * Реализуйте метод, который будет возвращать медианы треугольника по возрастанию.
      *
@@ -111,7 +115,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a, b, c)) {
+        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return new double[0];
         }
 
@@ -134,7 +138,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a, b, c)) {
+        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return new double[0];
         }
 
@@ -158,7 +162,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a, b, c)) {
+        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return new double[0];
         }
 
@@ -181,9 +185,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a, b, c)) {
+        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return -1;
         }
+
+        double areaByHeron = getAreaByHeron(a, b, c);
 
         return areaByHeron / ((a + b + c) / 2);
     }
@@ -196,9 +202,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a, b, c)) {
+        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return -1;
         }
+
+        double areaByHeron = getAreaByHeron(a, b, c);
 
         return (a * b * c) / (4 * areaByHeron);
     }
@@ -218,7 +226,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || !isTriangle(a, b, c)) {
+        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return -1;
         }
 
