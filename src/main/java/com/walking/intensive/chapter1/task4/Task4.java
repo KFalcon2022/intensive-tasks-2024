@@ -17,7 +17,7 @@ public class Task4 {
             return "Бесконечное множество решений.";
         }
 
-        if (a == 0 && b == 0 && c != 0) {
+        if (a == 0 && b == 0) {
             return textMessage + "0.";
         }
 
