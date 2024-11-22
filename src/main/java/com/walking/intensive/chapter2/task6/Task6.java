@@ -8,7 +8,9 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getLcm(15, 25));
+        System.out.println(getGcd(12, 6));
+        System.out.println(getGcdByEuclideanAlgorithm(2, 2));
     }
 
     /**
@@ -19,8 +21,11 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m < 1 || n < 1) {
+            return -1;
+        }
+
+        return (m * n) / getGcdByEuclideanAlgorithm(m, n);
     }
 
     /**
@@ -31,8 +36,20 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m < 1 || n < 1) {
+            return -1;
+        }
+
+        int gcd = 0;
+        int max = Math.max(m, n);
+
+        for (int i = 1; i <= max; i++) {
+            if (m % i == 0 && n % i == 0) {
+                gcd = i;
+            }
+        }
+
+        return gcd;
     }
 
     /**
@@ -44,7 +61,23 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m < 1 || n < 1) {
+            return -1;
+        }
+
+        if (m == n) {
+            return m;
+        }
+
+        while (m != n) {
+            if (m > n) {
+                m -= n;
+            }
+            if (m < n) {
+                n -= m;
+            }
+        }
+
+        return m;
     }
 }
