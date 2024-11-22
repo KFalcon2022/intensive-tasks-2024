@@ -30,17 +30,21 @@ public class Task1 {
         int ageLet = age % 100;
         int ageGoda = age % 10;
 
-        if (age < 0)
+        if (age < 0) {
             return "Некорректный ввод";
+        }
 
-        if (ageLet >= 11 && ageLet < 15)
+        if (ageLet >= 11 && ageLet < 15) {
             return "Вам " + age + " лет";
+        }
 
-        if (ageGoda == 1)
+        if (ageGoda == 1) {
             return "Вам " + age + " год";
+        }
 
-        if (ageGoda == 2 || ageGoda == 3 || ageGoda == 4)
+        if (ageGoda == 2 || ageGoda == 3 || ageGoda == 4) {
             return "Вам " + age + " года";
+        }
 
         return "Вам " + age + " лет";
 
