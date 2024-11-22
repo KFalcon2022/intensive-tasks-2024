@@ -18,8 +18,6 @@ public class Task12Test {
         // when
         var result = getMovementsNumber(baskets);
 
-        // then
-        assertEquals(baskets.length(), result.length);
         assertArrayEquals(expectedArray, result);
     }
 
