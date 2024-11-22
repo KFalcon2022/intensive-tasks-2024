@@ -53,9 +53,12 @@ public class Task2 {
         if (flatNumber % oneEnterance > 0) {
             numberEnterance = numberEnterance + 1;
         }
-        int level = (flatNumber / 4) % floorAmount;
-        if ((flatNumber % 4) >= 0) {
+        int level = (flatNumber / 4);
+        if ((flatNumber % 4) > 0) {
             level = ++level;
+        }
+        if (level > floorAmount) {
+            level = level % 10;
         }
         String s =  maxFlat + "всего квартир" + oneEnterance + "квартир в одном подьезде" + numberEnterance + "подьезд";
         return s + "\n Этаж" + level;
