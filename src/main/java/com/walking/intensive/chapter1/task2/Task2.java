@@ -37,29 +37,32 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        if ((floorAmount <= 0 || floorAmount > 163) || (entranceAmount <= 0 || entranceAmount > 156) || flatNumber <= 0)
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
             return "Некорректные входные данные";
+        }
 
         int totalQuantityOfFlats = floorAmount * entranceAmount * 4;
-        if (flatNumber > totalQuantityOfFlats)
+        if (flatNumber > totalQuantityOfFlats) {
             return "Такой квартиры не существует";
+        }
 
         int flatsInEntrance = floorAmount * 4; // кол-во квартир в 1 подъезде
         int entranceNumber = ((flatNumber - 1) / flatsInEntrance) + 1; // номер подъезда
         int floor = 1 + (flatNumber - 1) % flatsInEntrance / 4; // этаж
         int flatNumberOnFloor = (flatNumber - (flatsInEntrance * (entranceNumber - 1))) % 4; // расположение квартиры
 
-        return switch (flatNumberOnFloor) {
+        String turns = null;
+         switch (flatNumberOnFloor) {
             case 1 ->
-                    String.format("%d кв - %d подъезд, %d этаж, слева от лифта, влево", flatNumber, entranceNumber, floor);
+                    turns = "слева от лифта, влево";
             case 2 ->
-                    String.format("%d кв - %d подъезд, %d этаж, слева от лифта, вправо", flatNumber, entranceNumber, floor);
+                    turns = "слева от лифта, вправо";
             case 3 ->
-                    String.format("%d кв - %d подъезд, %d этаж, справа от лифта, влево", flatNumber, entranceNumber, floor);
+                    turns = "справа от лифта, влево";
             case 0 ->
-                    String.format("%d кв - %d подъезд, %d этаж, справа от лифта, вправо", flatNumber, entranceNumber, floor);
-            default -> null;
-        };
+                    turns = "справа от лифта, вправо";
+        }
+        return "%d кв - %d подъезд, %d этаж, %s".formatted(flatNumber, entranceNumber, floor, turns);
     }
 }
 
