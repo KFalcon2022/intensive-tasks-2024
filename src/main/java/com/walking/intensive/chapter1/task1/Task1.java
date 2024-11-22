@@ -27,10 +27,13 @@ public class Task1 {
         String ending = "лет";
         if (age < 0) {
             return "Некорректный ввод";
-        } else if (lastDigit == 1 && preLastDigit != 1) {
-            ending = "год";
-        } else if ((lastDigit == 2 || lastDigit == 3 || lastDigit == 4) && preLastDigit != 1) {
-            ending = "года";
+        }
+        if (preLastDigit != 1) {
+            if (lastDigit >= 2 && lastDigit <= 4) {
+                ending = "года";
+            } else if (lastDigit == 1) {
+                ending = "год";
+            }
         }
         return "Вам " + age + " " + ending;
 
