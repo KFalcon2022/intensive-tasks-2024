@@ -3,7 +3,7 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 
-        int age = 100;
+        int age = 1;
 
         System.out.println(getAgeString(age));
     }
