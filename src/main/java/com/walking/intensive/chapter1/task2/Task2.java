@@ -38,7 +38,7 @@ public class Task2 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int floorAmount = 5; // кол-во этажей
         int entranceAmount = 7; //кол-во подъездов
-        int flatNumber = 190; //номер квартиры
+        int flatNumber = 138; //номер квартиры
 
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
@@ -48,33 +48,38 @@ public class Task2 {
         String side1;
         String side2;
 
-        if (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0) {
-            if (flatNumber <= (flatAmount * floorAmount * entranceAmount)) {
-                int entranceNumber = (int) Math.ceil((double) flatNumber / flatAmount / floorAmount); //подъезд
-                int floorNumber = (int) Math.ceil((double) (flatNumber - (flatAmount * floorAmount * (entranceNumber - 1))) / flatAmount); //этаж
-                double angleCoefficient = ((double) flatNumber / flatAmount) - Math.floor((double) flatNumber / flatAmount);
+        //Проверка входных данных
+        if (floorAmount < 0 || entranceAmount < 0 || flatNumber < 0) {
+            return "Некорректные входные данные";
+        }
 
-                switch ((int) (angleCoefficient * 100)) {
-                    case 0:
-                        side1 = "справа от лифта,";
-                        side2 = " вправо";
-                        break;
-                    case 25:
-                        side1 = "слева от лифта,";
-                        side2 = " влево";
-                        break;
-                    case 50:
-                        side1 = "слева от лифта,";
-                        side2 = " вправо";
-                        break;
-                    default:
-                        side1 = "справа от лифта,";
-                        side2 = " влево";
-                }
-                return flatNumber + " кв" + " - " + entranceNumber + " подъезд" + "," + " " + floorNumber + " этаж" + ", " + side1 + side2;
-            }
+        //Проверка квартиры
+        if (flatNumber > (flatAmount * floorAmount * entranceAmount)) {
             return "Такой квартиры не существует";
         }
-        return "Некорректные входные данные";
+
+        //Вычисления
+        int entranceNumber = (int) Math.ceil((double) flatNumber / flatAmount / floorAmount); //подъезд
+        int floorNumber = (int) Math.ceil((double) (flatNumber - (flatAmount * floorAmount * (entranceNumber - 1))) / flatAmount); //этаж
+        double angleCoefficient = ((double) flatNumber / flatAmount) - Math.floor((double) flatNumber / flatAmount);
+
+        switch ((int) (angleCoefficient * 100)) {
+            case 0:
+                side1 = "справа от лифта,";
+                side2 = " вправо";
+                break;
+            case 25:
+                side1 = "слева от лифта,";
+                side2 = " влево";
+                break;
+            case 50:
+                side1 = "слева от лифта,";
+                side2 = " вправо";
+                break;
+            default:
+                side1 = "справа от лифта,";
+                side2 = " влево";
+        }
+        return flatNumber + " кв" + " - " + entranceNumber + " подъезд" + "," + " " + floorNumber + " этаж" + ", " + side1 + side2;
     }
 }
