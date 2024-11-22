@@ -13,27 +13,28 @@ package com.walking.intensive.chapter1.task1;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task1 {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         int age = 13;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-
-        int lastNumber = age % 10;
-
         if (age < 0 || age > 130) {
             return "Некорректный ввод";
         }
 
+        int lastNumber = age % 10;
         if (lastNumber == 0 || lastNumber >= 5 || (age % 100 >= 10 && age % 100 < 15)) {
             return "Вам " + age + " лет";
-        } else if (lastNumber == 1) {
-            return "Вам " + age + " год";
-        } else {
-            return "Вам " + age + " года";
         }
+
+        if (lastNumber == 1) {
+            return "Вам " + age + " год";
+        }
+
+        return "Вам " + age + " года";
     }
 }
+
