@@ -23,18 +23,17 @@ public class Task1 {
     static String getAgeString(int age) {
 
         int lastNumber = age % 10;
-        String ageMessage = null;
 
-        if (age < 0 || age > 130)
+        if (age < 0 || age > 130) {
             return "Некорректный ввод";
+        }
 
         if (lastNumber == 0 || lastNumber >= 5 || (age % 100 >= 10 && age % 100 < 15)) {
-            ageMessage = "Вам " + age + " лет";
+            return "Вам " + age + " лет";
         } else if (lastNumber == 1) {
-            ageMessage = "Вам " + age + " год";
-        } else if (lastNumber == 2 || lastNumber == 3 || lastNumber == 4) {
-            ageMessage = "Вам " + age + " года";
+            return "Вам " + age + " год";
+        } else {
+            return "Вам " + age + " года";
         }
-        return ageMessage;
     }
 }
