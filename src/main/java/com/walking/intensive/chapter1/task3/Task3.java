@@ -23,14 +23,30 @@ package com.walking.intensive.chapter1.task3;
  *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
+
+import java.util.Scanner;
+
 public class Task3 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        Scanner in = new Scanner (System.in);
+        System.out.print("Укажите год: ");
+        int year = in.nextInt();
+
+        System.out.println(isLeap(year));
     }
 
     static boolean isLeap(int year) {
-        //Место для вашего кода
+        if (year % 400 == 0)
+            return true;
 
-        return false; // Заглушка. При реализации - удалить
+        if (year % 100 == 0)
+            return false;
+
+        if (year % 4 == 0)
+            return true;
+
+        return false;
     }
+
 }
