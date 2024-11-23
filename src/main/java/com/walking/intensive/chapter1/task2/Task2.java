@@ -75,7 +75,7 @@ public class Task2 {
                     }
                 }
 
-                //определение местоположения квартиры на этаже и отправка результата
+                //определение местоположения квартиры на этаже и отправка результата 
                 route = flatNumber % flatInFlours;
                 return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " +
                         switch (route) {
