@@ -48,7 +48,7 @@ public class Task2 {
         System.out.println(getFlatLocation (floorAmount, entranceAmount, flatNumber));
     }
 
-    public static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
+    static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         final int flatInFlours = 4;
 
         if (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0) {
