@@ -35,36 +35,32 @@ import java.util.Scanner;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-    /*    Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner (System.in);
 
-        System.out.println("Введите количество этажей: ");
-        int floorAmount = in.nextByte();
-        System.out.println("Введите количество подъездов: ");
-        int entranceAmount = in.nextByte();
-        System.out.println("Введите номер нужной квартиры: ");
-        int flatNumber = in.nextByte();      */
+        System.out.print("Введите количество этажей: ");
+        int floorAmount = in.nextInt();
+        System.out.print("Введите количество подъездов: ");
+        int entranceAmount = in.nextInt();
+        System.out.print("Введите номер нужной квартиры: ");
+        int flatNumber = in.nextInt();
 
-        int floorAmount = 5, entranceAmount = 5, flatNumber = 31;
-        System.out.printf("%d, %d, %d \n", floorAmount, entranceAmount, flatNumber);
+        //int floorAmount = 5, entranceAmount = 5, flatNumber = 41;
         System.out.println(getFlatLocation (floorAmount, entranceAmount, flatNumber));
     }
 
-    static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+    public static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         final int flatInFlours = 4;
 
         if (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0) {
             if (floorAmount * entranceAmount * flatInFlours < flatNumber) {
                 return "Такой квартиры не существует";
-            }
-            else {
+            } else {
                 int entrance = 0;
                 int floor = 0;
                 int route;
 
                 // определение номера подъезда
-                for (int i = 1; i == entranceAmount; i++) {
+                for (int i = 1; i <= entranceAmount; i++) {
                     if (i * floorAmount * flatInFlours >= flatNumber) {
                         entrance = i;
                         break;
@@ -72,22 +68,21 @@ public class Task2 {
                 }
 
                 // определение этажа
-                for (int i = 1; i == floorAmount; i++) { // первый подъезд
-                    if ((i + floorAmount) * flatInFlours <= flatNumber) {
+                for (int i = 1; i <= floorAmount; i++) { // первый подъезд
+                    if (((entrance - 1) * floorAmount + i) * flatInFlours >= flatNumber) {
                         floor = i;
                         break;
                     }
                 }
 
-                //1 кв – 1 подъезд, 1 этаж, слева от лифта, влево
-                route = flatNumber - ((entrance * floorAmount - floor) * flatInFlours);
-                //return "result: " + floorAmount + " " + flatInFlours + " " + flatNumber;
+                //определение местоположения квартиры на этаже и отправка результата
+                route = flatNumber % flatInFlours;
                 return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " +
                         switch (route) {
                             case 1 -> "слева от лифта, влево";
                             case 2 -> "слева от лифта, вправо";
                             case 3 -> "справа от лифта, влево";
-                            case 4 -> "справа от лифта, вправо";
+                            case 0 -> "справа от лифта, вправо";
                             default -> "ошибка";
                         };
             }
