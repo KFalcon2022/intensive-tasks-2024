@@ -1,128 +1,143 @@
 package com.walking.intensive.chapter1.task5;
 
-/**
- * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
- * треугольника окружностей является центральной в Геометрии.
- *
- * <p>Реализуйте представленные ниже методы в соответствии с заданными условиями.
- *
- * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
- */
+import java.util.Arrays;
+
 public class Task5 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        double a = 20;
+        double b = -10;
+        double c = 10;
+
+        System.out.println("Стороны треугольника: " + a + ", " + b + ", " + c);
+        System.out.println("Площадь треугольника: " + getAreaByHeron(a, b, c));
+        System.out.println("Высоты треугольника: " + Arrays.toString(getHeights(a, b, c)));
+        System.out.println("Медианы треугольника: " + Arrays.toString(getMedians(a, b, c)));
+        System.out.println("Биссектрисы треугольника: " + Arrays.toString(getBisectors(a, b, c)));
+        System.out.println("Углы треугольника: " + Arrays.toString(getAngles(a, b, c)));
+        System.out.println("Радиус вписанной окружности: " + getInscribedCircleRadius(a, b, c));
+        System.out.println("Радиус описанной окружности: " + getCircumradius(a, b, c));
+        System.out.println("Площадь через синус: " + getAreaAdvanced(a, b, c));
+
     }
 
-    /**
-     * Частным случаем Tеоремы Брахмагупты является формула Герона.
-     *
-     * <p>Реализуйте метод поиска площади треугольника формулой Герона.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - площадь треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
+
+        if (!nondegenerateTriangle) {
+            return -1;
+        }
+
+        double semiPerimeter = (a + b + c) / 2; //Полупериметр
+
+        return Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать высоты треугольника по возрастанию.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с высотами треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
-     */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
+
+        if (!nondegenerateTriangle) {
+            return new double[0];
+        }
+
+        double[] heightsMassive = new double[3];
+        heightsMassive[0] = getAreaByHeron(a, b, c) * 2 / a;
+        heightsMassive[1] = getAreaByHeron(a, b, c) * 2 / b;
+        heightsMassive[2] = getAreaByHeron(a, b, c) * 2 / c;
+        Arrays.sort(heightsMassive);
+
+        return heightsMassive;
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать медианы треугольника по возрастанию.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с медианами треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
-     */
     static double[] getMedians(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
+
+        if (!nondegenerateTriangle) {
+            return new double[0];
+        }
+
+        double[] mediansMassive = new double[3];
+        mediansMassive[0] = Math.sqrt(2 * a * a + 2 * b * b - c * c) / 2;
+        mediansMassive[1] = Math.sqrt(2 * a * a + 2 * c * c - b * b) / 2;
+        mediansMassive[2] = Math.sqrt(2 * c * c + 2 * b * b - a * a) / 2;
+        Arrays.sort(mediansMassive);
+        return mediansMassive;
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать биссектрисы треугольника по возрастанию.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с биссектрисами треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
-     */
     static double[] getBisectors(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
+
+        if (!nondegenerateTriangle) {
+            return new double[0];
+        }
+
+        double[] bisectorsMassive = new double[3];
+        double[] segmentsMultiplication = new double[3]; //Произведение отрезков стороны, на которую опирается биссектриса
+        segmentsMultiplication[0] = ((a * c) / (a + b)) * ((b * c) / (a + b)); // Сторона c
+        segmentsMultiplication[1] = ((a * b) / (a + c)) * ((b * c) / (a + c)); // Сторона b
+        segmentsMultiplication[2] = ((a * c) / (b + c)) * ((a * b) / (b + c)); // Сторона a
+        bisectorsMassive[0] = Math.sqrt(a * b - segmentsMultiplication[0]);
+        bisectorsMassive[1] = Math.sqrt(a * c - segmentsMultiplication[1]);
+        bisectorsMassive[2] = Math.sqrt(b * c - segmentsMultiplication[2]);
+        Arrays.sort(bisectorsMassive);
+        return bisectorsMassive;
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать углы треугольника (в градусах) по возрастанию.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с углами треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
-     */
     static double[] getAngles(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
+
+        if (!nondegenerateTriangle) {
+            return new double[0];
+        }
+
+        double[] angelsMassive = new double[3];
+        angelsMassive[0] = Math.acos((b * b + c * c - a * a) / (2 * b * c)) * 180 / Math.PI; //Наименьший угол
+        angelsMassive[1] = Math.acos((a * a + c * c - b * b) / (2 * a * c)) * 180 / Math.PI;
+        angelsMassive[2] = Math.acos((b * b + a * a - c * c) / (2 * b * a)) * 180 / Math.PI; //Наибольший угол
+        Arrays.sort(angelsMassive);
+        return angelsMassive;
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать длину радиуса вписанной в треугольник окружности.
-     *
-     * <p>Входные параметры - длина сторон треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
+
+        if (!nondegenerateTriangle) {
+            return -1;
+        }
+
+        return Math.sqrt((-a + b + c) * (a - b + c) * (a + b - c) / (4 * (a + b + c)));
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать длину радиуса описанной вокруг треугольника окружности.
-     *
-     * <p>Входные параметры - длина сторон треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static double getCircumradius(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
+
+        if (!nondegenerateTriangle) {
+            return -1;
+        }
+
+        double semiPerimeter = (a + b + c) / 2; //Полупериметр
+
+        return (a * b * c) / (4 * Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c)));
     }
 
-    /**
-     * Дополнительная задача по желанию.
-     *
-     * <p>Реализуйте метод, который будет возвращать площадь треугольника.
-     *
-     * <p>Расчет площади должен быть произведем через поиск косинуса угла через теорему косинусов,
-     * далее нахождение синуса через основное тригонометрическое тождество
-     * и подстановку синуса в нужную формулу для площади треугольника.
-     * (Всего основных способов поиска площади треугольника 6)
-     *
-     * <p>Входные параметры - длина сторон треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static double getAreaAdvanced(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
+
+        if (!nondegenerateTriangle) {
+            return -1;
+        }
+
+        double angel = Math.acos((a * a + b * b - c * c) / (2 * a * b)); //Угол в радианах
+        double sine = Math.sqrt(1 - Math.pow(Math.cos(angel), 2)); //Синус угла через косинус
+
+        return (a * b * sine) / 2;
     }
 }
