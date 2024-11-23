@@ -37,42 +37,40 @@ public class Task4 {
         //        Место для вашего кода
 
         // Проверка на наличие корней
-        if (a==0){
-            if (b==0){
-                if(c==0){
+        if (a == 0) {
+            if (b == 0) {
+                if (c == 0) {
                     return "Бесконечное множество решений.";
-                }
-                else {
+                } else {
                     return "Количество решений: 0.";
                 }
-            }
-            else {
-                double specialCase = -c/b;
-                return String.format("Количество решений: 1. Корень: %.1f", specialCase);
+            } else {
+                double singleRoot = -c / b;
+                return String.format("Количество решений: 1. Корень: %.1f", singleRoot);
             }
         }
 
-        double discriminantValue = Math.pow(b,2) - 4 * a * c;
+        double discriminantValue = Math.pow(b, 2) - 4 * a * c;
 
         // Два корня
-        if(discriminantValue > 0){
-            double specialCase1 = (-b - Math.sqrt(discriminantValue)) / (2 * a);
-            double specialCase2 = (-b + Math.sqrt(discriminantValue)) / (2 * a);
-            return String.format("Количество решений: 2. Корни: %.1f;%.1f", Math.min(specialCase1, specialCase2), Math.max(specialCase1, specialCase2));
+        if (discriminantValue > 0) {
+            double firstRoot = (-b - Math.sqrt(discriminantValue)) / (2 * a);
+            double secondRoot = (-b + Math.sqrt(discriminantValue)) / (2 * a);
+            return String.format("Количество решений: 2. Корни: %.1f;%.1f",
+                    Math.min(firstRoot, secondRoot),
+                    Math.max(firstRoot, secondRoot));
         }
         // Один корень
         else if (discriminantValue == 0) {
-            double specialCase3 = -b / (2 * a);
-            return String.format("Количество решений: 1. Корень: %.1f", formatRoot(specialCase3));
-        }
-        // Нет корней
-        else {
+            double singleRoot2 = -b / (2 * a);
+            return String.format("Количество решений: 1. Корень: %.1f", formatCase(singleRoot2));
+        } else {
             return "Количество решений: 0.";
         }
     }
 
     // Заменяем -0.0 на 0.0
-    private static double formatRoot(double root) {
-        return root == -0.0 ? 0.0 : root; // тернарный оператор
+    private static double formatCase(double specialCase) {
+        return specialCase == -0.0 ? 0.0 : specialCase; // тернарный оператор
     }
 }
