@@ -17,29 +17,24 @@ import com.sun.source.util.SourcePositions;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 99;
+        int age = 111;
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-        String result = "";
+
         int ageDiv = age % 10;
         if (age < 0) {
-            result = "Некорректный ввод";
+            return  "Некорректный ввод";
+        } else if ((age > 4 & age < 21) | (age > 104 & age < 121)) {
+            return  "Вам " + age + " лет";
+        } else if ((ageDiv == 0) | (ageDiv >=5 && ageDiv <= 9)) {
+            return  "Вам " + age + " лет";
+        } else if (ageDiv == 1) {
+            return  "Вам " + age + " год";
+        } else if (ageDiv == 2 | ageDiv == 3 | ageDiv == 4) {
+            return  "Вам " + age + " года";
         }
-        else if (age > 4 & age < 21) {
-            result = "Вам " + age + " лет";
-        }
-        else if (ageDiv == 0 | ageDiv == 5 | ageDiv == 6 | ageDiv == 7 | ageDiv == 8 | ageDiv == 9) {
-            result = "Вам " + age + " лет";
-        }
-
-        else if (ageDiv == 1) {
-            result = "Вам " + age + " год";
-        }
-        else if (ageDiv == 2 | ageDiv == 3 | ageDiv == 4) {
-            result = "Вам " + age + " года";
-        }
-        return result; // Заглушка. При реализации - удалить
+        return null;
     }
 }
