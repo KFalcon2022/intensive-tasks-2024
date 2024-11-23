@@ -16,8 +16,7 @@ import java.sql.SQLOutput;
  */
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 54;
+        int age = 22;
 
         System.out.println(getAgeString(age));
     }
@@ -26,20 +25,17 @@ public class Task1 {
         if (age < 0){
             return "Некорректный ввод";
         }
-        else if (age > 4 && age < 21){
+
+        if (age > 4 && age < 21){
             return "Вам " + age + " лет";
         }
+
         int remnant_age = age % 10;
-        switch (remnant_age) {
-            case 1 -> {
-                return "Вам " + age + " год";
-            }
-            case 2, 3, 4 -> {
-                return "Вам " + age + " года";
-            }
-            default -> {
-                return "Вам " + age + " лет";
-            }
-        }
+        return "Вам " + age +
+            switch (remnant_age) {
+                case 1 -> " год";
+                case 2, 3, 4 -> " года";
+                default -> " лет";
+            };
     }
 }
