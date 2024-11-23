@@ -11,7 +11,7 @@ import java.util.Arrays;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task5 {
-    static final double[] EMPTY = new double[0];
+    static final double[] EMPTY_ARRAY = new double[0];
 
     public static void main(String[] args) {
         System.out.println(Arrays.toString(getAngles(12, 13, 5)));
@@ -32,7 +32,7 @@ public class Task5 {
             return -1;
         }
 
-        double p = semiperimeter(a, b, c);
+        double p = getSemiPerimeter(a, b, c);
 
         return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
@@ -47,7 +47,7 @@ public class Task5 {
     static double[] getHeights(double a, double b, double c) {
 
         if (!isValidTriangle(a, b, c)) {
-            return EMPTY;
+            return EMPTY_ARRAY;
         }
 
         double[] sideLengths = new double[]{a, b, c};
@@ -70,7 +70,7 @@ public class Task5 {
     static double[] getMedians(double a, double b, double c) {
 
         if (!isValidTriangle(a, b, c)) {
-            return EMPTY;
+            return EMPTY_ARRAY;
         }
 
         double[] allMedians = new double[3];
@@ -92,7 +92,7 @@ public class Task5 {
     static double[] getBisectors(double a, double b, double c) {
 
         if (!isValidTriangle(a, b, c)) {
-            return EMPTY;
+            return EMPTY_ARRAY;
         }
 
         double[] allBisectors = new double[3];
@@ -114,7 +114,7 @@ public class Task5 {
     static double[] getAngles(double a, double b, double c) {
 
         if (!isValidTriangle(a, b, c)) {
-            return EMPTY;
+            return EMPTY_ARRAY;
         }
 
         double[] allAngles = new double[3];
@@ -151,7 +151,7 @@ public class Task5 {
         }
 
         double area = getAreaByHeron(a, b, c);
-        double semiperimeter = semiperimeter(a, b, c);
+        double semiperimeter = getSemiPerimeter(a, b, c);
 
         return area / semiperimeter;
     }
@@ -204,7 +204,7 @@ public class Task5 {
         return a + b > c && a + c > b && b + c > a;
     }
 
-    static double semiperimeter(double a, double b, double c) {
+    static double getSemiPerimeter(double a, double b, double c) {
         return (a + b + c) / 2;
     }
 
@@ -257,9 +257,7 @@ public class Task5 {
 
     static double[] ascendingSort(double[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
-
             for (int j = 0; j < arr.length - 1 - i; j++) {
-
                 if (arr[j] > arr[j + 1]) {
                     double temp = arr[j];
                     arr[j] = arr[j + 1];
