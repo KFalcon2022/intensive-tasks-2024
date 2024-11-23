@@ -23,6 +23,8 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
+        String ageText;
+
         if (age <= 0) {
             return "Некорректный ввод";
         } else {
