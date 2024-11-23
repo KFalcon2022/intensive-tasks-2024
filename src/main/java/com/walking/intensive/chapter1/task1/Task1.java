@@ -28,6 +28,7 @@ public class Task1 {
         if (age <= 0) {
             return "Некорректный ввод";
         } else {
+
             switch (age % 10) {
 
                 case 1:
