@@ -60,19 +60,15 @@ public class Task2 {
                                                                                     // и в частности посл. на этаже
             floorNum = flatNumber / 4 - (entranceNum - 1) * floorAmount;
         }
-        String result = flatNumber + " кв - " + entranceNum + " подъезд, " + floorNum + " этаж, ";
+        String location = "справа от лифта, вправо";
         int flatLocation = flatNumber % 4;
-        switch (flatLocation) {
-            case 1: result += "слева от лифта, влево";
-                break;
-            case 2: result += "слева от лифта, вправо";
-                break;
-            case 3: result += "справа от лифта, влево";
-                break;
-            case 0: result += "справа от лифта, вправо";
-                break;
-        }
-        return  result;
+        location = switch (flatLocation) {
+            case 1 -> "слева от лифта, влево";
+            case 2 -> "слева от лифта, вправо";
+            case 3 -> "справа от лифта, влево";
+            default -> location;
+        };
+        return flatNumber + " кв - " + entranceNum + " подъезд, " + floorNum + " этаж, " + location;
 
     }
 }
