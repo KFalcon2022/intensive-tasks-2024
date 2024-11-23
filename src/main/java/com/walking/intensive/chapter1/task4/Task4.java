@@ -59,9 +59,7 @@ public class Task4 {
             return String.format("Количество решений: 2. Корни: %.1f;%.1f",
                     Math.min(firstRoot, secondRoot),
                     Math.max(firstRoot, secondRoot));
-        }
-        // Один корень
-        else if (discriminantValue == 0) {
+        } else if (discriminantValue == 0) {
             double singleRoot2 = -b / (2 * a);
             return String.format("Количество решений: 1. Корень: %.1f", formatCase(singleRoot2));
         } else {
