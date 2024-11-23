@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 15.0;
+        double a = 5.0;
         double b = 6.0;
         double c = 7.0;
 
@@ -27,12 +27,10 @@ public class Task5 {
         //System.out.println(conditionExistTriangle(a, b, c));
     }
 
-    static String conditionExistTriangle(double a, double b, double c) {
-
-        if ((a < 0 || b < 0 || c < 0) || (a + b < c || a + c < b || c + b < a)) {
-            return "Negative";
-        }
-        return "Positive";
+    static boolean conditionExistTriangle(double a, double b, double c) {
+        if ((a < 0 || b < 0 || c < 0) || (a + b < c || a + c < b || c + b < a))
+            return false;
+        return true;
     }
 
     /**
@@ -48,10 +46,11 @@ public class Task5 {
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
         double p = (a + b + c) / 2;
-        if (conditionExistTriangle(a, b, c).equals("Positive")) {
+        if (conditionExistTriangle(a, b, c)) {
             double sTriangle = Math.sqrt(p * (p - a) * (p - b) * (p - c));
             return sTriangle;
         }
+
         return -1;
     }
 
@@ -66,7 +65,7 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c).equals("Positive")) {
+        if (conditionExistTriangle(a, b, c)) {
             double s = getAreaByHeron(a, b, c);
             double h1 = (2.0 / a) * s;
             double h2 = (2.0 / b) * s;
@@ -74,9 +73,9 @@ public class Task5 {
 
             double[] height = {h1, h2, h3};
             Arrays.sort(height);
-
             return height;
         }
+
         return new double[0];
     }
 
@@ -90,16 +89,16 @@ public class Task5 {
      * Ma=(Math.sqrt(2*b*b + 2*c*c - a*a))/2
      */
     static double[] getMedians(double a, double b, double c) {
-        if (conditionExistTriangle(a, b, c).equals("Positive")) {
+        if (conditionExistTriangle(a, b, c)) {
             double m1 = (Math.sqrt(2 * b * b + 2 * c * c - a * a)) / 2;
             double m2 = (Math.sqrt(2 * a * a + 2 * c * c - b * b)) / 2;
             double m3 = (Math.sqrt(2 * a * a + 2 * b * b - c * c)) / 2;
 
             double[] height = {m1, m2, m3};
             Arrays.sort(height);
-
             return height;
         }
+
         return new double[0];
     }
 
@@ -114,16 +113,16 @@ public class Task5 {
      */
     static double[] getBisectors(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c).equals("Positive")) {
+        if (conditionExistTriangle(a, b, c)) {
             double bis1 = (Math.sqrt(b * c * (((b + c) * (b + c)) - (a * a)))) / (b + c);
             double bis2 = (Math.sqrt(a * c * (((a + c) * (a + c)) - (b * b)))) / (a + c);
             double bis3 = (Math.sqrt(a * b * (((a + b) * (a + b)) - (c * c)))) / (a + b);
 
             double[] bisector = {bis1, bis2, bis3};
             Arrays.sort(bisector);
-
             return bisector;
         }
+
         return new double[0];
     }
 
@@ -138,7 +137,7 @@ public class Task5 {
      */
     static double[] getAngles(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c).equals("Positive")) {
+        if (conditionExistTriangle(a, b, c)) {
             double radiansAng1 = Math.acos((((b * b) + (c * c)) - (a * a)) / (2 * b * c));
             double degreesAng1 = Math.toDegrees(radiansAng1);
 
@@ -150,9 +149,9 @@ public class Task5 {
 
             double[] angles = {degreesAng1, degreesAng2, degreesAng3};
             Arrays.sort(angles);
-
             return angles;
         }
+
         return new double[0];
     }
 
@@ -167,12 +166,12 @@ public class Task5 {
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c).equals("Positive")) {
+        if (conditionExistTriangle(a, b, c)) {
             double p = (a + b + c) / 2;
             double inscrRadius = Math.sqrt(((p - a) * (p - b) * (p - c)) / p);
-
             return inscrRadius;
         }
+
         return -1;
     }
 
@@ -187,12 +186,12 @@ public class Task5 {
      */
     static double getCircumradius(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c).equals("Positive")) {
+        if (conditionExistTriangle(a, b, c)) {
             double s = getAreaByHeron(a, b, c);
             double circRadius = (a * b * c) / (4 * s);
-
             return circRadius;
         }
+
         return -1;
     }
 
