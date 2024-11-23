@@ -63,7 +63,7 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
+        if (paramsIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return -1;
         }
 
@@ -80,7 +80,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
+        if (paramsIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return new double[0];
         }
 
@@ -98,13 +98,11 @@ public class Task5 {
     }
 
     public static boolean isTriangle(double a, double b, double c) {
-
-        return (a + b > c) && (a + c > b) && (b + c > a);
+        return a + b > c && a + c > b && b + c > a;
     }
 
-    public static boolean paramIsNegative(double a, double b, double c) {
-
-        return (a <= 0 || b <= 0 || c <= 0);
+    public static boolean paramsIsNegative(double a, double b, double c) {
+        return a <= 0 || b <= 0 || c <= 0;
     }
 
     /**
@@ -115,7 +113,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
+        if (paramsIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return new double[0];
         }
 
@@ -138,10 +136,9 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
+        if (paramsIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return new double[0];
         }
-
 
         double bisectorA = Math.sqrt(b * c * (1 - a * a / Math.pow(b + c, 2)));
         double bisectorB = Math.sqrt(a * c * (1 - b * b / Math.pow(a + c, 2)));
@@ -162,7 +159,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
+        if (paramsIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return new double[0];
         }
 
@@ -185,7 +182,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
+        if (paramsIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return -1;
         }
 
@@ -202,7 +199,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
+        if (paramsIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return -1;
         }
 
@@ -226,12 +223,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        if (paramIsNegative(a, b, c) || !isTriangle(a, b, c)) {
+        if (paramsIsNegative(a, b, c) || !isTriangle(a, b, c)) {
             return -1;
         }
 
         double cosA = (a * a + b * b - c * c) / (2 * a * b);
-
         double sinA = Math.sqrt(1 - cosA * cosA);
 
         return 0.5 * a * b * sinA;
