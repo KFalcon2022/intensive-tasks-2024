@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task2;
 
+import java.util.Scanner;
+
 /**
  * Реализуйте метод getFlatLocation(), который будет принимать параметрами следующие данные:
  * <ul>
@@ -34,11 +36,65 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+    /*    Scanner in = new Scanner (System.in);
+
+        System.out.println("Введите количество этажей: ");
+        int floorAmount = in.nextByte();
+        System.out.println("Введите количество подъездов: ");
+        int entranceAmount = in.nextByte();
+        System.out.println("Введите номер нужной квартиры: ");
+        int flatNumber = in.nextByte();      */
+
+        int floorAmount = 5, entranceAmount = 5, flatNumber = 31;
+        System.out.printf("%d, %d, %d \n", floorAmount, entranceAmount, flatNumber);
+        System.out.println(getFlatLocation (floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         //        Место для вашего кода
+        final int flatInFlours = 4;
 
-        return null; // Заглушка. При реализации - удалить
+        if (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0) {
+            if (floorAmount * entranceAmount * flatInFlours < flatNumber) {
+                return "Такой квартиры не существует";
+            }
+            else {
+                int entrance = 0;
+                int floor = 0;
+                int route;
+
+                // определение номера подъезда
+                for (int i = 1; i == entranceAmount; i++) {
+                    if (i * floorAmount * flatInFlours >= flatNumber) {
+                        entrance = i;
+                        break;
+                    }
+                }
+
+                // определение этажа
+                for (int i = 1; i == floorAmount; i++) { // первый подъезд
+                    if ((i + floorAmount) * flatInFlours <= flatNumber) {
+                        floor = i;
+                        break;
+                    }
+                }
+
+                //1 кв – 1 подъезд, 1 этаж, слева от лифта, влево
+                route = flatNumber - ((entrance * floorAmount - floor) * flatInFlours);
+                //return "result: " + floorAmount + " " + flatInFlours + " " + flatNumber;
+                return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " +
+                        switch (route) {
+                            case 1 -> "слева от лифта, влево";
+                            case 2 -> "слева от лифта, вправо";
+                            case 3 -> "справа от лифта, влево";
+                            case 4 -> "справа от лифта, вправо";
+                            default -> "ошибка";
+                        };
+            }
+        }
+        else {
+            return "Некорректные входные данные";
+        }
+
     }
 }
