@@ -21,11 +21,13 @@ public class Task5 {
 
     }
 
+    static boolean isDegenerate(double a, double b, double c) {
+        return (a + b) > c && (a + c) > b && (b + c) > a;
+    }
+
     static double getAreaByHeron(double a, double b, double c) {
 
-        boolean nondegenerateTriangle = (a + b) > c && (a + c) > b && (b + c) > a; //Проверяем условие невырожденного треугольника
-
-        if (!nondegenerateTriangle) {
+        if (!isDegenerate(a,b,c)) {
             return -1;
         }
 
@@ -76,14 +78,15 @@ public class Task5 {
         }
 
         double[] bisectorsMassive = new double[3];
-        double[] segmentsMultiplication = new double[3]; //Произведение отрезков стороны, на которую опирается биссектриса
-        segmentsMultiplication[0] = ((a * c) / (a + b)) * ((b * c) / (a + b)); // Сторона c
-        segmentsMultiplication[1] = ((a * b) / (a + c)) * ((b * c) / (a + c)); // Сторона b
-        segmentsMultiplication[2] = ((a * c) / (b + c)) * ((a * b) / (b + c)); // Сторона a
+        double[] segmentsMultiplication = new double[3];
+        segmentsMultiplication[0] = ((a * c) / (a + b)) * ((b * c) / (a + b));
+        segmentsMultiplication[1] = ((a * b) / (a + c)) * ((b * c) / (a + c));
+        segmentsMultiplication[2] = ((a * c) / (b + c)) * ((a * b) / (b + c));
         bisectorsMassive[0] = Math.sqrt(a * b - segmentsMultiplication[0]);
         bisectorsMassive[1] = Math.sqrt(a * c - segmentsMultiplication[1]);
         bisectorsMassive[2] = Math.sqrt(b * c - segmentsMultiplication[2]);
         Arrays.sort(bisectorsMassive);
+
         return bisectorsMassive;
     }
 
