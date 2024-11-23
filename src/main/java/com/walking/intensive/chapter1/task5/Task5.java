@@ -212,11 +212,9 @@ public class Task5 {
     }
 
     private static boolean isTriangle(double a, double b, double c) {
-        return !(a < b + c)
+        return a < 0 || b < 0 || c < 0
+                || !(a < b + c)
                 || !(b < a + c)
-                || !(c < b + a)
-                || a < 1
-                || b < 1
-                || c < 1;
+                || !(c < b + a);
     }
 }
