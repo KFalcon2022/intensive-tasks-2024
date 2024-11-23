@@ -71,7 +71,7 @@ public class Task5 {
             System.out.println("Некорректные данные для сторон треугольника.");
         }
 
-        // Пример использования
+        // Пример нахождения площади треугольника (дополнительно)
         double triangleAreaAdvanced = getAreaAdvanced(3, 4, 5);
         if (triangleAreaAdvanced != -1) {
             System.out.println("Площадь треугольника: " + triangleAreaAdvanced);
