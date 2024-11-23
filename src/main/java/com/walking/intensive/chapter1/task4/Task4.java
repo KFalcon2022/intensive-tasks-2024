@@ -23,7 +23,7 @@ public class Task4 {
 
         if (a == 0) {
             double root = -c / b + 0;
-            return textMessage + "1. Корень: " + String.format("%.0f", root); //Решаем как линейное уравнение с одним неизвестным
+        return textMessage + "1. Корень: " + String.format("%.0f", root); //Решаем как линейное уравнение с одним неизвестным
         }
 
         double discriminant = b * b - 4 * a * c; //Находим дискриминант
@@ -31,14 +31,14 @@ public class Task4 {
         if (discriminant > 0) {
             double firstRoot = (-b - Math.sqrt(discriminant)) / (2 * a); //Находим значение корней
             double secondRoot = (-b + Math.sqrt(discriminant)) / (2 * a);
-            textMessage = textMessage + "2. Корни: " + String.format("%.0f", Math.min(firstRoot, secondRoot)) + ";" + String.format("%.0f", Math.max(firstRoot, secondRoot));
-        } else if (discriminant == 0) {
-            double root = (-b - Math.sqrt(discriminant) + 0) / (2 * a); //Значение корня при Д=0
-            textMessage = textMessage + "1. Корень: " + String.format("%.0f", root);
-        } else {
-            textMessage = textMessage + "0.";
+        return textMessage + "2. Корни: " + String.format("%.0f", Math.min(firstRoot, secondRoot)) + ";" + String.format("%.0f", Math.max(firstRoot, secondRoot));
         }
 
-        return textMessage;
+        if (discriminant == 0) {
+            double root = (-b - Math.sqrt(discriminant) + 0) / (2 * a); //Значение корня при Д=0
+        return textMessage + "1. Корень: " + String.format("%.0f", root);
+        }
+
+    return textMessage + "0.";
     }
 }
