@@ -8,9 +8,10 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-        System.out.println(getLcm(15, 25));
-        System.out.println(getGcd(12, 6));
-        System.out.println(getGcdByEuclideanAlgorithm(2, 2));
+        System.out.println(getLcm(66, 87));
+        System.out.println(getGcd(119, 544));
+        System.out.println(getGcdByEuclideanAlgorithm(17, 49));
+        System.out.println(getGcdByEuclideanAlgorithmByRecursion(15, 25));
     }
 
     /**
@@ -40,16 +41,35 @@ public class Task6 {
             return -1;
         }
 
-        int gcd = 0;
-        int max = Math.max(m, n);
+        if (m > n) {
+            int temp = n;
+            n = m;
+            m = temp;
+        }
 
-        for (int i = 1; i <= max; i++) {
-            if (m % i == 0 && n % i == 0) {
-                gcd = i;
+        int nod = 1;
+
+        while (m > 1 && n > 1) {
+            for (int i = 2; i <= m; i++) {
+                if (m % i == 0 && n % i == 0) {
+                    nod *= i;
+                    m /= i;
+                    n /= i;
+                }
+
+                if (m % i == 0) {
+                    m /= i;
+                    break;
+                }
+
+                if (n % i == 0) {
+                    n /= i;
+                    break;
+                }
             }
         }
 
-        return gcd;
+        return nod;
     }
 
     /**
@@ -79,5 +99,18 @@ public class Task6 {
         }
 
         return m;
+    }
+
+    static int getGcdByEuclideanAlgorithmByRecursion(int m, int n) {
+        if (m < 1 || n < 1) {
+            return -1;
+        }
+
+        if (m == n) {
+            return m;
+        }
+
+        return m > n ? getGcdByEuclideanAlgorithmByRecursion(m - n, n)
+                : getGcdByEuclideanAlgorithmByRecursion(n, n - m);
     }
 }
