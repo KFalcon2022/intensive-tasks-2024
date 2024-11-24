@@ -11,8 +11,8 @@ public class Task6 {
 //        Для собственных проверок можете делать любые изменения в этом методе
 
         // Пример использования методов
-        int m = 12;
-        int n = 15;
+        int m = -1;
+        int n = 0;
 
         int lcm = getLcm(m, n);
         int gcd = getGcd(m, n);
@@ -57,6 +57,7 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
 
+
         // Проверка корректности входных данных
         if (isValidInput(m, n)) {
             return -1; // Некорректные данные
@@ -65,8 +66,10 @@ public class Task6 {
         // Метод простого деления для нахождения НОД
         int gcd = 1; // Начальное значение НОД
         for (int i = 1; i <= Math.min(m, n); i++) {
+
             if (m % i == 0 && n % i == 0) {
                 gcd = i; // Обновляем НОД, если i делит оба числа
+
             }
         }
         return gcd;
@@ -82,17 +85,14 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
 
-        // Проверка корректности входных данных
-        if (isValidInput(m, n)) {
+
+        if (m < 0 || n < 0) {
             return -1; // Некорректные данные
         }
 
-        // Алгоритм Евклида
-        while (n != 0) {
-            int valuePreserving = n;
-            n = m % n;
-            m = valuePreserving;
+        if (n == 0) {
+            return m;
         }
-        return m;
+        return getGcdByEuclideanAlgorithm(n, m % n); // Рекурсия
     }
 }
