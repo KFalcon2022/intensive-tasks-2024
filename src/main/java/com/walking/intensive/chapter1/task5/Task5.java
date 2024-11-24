@@ -114,10 +114,11 @@ public class Task5 {
         if (!isDegenerate(a, b, c)) {
             return -1;
         }
-
+        
         double semiPerimeter = (a + b + c) / 2;
 
-        return (a * b * c) / (4 * Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c)));
+        return (a * b * c) / (4 * Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b)
+                * (semiPerimeter - c)));
     }
 
     static double getAreaAdvanced(double a, double b, double c) {
