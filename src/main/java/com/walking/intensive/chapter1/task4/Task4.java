@@ -41,8 +41,6 @@ public class Task4 {
             if (b == 0) {
                 if (c == 0) {
                     return "Бесконечное множество решений.";
-                } else {
-                    return "Количество решений: 0.";
                 }
             } else {
                 double singleRoot = -c / b;
@@ -58,8 +56,9 @@ public class Task4 {
             double secondRoot = (-b + Math.sqrt(discriminantValue)) / (2 * a);
             return String.format("Количество решений: 2. Корни: %.1f;%.1f",
                     Math.min(firstRoot, secondRoot),
-                    Math.max(firstRoot, secondRoot));
-        } else if (discriminantValue == 0) {
+                    Math.max(firstRoot, secondRoot)
+            );
+        } else if (discriminantValue == 0) { // Один корень
             double singleRoot2 = -b / (2 * a);
             return String.format("Количество решений: 1. Корень: %.1f", formatCase(singleRoot2));
         } else {
