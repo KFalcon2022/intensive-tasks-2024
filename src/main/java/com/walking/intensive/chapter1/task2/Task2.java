@@ -33,12 +33,78 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int c = 4;  // этажи
+        int b = 3;  // подъезды
+        int a = 26; // кв
+        System.out.println(getFlatLocation(c, b, a));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        boolean isCorrect = (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0);
+        if (isCorrect) {
+            final int apartments = 4;
+            final int maxApartments = apartments * floorAmount;
+            final int allApartments = maxApartments * entranceAmount;
 
-        return null; // Заглушка. При реализации - удалить
+            if (allApartments < flatNumber) {
+                return "Такой квартиры не существует";
+            }
+
+            int min = 0;
+            int max = maxApartments;
+            int countI = 1;
+
+            while (max != allApartments) {
+                if (flatNumber >= min && flatNumber <= max) {
+                    break;
+                }
+                min += maxApartments;
+                max += maxApartments;
+                ++countI;
+            }
+
+            final int trueEntrance = countI;
+            final int floor = flatNumber % maxApartments;
+
+            int countJ = 1;
+            if (floor > 0) {
+                min = 1;
+                max = apartments;
+                while (true) {
+                    if (floor >= min && floor <= max) {
+                        break;
+                    }
+                    min += apartments;
+                    max += apartments;
+                    ++countJ;
+                }
+            } else {
+                countJ = flatNumber / apartments;
+            }
+
+            final int trueFloor = countJ;
+            final int trueDirection = floor % apartments;
+
+            String pathFlat;
+            String fromTheLift;
+
+            if (trueDirection > 0 && trueDirection < 3) {
+                fromTheLift = "слева от лифта";
+                if (trueDirection == 1) {
+                    pathFlat = "влево";
+                } else {
+                    pathFlat = "вправо";
+                }
+            } else {
+                fromTheLift = "справа от лифта";
+                if (trueDirection == 0) {
+                    pathFlat = "вправо";
+                } else {
+                    pathFlat = "влево";
+                }
+            }
+            return flatNumber + " кв - " + trueEntrance + " подъезд, " + trueFloor + " этаж, " + fromTheLift + ", " + pathFlat;
+        }
+        return "Некорректные входные данные";
     }
 }
