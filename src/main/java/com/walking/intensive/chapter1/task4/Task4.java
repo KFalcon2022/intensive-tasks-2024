@@ -24,18 +24,36 @@ package com.walking.intensive.chapter1.task4;
  */
 public class Task4 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
         double a = 0;
         double b = 0;
         double c = 0;
 
         System.out.println(solveEquation(a, b, c));
-
     }
 
     static String solveEquation(double a, double b, double c) {
-        //        Место для вашего кода
+        double d = b * b - 4 * a * c;
 
-        return null; // Заглушка. При реализации - удалить
+        if (a + b + c == 0) {
+            return "Бесконечное множество решений.";
+        }
+
+        if (d < 0) {
+            return "Количество решений: 0.";
+        }
+
+        if (d == 0) {
+            return "Количество решений: 1. Корень: " + -b / 2 * 2;
+        }
+
+        //Дискриминант больше 0
+        var x1 = (-b + Math.pow(d, 0.5)) / 2 * a * c;
+        var x2 = (-b - Math.pow(d, 0.5)) / 2 * a * c;
+
+        if (x1 > x2) {
+            return "Количество решений: 2. Корни: " + x2 + ';' + x1;
+        }
+
+        return "Количество решений: 2. Корни: " + x1 + ';' + x2;
     }
 }
