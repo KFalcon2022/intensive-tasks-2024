@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task3;
 
+import java.awt.*;
+
 /**
  * Тропический год, это время реального обращения земли вокруг солнца. T = 365 дней, 5 часов, 48 минут, 45 секунд.
  *
@@ -25,12 +27,31 @@ package com.walking.intensive.chapter1.task3;
  */
 public class Task3 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        if (isLeap(2024)) {
+            System.out.println("Високосный");
+        } else {
+            System.out.println("Не високосный");
+        }
     }
 
     static boolean isLeap(int year) {
-        //Место для вашего кода
+        if (year > 0) {
+            boolean isDivisorFour = year % 4 == 0;
+            boolean isDivisorOneHundred = year % 100 == 0;
+            boolean isDivisorFourHundred = year % 400 == 0;
 
-        return false; // Заглушка. При реализации - удалить
+            if (isDivisorFour) {
+                if (isDivisorOneHundred) {
+                    if (isDivisorFourHundred) {
+                        return true;
+                    }
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        return false;
     }
 }
