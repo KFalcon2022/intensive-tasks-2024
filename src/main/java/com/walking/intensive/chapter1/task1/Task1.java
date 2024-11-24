@@ -16,11 +16,6 @@ import java.util.Scanner;
  */
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-//        System.out.print(">> ");
-//        Scanner in = new Scanner(System.in);
-//        int age = in.nextInt();
-//        in.close();
         int age = 15;
         System.out.println(getAgeString(age));
     }
