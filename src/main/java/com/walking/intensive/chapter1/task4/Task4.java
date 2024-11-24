@@ -68,7 +68,9 @@ public class Task4 {
             }
 
             return "Количество решений: 2. Корни: " + x1 + ";" + x2;
-        } else if (d == 0) {
+        }
+
+        if (d == 0) {
             x1 = -b / (2 * a);
 
             if (Double.isNaN(x1) || Double.isInfinite(x1)) {
