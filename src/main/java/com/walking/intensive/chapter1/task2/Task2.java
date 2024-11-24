@@ -35,7 +35,7 @@ import java.util.Scanner;
  */
 public class Task2 {
     public static void main(String[] args) {
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
 
         System.out.print("Введите количество этажей: ");
         int floorAmount = in.nextInt();
@@ -45,7 +45,7 @@ public class Task2 {
         int flatNumber = in.nextInt();
 
         //int floorAmount = 5, entranceAmount = 5, flatNumber = 41;
-        System.out.println(getFlatLocation (floorAmount, entranceAmount, flatNumber));
+        System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
@@ -54,42 +54,42 @@ public class Task2 {
         if (floorAmount > 0 && entranceAmount > 0 && flatNumber > 0) {
             if (floorAmount * entranceAmount * flatInFlours < flatNumber) {
                 return "Такой квартиры не существует";
-            } else {
-                int entrance = 0;
-                int floor = 0;
-                int route;
-
-                // определение номера подъезда
-                for (int i = 1; i <= entranceAmount; i++) {
-                    if (i * floorAmount * flatInFlours >= flatNumber) {
-                        entrance = i;
-                        break;
-                    }
-                }
-
-                // определение этажа
-                for (int i = 1; i <= floorAmount; i++) { // первый подъезд
-                    if (((entrance - 1) * floorAmount + i) * flatInFlours >= flatNumber) {
-                        floor = i;
-                        break;
-                    }
-                }
-
-                //определение местоположения квартиры на этаже и отправка результата 
-                route = flatNumber % flatInFlours;
-                return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " +
-                        switch (route) {
-                            case 1 -> "слева от лифта, влево";
-                            case 2 -> "слева от лифта, вправо";
-                            case 3 -> "справа от лифта, влево";
-                            case 0 -> "справа от лифта, вправо";
-                            default -> "ошибка";
-                        };
             }
-        }
-        else {
-            return "Некорректные входные данные";
+
+            int entrance = 0;
+            int floor = 0;
+            int route;
+
+            // определение номера подъезда
+            for (int i = 1; i <= entranceAmount; i++) {
+                if (i * floorAmount * flatInFlours >= flatNumber) {
+                    entrance = i;
+                    break;
+                }
+            }
+
+            // определение этажа
+            for (int i = 1; i <= floorAmount; i++) { // первый подъезд
+                if (((entrance - 1) * floorAmount + i) * flatInFlours >= flatNumber) {
+                    floor = i;
+                    break;
+                }
+            }
+
+            //определение местоположения квартиры на этаже и отправка результата
+            route = flatNumber % flatInFlours;
+            return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " +
+                    switch (route) {
+                        case 1 -> "слева от лифта, влево";
+                        case 2 -> "слева от лифта, вправо";
+                        case 3 -> "справа от лифта, влево";
+                        case 0 -> "справа от лифта, вправо";
+                        default -> "ошибка";
+                    };
+
         }
 
+        return "Некорректные входные данные";
+        
     }
 }
