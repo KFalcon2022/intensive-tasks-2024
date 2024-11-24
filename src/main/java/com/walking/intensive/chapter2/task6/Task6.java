@@ -9,6 +9,22 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+
+        // Пример использования методов
+        int m = 12;
+        int n = 15;
+
+        int lcm = getLcm(m, n);
+        int gcd = getGcd(m, n);
+        int gcdEuclidean = getGcdByEuclideanAlgorithm(m, n);
+
+        System.out.println("НОК для " + m + " и " + n + " равен " + lcm);
+        System.out.println("НОД для " + m + " и " + n + " равен " + gcd);
+        System.out.println("НОД (алгоритм Евклида) для " + m + " и " + n + " равен " + gcdEuclidean);
+    }
+
+    static boolean isValidInput(int m, int n) {
+        return m <= 0 || n <= 0;
     }
 
     /**
@@ -19,8 +35,17 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+
+        // Проверка корректности входных данных
+        if (isValidInput(m, n)) {
+            return -1; // Некорректные данные
+        }
+
+        // Вычисление НОД
+        int gcd = getGcd(m, n);
+
+        // Вычисление НОК
+        return (m / gcd) * n; // Используем (m / gcd) чтобы избежать переполнения
     }
 
     /**
@@ -31,8 +56,20 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+
+        // Проверка корректности входных данных
+        if (isValidInput(m, n)) {
+            return -1; // Некорректные данные
+        }
+
+        // Метод простого деления для нахождения НОД
+        int gcd = 1; // Начальное значение НОД
+        for (int i = 1; i <= Math.min(m, n); i++) {
+            if (m % i == 0 && n % i == 0) {
+                gcd = i; // Обновляем НОД, если i делит оба числа
+            }
+        }
+        return gcd;
     }
 
     /**
@@ -44,7 +81,18 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+
+        // Проверка корректности входных данных
+        if (isValidInput(m, n)) {
+            return -1; // Некорректные данные
+        }
+
+        // Алгоритм Евклида
+        while (n != 0) {
+            int valuePreserving = n;
+            n = m % n;
+            m = valuePreserving;
+        }
+        return m;
     }
 }
