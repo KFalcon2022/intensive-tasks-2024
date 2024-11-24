@@ -26,7 +26,7 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
 
-        if (!validateTriangle(a, b, c)) {
+        if (!isValid(a, b, c)) {
             return -1;
         }
         double p = calculateSemiPerimeter(a, b, c);
@@ -37,7 +37,7 @@ public class Task5 {
         return (a + b + c) / 2;
     }
 
-    static boolean validateTriangle(double a, double b, double c) {
+    static boolean isValid(double a, double b, double c) {
         return a + b > c && a + c > b && b + c > a;
     }
 
@@ -50,7 +50,7 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
 
-        if (!validateTriangle(a, b, c)) {
+        if (!isValid(a, b, c)) {
             return new double[0];
         }
 
@@ -73,7 +73,7 @@ public class Task5 {
      */
     static double[] getMedians(double a, double b, double c) {
 
-        if (!validateTriangle(a, b, c)) {
+        if (!isValid(a, b, c)) {
             return new double[0];
         }
 
@@ -99,7 +99,7 @@ public class Task5 {
      */
     static double[] getBisectors(double a, double b, double c) {
 
-        if (!validateTriangle(a, b, c)) {
+        if (!isValid(a, b, c)) {
             return new double[0];
         }
 
@@ -125,7 +125,7 @@ public class Task5 {
      */
     static double[] getAngles(double a, double b, double c) {
 
-        if (!validateTriangle(a, b, c)) {
+        if (!isValid(a, b, c)) {
             return new double[0];
         }
         double[] result = new double[3];
@@ -150,7 +150,7 @@ public class Task5 {
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
 
-        if (!validateTriangle(a, b, c)) {
+        if (!isValid(a, b, c)) {
             return -1;
         }
 
@@ -167,7 +167,7 @@ public class Task5 {
      */
     static double getCircumradius(double a, double b, double c) {
 
-        if (!validateTriangle(a, b, c)) {
+        if (!isValid(a, b, c)) {
             return -1;
         }
 
@@ -191,7 +191,7 @@ public class Task5 {
      */
     static double getAreaAdvanced(double a, double b, double c) {
 
-        if (!validateTriangle(a, b, c)) {
+        if (!isValid(a, b, c)) {
             return -1;
         }
 
