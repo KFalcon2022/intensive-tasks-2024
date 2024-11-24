@@ -40,8 +40,6 @@ public class Task4 {
             return "Бесконечное множество решений.";
         }
 
-
-
         if (a == 0) {
             double x1 = -c / b;
 
