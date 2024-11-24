@@ -51,11 +51,62 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getPascalTriangle(50));
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+        if (n < 0 || n == -0) {
+            return "";
+        }
+
+        int[][] triangle = new int[n][n];
+
+        calculateTriangle(triangle);
+
+        return printTriangle(triangle);
+    }
+
+    private static void calculateTriangle(int[][] triangle) {
+        for (int i = 0; i < triangle.length; i++) {
+            for (int j = 0; j < 1; j++) {
+                triangle[i][j] = 1;
+            }
+        }
+
+        for (int i = 1; i < triangle.length; i++) {
+            for (int j = 1; j <= i; j++) {
+                triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+            }
+        }
+    }
+
+    private static String printTriangle(int[][] triangle) {
+        String[] str = new String[triangle.length];
+
+        for (int i = 0; i < triangle.length; i++) {
+            StringBuilder temp = new StringBuilder();
+
+            for (int j = 0; j < triangle[i].length; j++) {
+                if (triangle[i][j] != 0) {
+                    temp.append(triangle[i][j]).append(" ");
+                }
+            }
+
+            str[i] = temp.deleteCharAt(temp.length() - 1).toString();
+        }
+
+        int baseWidth = str[str.length - 1].length();
+
+        StringBuilder result = new StringBuilder();
+
+        for (String s : str) {
+            for (int j = 0; j < ((double) (baseWidth - s.length() - 1) / 2); j++) {
+                result.append(" ");
+            }
+
+            result.append(s).append("\n");
+        }
+
+        return result.toString();
     }
 }
