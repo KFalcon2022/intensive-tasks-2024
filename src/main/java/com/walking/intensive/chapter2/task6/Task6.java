@@ -10,9 +10,13 @@ public class Task6 {
         System.out.println("Euc: " + getGcdByEuclideanAlgorithm(m, n));
     }
 
+    static boolean isValidate(int m, int n) {
+        return (m > 0 && n > 0);
+    }
+
     static int getLcm(int m, int n) {
 
-        if (m < 1 || n < 1) {
+        if (!isValidate(m, n)) {
             return -1;
         }
 
@@ -29,7 +33,7 @@ public class Task6 {
 
     static int getGcd(int m, int n) {
 
-        if (m < 1 || n < 1) {
+        if (!isValidate(m, n)) {
             return -1;
         }
 
@@ -46,14 +50,14 @@ public class Task6 {
 
     static int getGcdByEuclideanAlgorithm(int m, int n) {
 
-        if (m < 1 || n < 1) {
+        if (!isValidate(m, n)) {
             return -1;
         }
 
         int a = Math.max(m, n);
         int b = Math.min(m, n);
 
-        if (a%b == 0){
+        if (a % b == 0) {
             return b;
         }
 
