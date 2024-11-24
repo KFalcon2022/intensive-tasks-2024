@@ -29,7 +29,6 @@ class Task5Test {
     void getHeightsTest() {
         assertArrayEquals(new double[]{4.615384615384615, 5.0, 12.0}, getHeights(12, 13, 5), 1e-10);
         assertArrayEquals(new double[]{2.4, 3.0, 4.0}, getHeights(3, 4, 5), 1e-10);
-        assertArrayEquals(new double[]{4.615, 5.0, 12.0}, getHeights(12, 13, 5), 1e-10);
         assertArrayEquals(new double[]{}, getHeights(17, 1, 1));
         assertArrayEquals(new double[]{}, getHeights(0, 10, 12));
         assertArrayEquals(new double[]{}, getHeights(20, -10, 10));
