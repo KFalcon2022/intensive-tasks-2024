@@ -34,12 +34,33 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 
-        System.out.println(getFlatLocation(7,4,29));
-        System.out.println(getFlatLocation(7,4,56));
-        System.out.println(getFlatLocation(7,4,57));
-        System.out.println(getFlatLocation(7,4,84));
-        System.out.println(getFlatLocation(7,4,85));
-        System.out.println(getFlatLocation(7,4,30));
+        System.out.println(getFlatLocation(7, 4, 1));
+        System.out.println(getFlatLocation(7, 4, 29));
+        System.out.println(getFlatLocation(7, 4, 28));
+        System.out.println(getFlatLocation(7, 4, 32));
+        System.out.println(getFlatLocation(7, 4, 56));
+        System.out.println(getFlatLocation(7, 4, 57));
+        System.out.println(getFlatLocation(7, 4, 58));
+        System.out.println(getFlatLocation(7, 4, 59));
+        System.out.println(getFlatLocation(7, 4, 60));
+        System.out.println(getFlatLocation(7, 4, 61));
+        System.out.println(getFlatLocation(7, 4, 62));
+        System.out.println(getFlatLocation(7, 4, 63));
+        System.out.println(getFlatLocation(7, 4, 64));
+        System.out.println(getFlatLocation(7, 4, 65));
+        System.out.println(getFlatLocation(7, 4, 66));
+        System.out.println(getFlatLocation(7, 4, 67));
+        System.out.println(getFlatLocation(7, 4, 68));
+        System.out.println(getFlatLocation(7, 4, 69));
+        System.out.println(getFlatLocation(7, 4, 70));
+        System.out.println(getFlatLocation(7, 4, 71));
+        System.out.println(getFlatLocation(7, 4, 72));
+        System.out.println(getFlatLocation(7, 4, 73));
+        System.out.println(getFlatLocation(7, 4, 74));
+        System.out.println(getFlatLocation(7, 4, 75));
+        System.out.println(getFlatLocation(7, 4, 84));
+        System.out.println(getFlatLocation(7, 4, 85));
+        System.out.println(getFlatLocation(7, 4, 30));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
@@ -59,21 +80,28 @@ public class Task2 {
         }
 
         int numberFloor = flatNumber / numberFlat;// какой этаж
-        System.out.println(numberFloor);
-        if (flatNumber % numberFlat > 0) {
-            numberFloor++;
-        }
-        if (numberFloor > floorAmount){ // ?????
-            numberFloor = (entranceAmount * floorAmount) - numberFloor;
+        int numberFloorOstatok = flatNumber % numberFlat;
+//        System.out.println("остаток от деления по подъезду " + flatNumber % numberFlat);
+  //        if (flatNumber % numberFlat > 0) {
+//            numberFloor += flatNumber % numberFlat;
+//            if (numberFloor > floorAmount) {
+//                numberFloor = 1;
+//            }
+//        }
+
+        if (numberFloor >= floorAmount && numberEntranceHouse > 1 && numberFloorOstatok < 7){
+            numberFloor = numberFloorOstatok;
         }
 
         if (flatNumber % numberFlat == 0) {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, слева от лифта, влево";
-        }if (flatNumber % numberFlat == 1) {
+        }
+        if (flatNumber % numberFlat == 1) {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, слева от лифта, вправо";
-        }if (flatNumber % numberFlat == 2) {
+        }
+        if (flatNumber % numberFlat == 2) {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, справа от лифта, влево";
-        }else {
+        } else {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, справа от лифта, вправо";
         }
     }
