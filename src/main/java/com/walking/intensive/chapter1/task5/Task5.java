@@ -80,6 +80,10 @@ public class Task5 {
         }
     }
 
+    private static boolean isValidTriangle(double a, double b, double c) {
+        return !(a > 0) || !(b > 0) || !(c > 0) || (!(a + b > c)) || (!(a + c > b)) || (!(b + c > a));
+    }
+
     /**
      * Частным случаем Tеоремы Брахмагупты является формула Герона.
      *
@@ -93,16 +97,16 @@ public class Task5 {
         //        Место для вашего кода
 
         // Проверка корректности входных данных
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isValidTriangle(a, b, c)) {
             return -1; // Некорректные данные
         }
 
         // Полу периметр
-        double semiPerimeterValue = (a + b + c) / 2;
+        double semiPerimeter = (a + b + c) / 2;
 
         // Площадь по формуле Герона
-        return Math.sqrt(semiPerimeterValue * (semiPerimeterValue - a) *
-                (semiPerimeterValue - b) * (semiPerimeterValue - c));
+        return Math.sqrt(semiPerimeter * (semiPerimeter - a) *
+                (semiPerimeter - b) * (semiPerimeter - c));
     }
 
     /**
@@ -115,28 +119,25 @@ public class Task5 {
     static double[] getHeights(double a, double b, double c) {
         //        Место для вашего кода
 
-        // Проверка корректности входных данных
-        if (a <= 0 || b <= 0 || c <= 0 ||
-                a + b <= c || a + c <= b || b + c <= a) {
-            return new double[0]; // Некорректные данные
+        if (isValidTriangle(a, b, c)) {
+            return new double[0]; // Возвращаем пустой массив
         }
 
-        // Вычисление площади по формуле Герона
-        double s = (a + b + c) / 2;
-        double triangleArea = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+        // Вычисление площади по формуле Герона, используя уже реализованный метод
+        double triangleArea = getAreaByHeron(a, b, c);
 
         // Вычисление высот
-        double triangleHeightSideA = (2 * triangleArea) / a;
-        double triangleHeightSideB = (2 * triangleArea) / b;
-        double triangleHeightSideC = (2 * triangleArea) / c;
+        double triangleHeightA = (2 * triangleArea) / a;
+        double triangleHeightB = (2 * triangleArea) / b;
+        double triangleHeightC = (2 * triangleArea) / c;
 
         // Создание массива высот
-        double[] arrayHeights = {triangleHeightSideA, triangleHeightSideB, triangleHeightSideC};
+        double[] heights = {triangleHeightA, triangleHeightB, triangleHeightC};
 
         // Сортировка высот по возрастанию
-        Arrays.sort(arrayHeights);
+        Arrays.sort(heights);
 
-        return arrayHeights;
+        return heights;
 
     }
 
@@ -150,24 +151,22 @@ public class Task5 {
     static double[] getMedians(double a, double b, double c) {
         //        Место для вашего кода
 
-        // Проверка корректности входных данных
-        if (a <= 0 || b <= 0 || c <= 0 ||
-                a + b <= c || a + c <= b || b + c <= a) {
-            return new double[0]; // Некорректные данные
+        if (isValidTriangle(a, b, c)) {
+            return new double[0]; // Возвращаем пустой массив
         }
 
         // Вычисление медиан
-        double medianSideA = 0.5 * Math.sqrt(2 * Math.pow(b, 2) + 2 * Math.pow(c, 2) - Math.pow(a, 2));
-        double medianSideB = 0.5 * Math.sqrt(2 * Math.pow(a, 2) + 2 * Math.pow(c, 2) - Math.pow(b, 2));
-        double medianSideC = 0.5 * Math.sqrt(2 * Math.pow(a, 2) + 2 * Math.pow(b, 2) - Math.pow(c, 2));
+        double medianA = 0.5 * Math.sqrt(2 * Math.pow(b, 2) + 2 * Math.pow(c, 2) - Math.pow(a, 2));
+        double medianB = 0.5 * Math.sqrt(2 * Math.pow(a, 2) + 2 * Math.pow(c, 2) - Math.pow(b, 2));
+        double medianC = 0.5 * Math.sqrt(2 * Math.pow(a, 2) + 2 * Math.pow(b, 2) - Math.pow(c, 2));
 
         // Создание массива медиан
-        double[] arrayMedians = {medianSideA, medianSideB, medianSideC};
+        double[] medians = {medianA, medianB, medianC};
 
         // Сортировка медиан по возрастанию
-        Arrays.sort(arrayMedians);
+        Arrays.sort(medians);
 
-        return arrayMedians;
+        return medians;
     }
 
     /**
@@ -180,40 +179,32 @@ public class Task5 {
     static double[] getBisectors(double a, double b, double c) {
         //        Место для вашего кода
 
-        // Проверка корректности входных данных
-        if (a <= 0 || b <= 0 || c <= 0 ||
-                a + b <= c || a + c <= b || b + c <= a) {
-            return new double[0]; // Некорректные данные
+        if (isValidTriangle(a, b, c)) {
+            return new double[0]; // Возвращаем пустой массив
         }
 
         // Вычисление косинусов углов
-        double cosAngleA = (Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c);
-        double cosAngleB = (Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) / (2 * a * c);
-        double cosAngleC = (Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b);
-
-        // Проверка на допустимость значения косинуса
-        if (cosAngleA < -1 || cosAngleA > 1 || cosAngleB < -1
-                || cosAngleB > 1 || cosAngleC < -1 || cosAngleC > 1) {
-            return new double[0]; // Некорректные данные
-        }
+        double cosA = (Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c);
+        double cosB = (Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) / (2 * a * c);
+        double cosC = (Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b);
 
         // Вычисление углов
-        double angleA = Math.acos(cosAngleA);
-        double angleB = Math.acos(cosAngleB);
-        double angleC = Math.acos(cosAngleC);
+        double angleA = Math.acos(cosA);
+        double angleB = Math.acos(cosB);
+        double angleC = Math.acos(cosC);
 
         // Вычисление биссектрис
-        double bisectorSideA = (2 * b * c / (b + c)) * Math.cos(angleA / 2);
-        double bisectorSideB = (2 * a * c / (a + c)) * Math.cos(angleB / 2);
-        double bisectorSideC = (2 * a * b / (a + b)) * Math.cos(angleC / 2);
+        double bisectorA = (2 * b * c / (b + c)) * Math.cos(angleA / 2);
+        double bisectorB = (2 * a * c / (a + c)) * Math.cos(angleB / 2);
+        double bisectorC = (2 * a * b / (a + b)) * Math.cos(angleC / 2);
 
         // Создание массива биссектрис
-        double[] arrayBisectors = {bisectorSideA, bisectorSideB, bisectorSideC};
+        double[] bisectors = {bisectorA, bisectorB, bisectorC};
 
         // Сортировка биссектрис по возрастанию
-        Arrays.sort(arrayBisectors);
+        Arrays.sort(bisectors);
 
-        return arrayBisectors;
+        return bisectors;
     }
 
     /**
@@ -226,10 +217,8 @@ public class Task5 {
     static double[] getAngles(double a, double b, double c) {
         //        Место для вашего кода
 
-        // Проверка корректности входных данных
-        if (a <= 0 || b <= 0 || c <= 0 ||
-                a + b <= c || a + c <= b || b + c <= a) {
-            return new double[0]; // Некорректные данные
+        if (isValidTriangle(a, b, c)) {
+            return new double[0]; // Возвращаем пустой массив
         }
 
         // Вычисление углов в радианах
@@ -262,19 +251,18 @@ public class Task5 {
         //        Место для вашего кода
 
         // Проверка корректности входных данных
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isValidTriangle(a, b, c)) {
             return -1; // Некорректные данные
         }
 
         // Вычисление полу периметра
-        double semiPerimeterValue = (a + b + c) / 2;
+        double semiPerimeter = (a + b + c) / 2;
 
-        // Вычисление площади по формуле Герона
-        double triangleArea = Math.sqrt(semiPerimeterValue * (semiPerimeterValue - a)
-                * (semiPerimeterValue - b) * (semiPerimeterValue - c));
+        // Вычисление площади по формуле Герона, используя уже реализованный метод
+        double triangleArea = getAreaByHeron(a, b, c);
 
         // Вычисление радиуса вписанной окружности
-        return triangleArea / semiPerimeterValue;
+        return triangleArea / semiPerimeter;
     }
 
     /**
@@ -288,16 +276,12 @@ public class Task5 {
         //        Место для вашего кода
 
         // Проверка корректности входных данных
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isValidTriangle(a, b, c)) {
             return -1; // Некорректные данные
         }
 
-        // Вычисление полу периметра
-        double semiPerimeterValue = (a + b + c) / 2;
-
-        // Вычисление площади по формуле Герона
-        double triangleArea = Math.sqrt(semiPerimeterValue * (semiPerimeterValue - a)
-                * (semiPerimeterValue - b) * (semiPerimeterValue - c));
+        // Вычисление площади по формуле Герона, используя уже реализованный метод
+        double triangleArea = getAreaByHeron(a, b, c);
 
         // Вычисление радиуса описанной окружности
         return (a * b * c) / (4 * triangleArea);
@@ -321,22 +305,17 @@ public class Task5 {
         //        Место для вашего кода
 
         // Проверка корректности входных данных
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isValidTriangle(a, b, c)) {
             return -1; // Некорректные данные
         }
 
         // Вычисление косинуса угла C
-        double cosAngleC = (Math.pow(a,2) + Math.pow(b,2) - Math.pow(c,2)) / (2 * a * b);
-
-        // Проверка, чтобы косинус был в пределах [-1, 1]
-        if (cosAngleC < -1 || cosAngleC > 1) {
-            return -1; // Некорректные данные
-        }
+        double cosC = (Math.pow(a,2) + Math.pow(b,2) - Math.pow(c,2)) / (2 * a * b);
 
         // Вычисление синуса угла C через основное тождество
-        double sinAngleC = Math.sqrt(1 - cosAngleC * cosAngleC);
+        double sinC = Math.sqrt(1 - cosC * cosC);
 
         // Вычисление площади треугольника
-        return 0.5 * a * b * sinAngleC;
+        return 0.5 * a * b * sinC;
     }
 }
