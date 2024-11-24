@@ -12,6 +12,7 @@ package com.walking.intensive.chapter1.task1;
  *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
+
 public class Task1 {
     public static void main(String[] args) {
 
