@@ -47,12 +47,12 @@ public class Task6 {
             m = temp;
         }
 
-        int nod = 1;
+        int gcd = 1;
 
         while (m > 1 && n > 1) {
             for (int i = 2; i <= m; i++) {
                 if (m % i == 0 && n % i == 0) {
-                    nod *= i;
+                    gcd *= i;
                     m /= i;
                     n /= i;
                 }
@@ -69,7 +69,7 @@ public class Task6 {
             }
         }
 
-        return nod;
+        return gcd;
     }
 
     /**
@@ -102,15 +102,10 @@ public class Task6 {
     }
 
     static int getGcdByEuclideanAlgorithmByRecursion(int m, int n) {
-        if (m < 1 || n < 1) {
-            return -1;
-        }
-
-        if (m == n) {
+        if (n == 0) {
             return m;
         }
 
-        return m > n ? getGcdByEuclideanAlgorithmByRecursion(m - n, n)
-                : getGcdByEuclideanAlgorithmByRecursion(n, n - m);
+        return getGcdByEuclideanAlgorithmByRecursion(n, m % n);
     }
 }
