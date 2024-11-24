@@ -1,56 +1,70 @@
 package com.walking.intensive.chapter2.task6;
 
-/**
- * Реализуйте представленные ниже методы для расчета
- * НОК (наименьшее общее кратное) и НОД (наибольший общий делитель).
- *
- * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
- */
 public class Task6 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        int n = 20;
-        int m = 4;
+        int n = 5;
+        int m = 7;
+
+        System.out.println(getLcm(m, n));
+        System.out.println(getGcd(m, n));
+        System.out.println("Euc: " + getGcdByEuclideanAlgorithm(m, n));
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать НОК для чисел, переданных параметрами.
-     *
-     * <p>Входные параметры - положительные целые числа.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static int getLcm(int m, int n) {
 
         if (m < 1 || n < 1) {
             return -1;
         }
 
+        int a = Math.max(m, n);
+        int b = Math.min(m, n);
+        int i = a;
 
-    }
-
-        /**
-         * Реализуйте метод, который будет возвращать НОД для чисел, переданных параметрами.
-         *
-         * <p>Входные параметры - положительные целые числа.
-         *
-         * <p>Если входные данные некорректны - метод должен возвращать -1.
-         */
-        static int getGcd ( int m, int n){
-            // Ваш код
-            return 0;
+        while (a % b != 0) {
+            a += i;
         }
 
-        /**
-         * Реализуйте метод, который будет возвращать НОК для чисел, переданных параметрами.
-         * Расчет должен производиться с помощью алгоритма Евклида
-         *
-         * <p>Входные параметры - положительные целые числа.
-         *
-         * <p>Если входные данные некорректны - метод должен возвращать -1.
-         */
-        static int getGcdByEuclideanAlgorithm ( int m, int n){
-            // Ваш код
-            return 0;
-        }
+        return a;
     }
+
+    static int getGcd(int m, int n) {
+
+        if (m < 1 || n < 1) {
+            return -1;
+        }
+
+        int i = Math.min(m, n);
+
+        while (i != 1) {
+            if (m % i == 0 && n % i == 0) {
+                break;
+            }
+            i -= 1;
+        }
+        return i;
+    }
+
+    static int getGcdByEuclideanAlgorithm(int m, int n) {
+
+        if (m < 1 || n < 1) {
+            return -1;
+        }
+
+        int a = Math.max(m, n);
+        int b = Math.min(m, n);
+
+        if (a%b == 0){
+            return b;
+        }
+
+        int i = a % b;
+
+        while (i != 0) {
+            a = b;
+            b = i;
+            i = a % b;
+        }
+
+        return b;
+    }
+}
