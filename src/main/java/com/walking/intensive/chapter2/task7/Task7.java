@@ -28,10 +28,45 @@ package com.walking.intensive.chapter2.task7;
 public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+
+        int N = 100; // Пример
+        int result = getFriendlyPair(N);
+        System.out.println("Наибольшее число из дружественной пары: " + result);
     }
 
     static int getFriendlyPair(int n) {
-        // Ваш код
-        return 0;
+
+        if (n <= 1 || n > 1000000) {
+            return -1; // Некорректные данные
+        }
+
+        int maxFriendlyNumber = 0;
+        int maxSum = 0;
+
+        for (int i = 1; i < n; i++) {
+            int sumDivisorsI = getSumDivisors(i);
+            if (sumDivisorsI < n && sumDivisorsI != i) { // Убедимся, что это не само число
+                int sumDivisorsJ = getSumDivisors(sumDivisorsI);
+                if (sumDivisorsJ == i && sumDivisorsI > i) { // Проверяем, являются ли числа дружественными
+                    int currentSum = i + sumDivisorsI;
+                    if (currentSum > maxSum) { // Проверяем, максимальна ли сумма
+                        maxSum = currentSum;
+                        maxFriendlyNumber = sumDivisorsI;
+                    }
+                }
+            }
+        }
+        return maxFriendlyNumber; // Возвращаем наибольшее число из пары, или -1, если не найдено
+    }
+
+    static int getSumDivisors(int number) { // Метод для вычисления суммы делителей числа
+
+        int sum = 0;
+        for (int i = 1; i <= number / 2; i++) {
+            if (number % i == 0) {
+                sum += i;
+            }
+        }
+        return sum;
     }
 }
