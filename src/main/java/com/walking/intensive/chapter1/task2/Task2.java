@@ -33,7 +33,8 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        getFlatLocation(10, 3, 44);
+        System.out.println(getFlatLocation(2, 3, 17));
+
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
@@ -42,28 +43,38 @@ public class Task2 {
             return "Некорректные входные данные";
         }
 
-        int flatInEntrance =  floorAmount * 4;
+        int flatInEntrance = floorAmount * 4;
+        int entranceNumber = 1;
+        int floorNumber;
 
         if (flatNumber > flatInEntrance * entranceAmount) {
             return "Такой квартиры не существует";
         }
 
-        int entrance = 1;
-        int lastFlatOnTheFloor = 0;
-
         for (int i = 1; i <= entranceAmount; i++) {
             if (flatNumber <= flatInEntrance * i) {
-                entrance = i;
-                lastFlatOnTheFloor = flatInEntrance * i;
+                entranceNumber = i;
                 break;
             }
         }
-        int firstFlatOnTheFloor = lastFlatOnTheFloor - flatInEntrance + 1;
 
-        System.out.println(entrance);
-        System.out.println(lastFlatOnTheFloor);
-        System.out.println(firstFlatOnTheFloor);
-        System.out.println(flatNumber % 4);
-        return null; // Заглушка. При реализации - удалить
+        if (flatNumber % 4 == 0) {
+            floorNumber = flatNumber / 4;
+        } else {
+            floorNumber = (flatNumber / 4) + 1;
+        }
+
+        if (floorNumber > floorAmount) {
+            floorNumber -= floorAmount * (entranceNumber - 1);
+        }
+
+        String direction = switch (flatNumber % 4) {
+            case 1 -> "слева от лифта, влево";
+            case 2 -> "слева от лифта, вправо";
+            case 3 -> "справа от лифта, влево";
+            default -> "справа от лифта, вправо";
+        };
+
+        return "%d кв - %d подъезд, %d этаж, %s".formatted(flatNumber, entranceNumber, floorNumber, direction);
     }
 }
