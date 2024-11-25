@@ -15,11 +15,7 @@ public class Task10 {
     }
 
     static boolean isPalindrome(String inputString) {
-        if (inputString == null) {
-            return false;
-        }
-
-        if (inputString.length() <= 1) {
+        if (inputString == null || inputString.length() <= 1) {
             return false;
         }
 
