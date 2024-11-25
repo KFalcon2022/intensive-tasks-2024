@@ -45,14 +45,16 @@ public class Task5 {
     // s =(a+b+c)/2 - полупириметр;        a= s*(s-a)*(s-b)*(s-c) площадь;
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-        double p = (a + b + c) / 2;
-        if (conditionExistTriangle(a, b, c)) {
-            double sTriangle = Math.sqrt(p * (p - a) * (p - b) * (p - c));
-
-            return sTriangle;
+        if (!conditionExistTriangle(a, b, c)) {
+            return -1;
         }
 
-        return -1;
+        double p = (a + b + c) / 2;
+        double sTriangle = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+
+        return sTriangle;
+
+
     }
 
     /**
@@ -66,19 +68,19 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c)) {
-            double s = getAreaByHeron(a, b, c);
-            double h1 = (2.0 / a) * s;
-            double h2 = (2.0 / b) * s;
-            double h3 = (2.0 / c) * s;
-
-            double[] heights = {h1, h2, h3};
-            Arrays.sort(heights);
-
-            return heights;
+        if (!conditionExistTriangle(a, b, c)) {
+            return new double[0];
         }
 
-        return new double[0];
+        double s = getAreaByHeron(a, b, c);
+        double h1 = (2.0 / a) * s;
+        double h2 = (2.0 / b) * s;
+        double h3 = (2.0 / c) * s;
+
+        double[] heights = {h1, h2, h3};
+        Arrays.sort(heights);
+
+        return heights;
     }
 
     /**
@@ -91,18 +93,18 @@ public class Task5 {
      * Ma=(Math.sqrt(2*b*b + 2*c*c - a*a))/2
      */
     static double[] getMedians(double a, double b, double c) {
-        if (conditionExistTriangle(a, b, c)) {
-            double m1 = (Math.sqrt(2 * b * b + 2 * c * c - a * a)) / 2;
-            double m2 = (Math.sqrt(2 * a * a + 2 * c * c - b * b)) / 2;
-            double m3 = (Math.sqrt(2 * a * a + 2 * b * b - c * c)) / 2;
-
-            double[] medians = {m1, m2, m3};
-            Arrays.sort(medians);
-
-            return medians;
+        if (!conditionExistTriangle(a, b, c)) {
+            return new double[0];
         }
 
-        return new double[0];
+        double m1 = (Math.sqrt(2 * b * b + 2 * c * c - a * a)) / 2;
+        double m2 = (Math.sqrt(2 * a * a + 2 * c * c - b * b)) / 2;
+        double m3 = (Math.sqrt(2 * a * a + 2 * b * b - c * c)) / 2;
+
+        double[] medians = {m1, m2, m3};
+        Arrays.sort(medians);
+
+        return medians;
     }
 
     /**
@@ -116,18 +118,18 @@ public class Task5 {
      */
     static double[] getBisectors(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c)) {
-            double bis1 = (Math.sqrt(b * c * (((b + c) * (b + c)) - (a * a)))) / (b + c);
-            double bis2 = (Math.sqrt(a * c * (((a + c) * (a + c)) - (b * b)))) / (a + c);
-            double bis3 = (Math.sqrt(a * b * (((a + b) * (a + b)) - (c * c)))) / (a + b);
-
-            double[] bisectors = {bis1, bis2, bis3};
-            Arrays.sort(bisectors);
-
-            return bisectors;
+        if (!conditionExistTriangle(a, b, c)) {
+            return new double[0];
         }
 
-        return new double[0];
+        double bis1 = (Math.sqrt(b * c * (((b + c) * (b + c)) - (a * a)))) / (b + c);
+        double bis2 = (Math.sqrt(a * c * (((a + c) * (a + c)) - (b * b)))) / (a + c);
+        double bis3 = (Math.sqrt(a * b * (((a + b) * (a + b)) - (c * c)))) / (a + b);
+
+        double[] bisectors = {bis1, bis2, bis3};
+        Arrays.sort(bisectors);
+
+        return bisectors;
     }
 
     /**
@@ -141,23 +143,23 @@ public class Task5 {
      */
     static double[] getAngles(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c)) {
-            double radiansAng1 = Math.acos((((b * b) + (c * c)) - (a * a)) / (2 * b * c));
-            double degreesAng1 = Math.toDegrees(radiansAng1);
-
-            double radiansAng2 = Math.acos((((a * a) + (c * c)) - (b * b)) / (2 * a * c));
-            double degreesAng2 = Math.toDegrees(radiansAng2);
-
-            double radiansAng3 = Math.acos((((a * a) + (b * b)) - (c * c)) / (2 * a * b));
-            double degreesAng3 = Math.toDegrees(radiansAng3);
-
-            double[] angles = {degreesAng1, degreesAng2, degreesAng3};
-            Arrays.sort(angles);
-
-            return angles;
+        if (!conditionExistTriangle(a, b, c)) {
+            return new double[0];
         }
 
-        return new double[0];
+        double radiansAng1 = Math.acos((((b * b) + (c * c)) - (a * a)) / (2 * b * c));
+        double degreesAng1 = Math.toDegrees(radiansAng1);
+
+        double radiansAng2 = Math.acos((((a * a) + (c * c)) - (b * b)) / (2 * a * c));
+        double degreesAng2 = Math.toDegrees(radiansAng2);
+
+        double radiansAng3 = Math.acos((((a * a) + (b * b)) - (c * c)) / (2 * a * b));
+        double degreesAng3 = Math.toDegrees(radiansAng3);
+
+        double[] angles = {degreesAng1, degreesAng2, degreesAng3};
+        Arrays.sort(angles);
+
+        return angles;
     }
 
     /**
@@ -171,14 +173,14 @@ public class Task5 {
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c)) {
-            double p = (a + b + c) / 2;
-            double inscrRadius = Math.sqrt(((p - a) * (p - b) * (p - c)) / p);
-
-            return inscrRadius;
+        if (!conditionExistTriangle(a, b, c)) {
+            return -1;
         }
 
-        return -1;
+        double p = (a + b + c) / 2;
+        double inscrRadius = Math.sqrt(((p - a) * (p - b) * (p - c)) / p);
+
+        return inscrRadius;
     }
 
     /**
@@ -192,14 +194,14 @@ public class Task5 {
      */
     static double getCircumradius(double a, double b, double c) {
         //        Место для вашего кода
-        if (conditionExistTriangle(a, b, c)) {
-            double s = getAreaByHeron(a, b, c);
-            double circRadius = (a * b * c) / (4 * s);
-
-            return circRadius;
+        if (!conditionExistTriangle(a, b, c)) {
+            return -1;
         }
 
-        return -1;
+        double s = getAreaByHeron(a, b, c);
+        double circRadius = (a * b * c) / (4 * s);
+
+        return circRadius;
     }
 
     /**
