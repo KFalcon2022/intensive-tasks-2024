@@ -34,38 +34,24 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 
-        System.out.println(getFlatLocation(7, 4, 1));
-        System.out.println(getFlatLocation(7, 4, 29));
         System.out.println(getFlatLocation(7, 4, 28));
-        System.out.println(getFlatLocation(7, 4, 32));
-        System.out.println(getFlatLocation(7, 4, 56));
-        System.out.println(getFlatLocation(7, 4, 57));
-        System.out.println(getFlatLocation(7, 4, 58));
-        System.out.println(getFlatLocation(7, 4, 59));
-        System.out.println(getFlatLocation(7, 4, 60));
-        System.out.println(getFlatLocation(7, 4, 61));
-        System.out.println(getFlatLocation(7, 4, 62));
-        System.out.println(getFlatLocation(7, 4, 63));
-        System.out.println(getFlatLocation(7, 4, 64));
-        System.out.println(getFlatLocation(7, 4, 65));
-        System.out.println(getFlatLocation(7, 4, 66));
-        System.out.println(getFlatLocation(7, 4, 67));
-        System.out.println(getFlatLocation(7, 4, 68));
-        System.out.println(getFlatLocation(7, 4, 69));
-        System.out.println(getFlatLocation(7, 4, 70));
-        System.out.println(getFlatLocation(7, 4, 71));
-        System.out.println(getFlatLocation(7, 4, 72));
-        System.out.println(getFlatLocation(7, 4, 73));
-        System.out.println(getFlatLocation(7, 4, 74));
-        System.out.println(getFlatLocation(7, 4, 75));
-        System.out.println(getFlatLocation(7, 4, 84));
-        System.out.println(getFlatLocation(7, 4, 85));
+        System.out.println(getFlatLocation(7, 4, 1));
+        System.out.println(getFlatLocation(7, 4, 2));
+        System.out.println(getFlatLocation(7, 4, 3));
+        System.out.println(getFlatLocation(7, 4, 29));
         System.out.println(getFlatLocation(7, 4, 30));
+        System.out.println(getFlatLocation(7, 4, 31));
+        System.out.println(getFlatLocation(7, 4, 32));
+        System.out.println(getFlatLocation(7, 4, 33));
+        System.out.println(getFlatLocation(7, 4, 34));
+        System.out.println(getFlatLocation(7, 4, 35));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
         int numberFlat = 4; // количество квартир
+        int numberFloor = 1; // какой этаж
+        int numberEntranceHouse = 0;  // в каком подъезде квартира
 
         if (flatNumber > (floorAmount * entranceAmount * numberFlat)) {
             return "Такой квартиры не существует";
@@ -74,24 +60,35 @@ public class Task2 {
             return "Некорректные входные данные";
         }
 
-        int numberEntranceHouse = flatNumber / (floorAmount * numberFlat); // в каком подъезде квартира
+        numberEntranceHouse = flatNumber / (floorAmount * numberFlat); // номер подъезда
         if (flatNumber % (floorAmount * numberFlat) > 0) {
             numberEntranceHouse++;
         }
 
-        int numberFloor = flatNumber / numberFlat;// какой этаж
-        int numberFloorOstatok = flatNumber % numberFlat;
-//        System.out.println("остаток от деления по подъезду " + flatNumber % numberFlat);
-  //        if (flatNumber % numberFlat > 0) {
-//            numberFloor += flatNumber % numberFlat;
-//            if (numberFloor > floorAmount) {
-//                numberFloor = 1;
-//            }
-//        }
-
-        if (numberFloor >= floorAmount && numberEntranceHouse > 1 && numberFloorOstatok < 7){
-            numberFloor = numberFloorOstatok;
+        if (flatNumber / numberFlat > floorAmount) { // какой этаж
+            numberFloor = (flatNumber / numberFlat) - ((numberEntranceHouse - 1) * floorAmount);
+            if ((double) flatNumber / numberFlat > 0){
+                numberFloor++;
+            }
+        } else {
+            numberFloor = flatNumber / numberFlat;// какой этаж
+//            System.out.println((double) 1/4);
+            if ((double) flatNumber / numberFlat > 0){
+                numberFloor++;
+            }
         }
+//        int numberFloorOstatok = flatNumber % numberFlat;
+////        System.out.println("остаток от деления по подъезду " + flatNumber % numberFlat);
+//  //        if (flatNumber % numberFlat > 0) {
+////            numberFloor += flatNumber % numberFlat;
+////            if (numberFloor > floorAmount) {
+////                numberFloor = 1;
+////            }
+////        }
+//
+//        if (numberFloor >= floorAmount && numberEntranceHouse > 1 && numberFloorOstatok < 7){
+//            numberFloor = numberFloorOstatok;
+//        }
 
         if (flatNumber % numberFlat == 0) {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, слева от лифта, влево";
