@@ -46,6 +46,10 @@ public class Task11 {
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+
         for (int j : array) {
             if (j < 0) {
                 return -1;
@@ -63,12 +67,13 @@ public class Task11 {
         return sum;
     }
 
-    private static int getOddSubSum(int n, int[] array) {
+    private static int getOddSubSum(int oddNum, int[] array) {
         int sum = 0;
+        int len = array.length;
 
-        for (int i = 0; i < array.length; i++) {            //ищем сумму заданого n подмассива
-            for (int j = i; j < n + i; j++) {               //вложенный цикл проходит по подмассиву, когда i увеличивается - подмассив сдвигается
-                if (n + i > array.length) {                 //проверка чтобы не вылететь за пределы массива
+        for (int i = 0; i < len; i++) {                           //ищем сумму заданого n подмассива
+            for (int j = i; j < oddNum + i; j++) {               //вложенный цикл проходит по подмассиву, когда i увеличивается - подмассив сдвигается
+                if (oddNum + i > len) {                         //проверка чтобы не вылететь за пределы массива
                     break;
                 }
 
