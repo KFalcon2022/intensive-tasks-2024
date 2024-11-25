@@ -48,6 +48,7 @@ public class Task5 {
         double p = (a + b + c) / 2;
         if (conditionExistTriangle(a, b, c)) {
             double sTriangle = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+
             return sTriangle;
         }
 
@@ -71,9 +72,10 @@ public class Task5 {
             double h2 = (2.0 / b) * s;
             double h3 = (2.0 / c) * s;
 
-            double[] height = {h1, h2, h3};
-            Arrays.sort(height);
-            return height;
+            double[] heights = {h1, h2, h3};
+            Arrays.sort(heights);
+
+            return heights;
         }
 
         return new double[0];
@@ -94,9 +96,10 @@ public class Task5 {
             double m2 = (Math.sqrt(2 * a * a + 2 * c * c - b * b)) / 2;
             double m3 = (Math.sqrt(2 * a * a + 2 * b * b - c * c)) / 2;
 
-            double[] height = {m1, m2, m3};
-            Arrays.sort(height);
-            return height;
+            double[] medians = {m1, m2, m3};
+            Arrays.sort(medians);
+
+            return medians;
         }
 
         return new double[0];
@@ -118,9 +121,10 @@ public class Task5 {
             double bis2 = (Math.sqrt(a * c * (((a + c) * (a + c)) - (b * b)))) / (a + c);
             double bis3 = (Math.sqrt(a * b * (((a + b) * (a + b)) - (c * c)))) / (a + b);
 
-            double[] bisector = {bis1, bis2, bis3};
-            Arrays.sort(bisector);
-            return bisector;
+            double[] bisectors = {bis1, bis2, bis3};
+            Arrays.sort(bisectors);
+
+            return bisectors;
         }
 
         return new double[0];
@@ -149,6 +153,7 @@ public class Task5 {
 
             double[] angles = {degreesAng1, degreesAng2, degreesAng3};
             Arrays.sort(angles);
+
             return angles;
         }
 
@@ -169,6 +174,7 @@ public class Task5 {
         if (conditionExistTriangle(a, b, c)) {
             double p = (a + b + c) / 2;
             double inscrRadius = Math.sqrt(((p - a) * (p - b) * (p - c)) / p);
+
             return inscrRadius;
         }
 
@@ -189,6 +195,7 @@ public class Task5 {
         if (conditionExistTriangle(a, b, c)) {
             double s = getAreaByHeron(a, b, c);
             double circRadius = (a * b * c) / (4 * s);
+
             return circRadius;
         }
 
