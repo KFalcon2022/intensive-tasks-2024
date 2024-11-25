@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task6;
 
+import java.util.Arrays;
+
 /**
  * Реализуйте представленные ниже методы для расчета
  * НОК (наименьшее общее кратное) и НОД (наибольший общий делитель).
@@ -9,6 +11,29 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int m = 24;
+        int n = 32;
+        //System.out.println(getLcm(m, n));
+        System.out.println(getGcd(m, n));
+    }
+
+    static boolean conditionNumber(int m, int n) {
+        return m > 0 && n > 0;
+    }
+
+    static int[] divider(int d) {
+        int[] dividers = new int[d]; // Создаем массив для хранения делителей
+        int count = 0; // Счетчик для индексации массива
+
+        for (int i = 2; i <= d; i++) {
+            if (d % i == 0) {
+                dividers[count] = i;
+                count++;
+            }
+        }
+
+        int[] result = Arrays.copyOf(dividers, count); // Создаем массив нужного размера
+        return result;
     }
 
     /**
@@ -20,7 +45,11 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
         // Ваш код
-        return 0;
+        if (!conditionNumber(m, n)) {
+            return -1;
+        }
+        int lcm = 1;
+        return lcm;
     }
 
     /**
@@ -32,7 +61,20 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
         // Ваш код
-        return 0;
+        if (!conditionNumber(m, n)) {
+            return -1;
+        }
+        int[] dividersM =  divider(m);
+        int[] dividersN =  divider(n);
+        int gcd = 1;
+        for (int i = 0; i < dividersM.length; i++) {
+            for (int j = 0; j < dividersN.length; j++) {
+                if (dividersM[i] == dividersN[j] && dividersM[i] > gcd) {
+                    gcd = dividersM[i];
+                }
+            }
+        }
+        return gcd;
     }
 
     /**
