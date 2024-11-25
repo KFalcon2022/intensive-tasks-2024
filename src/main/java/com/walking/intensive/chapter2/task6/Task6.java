@@ -13,8 +13,9 @@ public class Task6 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int m = 24;
         int n = 32;
-        System.out.println(getLcm(m, n));
-        System.out.println(getGcd(m, n));
+//        System.out.println(getLcm(m, n));
+//        System.out.println(getGcd(m, n));
+        System.out.println(getGcdByEuclideanAlgorithm(m,n));
     }
 
     static boolean conditionNumber(int m, int n) {
@@ -93,6 +94,10 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
         // Ваш код
+        if (!conditionNumber(m,n)) {
+            return -1;
+        }
+
         return 0;
     }
 }
