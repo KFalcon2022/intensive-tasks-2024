@@ -33,39 +33,37 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        System.out.println(getFlatLocation(10, 3, 40));
+        System.out.println(getFlatLocation(10, 3, 88));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        if(floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0){
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
             return "Некорректные входные данные";
         }
 
-        int apartmentAmount = floorAmount * entranceAmount * 4;
+        final int FLATS_PER_FLOW = 4;
+        int apartmentAmount = floorAmount * entranceAmount * FLATS_PER_FLOW;
 
-        if(flatNumber > apartmentAmount){
+        if (flatNumber > apartmentAmount) {
             return "Такой квартиры не существует";
         }
 
-        String location= null;
+        String location = null;
         String direction = null;
-        String result;
 
-        int entrance = (int)Math.ceil(flatNumber / (floorAmount * 4.0));
-        int flat = (int)Math.ceil((flatNumber - (entrance -1) * floorAmount * 4)/4.0);
+        int entrance = (int) Math.ceil(flatNumber / (floorAmount * (double) FLATS_PER_FLOW));
+        int flat = (int) Math.ceil((flatNumber - (entrance - 1) * floorAmount * FLATS_PER_FLOW) / (double) FLATS_PER_FLOW);
 
-        if(flatNumber <= (apartmentAmount/entranceAmount) * entrance){
-            if((flat-1) * 4 <= 2){
-                location = "слева от лифта";
-                direction = "влево";
-            }else {
-                location = "справа от лифта";
-                direction = "вправо";
-            }
 
+        if ((flat - 1) * FLATS_PER_FLOW <= FLATS_PER_FLOW / 2) {
+            location = "слева от лифта";
+            direction = "влево";
+        } else {
+            location = "справа от лифта";
+            direction = "вправо";
         }
 
-        result = String.format("%d кв – %d подъезд, %d этаж, %s , %s", flatNumber, entrance, flat, location, direction);
-        return result;
+
+        return String.format("%d кв – %d подъезд, %d этаж, %s , %s", flatNumber, entrance, flat, location, direction);
     }
 }
