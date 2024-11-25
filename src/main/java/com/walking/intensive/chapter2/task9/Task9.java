@@ -52,10 +52,57 @@ package com.walking.intensive.chapter2.task9;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int n = 23;
+        System.out.println(getPascalTriangle(n));
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+
+        if (n < 1) return "";
+        if (n == 1) return "1";
+
+        StringBuilder result = new StringBuilder();
+        int[][] nums = new int[n][n];
+
+        nums[0][0] = 1;
+        nums[1][0] = 1;
+        nums[1][1] = 1;
+
+        for (int i = 2; i < n; i++) {
+            nums[i][0] = nums[i - 1][0];
+            nums[i][i] = nums[i - 1][i - 1];
+
+            for (int j = 1; j < i; j++) {
+                nums[i][j] = nums[i - 1][j - 1] + nums[i - 1][j];
+            }
+        }
+
+        String lastString = getStringFromIntArray(nums[n - 1]);
+        StringBuilder spaceAdder = new StringBuilder();
+        int lastStringLength = lastString.length();
+        int amountOfAddedSpaces;
+
+        result.append(lastString).append("\n");
+
+        for (int i = n - 2; i >= 0; i--) {
+            result.insert(0, "\n");
+            String str = getStringFromIntArray(nums[i]);
+            amountOfAddedSpaces = (lastStringLength - str.length()) / 2 - spaceAdder.length();
+            spaceAdder.append(" ".repeat(amountOfAddedSpaces));
+            result.insert(0, str).insert(0, spaceAdder);
+        }
+
+        return result.toString();
+    }
+
+    static String getStringFromIntArray(int[] nums) {
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < nums.length && nums[i] > 0; i++) {
+            sb.append(nums[i]).append(" ");
+        }
+
+        return sb.toString().trim();
     }
 }
