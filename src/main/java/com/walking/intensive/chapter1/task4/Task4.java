@@ -26,9 +26,9 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 0;
-        double b = 0;
-        double c = 0;
+        double a = 3;
+        double b = 7;
+        double c = -10;
 
         System.out.println(solveEquation(a, b, c));
 
@@ -36,7 +36,11 @@ public class Task4 {
 
     static String solveEquation(double a, double b, double c) {
         //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        double discriminant = b * b - 4 * a * c;
+        // sqrtDis = Math.pow(discriminant, 0.5);
+        //System.out.println(discriminant, sqrtDis);
+        //var s = discriminant;
+        //return String.format("%d кв - %d подъезд " + discriminant, sqrtDis);// Заглушка. При реализации - удалить
+        return String.valueOf(discriminant);
     }
 }
