@@ -25,15 +25,15 @@ public class Task1 {
         if (age < 0) {
             return "Некорректный ввод";
         }
-        if (age % 100 >= 11 && age % 100 <= 14) {
+
+        if ((age % 100 <= 20 && age % 100 >= 5) || age % 10 >= 5 || age % 10 == 0) {
             return "Вам " + age + " лет";
         }
-        if (age % 10 <= 4 && age % 10 > 1) {
+
+        if (age % 10 > 1) {
             return "Вам " + age + " года";
         }
-        if (age % 10 == 1) {
-            return "Вам " + age + " год";
-        }
-        return "Вам " + age + " лет";
+
+        return "Вам " + age + " год";
     }
 }
