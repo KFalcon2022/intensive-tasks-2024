@@ -20,6 +20,7 @@ package com.walking.intensive.chapter1.task4;
  *
  * <p>P.S. Квадратные уравнения решаются либо через теорему Виета, либо через дискриминант.
  *
+ *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task4 {
