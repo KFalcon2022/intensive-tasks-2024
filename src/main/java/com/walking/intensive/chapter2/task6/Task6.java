@@ -13,7 +13,7 @@ public class Task6 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int m = 24;
         int n = 32;
-        //System.out.println(getLcm(m, n));
+        System.out.println(getLcm(m, n));
         System.out.println(getGcd(m, n));
     }
 
@@ -48,7 +48,9 @@ public class Task6 {
         if (!conditionNumber(m, n)) {
             return -1;
         }
-        int lcm = 1;
+
+        int lcm = (m * n) / getGcd(m, n);
+
         return lcm;
     }
 
@@ -61,12 +63,15 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
         // Ваш код
+
         if (!conditionNumber(m, n)) {
             return -1;
         }
-        int[] dividersM =  divider(m);
-        int[] dividersN =  divider(n);
+
+        int[] dividersM = divider(m);
+        int[] dividersN = divider(n);
         int gcd = 1;
+
         for (int i = 0; i < dividersM.length; i++) {
             for (int j = 0; j < dividersN.length; j++) {
                 if (dividersM[i] == dividersN[j] && dividersM[i] > gcd) {
@@ -74,6 +79,7 @@ public class Task6 {
                 }
             }
         }
+
         return gcd;
     }
 
