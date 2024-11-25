@@ -22,17 +22,17 @@ public class Task1 {
 
     static String getAgeString(int age) {
 
-        if(age < 0){
+        if (age < 0) {
             return "Некорректный ввод";
         }
 
-        if(age > 10 && age < 15){
+        if (age > 10 && age < 15) {
             return String.format("Вам %d лет", age);
         }
 
-        if(age % 10 == 2 || age % 10 == 3 || age % 10 == 4){
+        if (age % 10 == 2 || age % 10 == 3 || age % 10 == 4) {
             return String.format("Вам %d года", age);
-        } else if(age % 10 == 1) {
+        } else if (age % 10 == 1) {
             return String.format("Вам %d год", age);
         } else {
             return String.format("Вам %d лет", age);
