@@ -20,9 +20,22 @@ public class Task1 {
         System.out.println(getAgeString(age));
     }
 
-    static String getAgeString(int age) {
-//        Место для вашего кода
+    static String getAgeString(final int AGE) {
+        if (AGE >= 0) {
+            int divideAge = AGE;
+            boolean isException = (AGE % 100 < 10) || (AGE % 100 > 14);
 
-        return null; // Заглушка. При реализации - удалить
+            if (isException) {
+                divideAge = AGE % 10;
+            }
+
+            if (divideAge == 1) {
+                return "Вам " + AGE + " год";
+            } else if (divideAge > 1 && divideAge < 5) {
+                return "Вам " + AGE + " года";
+            }
+            return "Вам " + AGE + " лет";
+        }
+        return "Некорректный ввод";
     }
 }
