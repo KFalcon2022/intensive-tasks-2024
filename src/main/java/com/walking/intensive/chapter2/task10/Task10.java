@@ -12,10 +12,42 @@ package com.walking.intensive.chapter2.task10;
 public class Task10 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        String str = " ,d,d,d                  ";
+        System.out.println(isPalindrome(str));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+
+        if (inputString == null || inputString.isEmpty()) {
+            return false;
+        }
+
+        String lowerCaseString = inputString.toLowerCase();
+        boolean stringHasLetters = false;
+        int i = 0;
+        int j = lowerCaseString.length() - 1;
+
+        while (i <= j) {
+
+            if (!Character.isLetter(lowerCaseString.charAt(i))) {
+                i++;
+                continue;
+            }
+
+            if (!Character.isLetter(lowerCaseString.charAt(j))) {
+                j--;
+                continue;
+            }
+
+            if (lowerCaseString.charAt(i) != lowerCaseString.charAt(j)) {
+                return false;
+            }
+
+            stringHasLetters = true;
+            i++;
+            j--;
+        }
+
+        return stringHasLetters;
     }
 }
