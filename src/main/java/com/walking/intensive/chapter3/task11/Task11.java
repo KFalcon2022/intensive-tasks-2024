@@ -42,11 +42,40 @@ package com.walking.intensive.chapter3.task11;
  */
 public class Task11 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getOddSubArraysElementsSum(new int[]{1, 4, 2, 5, 3}));
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        // Ваш код
-        return 0;
+        for (int j : array) {
+            if (j < 0) {
+                return -1;
+            }
+        }
+
+        int sum = 0;
+
+        for (int i = 1; i <= array.length; i++) {        //находим размер подмассива
+            if (i % 2 != 0) {
+                sum += getOddSubSum(i, array);
+            }
+        }
+
+        return sum;
+    }
+
+    private static int getOddSubSum(int n, int[] array) {
+        int sum = 0;
+
+        for (int i = 0; i < array.length; i++) {            //ищем сумму заданого n подмассива
+            for (int j = i; j < n + i; j++) {               //вложенный цикл проходит по подмассиву, когда i увеличивается - подмасив сдвигается
+                if (n + i > array.length) {                 //проверк чтобы не вылететь за пределы маасива
+                    break;
+                }
+
+                sum += array[j];
+            }
+        }
+
+        return sum;
     }
 }
