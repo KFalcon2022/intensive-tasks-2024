@@ -141,8 +141,9 @@ public class Task16Test {
                 Arguments.of(new int[]{2, 4, 6}, new int[]{2, 4, 6}, new int[]{4, 16, 36}),
                 Arguments.of(new int[]{6, 0}, new int[]{7, 1}, new int[]{42, 0}),
                 Arguments.of(new int[]{0, 0, 0, 0}, new int[]{10, 20, 30, 40}, new int[]{0, 0, 0, 0}),
-                Arguments.of(new int[]{}, new int[]{2, 4, 6}, new int[]{2, 4, 6}),
-                Arguments.of(new int[]{2, 4, 6}, new int[]{}, new int[]{2, 4, 6}),
+                Arguments.of(new int[]{}, new int[]{2, 4, 6}, new int[]{0, 0, 0}),
+                Arguments.of(new int[]{2, 4, 6}, new int[]{}, new int[]{0, 0, 0}),
+                Arguments.of(new int[]{2, 4, 6}, new int[]{1, 2}, new int[]{2, 8, 0}),
                 Arguments.of(new int[]{}, new int[]{}, new int[]{})
         );
     }
@@ -152,8 +153,9 @@ public class Task16Test {
                 Arguments.of(new int[]{2, 4, 6}, new int[]{2, 4, 6}, new int[]{0, 0, 0}),
                 Arguments.of(new int[]{6, 0}, new int[]{7, 1}, new int[]{-1, -1}),
                 Arguments.of(new int[]{0, 0, 0, 0}, new int[]{10, 20, 30, 40}, new int[]{-10, -20, -30, -40}),
-                Arguments.of(new int[]{}, new int[]{2, 4, 6}, new int[]{2, 4, 6}),
+                Arguments.of(new int[]{}, new int[]{2, 4, 6}, new int[]{-2, -4, -6}),
                 Arguments.of(new int[]{2, 4, 6}, new int[]{}, new int[]{2, 4, 6}),
+                Arguments.of(new int[]{2, 4, 6}, new int[]{1, 2}, new int[]{1, -2, 6}),
                 Arguments.of(new int[]{}, new int[]{}, new int[]{})
         );
     }
