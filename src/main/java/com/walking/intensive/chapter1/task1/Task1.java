@@ -14,29 +14,27 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-        int age = 3331;
+        int age = 5;
+
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-        String str = null;
-        if (age >= 0) {
-            if (age % 100 < 11 || age % 100 > 19) {
-                if (age % 10 == 1) {
-                    str = "Вам " + age + " год";
-                }
-                if (age % 10 > 1 && age % 10 < 5) {
-                    str = "Вам " + age + " года";
-                }
-                if (age % 10 > 4 || age % 10 == 0) {
-                    str = "Вам " + age + " лет";
-                }
-            } else {
-                str = "Вам " + age + " лет";
-            }
-        } else {
-            str = "Некорректный ввод";
+        if (age < 0) {
+            return "Некорректный ввод";
         }
-        return str;
+
+        if ((age % 100 < 11 || age % 100 > 19) && age % 10 == 1) {
+            return "Вам " + age + " год";
+        }
+
+        if ((age % 100 < 11 || age % 100 > 19) && (age % 10 > 1 && age % 10 < 5)) {
+            return "Вам " + age + " года";
+        }
+
+        return "Вам " + age + " лет";
     }
 }
+
+
+
