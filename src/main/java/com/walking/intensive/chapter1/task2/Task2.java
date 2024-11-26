@@ -23,20 +23,24 @@ public class Task2 {
         if (level > floorAmount) {
             level = level % floorAmount;
         }
-        Object string1, string2, string3, string4;
-        string1 = "справа от лифта, вправо";
-        string2 = "слева от лифта, влево";
-        string3 = "слева от лифта, вправо";
-        string4 = "справа от лифта, влево";
+        var string1 = "справа от лифта, вправо";
+        var string2 = "слева от лифта, влево";
+        var string3 = "слева от лифта, вправо";
+        var string4 = "справа от лифта, влево";
+        var direction = "default";
         switch (flatNumber % 4) {
             case 0:
-                return String.format("%d кв - %d подъезд, %d этаж, " + string1, flatNumber, numberEnterance, level);
+                direction = string1;
+                break;
             case 1:
-                return String.format("%d кв - %d подъезд, %d этаж, " + string2, flatNumber, numberEnterance, level);
+                direction = string2;
+                break;
             case 2:
-                return String.format("%d кв - %d подъезд, %d этаж, " + string3, flatNumber, numberEnterance, level);
+                direction = string3;
+                break;
             default:
-                return String.format("%d кв - %d подъезд, %d этаж, " + string4, flatNumber, numberEnterance, level);
+                direction = string4;
         }
+        return String.format("%d кв - %d подъезд, %d этаж, " + direction, flatNumber, numberEnterance, level);
     }
 }
