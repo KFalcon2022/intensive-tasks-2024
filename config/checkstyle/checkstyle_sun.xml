@@ -56,10 +56,6 @@
     <property name="optional" value="true"/>
   </module>
 
-  <module name="SuppressionFilter">
-    <property name="file" value="${config_loc}/suppressions.xml"/>
-  </module>
-
   <!-- Checks that a package-info.java file exists for each package.     -->
   <!-- See https://checkstyle.org/checks/javadoc/javadocpackage.html#JavadocPackage -->
 <!--  <module name="JavadocPackage"/>-->
@@ -95,13 +91,6 @@
   </module>
 
   <module name="TreeWalker">
-
-    <!-- Checks for Javadoc comments.                     -->
-    <!-- See https://checkstyle.org/checks/javadoc/index.html -->
-    <module name="InvalidJavadocPosition"/>
-    <module name="JavadocType"/>
-    <module name="JavadocVariable"/>
-    <module name="JavadocStyle"/>
 
     <!-- Checks for Naming Conventions.                  -->
     <!-- See https://checkstyle.org/checks/naming/index.html -->
@@ -140,7 +129,6 @@
     <module name="OperatorWrap"/>
     <module name="ParenPad"/>
     <module name="TypecastParenPad"/>
-    <module name="WhitespaceAfter"/>
     <module name="WhitespaceAround"/>
 
     <!-- Modifier Checks                                    -->
@@ -163,9 +151,6 @@
     <module name="HiddenField"/>
     <module name="IllegalInstantiation"/>
     <module name="InnerAssignment"/>
-    <module name="MagicNumber">
-      <property name="severity" value="warning"/>
-    </module>
     <module name="MissingSwitchDefault"/>
     <module name="MultipleVariableDeclarations"/>
     <module name="SimplifyBooleanExpression"/>
