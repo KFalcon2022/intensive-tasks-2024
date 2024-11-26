@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class Task5 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
     }
 
     /**
@@ -29,16 +29,19 @@ public class Task5 {
         if (!isValid(a, b, c)) {
             return -1;
         }
-        double p = calculateSemiPerimeter(a, b, c);
-        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+
+        double semiPerimeter = getSemiPerimeter(a, b, c);
+        return Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
     }
 
-    static double calculateSemiPerimeter(double a, double b, double c) {
+    static double getSemiPerimeter(double a, double b, double c) {
+
         return (a + b + c) / 2;
     }
 
     static boolean isValid(double a, double b, double c) {
-        return a + b > c && a + c > b && b + c > a;
+
+        return (a + b > c && a + c > b && b + c > a) && (a > 0 && b > 0 && c > 0);
     }
 
     /**
@@ -54,8 +57,7 @@ public class Task5 {
             return new double[0];
         }
 
-        double p = calculateSemiPerimeter(a, b, c);
-        double S = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        double S = getAreaByHeron(a, b, c);
         double[] result = new double[]{a, b, c};
         for (int i = 0; i < result.length; i++) {
             result[i] = 2 * S / result[i];
@@ -78,14 +80,14 @@ public class Task5 {
         }
 
         double[] result = new double[3];
-        result[0] = calculateMedian(a, b, c);
-        result[1] = calculateMedian(a, c, b);
-        result[2] = calculateMedian(b, c, a);
+        result[0] = getMedian(a, b, c);
+        result[1] = getMedian(a, c, b);
+        result[2] = getMedian(b, c, a);
         Arrays.sort(result);
         return result;
     }
 
-    static double calculateMedian(double a, double b, double c) {
+    static double getMedian(double a, double b, double c) {
 
         return (Math.sqrt(2 * a * a + 2 * b * b - c * c)) / 2;
     }
@@ -104,14 +106,14 @@ public class Task5 {
         }
 
         double[] result = new double[3];
-        result[0] = calculateBisector(a, b, c);
-        result[1] = calculateBisector(a, c, b);
-        result[2] = calculateBisector(b, c, a);
+        result[0] = getBisector(a, b, c);
+        result[1] = getBisector(a, c, b);
+        result[2] = getBisector(b, c, a);
         Arrays.sort(result);
         return result;
     }
 
-    static double calculateBisector(double a, double b, double c) {
+    static double getBisector(double a, double b, double c) {
 
         return (Math.sqrt(a * b * (a + b + c) * (a + b - c))) / (a + b);
     }
@@ -128,15 +130,16 @@ public class Task5 {
         if (!isValid(a, b, c)) {
             return new double[0];
         }
+
         double[] result = new double[3];
-        result[0] = calculateAngle(a, b, c);
-        result[1] = calculateAngle(a, c, b);
-        result[2] = calculateAngle(b, c, a);
+        result[0] = getAngle(a, b, c);
+        result[1] = getAngle(a, c, b);
+        result[2] = getAngle(b, c, a);
         Arrays.sort(result);
         return result;
     }
 
-    static double calculateAngle(double a, double b, double c) {
+    static double getAngle(double a, double b, double c) {
 
         return Math.toDegrees(Math.acos((a * a + b * b - c * c) / (2 * a * b)));
     }
@@ -154,8 +157,8 @@ public class Task5 {
             return -1;
         }
 
-        double p = calculateSemiPerimeter(a, b, c);
-        return Math.sqrt((p - a) * (p - b) * (p - c) / p);
+        double semiPerimeter = getSemiPerimeter(a, b, c);
+        return getAreaByHeron(a, b, c) / semiPerimeter;
     }
 
     /**
@@ -171,8 +174,7 @@ public class Task5 {
             return -1;
         }
 
-        double p = calculateSemiPerimeter(a, b, c);
-        return (a * b * c) / (4 * Math.sqrt(p * (p - a) * (p - b) * (p - c)));
+        return a * b * c / (4 * getAreaByHeron(a, b, c));
     }
 
     /**
