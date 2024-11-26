@@ -106,30 +106,26 @@ public class Task5 {
         return angles;
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать длину радиуса вписанной в треугольник окружности.
-     *
-     * <p>Входные параметры - длина сторон треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a >= b + c || b >= a + c || c >= a + b) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double halfPerimeter = (a + b + c) / 2;
+
+        return (getAreaByHeron(a, b, c) / halfPerimeter);
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать длину радиуса описанной вокруг треугольника окружности.
-     *
-     * <p>Входные параметры - длина сторон треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
-    static double getCircumradius(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+    static double getCircumradius(double a, double b, double c) {
+        if (a >= b + c || b >= a + c || c >= a + b) {
+            return -1;
+        }
+
+        double cosC = (a * a + b * b - c * c) / (2 * a * b);
+        double sinC = Math.sqrt(1 - cosC * cosC);
+
+        return (c / (2 * sinC));
     }
 
     /**
