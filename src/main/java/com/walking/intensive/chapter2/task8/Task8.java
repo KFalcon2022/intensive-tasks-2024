@@ -10,11 +10,10 @@ public class Task8 {
 
     static double getHappyTicketChance() {
 
-        int[] sumOfDigits = new int[28];    //Количество сумм (0-27) трех цифр числа от 000 до 999 -
-                                            //есть вероятность таких комбинаций на одну тысячу
-        int summ;                           //Сумма трех цифр числа
-        int currentDigit;                   //Разряд числа
-        double totalChance = 0;             //Вероятность совпадения двух сумм "счастливого" билета -
+        int[] sumOfDigits = new int[28];
+        int summ;
+        int currentDigit;
+        double totalChance = 0;
 
         for (int i = 1; i < 1000; i++) {
             currentDigit = i;
