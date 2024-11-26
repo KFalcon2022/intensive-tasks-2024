@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task9;
 
+import java.util.Arrays;
+
 /**
  * Реализуйте метод getPascalTriangle(). Параметром он должен принимать натуральное число N,
  * а метод возвращать строковое представление треугольника Паскаля.
@@ -51,11 +53,39 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        int n = 7;
+        System.out.println(getPascalTriangle(n));
+
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+
+        int[][] cellsOfTriangle = new int[n][n];
+        String[] rawText = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            cellsOfTriangle[i][0] = 1;
+            cellsOfTriangle[0][i] = 1;
+            rawText[i] = "1";
+        }
+
+        for (int i = 1; i < n; i++) {
+
+            for (int j = 1; j < (n - i); j++) {
+                cellsOfTriangle[i][j] = cellsOfTriangle[i - 1][j] + cellsOfTriangle[i][j - 1];
+                rawText[i] += (" " + cellsOfTriangle[i][i-1]);
+            }
+
+            System.out.println(rawText[i]);
+
+        }
+
+
+        return "123";
     }
+
+
+
+
 }
