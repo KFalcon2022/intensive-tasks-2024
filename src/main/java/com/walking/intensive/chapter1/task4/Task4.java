@@ -56,23 +56,24 @@ public class Task4 {
             double x1 = calculateSquareRoot(a, b, -Math.sqrt(discriminant));
             double x2 = calculateSquareRoot(a, b, Math.sqrt(discriminant));
             builder.append(x1 > x2 ? x2 + ";" + x1 : x1 + ";" + x2);
-        } else if (discriminant == 0) {
-            builder.append("1. Корень: ");
-            builder.append(calculateSquareRoot(a, b, discriminant));
-        } else {
-            builder.append("0.");
+            return builder.toString();
         }
 
+        if (discriminant == 0) {
+            builder.append("1. Корень: ");
+            builder.append(calculateSquareRoot(a, b, discriminant));
+            return builder.toString();
+        }
+
+        builder.append("0.");
         return builder.toString();
     }
 
     static double calculateSquareRoot(double a, double b, double d) {
-
         return (-b + d) / 2 * a;
     }
 
     static double calculateLinearRoot(double b, double c) {
-
         return -c / b;
     }
 }
