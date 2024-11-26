@@ -1,6 +1,5 @@
 package com.walking.intensive.chapter1.task2;
 
-@SuppressWarnings("checkstyle:WhitespaceAround")
 public class Task2 {
     public static void main(String[] args) {
     }
@@ -24,15 +23,20 @@ public class Task2 {
         if (level > floorAmount) {
             level = level % floorAmount;
         }
+        Object string1, string2, string3, string4;
+        string1 = "справа от лифта, вправо";
+        string2 = "слева от лифта, влево";
+        string3 = "слева от лифта, вправо";
+        string4 = "справа от лифта, влево";
         switch (flatNumber % 4) {
             case 0:
-                return flatNumber + " кв - " + numberEnterance + " подъезд, " + level + " этаж, справа от лифта, вправо";
+                return String.format("%d кв - %d подъезд, %d этаж, " + string1, flatNumber, numberEnterance, level);
             case 1:
-                return flatNumber + " кв - " + numberEnterance + " подъезд, " + level + " этаж, слева от лифта, влево";
+                return String.format("%d кв - %d подъезд, %d этаж, " + string2, flatNumber, numberEnterance, level);
             case 2:
-                return flatNumber + " кв - " + numberEnterance + " подъезд, " + level + " этаж, слева от лифта, вправо";
+                return String.format("%d кв - %d подъезд, %d этаж, " + string3, flatNumber, numberEnterance, level);
             default:
-                return flatNumber + " кв - " + numberEnterance + " подъезд, " + level + " этаж, справа от лифта, вправо";
+                return String.format("%d кв - %d подъезд, %d этаж, " + string4, flatNumber, numberEnterance, level);
         }
     }
 }
