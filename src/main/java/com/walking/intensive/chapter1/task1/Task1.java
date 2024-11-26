@@ -28,17 +28,16 @@ public class Task1 {
         }
 
         int ageLastDigit = age % 10;
-        boolean isException = (age % 100 >= 11) && (age % 100 <= 14);
-        String ageInWords;
+        int ageTwoLastDigits = age % 100;
 
-        if (isException || ageLastDigit == 0 || ageLastDigit >= 5) {
-            ageInWords = " лет";
-        } else if (ageLastDigit == 1) {
-            ageInWords = " год";
-        } else {
-            ageInWords = " года";
+        if (ageTwoLastDigits >= 11 && ageTwoLastDigits <= 14 || ageLastDigit == 0 || ageLastDigit >= 5) {
+            return "Вам " + age + " лет";
         }
 
-        return "Вам " + age + ageInWords;
+        if (ageLastDigit == 1) {
+            return "Вам " + age + " год";
+        }
+
+        return "Вам " + age + " года";
     }
 }
