@@ -29,7 +29,18 @@ public class Task6 {
             return -1;
         }
 
-        return (m * n) / getGcdByEuclideanAlgorithm(m, n);
+        int maxNumber = Math.max(m, n);
+        int minNumber = Math.min(m, n);
+        int lcm = maxNumber;
+
+        while (true) {
+
+            if (lcm % minNumber == 0) {
+                return lcm;
+            }
+
+            lcm += maxNumber;
+        }
     }
 
     /**
@@ -49,13 +60,23 @@ public class Task6 {
             return Math.min(m, n);
         }
 
-        int divisor = Math.min(m, n) / 2;
+        int minNumber = Math.min(m, n);
+        int maxNumber = Math.max(m, n);
+        int gcd = 1;
+        int i = 2;
 
-        while (m % divisor != 0 || n % divisor != 0) {
-            divisor--;
+        while (i <= (minNumber / 2)) {
+
+            if (maxNumber % i == 0 && minNumber % i == 0) {
+                gcd *= i;
+                maxNumber /= i;
+                minNumber /= i;
+            } else {
+                i = i == 2 ? i + 1 : i + 2;
+            }
         }
 
-        return divisor;
+        return gcd;
     }
 
     /**
@@ -67,17 +88,16 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-         /*
-         Для валидации n == 0 ? предложил бы ввести в параметры метода boolean isOriginalNumbers
-         и вызов метода из main c true
-         и тогда делал бы проверку: if (isOriginalNumbers && ( m < 1 || n < 1)) return -1;
-         а в рекурсии бы параметром шел бы false и до проверки n не дошли бы
-         */
 
-        if (m < 1 || n < 0) {
+        if (m < 1 || n < 1) {
             return -1;
         }
 
-        return n == 0 ? m : (getGcdByEuclideanAlgorithm(n, m % n));
+        return getGcdByEuclideanAlgorithmHelper(n, m % n);
+    }
+
+    static int getGcdByEuclideanAlgorithmHelper(int m, int n) {
+
+        return n == 0 ? m : (getGcdByEuclideanAlgorithmHelper(n, m % n));
     }
 }
