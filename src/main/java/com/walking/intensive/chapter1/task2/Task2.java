@@ -41,16 +41,10 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
+        int entranceCapacity = floorAmount * 4;
+        int entranceCount =  (flatNumber - 1) / entranceCapacity + 1;
 
-        int entranceCount =  (flatNumber + (floorAmount * 4) - 1) / floorAmount * 4;
-
-        int floorCount;
-        if (flatNumber % entranceCount == 0) {
-            floorCount = floorAmount;
-        } else {
-            floorCount = (flatNumber % entranceCount + 3) / 4;
-        }
-
+        int floorCount = (flatNumber - (entranceCount - 1) * entranceCapacity -1) / 4 + 1;
 
         if (floorAmount <= 0 | entranceAmount <= 0 | flatNumber <= 0) {
             return "Некорректные входные данные";
