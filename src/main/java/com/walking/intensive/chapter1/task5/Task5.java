@@ -72,30 +72,38 @@ public class Task5 {
         return medians;
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать биссектрисы треугольника по возрастанию.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с биссектрисами треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
-     */
     static double[] getBisectors(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a >= b + c || b >= a + c || c >= a + b) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double halfPerimeter = (a + b + c) / 2;
+        double[] bisectors = new double[3];
+        bisectors[0] = 2 * Math.sqrt(a * b * halfPerimeter * (halfPerimeter - c)) / (a + b);
+        bisectors[1] = 2 * Math.sqrt(a * c * halfPerimeter * (halfPerimeter - b)) / (a + c);
+        bisectors[2] = 2 * Math.sqrt(c * b * halfPerimeter * (halfPerimeter - a)) / (c + b);
+        Arrays.sort(bisectors);
+
+        return bisectors;
+
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать углы треугольника (в градусах) по возрастанию.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с углами треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
-     */
-    static double[] getAngles(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+    static double[] getAngles(double a, double b, double c) {
+        if (a >= b + c || b >= a + c || c >= a + b) {
+            return new double[0];
+        }
+
+        double cosC = (a * a + b * b - c * c) / (2 * a * b);
+        double cosB = (a * a + c * c - b * b) / (2 * a * c);
+
+        double[] angles = new double[3];
+        angles[0] = Math.toDegrees(Math.acos(cosC));
+        angles[1] = Math.toDegrees(Math.acos(cosB));
+        angles[2] = 180 - angles[0] - angles[1];
+        Arrays.sort(angles);
+
+        return angles;
     }
 
     /**
