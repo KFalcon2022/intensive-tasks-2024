@@ -38,38 +38,48 @@ public class Task2 {
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
-        int entrance, floor;
+
 
         //проверяем данные
         if (floorAmount <= 0 | entranceAmount <= 0 | flatNumber <= 0) {
             return "Некорректные входные данные";
         }
-        if (flatNumber > floorAmount * entranceAmount * 4) {
+
+        int apartmentsAmount = floorAmount * entranceAmount * 4;
+        if (flatNumber > apartmentsAmount) {
             return "Такой квартиры не существует";
         }
 
         //находим подъезд
-        if (flatNumber % (floorAmount * 4) == 0) {
-            entrance = flatNumber / (floorAmount * 4);
+        int entrance;
+        int amountApartmentsOnFloor = 4;
+        int apartmentsAmountEntrance = floorAmount * amountApartmentsOnFloor;
+        if (flatNumber % apartmentsAmountEntrance == 0) {
+            entrance = flatNumber / apartmentsAmountEntrance;
         } else {
-            entrance = (flatNumber / (floorAmount * 4) ) + 1;
+            entrance = (flatNumber / apartmentsAmountEntrance) + 1;
         }
 
         //находим этаж
-        if (flatNumber % 4 == 0) {
-            floor = (flatNumber - ((floorAmount * 4) * (entrance - 1))) / 4;
+        int floor;
+        if (flatNumber % amountApartmentsOnFloor == 0) {
+            floor = (flatNumber - (apartmentsAmountEntrance * (entrance - 1))) / amountApartmentsOnFloor;
         } else {
-            floor = ((flatNumber - ((floorAmount * 4) * (entrance - 1))) / 4) + 1;
+            floor = ((flatNumber - (apartmentsAmountEntrance * (entrance - 1))) / amountApartmentsOnFloor) + 1;
         }
 
         if (flatNumber % 4 == 0) {
             return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "справа от лифта, вправо";
-        } else if (flatNumber % 4 == 3) {
-            return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "справа от лифта, влево";
-        } else if (flatNumber % 4 == 1) {
-            return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "слева от лифта, влево";
-        }else {
-            return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "слева от лифта, вправо";
         }
+
+        if (flatNumber % 4 == 3) {
+            return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "справа от лифта, влево";
+        }
+
+        if (flatNumber % 4 == 1) {
+            return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "слева от лифта, влево";
+        }
+
+        return flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "слева от лифта, вправо";
     }
 }
