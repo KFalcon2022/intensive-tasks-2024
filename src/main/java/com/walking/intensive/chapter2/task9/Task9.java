@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task9;
 
+import java.util.Arrays;
+
 /**
  * Реализуйте метод getPascalTriangle(). Параметром он должен принимать натуральное число N,
  * а метод возвращать строковое представление треугольника Паскаля.
@@ -51,11 +53,54 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+      System.out.println(getPascalTriangle(18));
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+        if (n < 1) {
+            return "";
+        }
+        StringBuilder pascalTriangle = new StringBuilder();
+        int maxWidth = getLineWidth(n - 1);
+
+        for (int i = 0; i < n; i++) {
+            int indent = (maxWidth - getLineWidth(i)) / 2;
+            pascalTriangle.append(getLineIndent(indent));
+
+            for (int k = 0; k <= i; k++) {
+                long element = getBinomialCoefficient(i, k);
+                pascalTriangle.append(element).append(" ");
+            }
+
+            pascalTriangle.append("\n");
+        }
+
+        return pascalTriangle.toString();
+    }
+
+    static int getBinomialCoefficient(int n, int k) {
+        int result = 1;
+
+        for (int i = 0; i < k; i++) {
+            result = result * (n - i) / (i + 1);
+        }
+
+        return result;
+    }
+
+    static int getLineWidth(int n) {
+        int width = 0;
+
+        for (int k = 0; k <= n; k++) {
+            int element = getBinomialCoefficient(n, k);
+            width += (element + "").length() + 1;
+        }
+
+        return width;
+    }
+
+    static String getLineIndent(int n) {
+        return " ".repeat(n);
     }
 }
