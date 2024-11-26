@@ -11,9 +11,8 @@ public class Task8 {
     static double getHappyTicketChance() {
 
         int[] sumOfDigits = new int[28];
-        int summ;
         int currentDigit;
-        double totalChance = 0;
+        int summ;
 
         for (int i = 1; i < 1000; i++) {
             currentDigit = i;
@@ -28,6 +27,8 @@ public class Task8 {
         }
 
         sumOfDigits[0] = 1;                 //Вероятность выпадения комбинации 000 = 1/1000
+
+        double totalChance = 0;
 
         for (int i = 0; i < 28; i++) {
             totalChance += Math.pow(sumOfDigits[i], 2);
