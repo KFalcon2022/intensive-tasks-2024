@@ -31,20 +31,8 @@ public class Task8 {
         int count = 0;
 
         for (int i = 0; i < 1_000_000; i++) {
-            int leftSum = 0;
-            int rightSum = 0;
-
-            int ticket = i;
-
-            for (int j = 0; j < 3; j++) {
-                rightSum += ticket % 10;
-                ticket /= 10;
-            }
-
-            for (int k = 0; k < 3; k++) {
-                leftSum += ticket % 10;
-                ticket /= 10;
-            }
+            int leftSum = getSumOfDigits(i / 1000);
+            int rightSum = getSumOfDigits(i % 1000);
 
             if (leftSum == rightSum) {
                 count++;
@@ -52,5 +40,14 @@ public class Task8 {
         }
 
         return count;
+    }
+
+    private static int getSumOfDigits(int number) {
+        int sum = 0;
+        for (int j = 0; j < 3; j++) {
+            sum += number % 10;
+            number /= 10;
+        }
+        return sum;
     }
 }
