@@ -11,10 +11,10 @@ import java.util.Arrays;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int m = 124;
-        int n = 250;
-//        System.out.println(getLcm(m, n));
-//        System.out.println(getGcd(m, n));
+        int m = 50;
+        int n = 45;
+        System.out.println(getLcm(m, n));
+        System.out.println(getGcd(m, n));
         System.out.println(getGcdByEuclideanAlgorithm(m, n));
     }
 
@@ -23,8 +23,8 @@ public class Task6 {
     }
 
     static int[] divider(int d) {
-        int[] dividers = new int[d]; // Создаем массив для хранения делителей
-        int count = 0; // Счетчик для индексации массива
+        int[] dividers = new int[d];
+        int count = 0;
 
         for (int i = 2; i <= d; i++) {
             if (d % i == 0) {
@@ -33,7 +33,7 @@ public class Task6 {
             }
         }
 
-        int[] result = Arrays.copyOf(dividers, count); // Создаем массив нужного размера
+        int[] result = Arrays.copyOf(dividers, count);
         return result;
     }
 
@@ -98,9 +98,13 @@ public class Task6 {
             return -1;
         }
 
-        int d = Math.max(m, n) % Math.min(m, n);
-
-
-        return d;
+        while (m != 0 && n != 0) {
+            if (m > n) {
+                m = m % n;
+            } else {
+                n = n % m;
+            }
+        }
+        return m + n;
     }
 }
