@@ -35,22 +35,22 @@ public class Task2 {
     public static void main(String[] args) {
         int floorAmount = 10;
         int entranceAmount = 2;
-        int flatNumber = 20;
+        int flatNumber = 10;
 
         System.out.println((getFlatLocation(floorAmount, entranceAmount, flatNumber)));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
-        int entranceCount =  flatNumber / (floorAmount * 4);
-        if (entranceCount == 0) {
-            entranceCount = entranceCount + 1;
-        }
-        int floorCount = ((flatNumber - ((entranceCount + 1) * (floorAmount * 4))) / 4);
+        int entranceCount =  (flatNumber + (floorAmount * 4) - 1) / floorAmount * 4;
 
-        if (floorCount == 1) {
-            floorCount = floorCount + 1;
+        int floorCount;
+        if (flatNumber % entranceCount == 0) {
+            floorCount = floorAmount;
+        } else {
+            floorCount = (flatNumber % entranceCount + 3) / 4;
         }
+
 
         if (floorAmount <= 0 | entranceAmount <= 0 | flatNumber <= 0) {
             return "Некорректные входные данные";
