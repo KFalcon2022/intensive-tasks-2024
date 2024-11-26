@@ -58,8 +58,13 @@ public class Task9 {
 
     static String getPascalTriangle(int n) {
 
-        if (n < 1) return "";
-        if (n == 1) return "1";
+        if (n < 1) {
+            return "";
+        }
+
+        if (n == 1) {
+            return "1";
+        }
 
         StringBuilder result = new StringBuilder();
         int[][] nums = new int[n][n];
@@ -85,8 +90,10 @@ public class Task9 {
         result.append(lastString).append("\n");
 
         for (int i = n - 2; i >= 0; i--) {
-            result.insert(0, "\n");
+
             String str = getStringFromIntArray(nums[i]);
+
+            result.insert(0, "\n");
             amountOfAddedSpaces = (lastStringLength - str.length()) / 2 - spaceAdder.length();
             spaceAdder.append(" ".repeat(amountOfAddedSpaces));
             result.insert(0, str).insert(0, spaceAdder);
