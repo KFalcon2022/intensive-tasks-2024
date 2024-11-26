@@ -11,11 +11,11 @@ import java.util.Arrays;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int m = 24;
-        int n = 32;
+        int m = 124;
+        int n = 250;
 //        System.out.println(getLcm(m, n));
 //        System.out.println(getGcd(m, n));
-        System.out.println(getGcdByEuclideanAlgorithm(m,n));
+        System.out.println(getGcdByEuclideanAlgorithm(m, n));
     }
 
     static boolean conditionNumber(int m, int n) {
@@ -94,10 +94,13 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
         // Ваш код
-        if (!conditionNumber(m,n)) {
+        if (!conditionNumber(m, n)) {
             return -1;
         }
 
-        return 0;
+        int d = Math.max(m, n) % Math.min(m, n);
+
+
+        return d;
     }
 }
