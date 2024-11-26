@@ -26,13 +26,9 @@ public class Task6 {
             return -1;
         }
 
-        int lcm = Math.max(m, n);
+        int gcd = getGcd(m, n);
 
-        while (lcm % m != 0 || lcm % n != 0) {
-            lcm++;
-        }
-
-        return lcm;
+        return m / gcd * n;
     }
 
     /**
@@ -68,14 +64,12 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        if (m <= 0 || n <=0) {
+        if (m <= 0 || n < 0) {
             return -1;
         }
 
-        while (n != 0) {
-            int temp = n;
-            n = m % n;
-            m = temp;
+        if (n > 0) {
+            return getGcdByEuclideanAlgorithm(n, m % n);
         }
 
         return m;
