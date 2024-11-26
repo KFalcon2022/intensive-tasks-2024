@@ -37,10 +37,17 @@ public class Task4 {
     static String solveEquation(double a, double b, double c) {
         //        Место для вашего кода
         double discriminant = b * b - 4 * a * c;
-        // sqrtDis = Math.pow(discriminant, 0.5);
-        //System.out.println(discriminant, sqrtDis);
-        //var s = discriminant;
-        //return String.format("%d кв - %d подъезд " + discriminant, sqrtDis);// Заглушка. При реализации - удалить
-        return String.valueOf(discriminant);
+        int num = 0;
+        if (discriminant < 0){
+            return String.valueOf("Количество решений: 0.");
+        }
+        if (discriminant == 0){
+        num
+        }
+        var sqrtDis = Math.pow(discriminant, 0.5);
+        var x1 = (-b + sqrtDis)/(2*a);
+        var x2 = (-b - sqrtDis)/(2*a);
+        //return String.format("%d дискриминант - %d корень из д, %d х1, %d х2", discriminant, sqrtDis, x1, x2);// Заглушка. При реализации - удалить
+        return String.valueOf("Количество решений: " + discriminant + "," + sqrtDis);
     }
 }
