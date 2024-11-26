@@ -36,16 +36,20 @@ public class Task4 {
     static String solveEquation(double a, double b, double c) {
         //        Место для вашего кода
 
-        // Проверка на наличие корней
+        // Проверяем случай бесконечного множества решений
+        if (a == 0 && b == 0 && c == 0) {
+            return "Бесконечное множество решений.";
+        }
+
+        // Проверяем случай, когда нет решений
+        if (a == 0 && b == 0) {
+            return "Количество решений: 0.";
+        }
+
+        // Если это линейное уравнение
         if (a == 0) {
-            if (b == 0) {
-                if (c == 0) {
-                    return "Бесконечное множество решений.";
-                }
-            } else {
-                double singleRoot = -c / b;
-                return String.format("Количество решений: 1. Корень: %.1f", singleRoot);
-            }
+            double singleRoot = -c / b;
+            return "Количество решений: 1. Корень: " + singleRoot;
         }
 
         double discriminantValue = Math.pow(b, 2) - 4 * a * c;
