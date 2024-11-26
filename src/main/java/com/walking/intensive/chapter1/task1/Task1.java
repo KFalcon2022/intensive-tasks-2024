@@ -14,13 +14,13 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-        int age = 5;
+        int age = 152;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-        if (age < 0) {
+        if (age < 0 || 127 < age) {
             return "Некорректный ввод";
         }
 
