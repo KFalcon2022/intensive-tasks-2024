@@ -8,50 +8,68 @@ package com.walking.intensive.chapter1.task5;
  *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
+
+import java.util.Arrays;
+import java.util.Scanner;
 public class Task5 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Длина первой стороны: ");
+        double a = in.nextDouble();
+        System.out.print("Длина второй стороны: ");
+        double b = in.nextDouble();
+        System.out.print("Длина третьей стороны: ");
+        double c = in.nextDouble();
+
+        System.out.println("Площадь треугольника: " + getAreaByHeron(a, b, c));
+        System.out.println("Высоты треугольника: " + Arrays.toString(getHeights(a, b, c)));
+        System.out.println("Медианы треугольника: " + Arrays.toString(getMedians(a, b, c)));
+        System.out.println("Биссектрисы треугольника: " + Arrays.toString(getBisectors(a, b, c)));
+        System.out.println("Углы треугольника: " + Arrays.toString(getAngles(a, b, c)));
+        System.out.println("Радиус вписаной в треугольник окружности: " + getInscribedCircleRadius(a, b, c));
+        System.out.println("Радиус описанной вокруг треугольника окружности: " + getCircumradius(a, b, c));
+
     }
 
-    /**
-     * Частным случаем Tеоремы Брахмагупты является формула Герона.
-     *
-     * <p>Реализуйте метод поиска площади треугольника формулой Герона.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - площадь треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a >= b + c || b >= a + c || c >= a + b) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double halfPerimeter = (a + b + c) / 2;
+        return (double) Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
+
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать высоты треугольника по возрастанию.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с высотами треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
-     */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a >= b + c || b >= a + c || c >= a + b) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double area = getAreaByHeron(a, b, c);
+        double[] heights = new double[3];
+        heights[0] = area * 2 / a;
+        heights[1] = area * 2 / b;
+        heights[2] = area * 2 / c;
+        Arrays.sort(heights);
+
+        return heights;
+
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать медианы треугольника по возрастанию.
-     *
-     * <p>Входные параметры - длина сторон треугольника. Возвращаемое значение - массив с медианами треугольника.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
-     */
     static double[] getMedians(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a >= b + c || b >= a + c || c >= a + b) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double[] medians = new double[3];
+        medians[0] = Math.sqrt(2 * a * a + 2 * b * b - c * c) / 2;
+        medians[1] = Math.sqrt(2 * a * a + 2 * c * c - b * b) / 2;
+        medians[2] = Math.sqrt(2 * c * c + 2 * b * b - a * a) / 2;
+        Arrays.sort(medians);
+
+        return medians;
     }
 
     /**
