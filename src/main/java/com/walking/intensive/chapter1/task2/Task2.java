@@ -37,6 +37,7 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
+        String flatLocation = "";
         if (floorAmount < 0 || entranceAmount < 0 || flatNumber < 0) {
             return "Некорректные входные данные";
         }
@@ -45,19 +46,21 @@ public class Task2 {
         }
         int nomerPodezda = (flatNumber - 1) / (4 * floorAmount) + 1;
         int nomerEtaza = ((flatNumber - 1) / 4) % floorAmount + 1;
-        int a = (flatNumber % 4);
-        if (a%4==0) {
-            return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + "справа от лифта, вправо";
-        }
-        if (a%4==1) {
-            return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + "слева от лифта, влево";
-        }
-        if (a%4==2) {
-            return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + "слева от лифта, вправо";
-        }
-        else {
-            return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + "справа от лифта, влево";
-        }
+        switch (flatNumber % 4) {
+            case 0:
+                flatLocation = "справа от лифта, вправо";
+                break;
+            case 1:
+                flatLocation = "слева от лифта, влево";
+                break;
+            case 2:
+                flatLocation = "слева от лифта, вправо";
+                break;
+            case 3:
+                flatLocation = "справа от лифта, влево";
+                break;
 
+        }
+        return flatNumber + " кв - " + nomerPodezda + " подъезд, " + nomerEtaza + " этаж, " + flatLocation;
     }
 }
