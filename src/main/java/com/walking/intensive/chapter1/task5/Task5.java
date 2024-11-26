@@ -11,6 +11,7 @@ package com.walking.intensive.chapter1.task5;
 
 import java.util.Arrays;
 import java.util.Scanner;
+
 public class Task5 {
     public static void main(String[] args) {
 
