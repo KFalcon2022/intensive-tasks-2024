@@ -26,9 +26,9 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 3;
-        double b = 7;
-        double c = -10;
+        double a = 0;
+        double b = -2;
+        double c = 4;
 
         System.out.println(solveEquation(a, b, c));
 
@@ -41,8 +41,12 @@ public class Task4 {
         if (a == 0 && b == 0 && c == 0){
             return "Бесконечное множество решений.";
         }
-        if (a == 0){
-        var x = - c/b;
+        if (a == 0 && b != 0 && c!= 0) {
+            double koren = (-c) / b;
+            return String.valueOf("Количество решений: 1. Корень: " + koren);
+        }
+        if (a != 0 && b == 0 && c == 0) {
+            return String.valueOf("Количество решений: 1. Корень: 0");
         }
         if (discriminant < 0 || a == 0 && b == 0) {
             return String.valueOf("Количество решений: 0.");
