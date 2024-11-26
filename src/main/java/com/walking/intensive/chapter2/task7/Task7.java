@@ -28,36 +28,36 @@ package com.walking.intensive.chapter2.task7;
 public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int n = 3000;
+        int n = 1;
         System.out.println(getFriendlyPair(n));
     }
 
     static int getFriendlyPair(int n) {
 
-        if (isNumberWrong(n)) return -1;
+        if (n < 1 || n > 1000000) {
+            return -1;
+        }
 
         int maxSum = 0;
         int maxNumber = 0;
 
         for (int i = n - 1; i > 1; i--) {
 
-            int sumOfDivisors = findSumOfDivisors(i);
+            int sumDivisors = findSumDivisors(i);
 
-            if (sumOfDivisors < n
-                    && i != sumOfDivisors
-                    && maxSum < (i + sumOfDivisors)
-                    && i == findSumOfDivisors(sumOfDivisors)) {
-                maxSum = i + sumOfDivisors;
-                maxNumber = Math.max(i, sumOfDivisors);
+            if (sumDivisors < n
+                    && i != sumDivisors
+                    && maxSum < (i + sumDivisors)
+                    && i == findSumDivisors(sumDivisors)) {
+                maxSum = i + sumDivisors;
+                maxNumber = Math.max(i, sumDivisors);
             }
         }
 
         return maxNumber;
     }
 
-    static int findSumOfDivisors(int n) {
-
-        if (isNumberWrong(n)) return -1;
+    static int findSumDivisors(int n) {
 
         int sum = 0;
         int divisor = n / 2;
@@ -70,9 +70,5 @@ public class Task7 {
         }
 
         return sum;
-    }
-
-    static boolean isNumberWrong(int n) {
-        return n < 1 || n > 1000000;
     }
 }
