@@ -10,7 +10,7 @@ public class Task6 {
     public static void main(String[] args) {
         System.out.println("lcm=" + getLcm(60, 420));
         System.out.println("gcd=" + getGcd(415 , 215));
-        System.out.println("gcdByEuclideanAlgorithm=" + getGcdByEuclideanAlgorithm(415 , 215));
+        System.out.println("gcdByEuclideanAlgorithm=" + getGcdByEuclideanAlgorithm(0 , 20));
     }
 
     /**
@@ -25,17 +25,14 @@ public class Task6 {
             return -1;
         }
 
-        int lcm = m * n;
-        int smallerNumber = m <= n ? m : n;
+        int lcm = Math.max(m, n);
 
-        for (int i = smallerNumber; i <= lcm; i++) {
-            if (i % m == 0 && i % n == 0) {
-                lcm = i;
-                break;
+        while (true) {
+            if (lcm % m == 0 && lcm % n == 0) {
+                return lcm;
             }
+            lcm++;
         }
-
-        return lcm;
     }
 
     /**
@@ -71,13 +68,16 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        if (m < 0 || n < 0) {
+        if (m < 1 || n < 1) {
             return -1;
         }
 
-        if (n == 0) {
-            return m;
+        while (n != 0) {
+            int temp = n;
+            n = m % n;
+            m = temp;
         }
-        return getGcdByEuclideanAlgorithm(n,m % n);
+
+        return m;
     }
 }
