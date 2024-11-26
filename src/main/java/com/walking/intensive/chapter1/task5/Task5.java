@@ -29,6 +29,7 @@ public class Task5 {
 
     static boolean conditionExistTriangle(double a, double b, double c) {
         if ((a < 0 || b < 0 || c < 0) || (a + b < c || a + c < b || c + b < a))
+
             return false;
         return true;
     }
@@ -122,9 +123,9 @@ public class Task5 {
             return new double[0];
         }
 
-        double bis1 = (Math.sqrt(b * c * (((b + c) * (b + c)) - (a * a)))) / (b + c);
-        double bis2 = (Math.sqrt(a * c * (((a + c) * (a + c)) - (b * b)))) / (a + c);
-        double bis3 = (Math.sqrt(a * b * (((a + b) * (a + b)) - (c * c)))) / (a + b);
+        double bis1 = (Math.sqrt(b * c * ((b + c) * (b + c) - a * a))) / (b + c);
+        double bis2 = (Math.sqrt(a * c * ((a + c) * (a + c) - b * b))) / (a + c);
+        double bis3 = (Math.sqrt(a * b * ((a + b) * (a + b) - c * c))) / (a + b);
 
         double[] bisectors = {bis1, bis2, bis3};
         Arrays.sort(bisectors);
