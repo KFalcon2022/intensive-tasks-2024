@@ -36,18 +36,28 @@ public class Task4 {
 
     static String solveEquation(double a, double b, double c) {
         //        Место для вашего кода
-        double discriminant = b * b - 4 * a * c;
+        double discriminant = (b * b) - (4 * a * c);
         int num = 0;
-        if (discriminant < 0){
+        if (a == 0 && b == 0 && c == 0){
+            return "Бесконечное множество решений.";
+        }
+        if (a == 0){
+        var x = - c/b;
+        }
+        if (discriminant < 0 || a == 0 && b == 0) {
             return String.valueOf("Количество решений: 0.");
         }
-        if (discriminant == 0){
-        num
+        if (discriminant == 0 || a == 0) {
+            num = 1;
+        }
+        if (discriminant >= 0) {
+            num = 2;
         }
         var sqrtDis = Math.pow(discriminant, 0.5);
-        var x1 = (-b + sqrtDis)/(2*a);
-        var x2 = (-b - sqrtDis)/(2*a);
+        var x1 = (-b + sqrtDis) / (2 * a);
+        var x2 = (-b - sqrtDis) / (2 * a);
         //return String.format("%d дискриминант - %d корень из д, %d х1, %d х2", discriminant, sqrtDis, x1, x2);// Заглушка. При реализации - удалить
-        return String.valueOf("Количество решений: " + discriminant + "," + sqrtDis);
+        //return String.valueOf("Количество решений: " + discriminant + "," + sqrtDis);
+        return String.valueOf("Количество решений: " + num + ". Корни: " + x1 + ";" + x2 + "," + discriminant);
     }
 }
