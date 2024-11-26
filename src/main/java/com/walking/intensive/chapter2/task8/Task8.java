@@ -21,10 +21,38 @@ package com.walking.intensive.chapter2.task8;
 public class Task8 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+
+        double chance = getHappyTicketChance();
+        System.out.printf("Вероятность выпадения счастливого билета: %.6f%n", chance);
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+
+        int totalTickets = 1000000;
+        int luckyTickets = 0;
+
+        for (int ticketNumber = 0; ticketNumber < totalTickets; ticketNumber++) {
+
+            // Преобразовываем номер билета в строку (изначально с нулями)
+            String ticket = String.format("%06d", ticketNumber);
+
+            // Получаем первые три цифры
+            int firstHalfSum = (ticket.charAt(0) - '0') +
+                    (ticket.charAt(1) - '0') +
+                    (ticket.charAt(2) - '0'); // Преобразователь char в int
+
+            // Получаем последние три цифры
+            int secondHalfSum = (ticket.charAt(3) - '0') +
+                    (ticket.charAt(4) - '0') +
+                    (ticket.charAt(5) - '0'); // Преобразователь char в int
+
+            // Проверяем, является ли билет счастливым
+            if (firstHalfSum == secondHalfSum) {
+                luckyTickets++;
+            }
+        }
+
+        // Вычисляем вероятность
+        return (double) luckyTickets / totalTickets;
     }
 }
