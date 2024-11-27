@@ -11,11 +11,24 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+
+        if (inputString == null || inputString.length() <= 1) {
+            return false;
+        }
+
+       String ignoreChars = " .,:;!?\"()—-";
+       StringBuilder builder = new StringBuilder();
+
+       for (int i=0; i < inputString.length(); i++) {
+           if (ignoreChars.indexOf(inputString.charAt(i)) == -1) {
+               builder.append(inputString.charAt(i));
+           }
+       }
+
+        return builder.toString().equalsIgnoreCase(builder.reverse().toString());
     }
 }
