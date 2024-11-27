@@ -45,7 +45,7 @@ public class Task7 {
                 //System.out.println(sumN);
             }
         }
-       // return sumN;
+        // return sumN;
         int m = sumN;
         int sumM = 0;
         for (int j = 1; j < m; j++) {
@@ -53,7 +53,7 @@ public class Task7 {
                 sumM += j;
             }
         }
-        if (n=sumM && m=sumN) {
+        if (n = sumM && m = sumN) {
             return sumM;
         }
     }
