@@ -11,11 +11,17 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум."));
+        System.out.println(isPalindrome("А роза упала на лапу Азора"));
+        System.out.println(isPalindrome("Hello, world!"));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+        if (inputString == null || inputString.length() < 2) return false;
+
+        String normalized = inputString.replaceAll("\\p{Punct}", "")
+                .replaceAll("\\s", "").toLowerCase();
+
+        return normalized.contentEquals(new StringBuilder(normalized).reverse());
     }
 }
