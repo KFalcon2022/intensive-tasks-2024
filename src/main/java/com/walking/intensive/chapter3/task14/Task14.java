@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -32,7 +34,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -43,11 +45,107 @@ package com.walking.intensive.chapter3.task14;
  */
 public class Task14 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] pointsOne = {{1, 3}, {3, 3}, {5, 3}, {2, 2}};
+        int[][] queriesOne = {{2, 3, 1}, {4, 3, 1}, {1, 1, 2}};
+
+        System.out.println(Arrays.toString(getObjectCounts(pointsOne, queriesOne)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+        if (!isValid(objectLocations, radars)) {
+            return new int[]{};
+        }
+
+        int len = radars.length;
+        int[] objectsCount = new int[len];
+
+        int centerX;
+        int centerY;
+        int radius;
+        int counts;
+
+        for (int i = 0; i < len; i++) {
+            centerX = 0;
+            centerY = 0;
+            radius = 0;
+
+            for (int j = 0; j < 1; j++) {
+                centerX = radars[i][0];
+                centerY = radars[i][1];
+                radius = radars[i][2];
+            }
+
+            counts = getCounts(objectLocations, centerX, centerY, radius);
+            objectsCount[i] = counts;
+        }
+
+        return objectsCount;
+    }
+
+    private static int getCounts(int[][] objectLocations, int centerX, int centerY, int radius) {
+        int count = 0;
+        int x;
+        int y;
+
+        for (int[] objectLocation : objectLocations) {
+            x = 0;
+            y = 0;
+
+            for (int j = 0; j < 1; j++) {
+                x = objectLocation[0];
+                y = objectLocation[1];
+            }
+
+            if (isRadarZone(centerX, centerY, x, y, radius)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private static boolean isRadarZone(int centerX, int centerY, int x, int y, int radius) {
+        double dx = centerX - x;
+        double dy = centerY - y;
+
+        dx *= dx;
+        dy *= dy;
+
+        double distanceSquared = dx + dy;
+        double radiusSquared = radius * radius;
+
+        return distanceSquared <= radiusSquared;
+    }
+
+    private static boolean isValid(int[][] array, int[][] arrayTwo) {
+        return checkArray(array, arrayTwo);
+    }
+
+    private static boolean checkArray(int[][] array, int[][] arrayTwo) {
+        for (int[] ints : array) {
+            if (ints.length != 2) {
+                return false;
+            }
+            for (int anInt : ints) {
+                if (anInt < 0) {
+                    return false;
+                }
+            }
+
+        }
+
+        for (int[] ints : arrayTwo) {
+            if (ints.length != 3) {
+                return false;
+            }
+
+            for (int anInt : ints) {
+                if (anInt < 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
