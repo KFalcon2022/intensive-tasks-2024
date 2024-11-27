@@ -50,11 +50,34 @@ public class Task5 {
         }
 
         double area = getAreaByHeron(a, b, c);
+        double height1 = area * 2 / a;
+        double height2 = area * 2 / b;
+        double height3 = area * 2 / c;
+
         double[] heights = new double[3];
-        heights[0] = area * 2 / a;
-        heights[1] = area * 2 / b;
-        heights[2] = area * 2 / c;
-        Arrays.sort(heights);
+        if (height1 < height2 && height1 < height3)  {
+            heights[0] = height1;
+        } else if (height2 < height1 && height2 < height3) {
+            heights[0] = height2;
+        } else {
+            heights[0] = height3;
+        }
+
+        if (height1 > height2 && height1 > height3) {
+            heights[2] = height1;
+        } else if (height2 > height1 && height2 > height3) {
+            heights[2] = height2;
+        } else {
+            heights[2] = height3;
+        }
+
+        if (heights[0] != height1 && heights[2] != height1) {
+            heights[1] = height1;
+        } else if (heights[0] != height2 && heights[2] != height2) {
+            heights[1] = height2;
+        } else {
+            heights[1] = height3;
+        }
 
         return heights;
 
