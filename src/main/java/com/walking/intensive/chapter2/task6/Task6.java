@@ -66,7 +66,9 @@ public class Task6 {
             return -1;
         }
 
-        int nod = 0, number1 = 0, number2 = 0;
+        int nod = 0;
+        int number1 = 0;
+        int number2;
 
         for (int i = 1; i <= m; i++) {
             if (m % i == 0) {
