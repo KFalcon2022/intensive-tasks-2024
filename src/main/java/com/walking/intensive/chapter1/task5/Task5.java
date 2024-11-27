@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 5.0;
+        double a = 25.0;
         double b = 6.0;
         double c = 7.0;
 
@@ -28,10 +28,8 @@ public class Task5 {
     }
 
     static boolean conditionExistTriangle(double a, double b, double c) {
-        if ((a < 0 || b < 0 || c < 0) || (a + b < c || a + c < b || c + b < a))
-
-            return false;
-        return true;
+        return a > 0 && b > 0 && c > 0 &&
+                a + b > c && a + c > b && b + c > a;
     }
 
     /**
