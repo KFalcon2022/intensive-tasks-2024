@@ -31,28 +31,29 @@ public class Task8 {
         int totalTickets = 1000000;
         int luckyTickets = 0;
 
-        for (int ticketNumber = 0; ticketNumber < totalTickets; ticketNumber++) {
-
-            // Преобразовываем номер билета в строку (изначально с нулями)
-            String ticket = String.format("%06d", ticketNumber);
-
-            // Получаем первые три цифры
-            int firstHalfSum = (ticket.charAt(0) - '0') +
-                    (ticket.charAt(1) - '0') +
-                    (ticket.charAt(2) - '0'); // Преобразователь char в int
-
-            // Получаем последние три цифры
-            int secondHalfSum = (ticket.charAt(3) - '0') +
-                    (ticket.charAt(4) - '0') +
-                    (ticket.charAt(5) - '0'); // Преобразователь char в int
-
-            // Проверяем, является ли билет счастливым
-            if (firstHalfSum == secondHalfSum) {
+        for (int i = 0; i < totalTickets; i++) {
+            if (isLuckyTicket(i)) {
                 luckyTickets++;
             }
         }
 
         // Вычисляем вероятность
         return (double) luckyTickets / totalTickets;
+    }
+
+    static boolean isLuckyTicket(int ticketNumber) {
+
+        // Получаем сумму первых трех цифр
+        int firstHalfSum = (ticketNumber / 1000) / 100 +
+                ((ticketNumber / 1000) % 100) / 10 +
+                (ticketNumber / 1000) % 10;
+
+        // Получаем сумму последних трех цифр
+        int secondHalfSum = (ticketNumber % 1000) / 100 +
+                ((ticketNumber % 1000) % 100) / 10 +
+                (ticketNumber % 10);
+
+        // Является ли билет счастливым?
+        return firstHalfSum == secondHalfSum;
     }
 }
