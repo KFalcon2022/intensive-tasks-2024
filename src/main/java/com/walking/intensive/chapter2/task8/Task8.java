@@ -24,20 +24,24 @@ public class Task8 {
     }
 
     static double getHappyTicketChance() {
-        int sumPositiveResult = 0;
+        int numberHappyTickets = 0;
 
         for (int i = 0; i <= 999999; i++) {
-            int leftNumbers = i / 1000;
-            int rightNumbers = i % 1000;
-
-            int sumLeftNumbers = leftNumbers / 100 + (leftNumbers % 100 / 10) + leftNumbers % 10;
-            int sumRightNumbers = rightNumbers / 100 + (rightNumbers % 100 / 10) + rightNumbers % 10;
-
-            if (sumLeftNumbers == sumRightNumbers) {
-                sumPositiveResult++;
+            if (isHappyTicket(i)) {
+                numberHappyTickets++;
             }
         }
 
-        return (double) sumPositiveResult / 1000000;
+        return (double) numberHappyTickets / 1000000;
+    }
+
+    static boolean isHappyTicket(int n) {
+        int leftNumbers = n / 1000;
+        int rightNumbers = n % 1000;
+
+        int sumLeftNumbers = leftNumbers / 100 + (leftNumbers % 100 / 10) + leftNumbers % 10;
+        int sumRightNumbers = rightNumbers / 100 + (rightNumbers % 100 / 10) + rightNumbers % 10;
+
+        return sumLeftNumbers == sumRightNumbers;
     }
 }
