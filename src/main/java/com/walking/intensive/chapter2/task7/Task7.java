@@ -28,8 +28,18 @@ package com.walking.intensive.chapter2.task7;
 public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int n = 24;
+        int n = 230;
         System.out.println(getFriendlyPair(n));
+    }
+
+    static int sumDivider(int num) {
+        int sum = 0;
+        for (int i = 1; i < num; i++) {
+            if (num % i == 0) {
+                sum += i;
+            }
+        }
+        return sum;
     }
 
     static int getFriendlyPair(int n) {
@@ -38,23 +48,21 @@ public class Task7 {
             return -1;
         }
 
-        int sumN = 0;
-        for (int i = 1; i < n; i++) {
-            if (n % i == 0) {
-                sumN = sumN + i;
-                //System.out.println(sumN);
+        for (int a = n - 1; a > 0; a--) {
+            int sumA = sumDivider(a);
+
+            for (int b = sumA; b > 0; b--) {
+                int sumB = sumDivider(b);
+
+                if (sumA == b && sumB == a && a != b) {
+//                    System.out.println(a);
+//                    System.out.println(b);
+                    return Math.max(a, b);
+                }
             }
         }
-        // return sumN;
-        int m = sumN;
-        int sumM = 0;
-        for (int j = 1; j < m; j++) {
-            if (m % j == 0) {
-                sumM += j;
-            }
-        }
-        if (n = sumM && m = sumN) {
-            return sumM;
-        }
+        return 0;
     }
+
 }
+
