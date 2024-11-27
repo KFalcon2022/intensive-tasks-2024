@@ -8,7 +8,8 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        //System.out.println(getLcm(30, 18));
+        System.out.println(getGcdByEuclideanAlgorithm(30, 18));
     }
 
     /**
@@ -19,8 +20,12 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+
+        return m * n / getGcd(m, n);
     }
 
     /**
@@ -31,8 +36,21 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+
+        int minValue = Math.min(m, n);
+        int maxValue = Math.max(m, n);
+
+        while (maxValue % minValue != 0) {
+            int modValue = maxValue % minValue;
+            maxValue = minValue;
+            minValue = modValue;
+        }
+
+        return minValue;
     }
 
     /**
@@ -44,7 +62,18 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+
+        int minValue = Math.min(m, n);
+        int modValue = Math.max(m, n) % minValue;
+
+        if (modValue == 0) {
+            return minValue;
+        }
+
+        return getGcdByEuclideanAlgorithm( minValue, modValue );
     }
 }
