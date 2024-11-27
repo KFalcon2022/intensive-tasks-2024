@@ -181,8 +181,6 @@ public class Task5 {
             return -1.0;
         }
 
-        double halfPerimeter = getHalfPerimeter(a, b, c);
-
         return a * b * c / (4 * getAreaByHeron(a, b, c));
     }
 
