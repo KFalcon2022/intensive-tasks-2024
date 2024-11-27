@@ -24,17 +24,16 @@ public class Task1 {
         int remainderHundred = age % 100;
         int remainderTen = age % 10;
 
-        if (age < 0 ) {
+        if (age < 0) {
             return "Некорректный ввод";
 
-        } if (remainderHundred >= 11 && remainderHundred <= 20 || remainderTen >= 5) {
-            return "Вам " + age + " лет";
-        } if (remainderTen >= 2) {
-            return "Вам " + age + " года";
-        } if (remainderTen == 1) {
-            return "Вам " + age + " год";
-        } else {
+        }
+        if (remainderHundred >= 11 && remainderHundred <= 20 || remainderTen >= 5) {
             return "Вам " + age + " лет";
         }
+        if (remainderTen >= 2) {
+            return "Вам " + age + " года";
+        }
+            return "Вам " + age + " год";
+        }
     }
-}
