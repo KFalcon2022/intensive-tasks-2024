@@ -12,25 +12,11 @@ import java.util.Arrays;
  */
 public class Task5 {
 
-    static double negativeResult = -1.0;
-
     public static void main(String[] args) {
 
-        System.out.println(getAreaByHeron(12, 1, 4));
-        System.out.println();
-        System.out.println(Arrays.toString(getHeights(12, 13, 5)));
-        System.out.println();
-        System.out.println(Arrays.toString(getMedians(12, 13, 5)));
-        System.out.println();
-        System.out.println(Arrays.toString(getBisectors(12, 13, 5)));
-        System.out.println();
-        System.out.println(Arrays.toString(getAngles(12, 13, 5)));
-        System.out.println();
-        System.out.println(getInscribedCircleRadius(12, 13, 5));
-        System.out.println();
-        System.out.println(getCircumradius(12, 13, 5));
-        System.out.println();
         System.out.println(getAreaAdvanced(12, 13, 5));
+        System.out.println();
+        System.out.println(getAreaByHeron(0, 0, 0));
     }
 
     static double getHalfPerimeter(double a, double b, double c) {
@@ -45,7 +31,7 @@ public class Task5 {
 
     static boolean getIncorrectData(double a, double b, double c) {
 
-        return a > b + c || b > a + c || c > a + b;
+        return a >= b + c || b >= a + c || c >= a + b;
     }
 
     /**
@@ -60,11 +46,12 @@ public class Task5 {
     static double getAreaByHeron(double a, double b, double c) {
 
         if (getIncorrectData(a, b, c)) {
-            return negativeResult;
+            return -1.0;
         }
 
-        return Math.sqrt(getHalfPerimeter(a, b, c) * (getHalfPerimeter(a, b, c) - a)
-                * (getHalfPerimeter(a, b, c) - b) * (getHalfPerimeter(a, b, c) - c));
+        double halfPerimeter = getHalfPerimeter(a, b, c);
+
+        return Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
     }
 
     /**
@@ -76,20 +63,20 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
 
-        double triangleArea = getAreaByHeron(a, b, c);
-
-        double[] triangleHeights = new double[3];
-        triangleHeights[0] = 2 * triangleArea / a;
-        triangleHeights[1] = 2 * triangleArea / b;
-        triangleHeights[2] = 2 * triangleArea / c;
-
-        Arrays.sort(triangleHeights);
-
         if (getIncorrectData(a, b, c)) {
             return getArrayEmpty();
         }
 
-        return triangleHeights;
+        double area = getAreaByHeron(a, b, c);
+
+        double[] heights = new double[3];
+        heights[0] = 2 * area / a;
+        heights[1] = 2 * area / b;
+        heights[2] = 2 * area / c;
+
+        Arrays.sort(heights);
+
+        return heights;
     }
 
     /**
@@ -101,18 +88,18 @@ public class Task5 {
      */
     static double[] getMedians(double a, double b, double c) {
 
-        double[] triangleMedians = new double[3];
-        triangleMedians[0] = 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
-        triangleMedians[1] = 0.5 * Math.sqrt(2 * a * a + 2 * c * c - b * b);
-        triangleMedians[2] = 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a);
-
-        Arrays.sort(triangleMedians);
-
         if (getIncorrectData(a, b, c)) {
             return getArrayEmpty();
         }
 
-        return triangleMedians;
+        double[] medians = new double[3];
+        medians[0] = 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
+        medians[1] = 0.5 * Math.sqrt(2 * a * a + 2 * c * c - b * b);
+        medians[2] = 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a);
+
+        Arrays.sort(medians);
+
+        return medians;
     }
 
     /**
@@ -124,21 +111,20 @@ public class Task5 {
      */
     static double[] getBisectors(double a, double b, double c) {
 
-        double[] triangleBisectors = new double[3];
-        triangleBisectors[0] = 2 * Math.sqrt(a * b * getHalfPerimeter(a, b, c)
-                * (getHalfPerimeter(a, b, c) - c)) / (a + b);
-        triangleBisectors[1] = 2 * Math.sqrt(b * c * getHalfPerimeter(a, b, c)
-                * (getHalfPerimeter(a, b, c) - a)) / (b + c);
-        triangleBisectors[2] = 2 * Math.sqrt(a * c * getHalfPerimeter(a, b, c)
-                * (getHalfPerimeter(a, b, c) - b)) / (a + c);
-
-        Arrays.sort(triangleBisectors);
-
         if (getIncorrectData(a, b, c)) {
             return getArrayEmpty();
         }
 
-        return triangleBisectors;
+        double halfPerimeter = getHalfPerimeter(a, b, c);
+
+        double[] bisectors = new double[3];
+        bisectors[0] = 2 * Math.sqrt(a * b * halfPerimeter * (halfPerimeter - c)) / (a + b);
+        bisectors[1] = 2 * Math.sqrt(b * c * halfPerimeter * (halfPerimeter - a)) / (b + c);
+        bisectors[2] = 2 * Math.sqrt(a * c * halfPerimeter * (halfPerimeter - b)) / (a + c);
+
+        Arrays.sort(bisectors);
+
+        return bisectors;
     }
 
     /**
@@ -150,18 +136,18 @@ public class Task5 {
      */
     static double[] getAngles(double a, double b, double c) {
 
-        double[] triangleAngles = new double[3];
-        triangleAngles[0] = Math.toDegrees(Math.acos((b * b + c * c - a * a) / (2 * b * c)));
-        triangleAngles[1] = Math.toDegrees(Math.acos((a * a + c * c - b * b) / (2 * a * c)));
-        triangleAngles[2] = Math.toDegrees(Math.acos((a * a + b * b - c * c) / (2 * a * b)));
-
-        Arrays.sort(triangleAngles);
-
         if (getIncorrectData(a, b, c)) {
             return getArrayEmpty();
         }
 
-        return triangleAngles;
+        double[] angles = new double[3];
+        angles[0] = Math.toDegrees(Math.acos((b * b + c * c - a * a) / (2 * b * c)));
+        angles[1] = Math.toDegrees(Math.acos((a * a + c * c - b * b) / (2 * a * c)));
+        angles[2] = Math.toDegrees(Math.acos((a * a + b * b - c * c) / (2 * a * b)));
+
+        Arrays.sort(angles);
+
+        return angles;
     }
 
     /**
@@ -174,11 +160,12 @@ public class Task5 {
     static double getInscribedCircleRadius(double a, double b, double c) {
 
         if (getIncorrectData(a, b, c)) {
-            return negativeResult;
+            return -1.0;
         }
 
-        return Math.sqrt((getHalfPerimeter(a, b, c) - a) * (getHalfPerimeter(a, b, c) - b)
-                * (getHalfPerimeter(a, b, c) - c) / getHalfPerimeter(a, b, c));
+        double halfPerimeter = getHalfPerimeter(a, b, c);
+
+        return Math.sqrt((halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c) / halfPerimeter);
     }
 
     /**
@@ -191,11 +178,12 @@ public class Task5 {
     static double getCircumradius(double a, double b, double c) {
 
         if (getIncorrectData(a, b, c)) {
-            return negativeResult;
+            return -1.0;
         }
 
-        return (a * b * c) / (4 * Math.sqrt(getHalfPerimeter(a, b, c) * (getHalfPerimeter(a, b, c) - a)
-                * (getHalfPerimeter(a, b, c) - b) * (getHalfPerimeter(a, b, c) - c)));
+        double halfPerimeter = getHalfPerimeter(a, b, c);
+
+        return a * b * c / (4 * getAreaByHeron(a, b, c));
     }
 
     /**
@@ -214,14 +202,13 @@ public class Task5 {
      */
     static double getAreaAdvanced(double a, double b, double c) {
 
-        double cosineAlpha = (b * b + c * c - a * a) / (2 * b * c);
-        double sineAlpha = Math.sqrt(1 - Math.pow(cosineAlpha, 2));
-        double triangleArea = 0.5 * b * c * sineAlpha;
-
         if (getIncorrectData(a, b, c)) {
-            return negativeResult;
+            return -1.0;
         }
 
-        return triangleArea;
+        double cosineAlpha = (b * b + c * c - a * a) / (2 * b * c);
+        double sineAlpha = Math.sqrt(1 - Math.pow(cosineAlpha, 2));
+
+        return 0.5 * b * c * sineAlpha;
     }
 }
