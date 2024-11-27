@@ -30,7 +30,27 @@ public class Task7 {
         System.out.println("Результат: " + getFriendlyPair(300));
     }
 
-    static int getSumOfDivisors(int number) {
+
+    static int getFriendlyPair(int n) {
+        if (n <= 0 || n > 1000000) {
+            return -1;
+        }
+
+        for (int candidate = n; candidate > 0; candidate--) {
+            int divisorSumCandidate = getDivisorSum(candidate);
+
+            if (divisorSumCandidate > candidate && divisorSumCandidate < n) {
+                int divisorSumPair = getDivisorSum(divisorSumCandidate);
+
+                if (divisorSumPair == candidate) {
+                    return Math.max(candidate, divisorSumCandidate);
+                }
+            }
+        }
+        return 0;
+    }
+
+    static int getDivisorSum(int number) {
         int sum = 1;
         int sqrt = (int) Math.sqrt(number);
 
@@ -43,31 +63,5 @@ public class Task7 {
             }
         }
         return sum;
-    }
-
-    static int getFriendlyPair(int n) {
-        if (n <= 0 || n > 1000000) {
-            return -1;
-        }
-
-        int maxFriendlySum = 0;
-        int largestFriendlyNumber = -1;
-
-        for (int candidate = 2; candidate < n; candidate++) {
-            int divisorSumCandidate = getSumOfDivisors(candidate);
-
-            if (divisorSumCandidate > candidate && divisorSumCandidate < n) {
-                int divisorSumPair = getSumOfDivisors(divisorSumCandidate);
-                if (divisorSumPair == candidate) {
-                    int currentFriendlySum = candidate + divisorSumCandidate;
-                    if (currentFriendlySum > maxFriendlySum) {
-                        maxFriendlySum = currentFriendlySum;
-                        largestFriendlyNumber = Math.max(candidate, divisorSumCandidate);
-                    }
-                }
-            }
-        }
-
-        return largestFriendlyNumber;
     }
 }
