@@ -24,6 +24,7 @@ public class Task8 {
     }
 
     static double getHappyTicketChance() {
+asdad
         // Ваш код
         return 0.0;
     }
