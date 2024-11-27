@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task10;
 
+import java.lang.reflect.Array;
+
 /**
  * Реализуйте метод isPalindrome(), который проверяет, является ли строка палиндромом.
  *
@@ -11,11 +13,26 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(isPalindrome("Палиндромина - ни морд, ни лап"));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+
+        if (inputString == null || inputString.length() <2){
+
+            return false;
+        }
+
+        inputString = inputString.toUpperCase();
+        inputString = inputString.replaceAll("[^\\p{L}]", "");
+        char[] cleanCharacters = inputString.toCharArray();
+        String outputString = "";
+
+        for (int i = cleanCharacters.length - 1; i >=0 ; i--) {
+            outputString += cleanCharacters[i];
+        }
+
+        return outputString.equals(inputString);
     }
 }
