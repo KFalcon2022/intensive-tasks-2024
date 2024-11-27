@@ -9,8 +9,8 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
         System.out.println("lcm=" + getLcm(60, 420));
-        System.out.println("gcd=" + getGcd(415 , 215));
-        System.out.println("gcdByEuclideanAlgorithm=" + getGcdByEuclideanAlgorithm(0 , 20));
+        System.out.println("gcd=" + getGcd(415, 215));
+        System.out.println("gcdByEuclideanAlgorithm=" + getGcdByEuclideanAlgorithm(0, 20));
     }
 
     /**
@@ -21,18 +21,11 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        if (m < 1 || n < 1) {
+        if (notValid(m, n)) {
             return -1;
         }
 
-        int lcm = Math.max(m, n);
-
-        while (true) {
-            if (lcm % m == 0 && lcm % n == 0) {
-                return lcm;
-            }
-            lcm++;
-        }
+        return m * n / getGcd(m, n);
     }
 
     /**
@@ -43,7 +36,7 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        if (m < 1 || n < 1) {
+        if (notValid(m, n)) {
             return -1;
         }
         int gcd = 1;
@@ -51,8 +44,7 @@ public class Task6 {
 
         for (int i = biggerNumber; i >= 1; i--) {
             if (m % i == 0 && n % i == 0) {
-                gcd = i;
-                break;
+                return i;
             }
         }
 
@@ -68,7 +60,7 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        if (m < 1 || n < 1) {
+        if (notValid(m, n)) {
             return -1;
         }
 
@@ -79,5 +71,9 @@ public class Task6 {
         }
 
         return m;
+    }
+
+    static boolean notValid(int m, int n) {
+        return m < 1 || n < 1;
     }
 }
