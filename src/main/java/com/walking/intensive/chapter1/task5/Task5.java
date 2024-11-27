@@ -71,11 +71,11 @@ public class Task5 {
             return new double[]{};
         }
 
-        double m_a = 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a);
-        double m_b = 0.5 * Math.sqrt(2 * a * a + 2 * c * c - b * b);
-        double m_c = 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
+        double medianA = 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a);
+        double medianB = 0.5 * Math.sqrt(2 * a * a + 2 * c * c - b * b);
+        double medianC = 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
 
-        double[] medians = {m_a, m_b, m_c};
+        double[] medians = {medianA, medianB, medianC};
         Arrays.sort(medians);
 
         return medians;
@@ -156,9 +156,9 @@ public class Task5 {
         }
 
         double p = (a + b + c) / 2;
-        double S = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        double area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
-        return (a * b * c) / (4 * S);
+        return (a * b * c) / (4 * area);
     }
 
     /**
