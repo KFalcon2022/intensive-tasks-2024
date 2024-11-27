@@ -26,32 +26,22 @@ public class Task8 {
 
     static double getHappyTicketChance() {
 
-        int[] digits = new int[6];
+        int[] digitSum = new int[28];
+
         int counter = 0;
 
-        while (true) {
-
-            if ((digits[0] + digits[1] + digits[2]) == (digits[3] + digits[4] + digits[5])) {
-                counter++;
-            }
-
-            for (int i = 5; i >= 0; i--) {
-
-                digits[i]++;
-
-                if (digits[i] > 9) {
-
-                    if (i == 0) {
-                        return (double) counter / 1000000;
-                    }
-
-                    digits[i] = 0;
-
-                } else {
-
-                    break;
+        for (int i = 0; i <= 9; i++) {
+            for (int j = 0; j <= 9; j++) {
+                for (int k = 0; k <= 9; k++) {
+                    digitSum[i + j + k]++;
                 }
             }
         }
+
+        for (int i = 0; i < 28; i++) {
+            counter += digitSum[i] * digitSum[i];
+        }
+
+        return (double) counter / 1000000;
     }
 }
