@@ -37,33 +37,27 @@ public class Task4 {
     static String solveEquation(double a, double b, double c) {
         Locale.setDefault(Locale.ENGLISH);
 
-        String resultString;
         double x1;
         double x2;
         double D = Math.pow(b, 2) - 4 * a * c;
 
         if (a == 0 && b == 0 && c == 0) {
-            resultString = "Бесконечное множество решений.";
+            return "Бесконечное множество решений.";
         } else if (a == 0 && b != 0) {
-            resultString = "Количество решений: 1. Корень: " + getPrettyNull(-c / b);
+            return "Количество решений: 1. Корень: " + getPrettyNull(-c / b);
         } else if (a == 0 || D < 0) {
-            resultString = "Количество решений: 0.";
+            return "Количество решений: 0.";
         } else if (D == 0) {
-            resultString = "Количество решений: 1. Корень: " + getPrettyNull(-b / (2 * a));
+            return "Количество решений: 1. Корень: " + getPrettyNull(-b / (2 * a));
         } else {
             x1 = getPrettyNull((-b + Math.sqrt(D)) / (2 * a));
             x2 = getPrettyNull((-b - Math.sqrt(D)) / (2 * a));
-            resultString = String.format("Количество решений: 2. Корни: %1$.1f;%2$.1f", Double.min(x1, x2), Double.max(x1, x2));
+            return String.format("Количество решений: 2. Корни: %1$.1f;%2$.1f", Double.min(x1, x2), Double.max(x1, x2));
         }
-        return resultString;
     }
 
     //костыль для избавления от -0.0
     static double getPrettyNull(double a) {
-        if (a == -0.0) {
-            return 0.0;
-        } else {
-            return a;
-        }
+        return a == -0.0 ? 0.0 : a;
     }
 }
