@@ -43,17 +43,20 @@ public class Task4 {
 
         if (a == 0 && b == 0 && c == 0) {
             return "Бесконечное множество решений.";
-        } else if (a == 0 && b != 0) {
-            return "Количество решений: 1. Корень: " + getPrettyNull(-c / b);
-        } else if (a == 0 || D < 0) {
-            return "Количество решений: 0.";
-        } else if (D == 0) {
-            return "Количество решений: 1. Корень: " + getPrettyNull(-b / (2 * a));
-        } else {
-            x1 = getPrettyNull((-b + Math.sqrt(D)) / (2 * a));
-            x2 = getPrettyNull((-b - Math.sqrt(D)) / (2 * a));
-            return String.format("Количество решений: 2. Корни: %1$.1f;%2$.1f", Double.min(x1, x2), Double.max(x1, x2));
         }
+        if (a == 0 && b != 0) {
+            return "Количество решений: 1. Корень: " + getPrettyNull(-c / b);
+        }
+        if (a == 0 || D < 0) {
+            return "Количество решений: 0.";
+        }
+        if (D == 0) {
+            return "Количество решений: 1. Корень: " + getPrettyNull(-b / (2 * a));
+        }
+        x1 = getPrettyNull((-b + Math.sqrt(D)) / (2 * a));
+        x2 = getPrettyNull((-b - Math.sqrt(D)) / (2 * a));
+        return String.format("Количество решений: 2. Корни: %1$.1f;%2$.1f", Double.min(x1, x2), Double.max(x1, x2));
+
     }
 
     //костыль для избавления от -0.0
