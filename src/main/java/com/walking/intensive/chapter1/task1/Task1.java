@@ -13,22 +13,24 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-        int age = 2021;
-                System.out.println(getAgeString(age));
+        int age = -100;
+        System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-        String phraseYears = "Некорректный ввод";
-        if (age >= 5 && age <= 20) {
+        String phraseYears = "";
+        int restOfHundred = age%100;
+        if (age < 0) {
+            phraseYears = "Некорректный ввод";
+        } else if (restOfHundred >= 5 && restOfHundred <= 20) {
             phraseYears = "Вам " + age + " лет";
-        } else if (age % 10 == 1) {
+        } else if (restOfHundred % 10 == 1) {
             phraseYears = "Вам " + age + " год";
-        } else if (age % 10 >= 2 && age % 10 <= 4) {
+        } else if (restOfHundred % 10 >= 2 && age % 10 <= 4) {
             phraseYears = "Вам " + age + " года";
-        } else if (age % 10 >= 5 || age % 10 == 0) {
+        } else if (restOfHundred % 10 >= 5 || restOfHundred % 10 == 0) {
             phraseYears = "Вам " + age + " лет";
         }
-
         return phraseYears;
     }
 }
