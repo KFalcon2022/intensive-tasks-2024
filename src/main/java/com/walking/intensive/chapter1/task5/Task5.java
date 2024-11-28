@@ -25,12 +25,17 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isNotTriangle(a, b, c)) {
             return -1;
         }
 
         double s = (a + b + c) / 2;
         return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    }
+
+    private static boolean isNotTriangle(double a, double b, double c) {
+        return a <= 0 || b <= 0 || c <= 0
+                || a + b <= c || a + c <= b || b + c <= a;
     }
 
     /**
@@ -41,13 +46,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isNotTriangle(a, b, c)) {
             return new double[]{};
         }
 
-        double s = (a + b + c) / 2;
-        double area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
-
+        double area = getAreaByHeron(a, b, c);
         double heightA = (2 * area) / a;
         double heightB = (2 * area) / b;
         double heightC = (2 * area) / c;
@@ -67,7 +70,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isNotTriangle(a, b, c)) {
             return new double[]{};
         }
 
@@ -89,7 +92,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isNotTriangle(a, b, c)) {
             return new double[]{};
         }
 
@@ -111,7 +114,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+        if (isNotTriangle(a, b, c)) {
             return new double[]{};
         }
 
@@ -120,7 +123,7 @@ public class Task5 {
         double angleC = Math.PI - angleA - angleB;
 
         double[] angles = {Math.toDegrees(angleA), Math.toDegrees(angleB), Math.toDegrees(angleC)};
-        java.util.Arrays.sort(angles);
+        Arrays.sort(angles);
 
         return angles;
     }
@@ -133,12 +136,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || (a + b <= c) || (a + c <= b) || (b + c <= a)) {
+        if (isNotTriangle(a, b, c)) {
             return -1;
         }
 
+        double area = getAreaByHeron(a, b, c);
         double p = (a + b + c) / 2;
-        double area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
         return area / p;
     }
@@ -151,13 +154,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || (a + b <= c) || (a + c <= b) || (b + c <= a)) {
+        if (isNotTriangle(a, b, c)) {
             return -1;
         }
 
-        double p = (a + b + c) / 2;
-        double area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
-
+        double area = getAreaByHeron(a, b, c);
         return (a * b * c) / (4 * area);
     }
 
@@ -176,7 +177,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0 || (a + b <= c) || (a + c <= b) || (b + c <= a)) {
+        if (isNotTriangle(a, b, c)) {
             return -1;
         }
 
