@@ -1,5 +1,6 @@
 package com.walking.intensive.chapter4.task16;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -90,9 +91,17 @@ public class Task16Test {
 
     @ParameterizedTest
     @MethodSource("removeAllSource")
-    void removeAllTest(int[] expected, int[] arr, int... removingValues) {
+    void removeAllTest(int[] expected, int[] arr, int[] removingValues) {
         int[] result = Task16.removeAll(arr, removingValues);
         assertArrayEquals(expected, result);
+    }
+
+    @Test
+    void removeAllWithoutRemovingTest() {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+
+        int[] result = Task16.removeAll(arr);
+        assertArrayEquals(arr, result);
     }
 
     @ParameterizedTest
@@ -112,7 +121,7 @@ public class Task16Test {
     static Stream<Arguments> isEqualSizeSource() {
         return Stream.of(
                 Arguments.of(new int[]{10, 11, 12}, new int[]{11, 16, 1}, true),
-                Arguments.of(new int[]{}, new int[]{}, true),
+                Arguments.of(new int[]{}, new int[]{}, false),
                 Arguments.of(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 0}, new int[]{0, 0, 0, 0, 0, 0}, false),
                 Arguments.of(new int[]{10, 11, 12}, new int[]{16}, false)
         );
@@ -141,8 +150,9 @@ public class Task16Test {
                 Arguments.of(new int[]{2, 4, 6}, new int[]{2, 4, 6}, new int[]{4, 16, 36}),
                 Arguments.of(new int[]{6, 0}, new int[]{7, 1}, new int[]{42, 0}),
                 Arguments.of(new int[]{0, 0, 0, 0}, new int[]{10, 20, 30, 40}, new int[]{0, 0, 0, 0}),
-                Arguments.of(new int[]{}, new int[]{2, 4, 6}, new int[]{2, 4, 6}),
-                Arguments.of(new int[]{2, 4, 6}, new int[]{}, new int[]{2, 4, 6}),
+                Arguments.of(new int[]{}, new int[]{2, 4, 6}, new int[]{0, 0, 0}),
+                Arguments.of(new int[]{2, 4, 6}, new int[]{}, new int[]{0, 0, 0}),
+                Arguments.of(new int[]{2, 4, 6}, new int[]{1, 2}, new int[]{2, 8, 0}),
                 Arguments.of(new int[]{}, new int[]{}, new int[]{})
         );
     }
@@ -152,8 +162,9 @@ public class Task16Test {
                 Arguments.of(new int[]{2, 4, 6}, new int[]{2, 4, 6}, new int[]{0, 0, 0}),
                 Arguments.of(new int[]{6, 0}, new int[]{7, 1}, new int[]{-1, -1}),
                 Arguments.of(new int[]{0, 0, 0, 0}, new int[]{10, 20, 30, 40}, new int[]{-10, -20, -30, -40}),
-                Arguments.of(new int[]{}, new int[]{2, 4, 6}, new int[]{2, 4, 6}),
+                Arguments.of(new int[]{}, new int[]{2, 4, 6}, new int[]{-2, -4, -6}),
                 Arguments.of(new int[]{2, 4, 6}, new int[]{}, new int[]{2, 4, 6}),
+                Arguments.of(new int[]{2, 4, 6}, new int[]{1, 2}, new int[]{1, 2, 6}),
                 Arguments.of(new int[]{}, new int[]{}, new int[]{})
         );
     }
@@ -221,7 +232,6 @@ public class Task16Test {
                 Arguments.of(new int[]{11, 12, 3, 4, 5, 6}, new int[]{10, 11, 12, 1, 2, 3, 4, 5, 6, 7},
                         new int[]{10, 1, 7, 2}),
                 Arguments.of(new int[]{3, 4, 5, 6, 7}, new int[]{1, 2, 3, 4, 5, 6, 7}, new int[]{10, 1, 30, 2}),
-                Arguments.of(new int[]{1, 2, 3, 4, 6, 7}, new int[]{1, 2, 3, 4, 5, 6, 7}, 5),
                 Arguments.of(new int[]{1, 2, 3, 4, 5}, new int[]{1, 2, 3, 4, 5}, new int[]{10, 20, 30}),
                 Arguments.of(new int[]{}, new int[]{}, new int[]{10, 20, 30}),
                 Arguments.of(new int[]{1, 2, 3, 4, 5}, new int[]{1, 2, 3, 4, 5}, new int[]{})
@@ -230,8 +240,8 @@ public class Task16Test {
 
     static Stream<Arguments> isSimilarSource() {
         return Stream.of(
-                Arguments.of(new int[]{10, 11, 12, 3, 1, 2}, new int[]{1, 2, 3, 4, 10, 5, 11, 6, 12}, true),
-                Arguments.of(new int[]{1, 3, 5, 7, 9}, new int[]{9, 7, 5, 3, 10, 1}, true),
+                Arguments.of(new int[]{4, 10, 5, 6, 11, 12, 3, 1, 2}, new int[]{1, 2, 3, 4, 10, 5, 11, 6, 12}, true),
+                Arguments.of(new int[]{1, 3, 5, 7, 9, 10}, new int[]{9, 7, 5, 3, 10, 1}, true),
                 Arguments.of(new int[]{1, 3, 5, 7, 9}, new int[]{9, 7, 5, 3, 10}, false),
                 Arguments.of(new int[]{1, 3, 5, 7, 9}, new int[]{2, 4, 6, 8, 10}, false),
                 Arguments.of(new int[]{1, 3, 5, 7, 9}, new int[]{}, false),
