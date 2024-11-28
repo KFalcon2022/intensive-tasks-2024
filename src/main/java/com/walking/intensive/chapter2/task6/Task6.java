@@ -22,7 +22,7 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        if (m <= 0 || n <= 0) {
+        if (incorrectInputValidation(m, n)) {
             return -1;
         }
 
@@ -39,7 +39,7 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        if (m <= 0 || n <= 0) {
+        if (incorrectInputValidation(m, n)) {
             return -1;
         }
 
@@ -64,7 +64,7 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        if (m <= 0 || n < 0) {
+        if (incorrectInputValidation(m, n)) {
             return -1;
         }
 
@@ -73,5 +73,10 @@ public class Task6 {
         }
 
         return getGcdByEuclideanAlgorithm(n, m % n);
+    }
+
+    static boolean incorrectInputValidation(int m, int n) {
+
+        return (m <= 0 || n < 0);
     }
 }
