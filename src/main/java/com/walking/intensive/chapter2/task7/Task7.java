@@ -53,7 +53,7 @@ public class Task7 {
             int b = sumA;
             int sumB = sumDivider(b);
 
-            if (sumA == b && sumB == a && a != b) {
+            if (sumB == a && a != b) {
                 return Math.max(a, b);
             }
         }
