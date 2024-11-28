@@ -34,52 +34,66 @@ public class Task5 {
 
     }
 
-    static double getAreaByHeron(double a, double b, double c) {
+    static void isTriangleExist (double a, double b, double c) {
         if (a >= b + c || b >= a + c || c >= a + b) {
-            return -1;
+            System.out.println(-1);
+        }
+    }
+
+    static void isTriangleExist2 (double a, double b, double c) {
+
+        if (a >= b + c || b >= a + c || c >= a + b) {
+            System.out.println(Arrays.toString(new double[0]));
+        }
+    }
+
+    static void sortArrays (double doubles1, double doubles2, double doubles3) {
+        double[] doubles = new double[3];
+        if (doubles1 < doubles2 && doubles1 < doubles3)  {
+            doubles[0] = doubles1;
+        } else if (doubles2 < doubles1 && doubles2 < doubles3) {
+            doubles[0] = doubles2;
+        } else {
+            doubles[0] = doubles3;
         }
 
+        if (doubles1 > doubles2 && doubles1 > doubles3) {
+            doubles[2] = doubles1;
+        } else if (doubles2 > doubles1 && doubles2 > doubles3) {
+            doubles[2] = doubles2;
+        } else {
+            doubles[2] = doubles3;
+        }
+
+        if (doubles[0] != doubles1 && doubles[2] != doubles1) {
+            doubles[1] = doubles1;
+        } else if (doubles[0] != doubles2 && doubles[2] != doubles2) {
+            doubles[1] = doubles2;
+        } else {
+            doubles[1] = doubles3;
+        }
+    }
+
+    static double getAreaByHeron(double a, double b, double c) {
+        isTriangleExist(a, b, c);
+
         double halfPerimeter = (a + b + c) / 2;
-        return (double) Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
+        return Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
 
     }
 
     static double[] getHeights(double a, double b, double c) {
-        if (a >= b + c || b >= a + c || c >= a + b) {
-            return new double[0];
-        }
+        isTriangleExist2(a, b, c);
 
         double area = getAreaByHeron(a, b, c);
-        double height1 = area * 2 / a;
-        double height2 = area * 2 / b;
-        double height3 = area * 2 / c;
+        double doubles1 = area * 2 / a;
+        double doubles2 = area * 2 / b;
+        double doubles3 = area * 2 / c;
 
-        double[] heights = new double[3];
-        if (height1 < height2 && height1 < height3)  {
-            heights[0] = height1;
-        } else if (height2 < height1 && height2 < height3) {
-            heights[0] = height2;
-        } else {
-            heights[0] = height3;
-        }
+        double[] doubles = new double[0];
+        sortArrays(doubles1, doubles2, doubles3);
 
-        if (height1 > height2 && height1 > height3) {
-            heights[2] = height1;
-        } else if (height2 > height1 && height2 > height3) {
-            heights[2] = height2;
-        } else {
-            heights[2] = height3;
-        }
-
-        if (heights[0] != height1 && heights[2] != height1) {
-            heights[1] = height1;
-        } else if (heights[0] != height2 && heights[2] != height2) {
-            heights[1] = height2;
-        } else {
-            heights[1] = height3;
-        }
-
-        return heights;
+        return doubles;
 
     }
 
@@ -163,4 +177,5 @@ public class Task5 {
 
         return (a * b / 2 * sinC);
     }
+
 }
