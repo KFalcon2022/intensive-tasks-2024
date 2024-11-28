@@ -19,8 +19,12 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+
+        if (!(isValidParams(m, n))){
+            return -1;
+        }
+
+        return n * m / getGcd(m, n);
     }
 
     /**
@@ -31,8 +35,18 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+
+        if (!(isValidParams(m, n))){
+            return -1;
+        }
+
+        while (m != 0) {
+            int tmp = m;
+            m = n % m;
+            n = tmp;
+        }
+
+        return n;
     }
 
     /**
@@ -44,7 +58,24 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+
+        if (!(isValidParams(m, n))){
+            return -1;
+        }
+
+        while (m != n) {
+            if (m > n) {
+                m = m - n;
+            }
+            else {
+                n = n - m;
+            }
+        }
+
+        return m;
+    }
+
+    static boolean isValidParams(int m, int n){
+        return (m > 0 && n > 0);
     }
 }
