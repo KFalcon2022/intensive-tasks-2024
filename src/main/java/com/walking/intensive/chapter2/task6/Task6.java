@@ -22,21 +22,6 @@ public class Task6 {
         return m > 0 && n > 0;
     }
 
-    static int[] divider(int d) {
-        int[] dividers = new int[d];
-        int count = 0;
-
-        for (int i = 2; i <= d; i++) {
-            if (d % i == 0) {
-                dividers[count] = i;
-                count++;
-            }
-        }
-
-        int[] result = Arrays.copyOf(dividers, count);
-        return result;
-    }
-
     /**
      * Реализуйте метод, который будет возвращать НОК для чисел, переданных параметрами.
      *
@@ -68,19 +53,13 @@ public class Task6 {
         if (!conditionNumber(m, n)) {
             return -1;
         }
-
-        int[] dividersM = divider(m);
-        int[] dividersN = divider(n);
         int gcd = 1;
-
-        for (int i = 0; i < dividersM.length; i++) {
-            for (int j = 0; j < dividersN.length; j++) {
-                if (dividersM[i] == dividersN[j] && dividersM[i] > gcd) {
-                    gcd = dividersM[i];
-                }
+        for (int i = Math.min(m, n); i > 0; i--) {
+            if (m % i == 0 && n % i == 0) {
+                gcd = i;
+                break;
             }
         }
-
         return gcd;
     }
 
