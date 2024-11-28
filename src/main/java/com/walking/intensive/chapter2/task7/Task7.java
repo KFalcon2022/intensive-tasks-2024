@@ -28,7 +28,7 @@ package com.walking.intensive.chapter2.task7;
 public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int n = 230;
+        int n = 10000;
         System.out.println(getFriendlyPair(n));
     }
 
@@ -50,15 +50,11 @@ public class Task7 {
 
         for (int a = n - 1; a > 0; a--) {
             int sumA = sumDivider(a);
+            int b = sumA;
+            int sumB = sumDivider(b);
 
-            for (int b = sumA; b > 0; b--) {
-                int sumB = sumDivider(b);
-
-                if (sumA == b && sumB == a && a != b) {
-//                    System.out.println(a);
-//                    System.out.println(b);
-                    return Math.max(a, b);
-                }
+            if (sumA == b && sumB == a && a != b) {
+                return Math.max(a, b);
             }
         }
         return 0;
