@@ -58,6 +58,5 @@ public class Task7 {
         }
         return 0;
     }
-
 }
 
