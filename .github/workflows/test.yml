@@ -41,7 +41,7 @@ jobs:
           done
           echo "TEST_CLASSES=$TEST_CLASSES" >> $GITHUB_ENV
 
-      - name: Run Checkstyle and Tests
+      - name: Run Tests
         run: |
           if [[ -n "$TEST_CLASSES" ]]; then
             ./gradlew test $TEST_CLASSES

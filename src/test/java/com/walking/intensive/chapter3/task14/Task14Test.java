@@ -21,8 +21,6 @@ public class Task14Test {
         // when
         var result = getObjectCounts(points, queries);
 
-        // then
-        assertEquals(queries.length, result.length);
         assertArrayEquals(expectedCountOfPoints, result);
     }
 
