@@ -302,7 +302,6 @@ public class Task5 {
         if (a + b < c || b + c < a || a + c < b || a <= 0 || b <= 0 || c <= 0) {
             return -1;
         }
-        double p = (a + b + c) / 2;
 
         return (a * b * c) / (4 * getAreaByHeron(a, b, c));
     }
