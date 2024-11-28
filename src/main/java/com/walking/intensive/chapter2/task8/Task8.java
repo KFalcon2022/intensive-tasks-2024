@@ -32,7 +32,6 @@ public class Task8 {
         for (int h1 = 0; h1 <= maxCifra; h1++) {
             for (int h2 = 0; h2 <= maxCifra; h2++) {
                 for (int h3 = 0; h3 <= maxCifra; h3++) {
-
                     int sum = h1 + h2 + h3;
                     sums[sum]++;
                 }
