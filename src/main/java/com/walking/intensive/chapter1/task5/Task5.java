@@ -38,6 +38,13 @@ public class Task5 {
         return a < b + c && b < a + c && c < a + b;
     }
 
+    static double getHalfPerimeter (double a, double b, double c) {
+        return (a + b + c) / 2;
+    }
+
+    static double getCosC (double a, double b, double c) {
+        return (a * a + b * b - c * c) / (2 * a * b);
+    }
 
     static double[] sortArrays (double doubles1, double doubles2, double doubles3) {
         double[] doubles = new double[3];
@@ -70,8 +77,7 @@ public class Task5 {
 
     static double getAreaByHeron(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
-
-            double halfPerimeter = (a + b + c) / 2;
+            double halfPerimeter = getHalfPerimeter(a, b, c);
             return Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
         }
 
@@ -101,13 +107,14 @@ public class Task5 {
 
             return sortArrays(doubles1, doubles2, doubles3);
         }
+
         return new double[0];
     }
 
     static double[] getBisectors(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double halfPerimeter = (a + b + c) / 2;
+            double halfPerimeter = getHalfPerimeter(a, b, c);
 
             double doubles1 = 2 * Math.sqrt(a * b * halfPerimeter * (halfPerimeter - c)) / (a + b);
             double doubles2 = 2 * Math.sqrt(a * c * halfPerimeter * (halfPerimeter - b)) / (a + c);
@@ -115,13 +122,14 @@ public class Task5 {
 
             return sortArrays(doubles1, doubles2, doubles3);
         }
+
         return new double[0];
     }
 
     static double[] getAngles(double a, double b, double c) {
        if (isTriangleExist(a, b, c)) {
 
-           double cosC = (a * a + b * b - c * c) / (2 * a * b);
+           double cosC = getCosC(a, b, c);
            double cosB = (a * a + c * c - b * b) / (2 * a * c);
 
            double doubles1 = Math.toDegrees(Math.acos(cosC));
@@ -130,16 +138,18 @@ public class Task5 {
 
            return sortArrays(doubles1, doubles2, doubles3);
        }
+
        return new double[0];
     }
 
     static double getInscribedCircleRadius(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double halfPerimeter = (a + b + c) / 2;
+            double halfPerimeter = getHalfPerimeter(a, b, c);
 
             return (getAreaByHeron(a, b, c) / halfPerimeter);
         }
+
         return -1;
     }
 
@@ -147,23 +157,24 @@ public class Task5 {
     static double getCircumradius(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double cosC = (a * a + b * b - c * c) / (2 * a * b);
+            double cosC = getCosC(a, b, c);
             double sinC = Math.sqrt(1 - cosC * cosC);
 
             return (c / (2 * sinC));
         }
+
         return -1;
     }
 
     static double getAreaAdvanced(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double cosC = (a * a + b * b - c * c) / (2 * a * b);
+            double cosC = getCosC(a, b, c);
             double sinC = Math.sqrt(1 - cosC * cosC);
 
             return (a * b / 2 * sinC);
         }
+
         return -1;
     }
-
 }
