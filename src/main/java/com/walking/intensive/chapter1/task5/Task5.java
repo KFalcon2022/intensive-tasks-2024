@@ -72,6 +72,7 @@ public class Task5 {
         } else {
             doubles[1] = doubles3;
         }
+        System.out.println(Arrays.toString(doubles));
     }
 
     static double getAreaByHeron(double a, double b, double c) {
