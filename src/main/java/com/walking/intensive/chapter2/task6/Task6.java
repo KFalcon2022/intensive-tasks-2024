@@ -7,6 +7,12 @@ package com.walking.intensive.chapter2.task6;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task6 {
+
+    private static boolean isNotCorrectInputValues(int m, int n) {
+
+        return m <= 0 || n <= 0;
+    }
+
     public static void main(String[] args) {
         //System.out.println(getLcm(30, 18));
         System.out.println(getGcdByEuclideanAlgorithm(30, 18));
@@ -21,7 +27,7 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
 
-        if (m <= 0 || n <= 0) {
+        if (isNotCorrectInputValues(m, n)) {
             return -1;
         }
 
@@ -37,7 +43,7 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
 
-        if (m <= 0 || n <= 0) {
+        if (isNotCorrectInputValues(m, n)) {
             return -1;
         }
 
@@ -63,7 +69,7 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
 
-        if (m <= 0 || n <= 0) {
+        if (isNotCorrectInputValues(m, n)) {
             return -1;
         }
 
@@ -74,6 +80,6 @@ public class Task6 {
             return minValue;
         }
 
-        return getGcdByEuclideanAlgorithm( minValue, modValue );
+        return getGcdByEuclideanAlgorithm(minValue, modValue);
     }
 }
