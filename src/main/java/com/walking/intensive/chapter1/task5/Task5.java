@@ -47,7 +47,7 @@ public class Task5 {
         }
     }
 
-    static void sortArrays (double doubles1, double doubles2, double doubles3) {
+    static double[] sortArrays (double doubles1, double doubles2, double doubles3) {
         double[] doubles = new double[3];
         if (doubles1 < doubles2 && doubles1 < doubles3)  {
             doubles[0] = doubles1;
@@ -72,7 +72,8 @@ public class Task5 {
         } else {
             doubles[1] = doubles3;
         }
-        System.out.println(Arrays.toString(doubles));
+
+        return doubles;
     }
 
     static double getAreaByHeron(double a, double b, double c) {
@@ -91,65 +92,48 @@ public class Task5 {
         double doubles2 = area * 2 / b;
         double doubles3 = area * 2 / c;
 
-        double[] doubles = new double[0];
-        sortArrays(doubles1, doubles2, doubles3);
-
-        return doubles;
+        return sortArrays(doubles1, doubles2, doubles3);
 
     }
 
     static double[] getMedians(double a, double b, double c) {
-        if (a >= b + c || b >= a + c || c >= a + b) {
-            return new double[0];
-        }
+        isTriangleExist2(a, b, c);
 
-        double[] medians = new double[3];
-        medians[0] = Math.sqrt(2 * a * a + 2 * b * b - c * c) / 2;
-        medians[1] = Math.sqrt(2 * a * a + 2 * c * c - b * b) / 2;
-        medians[2] = Math.sqrt(2 * c * c + 2 * b * b - a * a) / 2;
-        Arrays.sort(medians);
+        double doubles1 = Math.sqrt(2 * a * a + 2 * b * b - c * c) / 2;
+        double doubles2 = Math.sqrt(2 * a * a + 2 * c * c - b * b) / 2;
+        double doubles3 = Math.sqrt(2 * c * c + 2 * b * b - a * a) / 2;
 
-        return medians;
+        return sortArrays(doubles1, doubles2, doubles3);
     }
 
     static double[] getBisectors(double a, double b, double c) {
-        if (a >= b + c || b >= a + c || c >= a + b) {
-            return new double[0];
-        }
+        isTriangleExist2(a, b, c);
 
         double halfPerimeter = (a + b + c) / 2;
-        double[] bisectors = new double[3];
-        bisectors[0] = 2 * Math.sqrt(a * b * halfPerimeter * (halfPerimeter - c)) / (a + b);
-        bisectors[1] = 2 * Math.sqrt(a * c * halfPerimeter * (halfPerimeter - b)) / (a + c);
-        bisectors[2] = 2 * Math.sqrt(c * b * halfPerimeter * (halfPerimeter - a)) / (c + b);
-        Arrays.sort(bisectors);
 
-        return bisectors;
+        double doubles1 = 2 * Math.sqrt(a * b * halfPerimeter * (halfPerimeter - c)) / (a + b);
+        double doubles2 = 2 * Math.sqrt(a * c * halfPerimeter * (halfPerimeter - b)) / (a + c);
+        double doubles3 = 2 * Math.sqrt(c * b * halfPerimeter * (halfPerimeter - a)) / (c + b);
+
+        return sortArrays(doubles1, doubles2, doubles3);
 
     }
 
-
     static double[] getAngles(double a, double b, double c) {
-        if (a >= b + c || b >= a + c || c >= a + b) {
-            return new double[0];
-        }
+        isTriangleExist2(a, b, c);
 
         double cosC = (a * a + b * b - c * c) / (2 * a * b);
         double cosB = (a * a + c * c - b * b) / (2 * a * c);
 
-        double[] angles = new double[3];
-        angles[0] = Math.toDegrees(Math.acos(cosC));
-        angles[1] = Math.toDegrees(Math.acos(cosB));
-        angles[2] = 180 - angles[0] - angles[1];
-        Arrays.sort(angles);
+        double doubles1 = Math.toDegrees(Math.acos(cosC));
+        double doubles2 = Math.toDegrees(Math.acos(cosB));
+        double doubles3 = 180 - doubles1 - doubles2;
 
-        return angles;
+        return sortArrays(doubles1, doubles2, doubles3);
     }
 
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if (a >= b + c || b >= a + c || c >= a + b) {
-            return -1;
-        }
+        isTriangleExist(a, b, c);
 
         double halfPerimeter = (a + b + c) / 2;
 
@@ -158,9 +142,7 @@ public class Task5 {
 
 
     static double getCircumradius(double a, double b, double c) {
-        if (a >= b + c || b >= a + c || c >= a + b) {
-            return -1;
-        }
+        isTriangleExist(a, b, c);
 
         double cosC = (a * a + b * b - c * c) / (2 * a * b);
         double sinC = Math.sqrt(1 - cosC * cosC);
@@ -169,9 +151,7 @@ public class Task5 {
     }
 
     static double getAreaAdvanced(double a, double b, double c) {
-        if (a >= b + c || b >= a + c || c >= a + b) {
-            return -1;
-        }
+        isTriangleExist(a, b, c);
 
         double cosC = (a * a + b * b - c * c) / (2 * a * b);
         double sinC = Math.sqrt(1 - cosC * cosC);
