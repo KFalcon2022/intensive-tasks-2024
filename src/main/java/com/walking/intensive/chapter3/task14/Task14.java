@@ -117,24 +117,24 @@ public class Task14 {
         return distanceSquared <= radiusSquared;
     }
 
-    private static boolean isValid(int[][] array, int[][] arrayTwo) {
-        return checkArray(array, arrayTwo);
+    private static boolean isValid(int[][] objects, int[][] radar) {
+        return checkArray(objects, radar);
     }
 
-    private static boolean checkArray(int[][] array, int[][] arrayTwo) {
-        for (int[] ints : array) {
+    private static boolean checkArray(int[][] objects, int[][] radar) {
+        for (int[] ints : objects) {
             if (ints.length != 2) {
                 return false;
             }
+
             for (int anInt : ints) {
                 if (anInt < 0) {
                     return false;
                 }
             }
-
         }
 
-        for (int[] ints : arrayTwo) {
+        for (int[] ints : radar) {
             if (ints.length != 3) {
                 return false;
             }
