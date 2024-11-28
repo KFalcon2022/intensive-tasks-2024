@@ -50,11 +50,10 @@ public class Task7 {
 
         for (int a = n - 1; a > 0; a--) {
             int sumA = sumDivider(a);
-            int b = sumA;
-            int sumB = sumDivider(b);
+            int sumB = sumDivider(sumA);
 
-            if (sumB == a && a != b) {
-                return Math.max(a, b);
+            if (sumB == a && a != sumA) {
+                return Math.max(a, sumA);
             }
         }
         return 0;
