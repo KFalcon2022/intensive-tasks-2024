@@ -20,11 +20,32 @@ package com.walking.intensive.chapter2.task8;
  */
 public class Task8 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(getHappyTicketChance());
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+
+        int allVariants = 1000000;
+        int threeDigitsSum = 28; // количество вариантов сумм цифр в числах от 0 до 999
+        int[] allSums = new int[threeDigitsSum];
+
+        for (int i = 0; i < 1000; i++) {
+            int digitsSum = 0;
+            int number = i;
+            while (number != 0) {
+                digitsSum += number % 10;
+                number /= 10;
+            }
+            allSums[digitsSum]++;
+        }
+
+        int luckyVariants = 0;
+
+        for (int q : allSums) {
+            luckyVariants += q * q;
+        }
+
+        return (double) luckyVariants / allVariants;
     }
 }
