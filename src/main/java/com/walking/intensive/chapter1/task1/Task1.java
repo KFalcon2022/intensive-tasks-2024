@@ -18,13 +18,12 @@ public class Task1 {
         int age = 0;
 
         System.out.println(getAgeString(age));
-        System.out.println("asdf");
     }
 
     static String getAgeString(int age) {
         if (age < 0) return "Некорректный ввод";
 
-        if ((age >= 11 && age <= 14) || (age >= 111 && age <= 114) || (age % 10 >= 5 || age % 10 == 0)) {
+        if ((age % 10 >= 5 || age % 10 == 0) || (age >= 11 && age <= 14) || (age >= 111 && age <= 114)) {
             return "Вам " + age + " лет";
         }
 
