@@ -9,12 +9,12 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 
-        System.out.println(getGcd(38, 18));
+        System.out.println(getGcd(18, 38));
         System.out.println();
         System.out.println(getGcdByEuclideanAlgorithm(38, 18));
     }
 
-    static boolean getValidation(int m, int n) {
+    static boolean validate(int m, int n) {
 
         return m <= 0 || n <= 0;
     }
@@ -28,11 +28,13 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
 
-        if (getValidation(m, n)) {
+        if (validate(m, n)) {
             return -1;
         }
 
-        int noc = 0, number1 = m, number2 = n;
+        int noc = 0;
+        int number1 = m;
+        int number2 = n;
 
         if (number1 == number2) {
             noc = number1;
@@ -62,26 +64,15 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
 
-        if (getValidation(m, n)) {
+        if (validate(m, n)) {
             return -1;
         }
 
         int nod = 0;
-        int number1 = 0;
-        int number2;
 
         for (int i = 1; i <= m; i++) {
-            if (m % i == 0) {
-                number1 = i;
-            }
-            for (int j = 1; j <= n; j++) {
-                if (n % j == 0) {
-                    number2 = j;
-
-                    if (number1 == number2) {
-                        nod = number1;
-                    }
-                }
+            if (m % i == 0 && n % i == 0) {
+                nod = i;
             }
         }
 
