@@ -33,11 +33,6 @@ public class Task5 {
         return Math.sqrt(s * (s - a) * (s - b) * (s - c));
     }
 
-    private static boolean isNotTriangle(double a, double b, double c) {
-        return a <= 0 || b <= 0 || c <= 0
-                || a + b <= c || a + c <= b || b + c <= a;
-    }
-
     /**
      * Реализуйте метод, который будет возвращать высоты треугольника по возрастанию.
      *
@@ -51,16 +46,15 @@ public class Task5 {
         }
 
         double area = getAreaByHeron(a, b, c);
-        double heightA = (2 * area) / a;
-        double heightB = (2 * area) / b;
-        double heightC = (2 * area) / c;
+        double heightA = getHeight(area, a);
+        double heightB = getHeight(area, b);
+        double heightC = getHeight(area, c);
 
         double[] heights = new double[]{heightA, heightB, heightC};
         Arrays.sort(heights);
 
         return heights;
     }
-
 
     /**
      * Реализуйте метод, который будет возвращать медианы треугольника по возрастанию.
@@ -74,9 +68,9 @@ public class Task5 {
             return new double[]{};
         }
 
-        double medianA = 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a);
-        double medianB = 0.5 * Math.sqrt(2 * a * a + 2 * c * c - b * b);
-        double medianC = 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
+        double medianA = getMedian(b, c, a);
+        double medianB = getMedian(a, c, b);
+        double medianC = getMedian(a, b, c);
 
         double[] medians = {medianA, medianB, medianC};
         Arrays.sort(medians);
@@ -96,9 +90,9 @@ public class Task5 {
             return new double[]{};
         }
 
-        double bisectorA = Math.sqrt(b * c * (1 - (Math.pow(a, 2) / ((b + c) * (b + c)))));
-        double bisectorB = Math.sqrt(a * c * (1 - (Math.pow(b, 2) / ((a + c) * (a + c)))));
-        double bisectorC = Math.sqrt(a * b * (1 - (Math.pow(c, 2) / ((a + b) * (a + b)))));
+        double bisectorA = getBisector(a, b, c);
+        double bisectorB = getBisector(b, c, a);
+        double bisectorC = getBisector(c, a, b);
 
         double[] bisectors = {bisectorA, bisectorB, bisectorC};
         Arrays.sort(bisectors);
@@ -118,8 +112,8 @@ public class Task5 {
             return new double[]{};
         }
 
-        double angleA = Math.acos((b * b + c * c - a * a) / (2 * b * c));
-        double angleB = Math.acos((a * a + c * c - b * b) / (2 * a * c));
+        double angleA = getAngle(b, c, a);
+        double angleB = getAngle(a, c, b);
         double angleC = Math.PI - angleA - angleB;
 
         double[] angles = {Math.toDegrees(angleA), Math.toDegrees(angleB), Math.toDegrees(angleC)};
@@ -159,7 +153,7 @@ public class Task5 {
         }
 
         double area = getAreaByHeron(a, b, c);
-        return (a * b * c) / (4 * area);
+        return a * b * c / (4 * area);
     }
 
     /**
@@ -181,10 +175,31 @@ public class Task5 {
             return -1;
         }
 
-        double angleA = Math.acos((b * b + c * c - a * a) / (2 * b * c));
-        double angleB = Math.acos((a * a + c * c - b * b) / (2 * a * c));
+        double angleA = getAngle(b, c, a);
+        double angleB = getAngle(a, c, b);
         double angleC = Math.PI - angleA - angleB;
 
         return 0.5 * a * b * Math.sin(angleC);
+    }
+
+    private static boolean isNotTriangle(double a, double b, double c) {
+        return a <= 0 || b <= 0 || c <= 0
+                || a + b <= c || a + c <= b || b + c <= a;
+    }
+
+    private static double getHeight(double area, double side) {
+        return 2 * area / side;
+    }
+
+    private static double getMedian(double a, double b, double c) {
+        return 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
+    }
+
+    private static double getBisector(double a, double b, double c) {
+        return Math.sqrt(b * c * (1 - (Math.pow(a, 2) / ((b + c) * (b + c)))));
+    }
+
+    private static double getAngle(double a, double b, double c) {
+        return Math.acos((b * b + c * c - a * a) / (2 * b * c));
     }
 }
