@@ -34,7 +34,7 @@ public class Task5 {
 
     }
 
-    static void sortArray(double doubles1, double doubles2, double doubles3) {
+    static double sortArray(double doubles1, double doubles2, double doubles3) {
         double check1 = doubles1;
         double check2 = doubles2;
         double check3 = doubles3;
@@ -63,6 +63,7 @@ public class Task5 {
             doubles2 = check3;
         }
 
+        return (doubles1 + doubles2 + doubles3);
     }
 
     static double getAreaByHeron(double a, double b, double c) {
@@ -77,10 +78,9 @@ public class Task5 {
     static double[] getHeights(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double area = getAreaByHeron(a, b, c);
-            double height1 = area * 2 / a;
-            double height2 = area * 2 / b;
-            double height3 = area * 2 / c;
+            double height1 = getHeight(a, b, c);
+            double height2 = getHeight(b, c, a);
+            double height3 = getHeight(c, b, a);
             sortArray(height1, height2, height3);
 
             double[] heights = new double[3];
@@ -97,9 +97,9 @@ public class Task5 {
     static double[] getMedians(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double median1 = Math.sqrt(2 * a * a + 2 * b * b - c * c) / 2;
-            double median2 = Math.sqrt(2 * a * a + 2 * c * c - b * b) / 2;
-            double median3 = Math.sqrt(2 * c * c + 2 * b * b - a * a) / 2;
+            double median1 = getMedian(a, b, c);
+            double median2 = getMedian(b, c, a);
+            double median3 = getMedian(c, a, b);
             sortArray(median1, median2, median3);
 
             double[] medians = new double[3];
@@ -203,4 +203,14 @@ public class Task5 {
     static double getCos(double adjacent1, double adjacent2, double hypotenuse) {
         return (adjacent1 * adjacent1 + adjacent2 * adjacent2 - hypotenuse * hypotenuse) / (2 * adjacent1 * adjacent2);
     }
+
+    static double getHeight (double side1, double side2, double side3) {
+        double area = getAreaByHeron(side1, side2, side3);
+        return area * 2 / side1;
+    }
+
+    static double getMedian (double side1, double side2, double side3) {
+        return Math.sqrt(2 * side3 * side3 + 2 * side2 * side2 - side1 * side1) / 2;
+    }
+
 }
