@@ -116,11 +116,9 @@ public class Task5 {
     static double[] getBisectors(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double halfPerimeter = getHalfPerimeter(a, b, c);
-
-            double bisector1 = 2 * Math.sqrt(a * b * halfPerimeter * (halfPerimeter - c)) / (a + b);
-            double bisector2 = 2 * Math.sqrt(a * c * halfPerimeter * (halfPerimeter - b)) / (a + c);
-            double bisector3 = 2 * Math.sqrt(c * b * halfPerimeter * (halfPerimeter - a)) / (c + b);
+            double bisector1 = getBisector(a, b, c);
+            double bisector2 = getBisector(b, c, a);
+            double bisector3 = getBisector(c, a, b);
             sortArray(bisector1, bisector2, bisector3);
 
             double[] bisectors = new double[3];
@@ -137,12 +135,9 @@ public class Task5 {
     static double[] getAngles(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double cosC = getCos(a, b, c);
-            double cosB = getCos(a, c, b);
-
-            double angle1 = Math.toDegrees(Math.acos(cosC));
-            double angle2 = Math.toDegrees(Math.acos(cosB));
-            double angle3 = 180 - angle1 - angle2;
+            double angle1 = getAngle(a, b, c);
+            double angle2 = getAngle(b, c, a);
+            double angle3 = getAngle(c, b, a);
             sortArray(angle1, angle2, angle3);
 
             double[] angles = new double[3];
@@ -171,7 +166,7 @@ public class Task5 {
     static double getCircumradius(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double cosC = getCos(a, b, c);
+            double cosC = getCos(c, b, a);
             double sinC = Math.sqrt(1 - cosC * cosC);
 
             return (c / (2 * sinC));
@@ -183,7 +178,7 @@ public class Task5 {
     static double getAreaAdvanced(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double cosC = getCos(a, b, c);
+            double cosC = getCos(c, a, b);
             double sinC = Math.sqrt(1 - cosC * cosC);
 
             return (a * b / 2 * sinC);
@@ -200,17 +195,27 @@ public class Task5 {
         return (a + b + c) / 2;
     }
 
-    static double getCos(double adjacent1, double adjacent2, double hypotenuse) {
-        return (adjacent1 * adjacent1 + adjacent2 * adjacent2 - hypotenuse * hypotenuse) / (2 * adjacent1 * adjacent2);
+    static double getCos(double opposite, double adjacent1, double adjacent2) {
+        return (adjacent1 * adjacent1 + adjacent2 * adjacent2 - opposite * opposite) / (2 * adjacent1 * adjacent2);
     }
 
-    static double getHeight (double side1, double side2, double side3) {
-        double area = getAreaByHeron(side1, side2, side3);
-        return area * 2 / side1;
+    static double getHeight (double opposite, double adjacent1, double adjacent2) {
+        double area = getAreaByHeron(opposite, adjacent1, adjacent2);
+        return area * 2 / opposite;
     }
 
-    static double getMedian (double side1, double side2, double side3) {
-        return Math.sqrt(2 * side3 * side3 + 2 * side2 * side2 - side1 * side1) / 2;
+    static double getMedian (double opposite, double adjacent1, double adjacent2) {
+        return Math.sqrt(2 * adjacent2 * adjacent2 + 2 * adjacent1 * adjacent1 - opposite * opposite) / 2;
+    }
+
+    static double getBisector (double opposite, double adjacent1, double adjacent2) {
+        double halfPerimeter = getHalfPerimeter(opposite, adjacent1, adjacent2);
+        return 2 * Math.sqrt(adjacent1 * adjacent2 * halfPerimeter * (halfPerimeter - opposite)) / (adjacent1 + adjacent2);
+    }
+
+    static double getAngle (double opposite, double adjacent1, double adjacent2) {
+        double cos = getCos(opposite, adjacent1, adjacent2);
+        return Math.toDegrees(Math.acos(cos));
     }
 
 }
