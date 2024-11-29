@@ -20,7 +20,7 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
 
-        if (!(isValidParams(m, n))){
+        if (!(isValidParams(m, n))) {
             return -1;
         }
 
@@ -36,7 +36,7 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
 
-        if (!(isValidParams(m, n))){
+        if (!(isValidParams(m, n))) {
             return -1;
         }
 
@@ -59,20 +59,15 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
 
-        if (!(isValidParams(m, n))){
+        if (m < 1) {
             return -1;
         }
 
-        while (m != n) {
-            if (m > n) {
-                m = m - n;
-            }
-            else {
-                n = n - m;
-            }
+        if (n == 0) {
+            return m;
         }
 
-        return m;
+        return getGcdByEuclideanAlgorithm(n, m % n);
     }
 
     static boolean isValidParams(int m, int n){
