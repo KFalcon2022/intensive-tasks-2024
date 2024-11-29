@@ -31,7 +31,36 @@ public class Task7 {
     }
 
     static int getFriendlyPair(int n) {
-        // Ваш код
+
+        if (n < 1 || n > 1_000_000) {
+            return -1;
+        }
+
+        for (int i = n; i > 0; i--) {
+            int sumOne = getDivisorsSum(i);
+
+            if (i < sumOne && sumOne < n) {
+                int sumTwo = getDivisorsSum(sumOne);
+
+                if (sumTwo == i) {
+                    return sumOne;
+                }
+            }
+        }
         return 0;
+    }
+
+    static int getDivisorsSum(int a) {
+
+        int sum = 1;
+        int maxDivisor = (int) Math.sqrt(a);
+
+        for (int i = 2; i < maxDivisor; i++) {
+            if (a % i == 0) {
+                sum += i;
+                sum += a / i;
+            }
+        }
+        return sum;
     }
 }
