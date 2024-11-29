@@ -62,6 +62,7 @@ public class Task7 {
             if (sumDividers1 != friendlyPair2) {
                 sumDividers2 = friendlyPair2;
             }
+
             i--;
         }
         while (friendlyPair1 != sumDividers2 && i >= 0);
