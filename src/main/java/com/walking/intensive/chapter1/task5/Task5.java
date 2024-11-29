@@ -34,45 +34,35 @@ public class Task5 {
 
     }
 
-    static boolean isTriangleExist (double a, double b, double c) {
-        return a < b + c && b < a + c && c < a + b;
-    }
+    static void sortArray(double doubles1, double doubles2, double doubles3) {
+        double check1 = doubles1;
+        double check2 = doubles2;
+        double check3 = doubles3;
 
-    static double getHalfPerimeter (double a, double b, double c) {
-        return (a + b + c) / 2;
-    }
-
-    static double getCosC (double a, double b, double c) {
-        return (a * a + b * b - c * c) / (2 * a * b);
-    }
-
-    static double[] sortArrays (double doubles1, double doubles2, double doubles3) {
-        double[] doubles = new double[3];
-        if (doubles1 < doubles2 && doubles1 < doubles3)  {
-            doubles[0] = doubles1;
-        } else if (doubles2 < doubles1 && doubles2 < doubles3) {
-            doubles[0] = doubles2;
+        if (check2 < check1 && check2 < check3) {
+            doubles1 = check2;
+        } else if (check3 < check1 && check3 < check2) {
+            doubles1 = check3;
         } else {
-            doubles[0] = doubles3;
+            doubles1 = check1;
         }
 
-        if (doubles1 > doubles2 && doubles1 > doubles3) {
-            doubles[2] = doubles1;
-        } else if (doubles2 > doubles1 && doubles2 > doubles3) {
-            doubles[2] = doubles2;
+        if (check1 > check2 && check1 > check3) {
+            doubles3 = check1;
+        } else if (check2 > check1 && check2 > check3) {
+            doubles3 = check2;
         } else {
-            doubles[2] = doubles3;
+            doubles3 = check3;
         }
 
-        if (doubles[0] != doubles1 && doubles[2] != doubles1) {
-            doubles[1] = doubles1;
-        } else if (doubles[0] != doubles2 && doubles[2] != doubles2) {
-            doubles[1] = doubles2;
+        if (doubles1 != check1 && doubles3 != check1) {
+            doubles2 = check1;
+        } else if (doubles1 != check2 && doubles3 != check2) {
+            doubles2 = check2;
         } else {
-            doubles[1] = doubles3;
+            doubles2 = check3;
         }
 
-        return doubles;
     }
 
     static double getAreaByHeron(double a, double b, double c) {
@@ -88,11 +78,17 @@ public class Task5 {
         if (isTriangleExist(a, b, c)) {
 
             double area = getAreaByHeron(a, b, c);
-            double doubles1 = area * 2 / a;
-            double doubles2 = area * 2 / b;
-            double doubles3 = area * 2 / c;
+            double height1 = area * 2 / a;
+            double height2 = area * 2 / b;
+            double height3 = area * 2 / c;
+            sortArray(height1, height2, height3);
 
-            return sortArrays(doubles1, doubles2, doubles3);
+            double[] heights = new double[3];
+            heights[0] = height1;
+            heights[1] = height2;
+            heights[2] = height3;
+
+            return heights;
         }
 
         return new double[0];
@@ -101,11 +97,17 @@ public class Task5 {
     static double[] getMedians(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double doubles1 = Math.sqrt(2 * a * a + 2 * b * b - c * c) / 2;
-            double doubles2 = Math.sqrt(2 * a * a + 2 * c * c - b * b) / 2;
-            double doubles3 = Math.sqrt(2 * c * c + 2 * b * b - a * a) / 2;
+            double median1 = Math.sqrt(2 * a * a + 2 * b * b - c * c) / 2;
+            double median2 = Math.sqrt(2 * a * a + 2 * c * c - b * b) / 2;
+            double median3 = Math.sqrt(2 * c * c + 2 * b * b - a * a) / 2;
+            sortArray(median1, median2, median3);
 
-            return sortArrays(doubles1, doubles2, doubles3);
+            double[] medians = new double[3];
+            medians[0] = median1;
+            medians[1] = median2;
+            medians[2] = median3;
+
+            return medians;
         }
 
         return new double[0];
@@ -116,30 +118,42 @@ public class Task5 {
 
             double halfPerimeter = getHalfPerimeter(a, b, c);
 
-            double doubles1 = 2 * Math.sqrt(a * b * halfPerimeter * (halfPerimeter - c)) / (a + b);
-            double doubles2 = 2 * Math.sqrt(a * c * halfPerimeter * (halfPerimeter - b)) / (a + c);
-            double doubles3 = 2 * Math.sqrt(c * b * halfPerimeter * (halfPerimeter - a)) / (c + b);
+            double bisector1 = 2 * Math.sqrt(a * b * halfPerimeter * (halfPerimeter - c)) / (a + b);
+            double bisector2 = 2 * Math.sqrt(a * c * halfPerimeter * (halfPerimeter - b)) / (a + c);
+            double bisector3 = 2 * Math.sqrt(c * b * halfPerimeter * (halfPerimeter - a)) / (c + b);
+            sortArray(bisector1, bisector2, bisector3);
 
-            return sortArrays(doubles1, doubles2, doubles3);
+            double[] bisectors = new double[3];
+            bisectors[0] = bisector1;
+            bisectors[1] = bisector2;
+            bisectors[2] = bisector3;
+
+            return bisectors;
         }
 
         return new double[0];
     }
 
     static double[] getAngles(double a, double b, double c) {
-       if (isTriangleExist(a, b, c)) {
+        if (isTriangleExist(a, b, c)) {
 
-           double cosC = getCosC(a, b, c);
-           double cosB = (a * a + c * c - b * b) / (2 * a * c);
+            double cosC = getCos(a, b, c);
+            double cosB = getCos(a, c, b);
 
-           double doubles1 = Math.toDegrees(Math.acos(cosC));
-           double doubles2 = Math.toDegrees(Math.acos(cosB));
-           double doubles3 = 180 - doubles1 - doubles2;
+            double angle1 = Math.toDegrees(Math.acos(cosC));
+            double angle2 = Math.toDegrees(Math.acos(cosB));
+            double angle3 = 180 - angle1 - angle2;
+            sortArray(angle1, angle2, angle3);
 
-           return sortArrays(doubles1, doubles2, doubles3);
-       }
+            double[] angles = new double[3];
+            angles[0] = angle1;
+            angles[1] = angle2;
+            angles[2] = angle3;
 
-       return new double[0];
+            return angles;
+        }
+
+        return new double[0];
     }
 
     static double getInscribedCircleRadius(double a, double b, double c) {
@@ -157,7 +171,7 @@ public class Task5 {
     static double getCircumradius(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double cosC = getCosC(a, b, c);
+            double cosC = getCos(a, b, c);
             double sinC = Math.sqrt(1 - cosC * cosC);
 
             return (c / (2 * sinC));
@@ -169,12 +183,24 @@ public class Task5 {
     static double getAreaAdvanced(double a, double b, double c) {
         if (isTriangleExist(a, b, c)) {
 
-            double cosC = getCosC(a, b, c);
+            double cosC = getCos(a, b, c);
             double sinC = Math.sqrt(1 - cosC * cosC);
 
             return (a * b / 2 * sinC);
         }
 
         return -1;
+    }
+
+    static boolean isTriangleExist(double a, double b, double c) {
+        return a < b + c && b < a + c && c < a + b;
+    }
+
+    static double getHalfPerimeter(double a, double b, double c) {
+        return (a + b + c) / 2;
+    }
+
+    static double getCos(double adjacent1, double adjacent2, double hypotenuse) {
+        return (adjacent1 * adjacent1 + adjacent2 * adjacent2 - hypotenuse * hypotenuse) / (2 * adjacent1 * adjacent2);
     }
 }
