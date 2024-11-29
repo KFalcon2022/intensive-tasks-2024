@@ -51,11 +51,53 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+        return getFormatedPascalTriangle(n, generatePascalTriangle(n));
+    }
+
+    static String generatePascalTriangle(int n) {
+        StringBuilder result = new StringBuilder();
+        int currentValue = 1;
+
+        for (int i = 0; i < n; i++) {
+            currentValue = 1;
+
+            for (int j = 0; j <= i; j++) {
+                result.append(currentValue);
+                if (j < i) {
+                    result.append(" ");
+                }
+
+                currentValue = currentValue * (i - j) / (j + 1);
+            }
+            if (i < n - 1) {
+                result.append("\n");
+            }
+        }
+        return result.toString();
+    }
+
+    private static String getFormatedPascalTriangle(int n, String triangle) {
+        StringBuilder result = new StringBuilder();
+        int lastLineStart = triangle.lastIndexOf('\n') + 1;
+        int lastLineLength = triangle.length() - lastLineStart;
+
+        int currentLineStart = 0;
+        for (int i = 0; i < n; i++) {
+            int nextLineStart = triangle.indexOf('\n', currentLineStart);
+            if (nextLineStart == -1) {
+                nextLineStart = triangle.length();
+            }
+
+            String line = triangle.substring(currentLineStart, nextLineStart);
+            int spacesToAdd = (lastLineLength - line.length()) / 2;
+            result.append(" ".repeat(spacesToAdd)).append(line).append('\n');
+
+            currentLineStart = nextLineStart + 1;
+        }
+
+        return result.toString();
     }
 }
