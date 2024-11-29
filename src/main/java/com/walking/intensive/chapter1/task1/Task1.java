@@ -18,7 +18,7 @@ public class Task1 {
         int age = 0;
 
         System.out.println(getAgeString(age));
-
+        System.out.println("test");
     }
 
     static String getAgeString(int age) {
