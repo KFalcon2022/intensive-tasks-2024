@@ -157,21 +157,21 @@ public class Task5 {
         return (adjacent1 * adjacent1 + adjacent2 * adjacent2 - opposite * opposite) / (2 * adjacent1 * adjacent2);
     }
 
-    static double getHeight (double opposite, double adjacent1, double adjacent2) {
+    static double getHeight(double opposite, double adjacent1, double adjacent2) {
         double area = getAreaByHeron(opposite, adjacent1, adjacent2);
         return area * 2 / opposite;
     }
 
-    static double getMedian (double opposite, double adjacent1, double adjacent2) {
+    static double getMedian(double opposite, double adjacent1, double adjacent2) {
         return Math.sqrt(2 * adjacent2 * adjacent2 + 2 * adjacent1 * adjacent1 - opposite * opposite) / 2;
     }
 
-    static double getBisector (double opposite, double adjacent1, double adjacent2) {
+    static double getBisector(double opposite, double adjacent1, double adjacent2) {
         double halfPerimeter = getHalfPerimeter(opposite, adjacent1, adjacent2);
         return 2 * Math.sqrt(adjacent1 * adjacent2 * halfPerimeter * (halfPerimeter - opposite)) / (adjacent1 + adjacent2);
     }
 
-    static double getAngle (double opposite, double adjacent1, double adjacent2) {
+    static double getAngle(double opposite, double adjacent1, double adjacent2) {
         double cos = getCos(opposite, adjacent1, adjacent2);
         return Math.toDegrees(Math.acos(cos));
     }
