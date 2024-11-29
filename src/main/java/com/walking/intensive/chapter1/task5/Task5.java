@@ -48,17 +48,12 @@ public class Task5 {
             return new double[0];
         }
 
-        double height1 = getHeight(a, b, c);
-        double height2 = getHeight(b, c, a);
-        double height3 = getHeight(c, b, a);
-
         double[] heights = new double[3];
-        heights[0] = height1;
-        heights[1] = height2;
-        heights[2] = height3;
-        sortArray(heights[0], heights[1], heights[2]);
+        heights[0] = getHeight(a, b, c);
+        heights[1] = getHeight(b, c, a);
+        heights[2] = getHeight(c, b, a);
 
-        return heights;
+        return sortArray(heights);
     }
 
     static double[] getMedians(double a, double b, double c) {
@@ -66,17 +61,12 @@ public class Task5 {
             return new double[0];
         }
 
-        double median1 = getMedian(a, b, c);
-        double median2 = getMedian(b, c, a);
-        double median3 = getMedian(c, a, b);
-
         double[] medians = new double[3];
-        medians[0] = median1;
-        medians[1] = median2;
-        medians[2] = median3;
-        sortArray(medians[0], medians[1], medians[2]);
+        medians[0] = getMedian(a, b, c);
+        medians[1] = getMedian(b, c, a);
+        medians[2] = getMedian(c, a, b);
 
-        return medians;
+        return sortArray(medians);
     }
 
     static double[] getBisectors(double a, double b, double c) {
@@ -84,17 +74,12 @@ public class Task5 {
             return new double[0];
         }
 
-        double bisector1 = getBisector(a, b, c);
-        double bisector2 = getBisector(b, c, a);
-        double bisector3 = getBisector(c, a, b);
-
         double[] bisectors = new double[3];
-        bisectors[0] = bisector1;
-        bisectors[1] = bisector2;
-        bisectors[2] = bisector3;
-        sortArray(bisectors[0], bisectors[1], bisectors[2]);
+        bisectors[0] = getBisector(a, b, c);
+        bisectors[1] = getBisector(b, c, a);
+        bisectors[2] = getBisector(c, a, b);
 
-        return bisectors;
+        return sortArray(bisectors);
     }
 
     static double[] getAngles(double a, double b, double c) {
@@ -102,17 +87,12 @@ public class Task5 {
             return new double[0];
         }
 
-        double angle1 = getAngle(a, b, c);
-        double angle2 = getAngle(b, c, a);
-        double angle3 = getAngle(c, b, a);
-
         double[] angles = new double[3];
-        angles[0] = angle1;
-        angles[1] = angle2;
-        angles[2] = angle3;
-        sortArray(angles[0], angles[1], angles[2]);
+        angles[0] = getAngle(a, b, c);
+        angles[1] = getAngle(b, c, a);
+        angles[2] = getAngle(c, b, a);
 
-        return angles;
+        return sortArray(angles);
     }
 
     static double getInscribedCircleRadius(double a, double b, double c) {
@@ -176,35 +156,35 @@ public class Task5 {
         return Math.toDegrees(Math.acos(cos));
     }
 
-    static void sortArray(double doubles1, double doubles2, double doubles3) {
-        double check1 = doubles1;
-        double check2 = doubles2;
-        double check3 = doubles3;
+    static double[] sortArray(double[] doubles) {
+        double check1 = doubles[0];
+        double check2 = doubles[1];
+        double check3 = doubles[2];
 
         if (check2 < check1 && check2 < check3) {
-            doubles1 = check2;
+            doubles[0] = check2;
         } else if (check3 < check1 && check3 < check2) {
-            doubles1 = check3;
+            doubles[0] = check3;
         } else {
-            doubles1 = check1;
+            doubles[0] = check1;
         }
 
         if (check1 > check2 && check1 > check3) {
-            doubles3 = check1;
+            doubles[2] = check1;
         } else if (check2 > check1 && check2 > check3) {
-            doubles3 = check2;
+            doubles[2] = check2;
         } else {
-            doubles3 = check3;
+            doubles[2] = check3;
         }
 
-        if (doubles1 != check1 && doubles3 != check1) {
-            doubles2 = check1;
-        } else if (doubles1 != check2 && doubles3 != check2) {
-            doubles2 = check2;
+        if (doubles[0] != check1 && doubles[2] != check1) {
+            doubles[1] = check1;
+        } else if (doubles[0] != check2 && doubles[2] != check2) {
+            doubles[1] = check2;
         } else {
-            doubles2 = check3;
+            doubles[1] = check3;
         }
-
+        return doubles;
     }
 
 }
