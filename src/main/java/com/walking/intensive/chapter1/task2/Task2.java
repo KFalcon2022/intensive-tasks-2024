@@ -33,7 +33,7 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        System.out.println(getFlatLocation(2, 3, 1));
+        System.out.println(getFlatLocation(2, 3, 5));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
@@ -50,7 +50,7 @@ public class Task2 {
 
         int entrance = 0;
         for (int i = 0; i < entranceAmount; i++) {
-            if ((flatNumber > flatsOnEntrance * i) & (flatNumber <= flatsOnEntrance * (i + 1))) {
+            if ((flatNumber > flatsOnEntrance * i) && (flatNumber <= flatsOnEntrance * (i + 1))) {
                 entrance = i + 1;
                 break;
             }
@@ -58,14 +58,20 @@ public class Task2 {
 
         int floor = 0;
         for (int i = 0; i < floorAmount; i++) {
-            if ((flatNumber - (entrance - 1) * flatsOnEntrance >= flatsOnFloor * i) &
-                    (flatNumber - (entrance - 1) * flatsOnEntrance < flatsOnFloor * (i + 1))) {
+            if ((flatNumber - (entrance - 1) * flatsOnEntrance > flatsOnFloor * i) &&
+                    (flatNumber - (entrance - 1) * flatsOnEntrance <= flatsOnFloor * (i + 1))) {
                 floor = i + 1;
                 break;
             }
         }
 
+        int locationOnFloor = flatNumber - (flatsOnEntrance * (entrance - 1)) - (flatsOnFloor * (floor - 1));
+        return switch (locationOnFloor) {
+            case 1 -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, слева от лифта, влево";
+            case 2 -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, слева от лифта, вправо";
+            case 3 -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, справа от лифта, влево";
+            default -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, справа от лифта, вправо";
+        };
 
-        return entrance + " подъезд, " + floor + " этаж,";
     }
 }
