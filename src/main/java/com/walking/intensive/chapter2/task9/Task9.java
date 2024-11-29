@@ -58,16 +58,30 @@ public class Task9 {
         System.out.println(getPascalTriangle(n));
     }
 
+
     static String getPascalTriangle(int n) {
         // Ваш код
-        for (int j = 1; j < n; j++) {
-            int[] array = new int[n + 1];
+        if (n < 0) {
+            return " ";
+        }
+        for (int j = 1; j <= n; j++) {
+            int[] array = new int[j];
             array[0] = 1;
-            for (int i = 1; i < array.length; i++) {
-                double kef = (double) (n + 1 - i) / i;
+            for (int i = 1; i < j; i++) {
+                double kef = (double) (j - i) / i;
                 array[i] = (int) (array[i - 1] * kef);
             }
-            System.out.println(Arrays.toString(array));
-            return null;
+
+            for (int i : array) {
+                String sp = " ";
+//                for (int k = 1; k <= n - j; k++) {
+
+//                    System.out.printf(" %s", sp);
+//                }
+                System.out.printf("%2d",  i);
+            }
+            System.out.println();
         }
+        return null;
     }
+}
