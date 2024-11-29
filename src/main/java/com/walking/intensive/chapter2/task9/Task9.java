@@ -54,7 +54,7 @@ import java.util.Arrays;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int n = 5;
+        int n = 18;
         System.out.println(getPascalTriangle(n));
     }
 
@@ -72,13 +72,11 @@ public class Task9 {
                 array[i] = (int) (array[i - 1] * kef);
             }
 
+            for (int k = n - j; k > 0; k--) {
+                System.out.print(" ");
+            }
             for (int i : array) {
-                String sp = " ";
-//                for (int k = 1; k <= n - j; k++) {
-
-//                    System.out.printf(" %s", sp);
-//                }
-                System.out.printf("%2d",  i);
+                System.out.print(i+ " ");
             }
             System.out.println();
         }
