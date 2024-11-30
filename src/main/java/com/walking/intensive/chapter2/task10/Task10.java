@@ -11,11 +11,33 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(isPalindrome("Ежу хуже"));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+        if (!isValidValue(inputString)) {
+            return false;
+        }
+
+        inputString = deleteSpaces(inputString);
+        return new StringBuilder(inputString).reverse().toString().equals(inputString);
+    }
+
+
+    private static String deleteSpaces(String inputString) {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < inputString.length(); i++) {
+            char temp = inputString.charAt(i);
+            if (Character.isLetter(temp)) {
+                result.append(temp);
+            }
+        }
+
+        return result.toString().toLowerCase();
+    }
+
+    private static boolean isValidValue(String inputString) {
+        return inputString != null && inputString.length() > 1;
     }
 }
