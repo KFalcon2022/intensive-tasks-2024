@@ -34,69 +34,64 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 
-        System.out.println(getFlatLocation(7, 4, 28));
         System.out.println(getFlatLocation(7, 4, 1));
         System.out.println(getFlatLocation(7, 4, 2));
         System.out.println(getFlatLocation(7, 4, 3));
-        System.out.println(getFlatLocation(7, 4, 29));
-        System.out.println(getFlatLocation(7, 4, 30));
-        System.out.println(getFlatLocation(7, 4, 31));
-        System.out.println(getFlatLocation(7, 4, 32));
-        System.out.println(getFlatLocation(7, 4, 33));
-        System.out.println(getFlatLocation(7, 4, 34));
-        System.out.println(getFlatLocation(7, 4, 35));
+        System.out.println(getFlatLocation(7, 4, 4));
+        System.out.println(getFlatLocation(7, 4, 5));
+        System.out.println(getFlatLocation(7, 4, 6));
+        System.out.println(getFlatLocation(7, 4, 7));
+        System.out.println(getFlatLocation(7, 4, 8));
+        System.out.println(getFlatLocation(7, 4, 9));
+        System.out.println(getFlatLocation(7, 4, 10));
+        System.out.println(getFlatLocation(7, 4, 11));
+        System.out.println(getFlatLocation(7, 4, 12));
+        System.out.println(getFlatLocation(7, 4, 73));
+        System.out.println(getFlatLocation(7, 4, 80));
+        System.out.println(getFlatLocation(7, 4, 84));
+        System.out.println(getFlatLocation(7, 4, 90));
+        System.out.println(getFlatLocation(7, 4, 96));
+        System.out.println(getFlatLocation(7, 4, 100));
+        System.out.println(getFlatLocation(7, 4, 111));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
-        int numberFlat = 4; // количество квартир
-        int numberFloor = 1; // какой этаж
-        int numberEntranceHouse = 0;  // в каком подъезде квартира
+        int numberFlatInHouse = 4; // количество квартир
+        int numberFloor; // какой этаж
+        int numberEntranceHouse;  // в каком подъезде квартира
 
-        if (flatNumber > (floorAmount * entranceAmount * numberFlat)) {
+        if (flatNumber > (floorAmount * entranceAmount * numberFlatInHouse)) { // валидация
             return "Такой квартиры не существует";
         }
         if (flatNumber <= 0 || floorAmount <= 0 || entranceAmount <= 0) {
             return "Некорректные входные данные";
         }
 
-        numberEntranceHouse = flatNumber / (floorAmount * numberFlat); // номер подъезда
-        if (flatNumber % (floorAmount * numberFlat) > 0) {
+        numberEntranceHouse = flatNumber / (floorAmount * numberFlatInHouse); // номер подъезда
+        if (flatNumber % (floorAmount * numberFlatInHouse) > 0) {
             numberEntranceHouse++;
         }
 
-        if (flatNumber / numberFlat > floorAmount) { // какой этаж
-            numberFloor = (flatNumber / numberFlat) - ((numberEntranceHouse - 1) * floorAmount);
-            if ((double) flatNumber / numberFlat > 0){
+        if (numberEntranceHouse > 1) { // какой этаж
+            numberFloor = (flatNumber / numberFlatInHouse) - ((numberEntranceHouse - 1) * floorAmount);
+            if ((double) flatNumber % numberFlatInHouse > 0) {
                 numberFloor++;
             }
         } else {
-            numberFloor = flatNumber / numberFlat;// какой этаж
-//            System.out.println((double) 1/4);
-            if ((double) flatNumber / numberFlat > 0){
+            numberFloor = flatNumber / numberFlatInHouse;
+            if ((double) flatNumber % numberFlatInHouse > 0) {
                 numberFloor++;
             }
         }
-//        int numberFloorOstatok = flatNumber % numberFlat;
-////        System.out.println("остаток от деления по подъезду " + flatNumber % numberFlat);
-//  //        if (flatNumber % numberFlat > 0) {
-////            numberFloor += flatNumber % numberFlat;
-////            if (numberFloor > floorAmount) {
-////                numberFloor = 1;
-////            }
-////        }
-//
-//        if (numberFloor >= floorAmount && numberEntranceHouse > 1 && numberFloorOstatok < 7){
-//            numberFloor = numberFloorOstatok;
-//        }
 
-        if (flatNumber % numberFlat == 0) {
+        if (flatNumber == 1 | flatNumber % numberFlatInHouse == 1) {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, слева от лифта, влево";
         }
-        if (flatNumber % numberFlat == 1) {
+        if (flatNumber == 2 | flatNumber % numberFlatInHouse == 2) {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, слева от лифта, вправо";
         }
-        if (flatNumber % numberFlat == 2) {
+        if (flatNumber == 3 | flatNumber % numberFlatInHouse == 3) {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, справа от лифта, влево";
         } else {
             return flatNumber + " кв – " + numberEntranceHouse + " подъезд, " + numberFloor + " этаж, справа от лифта, вправо";
