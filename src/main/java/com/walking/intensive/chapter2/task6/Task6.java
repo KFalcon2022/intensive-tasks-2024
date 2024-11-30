@@ -1,26 +1,30 @@
 package com.walking.intensive.chapter2.task6;
 
-/**
- * Реализуйте представленные ниже методы для расчета
- * НОК (наименьшее общее кратное) и НОД (наибольший общий делитель).
- *
- * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
- */
+import java.util.Scanner;
+
 public class Task6 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите первое число: ");
+        int m = in.nextInt();
+        System.out.print("Введите второе число: ");
+        int n = in.nextInt();
+
+        System.out.println("НОК = " + getLcm(m, n));
+
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать НОК для чисел, переданных параметрами.
-     *
-     * <p>Входные параметры - положительные целые числа.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+
+        int x = m;
+        while (m % n != 0) {
+            m += x;
+        }
+        return m;
     }
 
     /**
