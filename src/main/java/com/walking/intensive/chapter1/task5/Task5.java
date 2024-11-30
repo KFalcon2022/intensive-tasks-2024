@@ -50,9 +50,9 @@ public class Task5 {
 
         double area = getAreaByHeron(a, b, c);
         double[] heights = new double[3];
-        heights[0] = getHeight(a, b, c, area);
-        heights[1] = getHeight(b, c, a, area);
-        heights[2] = getHeight(c, b, a, area);
+        heights[0] = getHeight(a, area);
+        heights[1] = getHeight(b, area);
+        heights[2] = getHeight(c, area);
         sortArray(heights);
 
         return heights;
@@ -143,7 +143,7 @@ public class Task5 {
         return (adjacent1 * adjacent1 + adjacent2 * adjacent2 - opposite * opposite) / (2 * adjacent1 * adjacent2);
     }
 
-    static double getHeight(double opposite, double adjacent1, double adjacent2, double area) {
+    static double getHeight(double opposite, double area) {
         return area * 2 / opposite;
     }
 
