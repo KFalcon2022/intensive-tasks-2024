@@ -57,7 +57,7 @@ public class Task4 {
         int num = 0;
         if (discriminant == 0 || a == 0) {
             num = 1;
-            double solution = - b / 2 * a;
+            double solution = (-b / 2) * a;
             return "Количество решений: " + num + ". Корень: " + solution;
         }
 
