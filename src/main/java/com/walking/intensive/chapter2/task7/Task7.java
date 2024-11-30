@@ -30,7 +30,6 @@ public class Task7 {
 
         System.out.println(getFriendlyPair(200));
     }
-
     private static int getSumDividers(int n) {
 
         int sumDividers = 0;
@@ -48,13 +47,13 @@ public class Task7 {
             return -1;
         }
 
-        int i = n;
+        //int i = n;
         int sumDividers1;
         int sumDividers2 = 0;
-        int friendlyPair1;
-        int friendlyPair2;
+        int friendlyPair1 = 0;
+        int friendlyPair2 = 0;
 
-        do {
+        for (int i = n; i >= 0; i--) {
             friendlyPair1 = i;
             sumDividers1 = getSumDividers(i);
             friendlyPair2 = getSumDividers(sumDividers1);
@@ -63,9 +62,10 @@ public class Task7 {
                 sumDividers2 = friendlyPair2;
             }
 
-            i--;
+            if (friendlyPair1 == sumDividers2) {
+                break;
+            }
         }
-        while (friendlyPair1 != sumDividers2 && i >= 0);
 
         return Math.max(friendlyPair1, friendlyPair2);
     }
