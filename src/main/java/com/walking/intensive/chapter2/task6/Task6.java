@@ -13,6 +13,7 @@ public class Task6 {
 
         System.out.println("НОК = " + getLcm(m, n));
         System.out.println("НОД = " + getGcd(m, n));
+        System.out.println("НОД Евклид = " + getGcdByEuclideanAlgorithm(m, n));
 
     }
 
@@ -38,26 +39,24 @@ public class Task6 {
         }
 
         if (m > n) {
-            return getGcdCheck(m, n);
+            return getGcdIfFirstNumberIsBigger(m, n);
         }
 
-        return getGcdCheck(n, m);
+        return getGcdIfFirstNumberIsBigger(n, m);
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать НОД для чисел, переданных параметрами.
-     * Расчет должен производиться с помощью рекурсивной версии алгоритма Евклида.
-     *
-     * <p>Входные параметры - положительные целые числа.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isNumberNegative(m, n)) {
+            return -1;
+        }
+        int x = m % n;
+        if (x == 0) {
+            return n;
+        }
+        return getGcdByEuclideanAlgorithm(n, x);
     }
 
-    static int getGcdCheck (int a, int b) {
+    static int getGcdIfFirstNumberIsBigger (int a, int b) {
         int x = b;
         while (a % x != 0) {
             x = a % x;
