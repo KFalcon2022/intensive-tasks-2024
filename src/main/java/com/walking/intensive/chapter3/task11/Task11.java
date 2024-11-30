@@ -42,11 +42,38 @@ package com.walking.intensive.chapter3.task11;
  */
 public class Task11 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+//        int[] array = new int[5];
+//
+//        for (int i = 0; i < array.length; i++) {
+//            array[i] = i + 1;
+//        }
+
+//        System.out.println(getOddSubArraysElementsSum(array));
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        // Ваш код
-        return 0;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i]<0) {
+                return -1;
+            }
+        }
+        int subArrayLength = array.length - (array.length + 1) % 2;
+        int sum = 0;
+
+        do {
+            for (int j = 0; j <= array.length - subArrayLength; j++) {
+
+                for (int k = 0; k < subArrayLength; k++) {
+                    sum += array[j + k];
+                }
+            }
+
+            subArrayLength -= 2;
+        } while (subArrayLength > 0);
+
+
+        return sum;
     }
 }
