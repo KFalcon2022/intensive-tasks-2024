@@ -28,8 +28,8 @@ public class Task1 {
             return ("Вам" + " " + age + " " + "год");
         }
         if (((age % 10 == 2) || (age % 10 == 3) || age % 10 == 4) && (age / 10 % 10 != 1)) {
-            return ("Вам" + " " + age + " " + "года");
+            return ("Вам " + age + " года");
         } else
-            return ("Вам" + " " + age + " " + "лет");
+            return ("Вам " + age + " лет");
     }
 }
