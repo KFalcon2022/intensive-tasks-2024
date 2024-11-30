@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task4;
 
+import static java.lang.Math.sqrt;
+
 /**
  * Дано уравнение:
  *
@@ -35,7 +37,35 @@ public class Task4 {
 
     static String solveEquation(double a, double b, double c) {
         //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        double Solution1;
+        double Solution2;
+        double Discriminant = b * b - 4 * a * c;
+        if (a == 0 && b == 0 && c == 0) {
+            return "Бесконечное множество решений.";
+        }
+        if (Discriminant < 0 || (a == 0 && b == 0 && c != 0)) {
+            return "Количество решений: 0.";
+        }
+        if (a == 0) {
+            Solution1 = -c / b;
+            return "Количество решений: 1. Корень: " + Solution1;
+        }
+        if (Discriminant == 0) {
+            if (b != 0 && c != 0) {
+                Solution1 = -b / (2 * a);
+                return "Количество решений: 1. Корень: " + Solution1;
+            }
+            Solution1 = b / (2 * a);
+            return "Количество решений: 1. Корень: " + Solution1;
+        }
+        if (Discriminant > 0) {
+            Solution1 = -(b + sqrt(Discriminant)) / (2 * a);
+            Solution2 = -(b - sqrt(Discriminant)) / (2 * a);
+            if (Solution1 > Solution2) {
+                return "Количество решений: 2. Корни: " + Solution2 + ";" + Solution1;
+            }
+            return "Количество решений: 2. Корни: " + Solution1 + ";" + Solution2;
+        }
+        return null;
     }
 }
