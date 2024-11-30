@@ -172,8 +172,6 @@ public class Task5 {
         } else if (check3 < check1 && check3 < check2) {
             doubles[0] = check3;
             doubles[2] = check1;
-        } else {
-            doubles[0] = check1;
         }
 
         if (doubles[2] < doubles[1]) {
