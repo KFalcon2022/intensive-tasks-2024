@@ -9,6 +9,7 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getLcm2(15, 25));
     }
 
     /**
@@ -20,11 +21,28 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
 
-        if (!(isValidParams(m, n))) {
+        if (!isValidParams(m, n)) {
             return -1;
         }
 
         return n * m / getGcd(m, n);
+    }
+
+    //Опционально. Поиск НОК без использования НОД
+    static int getLcm2(int m, int n) {
+
+        if (!isValidParams(m, n)) {
+            return -1;
+        }
+
+        int maxNum = Math.max(m, n);
+        int minNum = Math.min(m, n);
+        int lcm = maxNum;
+
+        while (lcm % minNum != 0) {
+            lcm += maxNum;
+        }
+        return lcm;
     }
 
     /**
@@ -36,7 +54,7 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
 
-        if (!(isValidParams(m, n))) {
+        if (!isValidParams(m, n)) {
             return -1;
         }
 
@@ -47,6 +65,22 @@ public class Task6 {
         }
 
         return n;
+    }
+
+    //Опционально
+    static int getGcd2(int m, int n) {
+
+        if (!isValidParams(m, n)) {
+            return -1;
+        }
+
+        int maxNum = Math.max(m, n);
+        int minNum = Math.min(m, n);
+
+        if (maxNum - minNum == 0) {
+            return minNum;
+        }
+        return getGcd2(maxNum - minNum, minNum);
     }
 
     /**
@@ -70,7 +104,7 @@ public class Task6 {
         return getGcdByEuclideanAlgorithm(n, m % n);
     }
 
-    static boolean isValidParams(int m, int n){
+    static boolean isValidParams(int m, int n) {
         return (m > 0 && n > 0);
     }
 }
