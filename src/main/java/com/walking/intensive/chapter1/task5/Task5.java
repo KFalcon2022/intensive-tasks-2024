@@ -15,9 +15,9 @@ import static java.lang.Math.sqrt;
 public class Task5 {
     public static void main(String[] args) {
         double a = 12;
-        double b = 13;
-        double c = 5;
-        System.out.println(getAreaAdvanced(a, b, c));
+        double b = 1;
+        double c = 4;
+        System.out.println(getAreaByHeron(a, b, c));
     }
 
     /**
@@ -29,14 +29,22 @@ public class Task5 {
      *
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
-    static double getAreaByHeron(double a, double b, double c) {
-        double p = (a + b + c) / 2;
-        double s = sqrt(p * (p - a) * (p - b) * (p - c));
 
-        if (a < 0 || b < 0 || c < 0 || Double.isNaN(s) || Double.isInfinite(s)) {
+    static double checkData(double a, double b, double c) {
+        if (a < 0 || b < 0 || c < 0 || a + b < c || b + c < a || a + c < b) {
             return -1.0;
         }
-        return s;
+
+        return 0;
+    }
+
+    static double getAreaByHeron(double a, double b, double c) {
+        if (checkData(a, b, c) == -1.0) {
+            return -1.0;
+        }
+
+        double p = (a + b + c) / 2;
+        return sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
     /**
@@ -47,22 +55,16 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
 
-    public static double[] emptyArray = new double[0];
-
     static double[] getHeights(double a, double b, double c) {
-        double s = getAreaByHeron(a, b, c);
-
-        if (s == -1.0) {
-            return emptyArray;
+        if (checkData(a, b, c) == -1.0) {
+            return new double[0];
         }
 
+        double s = getAreaByHeron(a, b, c);
         double h1 = 2 * s / a;
         double h2 = 2 * s / b;
         double h3 = 2 * s / c;
-        double[] heights = new double[3];
-        heights[0] = h1;
-        heights[1] = h2;
-        heights[2] = h3;
+        double[] heights = new double[]{h1,h2,h3};
         Arrays.sort(heights);
         return heights;
     }
@@ -75,17 +77,14 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        if (getAreaByHeron(a, b, c) == -1.0) {
-            return emptyArray;
+        if (checkData(a, b, c) == -1.0) {
+            return new double[0];
         }
 
         double m1 = sqrt(2 * (b * b + c * c) - a * a) / 2;
         double m2 = sqrt(2 * (a * a + c * c) - b * b) / 2;
         double m3 = sqrt(2 * (a * a + b * b) - c * c) / 2;
-        double[] medians = new double[3];
-        medians[0] = m1;
-        medians[1] = m2;
-        medians[2] = m3;
+        double[] medians = new double[]{m1,m2,m3};
         Arrays.sort(medians);
         return medians;
     }
@@ -98,17 +97,14 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        if (getAreaByHeron(a, b, c) == -1.0) {
-            return emptyArray;
+        if (checkData(a, b, c) == -1.0) {
+            return new double[0];
         }
 
         double b1 = sqrt(b * c * (a + b + c) * (b + c - a)) / (b + c);
         double b2 = sqrt(a * c * (a + b + c) * (a + c - b)) / (a + c);
         double b3 = sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
-        double[] bisectors = new double[3];
-        bisectors[0] = b1;
-        bisectors[1] = b2;
-        bisectors[2] = b3;
+        double[] bisectors = new double[]{b1,b2,b3};
         Arrays.sort(bisectors);
         return bisectors;
     }
@@ -121,18 +117,15 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        double s = getAreaByHeron(a, b, c);
-        if (s == -1.0) {
-            return emptyArray;
+        if (checkData(a, b, c) == -1.0) {
+            return new double[0];
         }
 
+        double s = getAreaByHeron(a, b, c);
         double alpha = Math.toDegrees(Math.asin(2 * s / (a * b)));
         double beta = Math.toDegrees(Math.asin(2 * s / (b * c)));
         double gamma = Math.toDegrees(Math.asin(2 * s / (a * c)));
-        double[] angles = new double[3];
-        angles[0] = alpha;
-        angles[1] = beta;
-        angles[2] = gamma;
+        double[] angles = new double[]{alpha,beta,gamma};
         Arrays.sort(angles);
         return angles;
     }
@@ -145,9 +138,10 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if (getAreaByHeron(a,b,c) == -1.0) {
+        if (checkData(a, b, c) == -1.0) {
             return -1.0;
         }
+
         double p = (a + b + c) / 2;
         return sqrt(((p - a) * (p - b) * (p - c)) / p);
     }
@@ -160,10 +154,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        double s = getAreaByHeron(a,b,c);
-        if (s == -1.0) {
+        if (checkData(a, b, c) == -1.0) {
             return -1.0;
         }
+
+        double s = getAreaByHeron(a, b, c);
         return (a * b * c) / (4 * s);
     }
 
@@ -182,11 +177,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        if (getAreaByHeron(a,b,c) == -1.0) {
+        if (checkData(a, b, c) == -1.0) {
             return -1.0;
         }
 
-        double cosAlpha =  (b * b + c * c - a * a) / (2 * b * c); // Теорема косинусов
+        double cosAlpha = (b * b + c * c - a * a) / (2 * b * c); // Теорема косинусов
         double sinAlpha = sqrt(1 - cosAlpha * cosAlpha); // Основное тригонометрическое тождество
         return 0.5 * (b * c * sinAlpha);
     }
