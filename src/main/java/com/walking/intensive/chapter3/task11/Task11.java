@@ -42,11 +42,41 @@ package com.walking.intensive.chapter3.task11;
  */
 public class Task11 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        // Ваш код
-        return 0;
+        if (!isValidValue(array)) {
+            return 0;
+        }
+        if (!isPositiveValue(array)) {
+            return -1;
+        }
+        int sum = 0;
+        int n = array.length;
+
+        for (int length = 1; length <= n; length += 2) {
+
+            for (int start = 0; start <= n - length; start++) {
+
+                for (int k = start; k < start + length; k++) {
+                    sum += array[k];
+                }
+            }
+        }
+
+        return sum;
+    }
+
+    private static boolean isValidValue(int[] array) {
+        return array != null && array.length > 0;
+    }
+
+    private static boolean isPositiveValue(int[] array) {
+        for (int j : array) {
+            if (j < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
