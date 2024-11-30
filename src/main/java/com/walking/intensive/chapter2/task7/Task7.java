@@ -37,13 +37,11 @@ public class Task7 {
         }
 
         for (int i = n; i > 0; i--) {
-            int sumOne = getDivisorsSum(i);
+            int firstFriendDivisorsSum = getDivisorsSum(i);
 
-            if (i < sumOne && sumOne < n) {
-                int sumTwo = getDivisorsSum(sumOne);
-
-                if (sumTwo == i) {
-                    return sumOne;
+            if (i < firstFriendDivisorsSum) {
+                if (getDivisorsSum(firstFriendDivisorsSum) == i) {
+                    return firstFriendDivisorsSum;
                 }
             }
         }
@@ -55,7 +53,7 @@ public class Task7 {
         int sum = 1;
         int maxDivisor = (int) Math.sqrt(a);
 
-        for (int i = 2; i < maxDivisor; i++) {
+        for (int i = 2; i <= maxDivisor; i++) {
             if (a % i == 0) {
                 sum += i;
                 sum += a / i;
