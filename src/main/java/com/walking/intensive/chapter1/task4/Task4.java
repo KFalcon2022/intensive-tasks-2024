@@ -35,39 +35,46 @@ public class Task4 {
 
     static String solveEquation(double a, double b, double c) {
         //        Место для вашего кода
-        double discriminant = (b * b) - (4 * a * c);
-        int num = 0;
+
         if (a == 0 && b == 0 && c == 0) {
             return "Бесконечное множество решений.";
         }
+
         if (a == 0 && b != 0 && c != 0) {
-            double koren = (-c) / b;
-            return String.valueOf("Количество решений: 1. Корень: " + koren);
+            double solution = -c / b;
+            return "Количество решений: 1. Корень: " + solution;
         }
+
         if (a != 0 && b == 0 && c == 0) {
-            return String.valueOf("Количество решений: 1. Корень: 0.0");
+            return "Количество решений: 1. Корень: 0.0";
         }
+
+        double discriminant = (b * b) - (4 * a * c);
         if (discriminant < 0 || a == 0 && b == 0) {
-            return String.valueOf("Количество решений: 0.");
+            return "Количество решений: 0.";
         }
+
+        int num = 0;
         if (discriminant == 0 || a == 0) {
             num = 1;
+            double solution = - b / 2 * a;
+            return "Количество решений: " + num + ". Корень: " + solution;
         }
+
         if (discriminant >= 0) {
             num = 2;
         }
+
         var sqrtDis = Math.pow(discriminant, 0.5);
         var x1 = (-b + sqrtDis) / (2 * a);
         var x2 = (-b - sqrtDis) / (2 * a);
+
         if (x2 < x1) {
             double temp = x2;
             x2 = x1;
             x1 = temp;
         }
-        if (x1 == x2) {
-            num = 1;
-            return String.valueOf("Количество решений: " + num + ". Корень: " + x1);
-        }
-        return String.valueOf("Количество решений: " + num + ". Корни: " + x1 + ";" + x2);
+
+        return "Количество решений: " + num + ". Корни: " + x1 + ";" + x2;
     }
 }
