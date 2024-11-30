@@ -12,11 +12,16 @@ public class Task6 {
         int n = in.nextInt();
 
         System.out.println("НОК = " + getLcm(m, n));
+        System.out.println("НОД = " + getGcd(m, n));
 
     }
 
+    static boolean isNumberNegative (int n, int m) {
+        return m <= 0 || n <= 0;
+    }
+
     static int getLcm(int m, int n) {
-        if (m <= 0 || n <= 0) {
+        if (isNumberNegative(m, n)) {
             return -1;
         }
 
@@ -27,16 +32,16 @@ public class Task6 {
         return m;
     }
 
-    /**
-     * Реализуйте метод, который будет возвращать НОД для чисел, переданных параметрами.
-     *
-     * <p>Входные параметры - положительные целые числа.
-     *
-     * <p>Если входные данные некорректны - метод должен возвращать -1.
-     */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isNumberNegative(m, n)) {
+            return -1;
+        }
+
+        if (m > n) {
+            return getGcdCheck(m, n);
+        }
+
+        return getGcdCheck(n, m);
     }
 
     /**
@@ -50,5 +55,16 @@ public class Task6 {
     static int getGcdByEuclideanAlgorithm(int m, int n) {
         // Ваш код
         return 0;
+    }
+
+    static int getGcdCheck (int a, int b) {
+        int x = b;
+        while (a % x != 0) {
+            x = a % x;
+        }
+        while (b % x != 0) {
+            x = b % x;
+        }
+        return x;
     }
 }
