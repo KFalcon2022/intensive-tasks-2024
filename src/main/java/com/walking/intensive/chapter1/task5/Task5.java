@@ -11,6 +11,7 @@ package com.walking.intensive.chapter1.task5;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getAreaByHeron(3,4,5));
     }
 
     /**
@@ -24,8 +25,15 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-
-        return 0; // Заглушка. При реализации - удалить
+        double result, p;
+        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a){
+            result = -1;
+            return result;
+        }
+        p = (a + b + c) / 2;
+        double pl = p * (p-a) * (p - b) * (p - c);
+        result = Math.pow(pl, 0.5);
+        return result;
     }
 
     /**
