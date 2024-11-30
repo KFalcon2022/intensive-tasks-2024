@@ -44,19 +44,15 @@ public class Task2 {
         }
 
         int flatInEntrance = floorAmount * 4;
-        int entranceNumber = 1;
+        int entranceNumber;
         int floorNumber;
 
         if (flatNumber > flatInEntrance * entranceAmount) {
             return "Такой квартиры не существует";
         }
 
-        for (int i = 1; i <= entranceAmount; i++) {
-            if (flatNumber <= flatInEntrance * i) {
-                entranceNumber = i;
-                break;
-            }
-        }
+        entranceNumber = (flatNumber % flatInEntrance == 0) ?
+                (flatNumber / flatInEntrance) : (flatNumber / flatInEntrance) + 1;
 
         if (flatNumber % 4 == 0) {
             floorNumber = flatNumber / 4;
