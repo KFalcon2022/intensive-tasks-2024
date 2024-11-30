@@ -13,15 +13,23 @@ public class Task10 {
     public static void main(String[] args) {
         System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум."));
         System.out.println(isPalindrome("А роза упала на лапу Азора"));
-        System.out.println(isPalindrome("Hello, world!"));
+        System.out.println(isPalindrome("H1ello, world!"));
     }
 
     static boolean isPalindrome(String inputString) {
-        if (inputString == null || inputString.length() < 2) return false;
+        if (inputString == null || inputString.length() < 2) {
+            return false;
+        }
+        String palindrome = inputString.toLowerCase();
+        String normalized = "";
 
-        String normalized = inputString.replaceAll("\\p{Punct}", "")
-                .replaceAll("\\s", "").toLowerCase();
+        for (int i = 0; i < palindrome.length(); i++) {
+            if (Character.isLetter(palindrome.charAt(i))) {
+                normalized += palindrome.charAt(i);
+            }
+        }
+        String afterReverse = new StringBuilder(normalized).reverse().toString();
 
-        return normalized.contentEquals(new StringBuilder(normalized).reverse());
+        return normalized.equals(afterReverse);
     }
 }
