@@ -43,7 +43,7 @@ public class Task4 {
         if (a == 0 && b == 0 && c == 0) {
             return "Бесконечное множество решений.";
         }
-        if (Discriminant < 0 || (a == 0 && b == 0 && c != 0)) {
+        if (Discriminant < 0 || (a == 0 && b == 0)) {
             return "Количество решений: 0.";
         }
         if (a == 0) {
