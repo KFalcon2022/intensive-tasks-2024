@@ -13,7 +13,7 @@ public class Task13 {
 
         for (int plant : plants) {
 
-            if (plant < 0 || wateringCanVolume < 0 || plant > wateringCanVolume) {
+            if (plant < 1 || wateringCanVolume < 0 || plant > wateringCanVolume) {
                 return -1;
             }
         }
