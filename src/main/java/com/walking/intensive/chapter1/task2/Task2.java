@@ -33,7 +33,7 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        System.out.println(getFlatLocation(2, 3, 5));
+//        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
