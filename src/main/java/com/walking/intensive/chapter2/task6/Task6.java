@@ -42,13 +42,12 @@ public class Task6 {
         if (m <= 0 || n <= 0) {
             return -1;
         }
-        while (n != 1) {
+        while (n != 0) {
             int a = n;
             n = m % n;
-            n = a;
-            return a;
+            m = a;
         }
-        return -1;
+        return m;
     }
 
 
@@ -62,6 +61,9 @@ public class Task6 {
      */
 
     static int getGcdByEuclideanAlgorithm(int m, int n) {
+        if (m <= 0 || n < 0) {
+            return -1;
+        }
         if (n == 0) {
             return m;
         }
