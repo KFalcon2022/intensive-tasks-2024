@@ -57,33 +57,29 @@ public class Task9 {
 
     static String getPascalTriangle(int n) {
 
-        String[] rowsOfTriangle = new String[n];
-        StringBuilder builder;
-        rowsOfTriangle[0] = "1";
-
-        for (int i = 1; i < n; i++) {
-            int c = 1;
-            builder = new StringBuilder();
-            builder.append(c);
-            for (int j = 1; j <= i; j++) {
-                c *= (i - j + 1);
-                c /= j;
-                builder.append(" ");
-                builder.append(c);
-            }
-            rowsOfTriangle[i] = builder.toString();
+        if (n <= 0) {
+            return "";
         }
 
-        int rowMaxLength = rowsOfTriangle[n - 1].length();
-        builder = new StringBuilder();
+        String pascalTriangle = getTriangleLine(n);
+        int baseLength = pascalTriangle.length();
 
-        for (String s : rowsOfTriangle) {
-            int spaceToAdd = (rowMaxLength - s.length()) / 2;
-            builder.append(" ".repeat(spaceToAdd));
-            builder.append(s);
-            builder.append("\n");
+        for (int i = n - 1; i >= 0; i--) {
+            String triangleLine = getTriangleLine(i);
+            int spacesAmount = (baseLength - triangleLine.length()) / 2;
+            pascalTriangle = " ".repeat(spacesAmount) + triangleLine + "\n" + pascalTriangle;
         }
+        return pascalTriangle;
+    }
 
-        return builder.toString();
+    static String getTriangleLine(int i) {
+
+        String triangleLine = "1";
+        int c = 1;
+        for (int j = 1; j <= i; j++) {
+            c = c * (i - j + 1) / j;
+            triangleLine += " " + c;
+        }
+        return triangleLine;
     }
 }
