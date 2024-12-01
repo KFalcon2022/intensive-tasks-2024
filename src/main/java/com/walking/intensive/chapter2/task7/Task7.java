@@ -36,15 +36,23 @@ public class Task7 {
             return -1;
         }
 
+        int maxSumDiv = 0;
+        int maxFriendlyNum = 0;
+
         for (int i = n; i > 0; i--) {
+
             int sumDivI = getSumDividers(i);
 
-            if (i == getSumDividers(sumDivI) && i != sumDivI) {
-                return Math.max(i, sumDivI);
+            if (sumDivI < n
+                    && sumDivI != i
+                    && maxSumDiv < (i + sumDivI)
+                    && i == getSumDividers(sumDivI)) {
+
+                maxSumDiv = i + sumDivI;
+                maxFriendlyNum = Math.max(i, sumDivI);
             }
         }
-
-        return 0;
+        return maxFriendlyNum;
     }
 
     static int getSumDividers(int n) {
