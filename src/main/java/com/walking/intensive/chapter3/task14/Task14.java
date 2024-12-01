@@ -118,10 +118,6 @@ public class Task14 {
     }
 
     private static boolean isValid(int[][] objects, int[][] radar) {
-        return checkArray(objects, radar);
-    }
-
-    private static boolean checkArray(int[][] objects, int[][] radar) {
         for (int[] ints : objects) {
             if (ints.length != 2) {
                 return false;
