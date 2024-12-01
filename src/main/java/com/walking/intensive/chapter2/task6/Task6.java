@@ -19,8 +19,11 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isNotPositive(m, n)) {
+            return -1;
+        }
+
+        return m / getGcd(m, n) * n;
     }
 
     /**
@@ -31,8 +34,17 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isNotPositive(m, n)) {
+            return -1;
+        }
+
+        while (n != 0) {
+            int temp = n;
+            n = m % n;
+            m = temp;
+        }
+
+        return m;
     }
 
     /**
@@ -44,7 +56,22 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isNotPositive(m, n)) {
+            return -1;
+        }
+
+        return gcd(m, n);
+    }
+
+    private static int gcd(int m, int n) {
+        if (n == 0) {
+            return m;
+        }
+
+        return gcd(n, m % n);
+    }
+
+    private static boolean isNotPositive(int m, int n) {
+        return m <= 0 || n <= 0;
     }
 }
