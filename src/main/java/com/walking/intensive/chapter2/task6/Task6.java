@@ -10,7 +10,7 @@ public class Task6 {
     public static void main(String[] args) {
         int m = 5;
         int n = 7;
-        System.out.println(getLcm(m, n));
+        System.out.println(getGcdByEuclideanAlgorithm(m, n));
     }
 
     /**
@@ -20,8 +20,12 @@ public class Task6 {
      *
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
+    static boolean getCorrectData(int m, int n) {
+    return m < 1 || n < 1;
+    }
+
     static int getLcm(int m, int n) {
-        if (m <= 0 || n <= 0) {
+        if (getCorrectData(m,n)) {
             return -1;
         }
 
@@ -42,10 +46,11 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        if (m <= 0 || n <= 0) {
+        if (getCorrectData(m,n)) {
             return -1;
         }
-        return  m * n / getLcm(m, n);
+
+        return m * n / getLcm(m, n);
     }
 
     /**
@@ -57,16 +62,14 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        if (m <= 0 || n <= 0) {
+        if (getCorrectData(m,n)) {
             return -1;
         }
-        while (m != 0 && n != 0) {
-            if (m > n) {
-                m = m % n;
-            } else {
-                n = n % m;
-            }
+
+        if (m%n == 0) {
+            return n;
         }
-        return m + n;
+
+        return getGcdByEuclideanAlgorithm(n, m%n);
     }
 }
