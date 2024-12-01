@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter2.task9;
 
-import java.util.Arrays;
-
 /**
  * Реализуйте метод getPascalTriangle(). Параметром он должен принимать натуральное число N,
  * а метод возвращать строковое представление треугольника Паскаля.
