@@ -43,10 +43,54 @@ package com.walking.intensive.chapter3.task11;
 public class Task11 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[] array = {1, 4, 2, 5};
+        int result = getOddSubArraysElementsSum(array);
+        System.out.println("Сумма подмассивов нечетной длины: " + result);
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        // Ваш код
-        return 0;
+
+        int totalSum = 0;
+
+        Integer x = getInteger(array);
+        if (x != null) return x;
+
+        // Проверка на наличие положительных целых чисел
+        for (int num : array) {
+            if (num <= 0) {
+                return -1; // Если есть некорректные данные
+            }
+        }
+
+        // Проходим по всем возможным начальным индексам
+        for (int i = 0; i < array.length; i++) {
+            // Проходим по всем возможным конечным индексам
+            for (int end = i; end < array.length; end++) {
+                // Вычисляем длину подмассива
+                int length = end - i + 1;
+
+                // Если длина нечетная
+                if (length % 2 != 0) {
+                    int subArraySum = 0;
+
+                    // Считаем сумму элементов
+                    for (int j = i; j <= end; j++) {
+                        subArraySum += array[j];
+                    }
+
+                    // Прибавляем к общей сумме
+                    totalSum += subArraySum;
+                }
+            }
+        }
+        return totalSum;
+    }
+
+    private static Integer getInteger(int[] array) {
+        // Проверка на пустой массив
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+        return null;
     }
 }
