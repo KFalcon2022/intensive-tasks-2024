@@ -22,6 +22,25 @@ public class Task1 {
 
     static String getAgeString(int age) {
 //        Место для вашего кода
+        String ageInString = Integer.toString(age);
+        int length = ageInString.length();
+        char lastChar = ageInString.charAt(length-1);
+        int lastInt = Character.getNumericValue(lastChar);
+
+        if (age < 0) {
+            return("Vveden nekorektniy vozrast");
+        }
+        else if (lastInt == 1) {
+            return("Vam " + age + " god");
+        }
+
+        else if ((lastInt > 1) && (lastInt < 5)) {
+            return("Vam " + age + " goda");
+        }
+
+        else if ((lastInt > 4) || (lastInt == 0)) {
+            return("Vam " + age + " let");
+        }
 
         return null; // Заглушка. При реализации - удалить
     }
