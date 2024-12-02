@@ -11,7 +11,8 @@ package com.walking.intensive.chapter1.task5;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        System.out.println(getAreaByHeron(-3,4,5));
+        //System.out.println(getAreaByHeron(3,4,5));
+        System.out.println(getHeights(3,4,5));
     }
 
     /**
@@ -45,8 +46,22 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
         //        Место для вашего кода
+        if (a >= 0 && b >= 0 && c >= 0){
+            double[] myArray;
+            myArray = new double[3];
+            double heightA = 2 * getAreaByHeron(a,b,c) / a;
+            myArray[0] = heightA;
+            for (double res: )
+            System.out.println(myArray[0]);
+            return
 
-        return null; // Заглушка. При реализации - удалить
+            /*for (String weekDay: weekDays) {
+
+                System.out.println(weekDay);
+
+            }        */
+        }
+        return new double[0];
     }
 
     /**
