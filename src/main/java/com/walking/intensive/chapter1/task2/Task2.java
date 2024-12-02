@@ -41,31 +41,18 @@ public class Task2 {
             return "Некорректные входные данные";
         }
 
-        final int flatsOnFloor = 4;
-        final int flatsOnEntrance = floorAmount * flatsOnFloor;
+        final int flatsOnEntrance = floorAmount * 4;
 
         if (flatNumber > flatsOnEntrance * entranceAmount) {
             return "Такой квартиры не существует";
         }
 
-        int entrance = 0;
-        for (int i = 0; i < entranceAmount; i++) {
-            if ((flatNumber > flatsOnEntrance * i) && (flatNumber <= flatsOnEntrance * (i + 1))) {
-                entrance = i + 1;
-                break;
-            }
-        }
 
-        int floor = 0;
-        for (int i = 0; i < floorAmount; i++) {
-            if ((flatNumber - (entrance - 1) * flatsOnEntrance > flatsOnFloor * i) &&
-                    (flatNumber - (entrance - 1) * flatsOnEntrance <= flatsOnFloor * (i + 1))) {
-                floor = i + 1;
-                break;
-            }
-        }
 
-        int locationOnFloor = flatNumber - (flatsOnEntrance * (entrance - 1)) - (flatsOnFloor * (floor - 1));
+        int entrance = getEntrance(entranceAmount, flatNumber, flatsOnEntrance);
+        int floor = getFloor(floorAmount, flatNumber, entrance, flatsOnEntrance);
+
+        int locationOnFloor = flatNumber - (flatsOnEntrance * (entrance - 1)) - (4 * (floor - 1));
         return switch (locationOnFloor) {
             case 1 -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, слева от лифта, влево";
             case 2 -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, слева от лифта, вправо";
@@ -73,5 +60,24 @@ public class Task2 {
             default -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, справа от лифта, вправо";
         };
 
+    }
+
+    static int getEntrance(int entranceAmount, int flatNumber, int flatsOnEntrance) {
+        for (int i = 0; i < entranceAmount - 1; i++) {
+            if (flatNumber > flatsOnEntrance * i && flatNumber <= flatsOnEntrance * (i + 1)) {
+                return i + 1;
+            }
+        }
+        return entranceAmount;
+    }
+
+    static int getFloor(int floorAmount, int flatNumber, int entrance, int flatsOnEntrance) {
+        for (int i = 0; i < floorAmount - 1; i++) {
+            if ((flatNumber - (entrance - 1) * flatsOnEntrance > 4 * i)
+                    && (flatNumber - (entrance - 1) * flatsOnEntrance <= 4 * (i + 1))) {
+                return i + 1;
+            }
+        }
+        return floorAmount;
     }
 }
