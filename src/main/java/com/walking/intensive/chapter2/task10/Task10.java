@@ -13,6 +13,7 @@ public class Task10 {
     public static void main(String[] args) {
         System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум."));
         System.out.println(isPalindrome("А роза упала на лапу Азора"));
+        System.out.println(isPalindrome("Кот, сука, за кусток"));
         System.out.println(isPalindrome("H1ello, world!"));
     }
 
@@ -23,12 +24,16 @@ public class Task10 {
         String palindrome = inputString.toLowerCase();
         String normalized = "";
 
-        for (int i = 0; i < palindrome.length(); i++) {
+        for (int i = 0; i <palindrome.length(); i++) {
             if (Character.isLetter(palindrome.charAt(i))) {
                 normalized += palindrome.charAt(i);
             }
         }
-        String afterReverse = new StringBuilder(normalized).reverse().toString();
+
+        String afterReverse = "";
+        for (int i = normalized.length()-1; i >= 0; i--) {
+            afterReverse += normalized.charAt(i);
+        }
 
         return normalized.equals(afterReverse);
     }
