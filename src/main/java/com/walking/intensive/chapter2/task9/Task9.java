@@ -51,11 +51,40 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        String s = getPascalTriangle(28);
+        System.out.println(s);
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+
+        int[][] triangle = new int[n][n];
+        triangle[0][0] = 1;
+        StringBuilder triangleAsString = new StringBuilder(triangle[0][0] + "\n");
+
+        for (int i = 1; i < n; i++) {
+
+            triangle[i][0] = 1;
+            triangleAsString.append(triangle[i][0]);
+
+            for (int j = 1; j <= i; j++) {
+
+                triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+                triangleAsString.append(" ").append(triangle[i][j]);
+            }
+            triangleAsString.append("\n");
+        }
+        String[] triangleLines = triangleAsString.toString().split("\\n");
+        int maxLineWidth = triangleLines[n - 1].length();
+        triangleAsString.setLength(0);
+
+        for (String triangleLine : triangleLines) {
+
+            int spaceQuantity = maxLineWidth / 2 - triangleLine.length() / 2;
+
+            triangleAsString.append(" ".repeat(spaceQuantity)).append(triangleLine);
+            triangleAsString.append(" ".repeat(spaceQuantity)).append("\n");
+        }
+        return triangleAsString.toString();
     }
 }
+
