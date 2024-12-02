@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -32,7 +34,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -44,10 +46,48 @@ package com.walking.intensive.chapter3.task14;
 public class Task14 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] objectLocations = {{1, 3}, {3, 3}, {5, 3}, {2, 2}};
+        int[][] radars = {{2, 3, 1}, {4, 3, 1}, {1, 1, 2}};
+        System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+
+        if (objectLocations.length == 0 || radars.length == 0) {
+            return new int[]{};
+        }
+
+        for (int[] arr : objectLocations) {
+
+            if (arr.length != 2) {
+                return new int[]{};
+            }
+        }
+
+        int[] objects = new int[radars.length];
+
+        for (int i = 0; i < radars.length; i++) {
+
+            if (radars[i].length != 3 || radars[i][2] < 0) {
+                return new int[]{};
+            }
+
+            double distance;
+            int x1 = radars[i][0];
+            int y1 = radars[i][1];
+
+            for (int[] objectLocation : objectLocations) {
+
+                int x2 = objectLocation[0];
+                int y2 = objectLocation[1];
+                distance = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+                if (distance <= radars[i][2]) {
+                    objects[i]++;
+                }
+            }
+        }
+
+        return objects;
     }
 }
