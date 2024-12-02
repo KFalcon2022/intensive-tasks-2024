@@ -9,6 +9,8 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 
+        System.out.println(getLcm(8, 6));
+        System.out.println();
         System.out.println(getGcd(18, 38));
         System.out.println();
         System.out.println(getGcdByEuclideanAlgorithm(38, 18));
@@ -42,10 +44,9 @@ public class Task6 {
         }
 
         while (number1 != number2) {
-            while (number1 < number2) {
+            if (number1 < number2) {
                 number1 += m;
-            }
-            while (number1 > number2) {
+            } else {
                 number2 += n;
             }
 
