@@ -45,24 +45,14 @@ public class Task4 {
             return "Количество решений: 1. Корень: " + solution;
         }
 
-        if (a != 0 && b == 0 && c == 0) {
-            return "Количество решений: 1. Корень: 0.0";
-        }
-
         double discriminant = (b * b) - (4 * a * c);
         if (discriminant < 0 || a == 0 && b == 0) {
             return "Количество решений: 0.";
         }
 
-        int num = 0;
-        if (discriminant == 0 || a == 0) {
-            num = 1;
-            double solution = (-b / 2) * a;
-            return "Количество решений: " + num + ". Корень: " + solution;
-        }
-
-        if (discriminant >= 0) {
-            num = 2;
+        if (discriminant == 0) {
+            double solution = (-b / 2) * a + 0.0;
+            return "Количество решений: 1. Корень: " + solution;
         }
 
         var sqrtDis = Math.pow(discriminant, 0.5);
@@ -75,6 +65,6 @@ public class Task4 {
             x1 = temp;
         }
 
-        return "Количество решений: " + num + ". Корни: " + x1 + ";" + x2;
+        return "Количество решений: 2. Корни: " + x1 + ";" + x2;
     }
 }
