@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task12;
 
+import java.util.Arrays;
+
 /**
  * Девочка Света очень любит играть в мячики. Она поставила в ряд корзинки и в некоторые положила по 1 мячику.
  * За 1 раз она может переложить 1 мячик в соседнюю корзинку. В 1 корзинке может поместиться много мячиков.
@@ -40,11 +42,46 @@ package com.walking.intensive.chapter3.task12;
  */
 public class Task12 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(Arrays.toString(getMovementsNumber("100009")));
     }
 
     static int[] getMovementsNumber(String baskets) {
-        // Ваш код
-        return new int[]{};
+
+        if (baskets.isEmpty()) {
+            return new int[]{};
+        }
+
+        int n = baskets.length();
+        int rightBalls = 0;
+        int leftBalls = 0;
+        int leftMoves = 0;
+        int rightMoves = 0;
+        int[] balls = new int[n];
+        int[] moves = new int[n];
+
+        for (int i = 0; i < n; i++) {
+
+            if (!Character.isDigit(baskets.charAt(i))) {
+                return new int[]{};
+            }
+
+            balls[i] = baskets.charAt(i) - '0';
+            rightBalls += balls[i];
+            rightMoves += i * balls[i];
+        }
+
+        rightBalls -= balls[0];
+        moves[0] = rightMoves;
+
+        for (int i = 1; i < n; i++) {
+
+            leftBalls += balls[i - 1];
+            leftMoves += leftBalls;
+            rightMoves -= rightBalls;
+            rightBalls -= balls[i];
+            moves[i] = leftMoves + rightMoves;
+        }
+
+        return moves;
     }
 }
