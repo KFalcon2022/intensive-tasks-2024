@@ -28,10 +28,52 @@ package com.walking.intensive.chapter2.task7;
 public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int n = 200;
+
+        System.out.println(getFriendlyPair(n));
     }
 
     static int getFriendlyPair(int n) {
-        // Ваш код
-        return 0;
+        if (n <= 1 || n > 1000000) {
+            return -1;
+        }
+
+        int maxSum = 0;
+        int result = 0;
+
+        for (int a = 1; a < n; a++) {
+            int sumA = 1;
+            for (int j = 2; j <= Math.sqrt((a)); j++) {
+                if (a % j == 0) {
+                    sumA += j;
+                    if (j != a / j) {
+                        sumA += a / j;
+                    }
+                }
+            }
+
+            int b = sumA;
+            if (b > a && b < n) {
+                int sumB = 1;
+                for (int j = 2; j <= Math.sqrt(b); j++) {
+                    if (b % j == 0) {
+                        sumB += j;
+                        if (j != b / j) {
+                            sumB += b / j;
+                        }
+                    }
+                }
+                if (sumB == a) {
+                    int sum = a + b;
+                    if (sum > maxSum) {
+                        maxSum = sum;
+                        result = b;
+                    }
+                }
+
+            }
+
+        }
+        return result;
     }
 }
