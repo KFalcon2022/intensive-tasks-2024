@@ -44,7 +44,6 @@ public class Task4 {
 
         if (a == 0) {
             double x = -c / b;
-
             return "Количество решений: 1. Корень: " + x;
         }
 
