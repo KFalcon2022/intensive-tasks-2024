@@ -16,26 +16,23 @@ public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int age = 23;
+
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-        if (age < 0 || age > 127) {
-            return "Некорректный ввод";
-        }
+
+        if (age < 0) return "Incorrect input.";
 
         int lastOneDigit = age % 10;
         int lastTwoDigits = age % 100;
 
-        String defaultLine = " лет";
-        if (lastTwoDigits < 11 || lastTwoDigits > 14) {
-            if (lastOneDigit == 1) {
-                defaultLine = " год";
-            }
-            if (lastOneDigit >= 2 && lastOneDigit <= 4) {
-                defaultLine = " года";
-            }
-        }
-        return "Вам " + age + defaultLine;
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+            return "Вам " + age + " лет";
+        } else if (lastOneDigit == 1) {
+            return "Вам " + age + " год";
+        } else if (lastOneDigit >= 2 && lastOneDigit <= 4) {
+            return "Вам " + age + " года";
+        } else return "Вам " + age + " лет";
     }
 }
