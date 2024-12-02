@@ -33,7 +33,7 @@ public class Task1 {
 
         return switch (tempAge) {
             case 1 -> "Вам " + age + " год";
-            case 2,3,4 -> "Вам " + age + " года";
+            case 2, 3, 4 -> "Вам " + age + " года";
             default -> "Вам " + age + " лет";
         };
     }
