@@ -35,7 +35,7 @@ public class Task6 {
             return -1;
         }
 
-        int lcm = (m * n) / getGcd(m, n);
+        int lcm = m / getGcd(m, n) * n;
 
         return lcm;
     }
@@ -53,13 +53,16 @@ public class Task6 {
         if (!conditionNumber(m, n)) {
             return -1;
         }
+
         int gcd = 1;
+
         for (int i = Math.min(m, n); i > 0; i--) {
             if (m % i == 0 && n % i == 0) {
                 gcd = i;
                 break;
             }
         }
+
         return gcd;
     }
 
@@ -84,6 +87,7 @@ public class Task6 {
                 n = n % m;
             }
         }
+
         return m + n;
     }
 }
