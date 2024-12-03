@@ -29,9 +29,6 @@ public class Task3 {
     }
 
     static boolean isLeap(int year) {
-        boolean isLeapSimple = year % 4 == 0;
-        boolean isNotLeap100 = year % 100 == 0;
-        boolean isLeap400 = year % 400 == 0;
-        return isLeapSimple && (!isNotLeap100 || isLeap400);
+        return year % 4 == 0 && (!(year % 100 == 0) || year % 400 == 0);
     }
 }
