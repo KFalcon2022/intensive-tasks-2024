@@ -20,11 +20,36 @@ package com.walking.intensive.chapter2.task8;
  */
 public class Task8 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(getHappyTicketChance());
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+
+        double happyTicketsAmount = 0;
+        int firstPartNumber = 0;
+        int secondPartNumber = 0;
+
+        for (int i = 0; i <= 999; i++) {
+            int digit1 = i / 100;
+            int digit2 = i / 10 % 10;
+            int digit3 = i % 10;
+
+            firstPartNumber = digit1 + digit2 + digit3;
+
+            for (int j = 0; j <= 999; j++) {
+                int digit4 = j / 100;
+                int digit5 = j / 10 % 10;
+                int digit6 = j % 10;
+
+                secondPartNumber = digit4 + digit5 + digit6;
+
+                if (firstPartNumber == secondPartNumber) {
+                    happyTicketsAmount += 1;
+                }
+            }
+        }
+
+        return happyTicketsAmount / 1000000;
     }
 }
