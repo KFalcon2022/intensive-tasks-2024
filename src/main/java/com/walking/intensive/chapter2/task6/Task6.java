@@ -17,53 +17,55 @@ public class Task6 {
 
     }
 
-    static boolean isNumberNegative (int n, int m) {
-        return m <= 0 || n <= 0;
-    }
-
     static int getLcm(int m, int n) {
-        if (isNumberNegative(m, n)) {
+        if (!isValid(m, n)) {
             return -1;
         }
 
-        int x = m;
-        while (m % n != 0) {
-            m += x;
+        int Lcm = m;
+        while (Lcm % n != 0) {
+            Lcm += m;
         }
-        return m;
+
+        return Lcm;
     }
 
     static int getGcd(int m, int n) {
-        if (isNumberNegative(m, n)) {
+        if (!isValid(m, n)) {
             return -1;
         }
 
-        if (m > n) {
-            return getGcdIfFirstNumberIsBigger(m, n);
-        }
-
-        return getGcdIfFirstNumberIsBigger(n, m);
+        return (m > n ? getGcdSet(m, n) : getGcdSet(n, m));
     }
 
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        if (isNumberNegative(m, n)) {
+        if (!isValid(m, n)) {
             return -1;
         }
+
         int x = m % n;
         if (x == 0) {
             return n;
         }
+
         return getGcdByEuclideanAlgorithm(n, x);
     }
 
-    static int getGcdIfFirstNumberIsBigger (int a, int b) {
-        int x = b;
-        while (a % x != 0) {
-            x = a % x;
+    static boolean isValid(int n, int m) {
+        return m > 0 || n > 0;
+    }
+
+    static int getGcdSet(int m, int n) {
+        int x = n;
+
+        while (m % x != 0) {
+            x = m % x;
         }
-        while (b % x != 0) {
-            x = b % x;
+
+        while (n % x != 0) {
+            x = n % x;
         }
+        
         return x;
     }
 }
