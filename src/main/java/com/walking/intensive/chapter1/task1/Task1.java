@@ -20,14 +20,18 @@ public class Task1 {
     }
 
     static String getAgeString(int age) {
-        if (age < 0) {
+        if (age < 0 || age > 127) {
             return "Некорректный ввод";
         }
-        if (age % 10 == 0 | age % 10 > 4 | age % 100 > 4 & age % 100 < 21) {
+
+        if (age % 10 == 0 || age % 10 > 4 || age % 100 > 4 & age % 100 < 21) {
             return "Вам " + age + " лет";
-        } else if (age % 10 == 1) {
+        }
+
+        if (age % 10 == 1) {
             return "Вам " + age + " год";
         }
+
         return "Вам " + age + " года";
     }
 }
