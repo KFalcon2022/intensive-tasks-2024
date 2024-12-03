@@ -23,9 +23,6 @@ public class Task5 {
         if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
             result = false;
         }
-        /*if (a > 0 && b > 0 && c > 0) {
-            result = true;
-        }*/
         return result;
     }
 
@@ -41,12 +38,11 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-        double result, p;
         if (isCheck(a, b, c)) {
-            p = (a + b + c) / 2;
+            double p = (a + b + c) / 2;
             double area = p * (p - a) * (p - b) * (p - c);
-            result = Math.pow(area, 0.5);
-            return result;
+            area = Math.pow(area, 0.5);
+            return area;
         }
         return -1;
     }
@@ -139,9 +135,13 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return 0; // Заглушка. При реализации - удалить
+        if (isCheck(a, b, c)) {
+            double p = (a + b + c) / 2;
+            double inRad = (p - a) * (p - b) * (p - c) / p;
+            inRad = Math.pow(inRad, 0.5);
+            return inRad;
+        }
+        return -1;
     }
 
     /**
@@ -152,9 +152,13 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return 0; // Заглушка. При реализации - удалить
+        if (isCheck(a, b, c)) {
+            double p = (a + b + c) / 2;
+            double outRad = Math.pow(p * (p - a) * (p - b) * (p - c), 0.5);
+            outRad = 0.25 * a * b * c / outRad;
+            return outRad;
+        }
+        return -1;
     }
 
     /**
