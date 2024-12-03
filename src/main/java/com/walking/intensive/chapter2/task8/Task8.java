@@ -27,8 +27,8 @@ public class Task8 {
     static double getHappyTicketChance() {
 
         double happyTicketsAmount = 0;
-        int firstPartNumber = 0;
-        int secondPartNumber = 0;
+        int firstPartNumber;
+        int secondPartNumber;
 
         for (int i = 0; i <= 999; i++) {
             int digit1 = i / 100;
