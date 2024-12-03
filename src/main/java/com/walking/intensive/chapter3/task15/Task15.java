@@ -51,11 +51,12 @@ public class Task15 {
 
             for (int c = 0; c < city.length; c++) {
 
-                if (city[r][c] <= verticalProjection[c])
+                if (city[r][c] <= verticalProjection[c]) {
                     if (city[r][c] < horizontalProjection[r]) {
-                        city[r][c] += Math.abs(horizontalProjection[r] - verticalProjection[c]);
+                        city[r][c] = Math.max(horizontalProjection[r], verticalProjection[c]);
                         maxFloors += Math.abs(horizontalProjection[r] - verticalProjection[c]);
                     }
+                }
             }
         }
 
