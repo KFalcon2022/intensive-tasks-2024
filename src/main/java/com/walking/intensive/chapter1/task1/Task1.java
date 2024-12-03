@@ -23,23 +23,20 @@ public class Task1 {
     static String getAgeString(int age) {
 //        Место для вашего кода
         int lastInt = age % 10;
-        String vozrast;
 
         if ((age < 0) || (age > 127)) {
-            return ("Vveden nekorektniy vozrast");
+            return "Vveden nekorektniy vozrast";
         }
 
         if ((lastInt == 1) && ((age > 20) || (age == 1))) {
-            return ("Vam " + age + " god");
+            return "Vam " + age + " god";
         }
 
         if ((lastInt > 1) && (lastInt < 5) && ((age < 5) || (age > 20))) {
-            vozrast = ("Vam " + age + " goda");
+            return "Vam " + age + " goda";
         }
         else {
-            vozrast = "Vam " + age + " let";
+            return "Vam " + age + " let";
         }
-
-        return (vozrast);
     }
 }
