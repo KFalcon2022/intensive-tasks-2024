@@ -24,19 +24,18 @@ public class Task1 {
 //        Место для вашего кода
         int lastInt = age % 10;
 
-        if ((age < 0) || (age > 127)) {
+        if (age < 0 || age > 127) {
             return "Vveden nekorektniy vozrast";
         }
 
-        if ((lastInt == 1) && ((age > 20) || (age == 1))) {
+        if (lastInt == 1 && age > 20 || age == 1) {
             return "Vam " + age + " god";
         }
 
-        if ((lastInt > 1) && (lastInt < 5) && ((age < 5) || (age > 20))) {
+        if (lastInt > 1 && lastInt < 5 && age < 5 || age > 20) {
             return "Vam " + age + " goda";
         }
-        else {
-            return "Vam " + age + " let";
-        }
+
+        return "Vam " + age + " let";
     }
 }
