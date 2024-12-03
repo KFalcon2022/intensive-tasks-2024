@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -32,7 +34,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -43,11 +45,40 @@ package com.walking.intensive.chapter3.task14;
  */
 public class Task14 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(Arrays.toString(getObjectCounts(new int[][]{{1, 3}, {3, 3}, {5, 3}, {2, 2}}, new int[][]{{2, 3, 1}, {4, 3, 1}, {1, 1, 2}})));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+
+        int[] emptyArray = new int[0];
+
+        if (objectLocations == null || objectLocations.length == 0 || radars == null || radars.length == 0) {
+            return emptyArray;
+        }
+
+        int[] objectCounts = new int[radars.length];
+
+        for (int i = 0; i < radars.length; i++) {
+            if (radars[i] == null || radars[i].length != 3 || radars[i][2] < 0) {
+                return emptyArray;
+            }
+
+            for (int[] objectLocation : objectLocations) {
+                if (objectLocation == null || objectLocation.length != 2) {
+                    return emptyArray;
+                }
+
+                if (isVulnerable(objectLocation[0], objectLocation[1], radars[i][0], radars[i][1], radars[i][2])) {
+                    objectCounts[i]++;
+                }
+            }
+        }
+
+        return objectCounts;
+    }
+
+    static boolean isVulnerable(int objectX, int objectY, int radarX, int radarY, int radarRange) {
+        double epsilon = 1e-6;
+        return Math.sqrt((objectX - radarX) * (objectX - radarX) + (objectY - radarY) * (objectY - radarY)) < radarRange + epsilon;
     }
 }
