@@ -1,5 +1,8 @@
 package com.walking.intensive.chapter1.task5;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
  * треугольника окружностей является центральной в Геометрии.
@@ -12,8 +15,20 @@ public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         //System.out.println(getAreaByHeron(3,4,5));
-        System.out.println(getHeights(3,4,5));
+        //System.out.println(getHeights(3,4,5));
     }
+
+    static boolean isCheck(double a, double b, double c) {
+        boolean result = true;
+        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+            result = false;
+        }
+        /*if (a > 0 && b > 0 && c > 0) {
+            result = true;
+        }*/
+        return result;
+    }
+
 
     /**
      * Частным случаем Tеоремы Брахмагупты является формула Герона.
@@ -27,14 +42,13 @@ public class Task5 {
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
         double result, p;
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a){
-            result = -1;
+        if (isCheck(a, b, c)) {
+            p = (a + b + c) / 2;
+            double area = p * (p - a) * (p - b) * (p - c);
+            result = Math.pow(area, 0.5);
             return result;
         }
-        p = (a + b + c) / 2;
-        double area = p * (p-a) * (p - b) * (p - c);
-        result = Math.pow(area, 0.5);
-        return result;
+        return -1;
     }
 
     /**
@@ -45,21 +59,14 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
-        if (a >= 0 && b >= 0 && c >= 0){
-            double[] myArray;
-            myArray = new double[3];
-            double heightA = 2 * getAreaByHeron(a,b,c) / a;
-            myArray[0] = heightA;
-            for (double res: )
-            System.out.println(myArray[0]);
-            return
-
-            /*for (String weekDay: weekDays) {
-
-                System.out.println(weekDay);
-
-            }        */
+        if (isCheck(a, b, c)) {
+            double area = getAreaByHeron(a, b, c);
+            double heightA = 2 * area / a;
+            double heightB = 2 * area / b;
+            double heightC = 2 * area / c;
+            double[] heights = {heightA, heightB, heightC};
+            Arrays.sort(heights);
+            return heights;
         }
         return new double[0];
     }
@@ -72,9 +79,15 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if (isCheck(a, b, c)) {
+            double medianA = 0.5 * Math.pow((2 * c * c + 2 * b * b - a * a), 0.5);
+            double medianB = 0.5 * Math.pow((2 * a * a + 2 * c * c - b * b), 0.5);
+            double medianC = 0.5 * Math.pow((2 * a * a + 2 * b * b - c * c), 0.5);
+            double[] medians = {medianA, medianB, medianC};
+            Arrays.sort(medians);
+            return medians;
+        }
+        return new double[0];
     }
 
     /**
@@ -85,9 +98,15 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if (isCheck(a, b, c)) {
+            double bisA = Math.pow(c * b * (a + b + c) * (c + b - a), 0.5) / (c + b);
+            double bisB = Math.pow(a * c * (a + b + c) * (a + c - b), 0.5) / (a + c);
+            double bisC = Math.pow(a * b * (a + b + c) * (a + b - c), 0.5) / (a + b);
+            double[] bis = {bisA, bisB, bisC};
+            Arrays.sort(bis);
+            return bis;
+        }
+        return new double[0];
     }
 
     /**
@@ -98,9 +117,17 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if (isCheck(a, b, c)) {
+            double angleA = Math.cos(b * b + c * c - a * a) / 2 * b * c;
+            double res = Math.toDegrees(angleA);
+            /*double bisA = Math.pow(c * b * (a + b + c) * (c + b - a), 0.5) / (c + b);
+            double bisB = Math.pow(a * c * (a + b + c) * (a + c - b), 0.5) / (a + c);
+            double bisC = Math.pow(a * b * (a + b + c) * (a + b - c), 0.5) / (a + b);
+            double[] bis = {bisA, bisB, bisC};
+            Arrays.sort(bis);*/
+            return new double[]{res, res*180.0d/Math.PI, 0};
+        }
+        return new double[0];
     }
 
     /**
