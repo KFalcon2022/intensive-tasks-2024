@@ -47,46 +47,37 @@ public class Task11 {
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        int validationResult = validate(array);
-        if (validationResult != 1) {
-            return validationResult;
+        if (!validatePositive(array)) {
+            return -1;
+        }
+        if (arrayIsEmpty(array)) {
+            return 0;
         }
 
         int totalSum = 0;
-        int subArraySize = 1;
-        int startIndex = 0; //смещение
+        for (int i = 0; i < array.length; i++) {
+            int leftCount = i + 1;
+            int rightCount = array.length - i;
 
-        for (int i = 0; i + startIndex < array.length; ) {
-            totalSum += array[i + startIndex];
-            i++;
+            int totalSubarrays = leftCount * rightCount;
+            int oddSubarraysCount = (totalSubarrays + 1) / 2;
 
-            if (i == subArraySize) {
-                if (i + startIndex == array.length && subArraySize + 2 <= array.length) {
-                    subArraySize += 2;
-                    startIndex = 0;
-                } else {
-                    startIndex++;
-                }
-                if (i == array.length) {
-                    break;
-                }
-                i = 0;
-            }
+            totalSum += array[i] * oddSubarraysCount;
         }
 
         return totalSum;
     }
 
-    static int validate(int[] array) {
-        if (array == null || array.length == 0) {
-            return 0;
-        }
+    static boolean validatePositive(int[] array) {
         for (int value : array) {
             if (value < 1) {
-                return -1;
+                return false;
             }
         }
+        return true;
+    }
 
-        return 1;
+    static boolean arrayIsEmpty(int[] array) {
+        return array == null || array.length == 0;
     }
 }
