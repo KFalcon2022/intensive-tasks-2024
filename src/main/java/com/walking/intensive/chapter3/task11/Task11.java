@@ -46,7 +46,28 @@ public class Task11 {
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        // Ваш код
-        return 0;
+        if (array.length == 0) {
+            return 0;
+        }
+
+        int result = 0;
+
+        for (int element : array) {
+            if (element < 1) {
+                return -1;
+            }
+            result += element;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            int distanceToEdge = Math.min(i + 1, array.length - i); // расстояние до ближайшего края массива (минимум 1)
+
+            for (int k = 3; k <= array.length; k += 2) {
+                int numberOfSubarrays = array.length - k + 1; // количество подмассивов длины k
+                result += array[i] * Math.min(Math.min(k, distanceToEdge), numberOfSubarrays);
+            }
+        }
+
+        return result;
     }
 }
