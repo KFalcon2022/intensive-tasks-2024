@@ -9,14 +9,14 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int m = 50;
-        int n = 45;
+        int m = -45;
+        int n = 80;
         System.out.println(getLcm(m, n));
         System.out.println(getGcd(m, n));
         System.out.println(getGcdByEuclideanAlgorithm(m, n));
     }
 
-    static boolean conditionNumber(int m, int n) {
+    static boolean isConditionNumber(int m, int n) {
         return m > 0 && n > 0;
     }
 
@@ -29,7 +29,7 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
         // Ваш код
-        if (!conditionNumber(m, n)) {
+        if (!isConditionNumber(m, n)) {
             return -1;
         }
 
@@ -48,7 +48,7 @@ public class Task6 {
     static int getGcd(int m, int n) {
         // Ваш код
 
-        if (!conditionNumber(m, n)) {
+        if (!isConditionNumber(m, n)) {
             return -1;
         }
 
@@ -74,18 +74,16 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
         // Ваш код
-        if (!conditionNumber(m, n)) {
+        if (!isConditionNumber(m,n)) {
             return -1;
         }
 
-        while (m != 0 && n != 0) {
-            if (m > n) {
-                m = m % n;
-            } else {
-                n = n % m;
-            }
-        }
+        int remainder = m % n;
 
-        return m + n;
+        if (remainder == 0) {
+            return n;
+        } else {
+            return getGcdByEuclideanAlgorithm(n, remainder);
+        }
     }
 }
