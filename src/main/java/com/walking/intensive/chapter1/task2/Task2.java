@@ -48,7 +48,6 @@ public class Task2 {
         int floorNumber;
         String flatLocationString;
 
-
         if ((floorAmount > 0) && (entranceAmount > 0) && (flatAmount >= flatNumber) && (flatNumber > 0)) {
 
             // Проверка на первый этаж первого подъезда
