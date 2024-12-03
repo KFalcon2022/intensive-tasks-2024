@@ -34,28 +34,33 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        System.out.println(getFlatLocation(9, 3, 108));
+        System.out.println(getFlatLocation(2, 4, 32));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
         //        Место для вашего кода
+        final int FLATS_AMOUNT_ON_ONE_FLOOR = 4;
 
-        int flatAmount = 4 * floorAmount * entranceAmount; // Количество квартир
-        if ((flatNumber > flatAmount) || (flatNumber < 1)) {
-            return("Nekorreknie vkhodnie dannie");
-        }
-        else {
-            int floorNumber; // Проверка на первый этаж первого подъезда
+        int flatAmount = FLATS_AMOUNT_ON_ONE_FLOOR * floorAmount * entranceAmount; // Количество квартир в доме
+        System.out.println(flatAmount);
+
+        int entranceNumber;
+        int floorNumber;
+        String flatLocationString;
+
+
+        if ((floorAmount > 0) && (entranceAmount > 0) && (flatAmount >= flatNumber) && (flatNumber > 0)) {
+
+            // Проверка на первый этаж первого подъезда
             if (flatNumber < 5) {
                 floorNumber = 1;
-            }
-            else {
-                floorNumber = flatNumber / 4;
+            } else {
+                floorNumber = flatNumber / FLATS_AMOUNT_ON_ONE_FLOOR;
             }
 
-            int flatLocationInt = flatNumber % 4;
+            int flatLocationInt = flatNumber % FLATS_AMOUNT_ON_ONE_FLOOR;
 
-            String flatLocationString = switch (flatLocationInt) {
+            flatLocationString = switch (flatLocationInt) {
                 case 1:
                     yield "sleva ot lifta, vlevo";
                 case 2:
@@ -65,17 +70,21 @@ public class Task2 {
                 case 0:
                     yield "sprava ot lifta, vpravo";
                 default:
-                    yield"";
+                    yield "";
             };
 
-            int entranceNumber = 1;
+            entranceNumber = 1; // Минимально возможное число подъездов в доме
 
             while (floorNumber > floorAmount) {
                 floorNumber -= floorAmount;
                 entranceNumber += 1;
             }
 
-            return(flatNumber + " kv - " + entranceNumber + " pod''ezd, " + floorNumber + " etazh, " + flatLocationString);
         }
+        else {
+            return ("Nekorreknie vkhodnie dannie");
+        }
+
+        return (flatNumber + " kv - " + entranceNumber + " pod''ezd, " + floorNumber + " etazh, " + flatLocationString);
     }
 }
