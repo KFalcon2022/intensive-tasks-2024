@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter2.task6;
 
-import java.util.Arrays;
-
 /**
  * Реализуйте представленные ниже методы для расчета
  * НОК (наименьшее общее кратное) и НОД (наибольший общий делитель).
