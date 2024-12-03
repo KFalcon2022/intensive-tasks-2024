@@ -40,11 +40,53 @@ package com.walking.intensive.chapter3.task15;
  */
 public class Task15 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getMaxFloors(new int[][]{{2, 1}, {1, 3}}));
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+
+        if (city == null || city.length == 0) {
+            return -1;
+        }
+
+        if (city[0] == null || city[0].length == 0) {
+            return -1;
+        }
+
+        int overallCounter = 0;
+        int columns = city[0].length;
+        int[] maxInColumn = new int[columns];
+        int[] maxInRow = new int[city.length];
+
+
+        for (int i = 0; i < city.length; i++) {
+            if (city[i] == null || city[i].length == 0 || city[i].length != columns) {
+                return -1;
+            }
+
+            for (int j = 0; j < columns; j++) {
+                if (city[i][j] < 0) {
+                    return -1;
+                }
+
+                if (city[i][j] > maxInColumn[j]) {
+                    maxInColumn[j] = city[i][j];
+                }
+
+                if (city[i][j] > maxInRow[i]) {
+                    maxInRow[i] = city[i][j];
+                }
+            }
+        }
+
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (city[i][j] < maxInColumn[j] && city[i][j] < maxInRow[i]) {
+                    overallCounter += Math.min(maxInColumn[j] - city[i][j], maxInRow[i] - city[i][j]);
+                }
+            }
+        }
+
+        return overallCounter;
     }
 }
