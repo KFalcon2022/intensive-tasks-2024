@@ -34,7 +34,7 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        System.out.println(getFlatLocation(2, 4, 32));
+        System.out.println(getFlatLocation(9, 9, 108));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
@@ -42,7 +42,6 @@ public class Task2 {
         final int FLATS_AMOUNT_ON_ONE_FLOOR = 4;
 
         int flatAmount = FLATS_AMOUNT_ON_ONE_FLOOR * floorAmount * entranceAmount; // Количество квартир в доме
-        System.out.println(flatAmount);
 
         int entranceNumber;
         int floorNumber;
