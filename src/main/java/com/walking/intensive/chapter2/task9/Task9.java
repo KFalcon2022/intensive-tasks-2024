@@ -1,6 +1,5 @@
 package com.walking.intensive.chapter2.task9;
 
-import java.util.Arrays;
 
 /**
  * Реализуйте метод getPascalTriangle(). Параметром он должен принимать натуральное число N,
@@ -54,32 +53,76 @@ import java.util.Arrays;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int n = 10;
+        int n = 18;
         System.out.println(getPascalTriangle(n));
     }
 
-
-    static String getPascalTriangle(int n) {
-        // Ваш код
+    static int getMaxLineLength(int n) {
         if (n < 0) {
-            return " ";
+            return n;
         }
+
+        int maxLength = 0;
+
         for (int j = 1; j <= n; j++) {
             int[] array = new int[j];
             array[0] = 1;
+
             for (int i = 1; i < j; i++) {
-                double kef = (double) (j - i) / i;
-                array[i] = (int) (array[i - 1] * kef);
+                double coefficient = (double) (j - i) / i;
+                array[i] = (int) Math.round(array[i - 1] * coefficient);
             }
 
-            for (int k = n - j; k > 0; k--) {
-                System.out.print(" ");
+            StringBuilder sb = new StringBuilder();
+            for (int num : array) {
+                sb.append(num).append(" ");
             }
-            for (int i : array) {
-                System.out.print(i+ " ");
+
+            String currentLine = sb.toString().trim();
+
+            if (currentLine.length() > maxLength) {
+                maxLength = currentLine.length();
             }
-            System.out.println();
         }
-        return null;
+
+        return maxLength;
+    }
+
+    static String getPascalTriangle(int n) {
+        // Ваш код
+        StringBuilder result = new StringBuilder();
+        if (n < 0) {
+            return "";
+        }
+
+        int MaxLength = getMaxLineLength(n);
+
+        for (int j = 1; j <= n; j++) {
+            int[] array = new int[j];
+            array[0] = 1;
+
+            for (int i = 1; i < j; i++) {
+                double coefficient = (double) (j - i) / i;
+                array[i] = (int) Math.round(array[i - 1] * coefficient);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int num : array) {
+                sb.append(num).append(" ");
+            }
+
+            String currentLine = sb.toString().trim();
+            int numberOfSpace = (MaxLength - currentLine.length()) / 2;
+
+            if (j < n) {
+                for (int k = 0; k < numberOfSpace; k++) {
+                    result.append(" ");
+                }
+            }
+
+            result.append(currentLine).append("\n");
+        }
+
+        return result.toString();
     }
 }
