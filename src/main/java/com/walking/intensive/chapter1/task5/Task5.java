@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task5;
 
+import java.util.Arrays;
+
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
  * треугольника окружностей является центральной в Геометрии.
@@ -23,9 +25,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
+        if (!isValidParameters(a, b, c)) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        double halfPerimeter = getHalfPerimeter(a, b, c);
+        return Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
     }
 
     /**
@@ -36,9 +41,14 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
+        if (!isValidParameters(a, b, c)) {
+            double[] emptyArray = new double[0];
+            return emptyArray;
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double[] sidesArray = {a, b, c};
+        Arrays.sort(sidesArray);
+        return sidesArray;
     }
 
     /**
@@ -124,5 +134,13 @@ public class Task5 {
         //        Место для вашего кода
 
         return 0; // Заглушка. При реализации - удалить
+    }
+
+    private static boolean isValidParameters(double a, double b, double c) {
+        return (a > 0 && b > 0 && c > 0) && (a + b > c && b + c > a && c + a > b);
+    }
+
+    private static double getHalfPerimeter(double a, double b, double c) {
+        return (a + b + c) / 2;
     }
 }
