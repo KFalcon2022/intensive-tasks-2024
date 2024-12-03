@@ -24,7 +24,35 @@ public class Task8 {
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+        int happyTicketCounter = 0;
+
+        for (int sumOfDigits = 0; sumOfDigits <= 13; sumOfDigits++) {
+            int combinationCounter = 0;
+
+            for (int i = 0; i <= 9; i++) {
+                for (int j = 0; j <= i; j++) {
+                    for (int k = 0; k <= j; k++) {
+                        int sum = i + j + k;
+                        if (sum == sumOfDigits) {
+                            combinationCounter += getNumberOfPermutation(i, j, k);
+                        }
+                    }
+                }
+            }
+
+            happyTicketCounter += 2 * combinationCounter * combinationCounter;
+        }
+
+        return (double) happyTicketCounter / 1_000_000;
+    }
+
+    static int getNumberOfPermutation(int a, int b, int c) {
+        if (a == b && a == c) {
+            return 1;
+        }
+        if (a == b || a == c || b == c) {
+            return 3;
+        }
+        return 6;
     }
 }
