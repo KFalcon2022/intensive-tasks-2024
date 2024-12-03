@@ -19,7 +19,7 @@ public class Task10 {
 
     static boolean isPalindrome(String inputString) {
         // Ваш код
-        if (inputString == null || inputString == "" || inputString.length() == 1) {
+        if ((inputString == null) || (inputString.equals("")) || (inputString.length() == 1)) {
             return false;
         }
 
