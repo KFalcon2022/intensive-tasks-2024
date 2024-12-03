@@ -11,11 +11,38 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум"));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+
+        if (isEmpty(inputString) || isChar(inputString)) {
+            return false;
+        }
+        char[] charArray = inputString.toUpperCase().toCharArray();
+        StringBuilder string = new StringBuilder();
+        StringBuilder invertedString = new StringBuilder();
+
+        for (char c : charArray) {
+
+            c = Character.toUpperCase(c);
+
+            if (c >= 'A' && c <= 'Z' || c >= 'А' && c <= 'Я' || c == 'Ё') {
+
+                string.append(c);
+                invertedString.insert(0, c);
+            }
+        }
+        return string.compareTo(invertedString) == 0;
+    }
+
+    private static boolean isEmpty(String inputString) {
+
+        return inputString == null || inputString.trim().isEmpty();
+    }
+
+    private static boolean isChar(String inputString) {
+
+        return inputString.trim().length() == 1;
     }
 }
