@@ -33,44 +33,46 @@ public class Task4 {
     }
 
     static String solveEquation(double a, double b, double c) {
-        double D;
 
         if (a == 0 && b == 0 && c == 0) {
             return "Бесконечное множество решений.";
-        } else if (a == 0 && b == 0) {
+        }
+        if (a == 0 && b == 0) {
             return "Количество решений: 0.";
-        } else if (a == 0) {
+        }
+        if (a == 0) {
             double root = (-c / b);
             if (root == -0.0) {
                 return "Количество решений: 1. Корень: " + 0.0;
-            } else {
-                return "Количество решений: 1. Корень: " + root;
             }
+            return "Количество решений: 1. Корень: " + root;
+
         }
 
+        // find discriminant
+        double discriminant = b * b - 4 * a * c;
+
+        // find roots
         double firstRoot;
         double secondRoot;
 
-        // find D
-        D = b * b - 4 * a * c;
-
-        // find roots
-        if (D < 0) {
+        if (discriminant < 0) {
             return "Количество решений: 0.";
-        } else if (D == 0) {
-            firstRoot = (-b - Math.sqrt(D)) / 2 * a;
+        } if (discriminant == 0) {
+            firstRoot = (-b - Math.sqrt(discriminant)) / 2 * a;
             firstRoot = firstRoot == 0 ? 0.0 : firstRoot;
-
             return "Количество решений: 1. " + "Корень: " + firstRoot;
-        } else
-            firstRoot = (-b - Math.sqrt(D)) / 2 * a;
-            secondRoot = (-b + Math.sqrt(D)) / 2 * a;
+        }
+        firstRoot = (-b - Math.sqrt(discriminant)) / 2 * a;
+        secondRoot = (-b + Math.sqrt(discriminant)) / 2 * a;
 
-            String roots;
-            if (firstRoot < secondRoot) {
-                roots = firstRoot + ";" + secondRoot;
-            } else roots = secondRoot + ";" + firstRoot;
+        String roots;
+        if (firstRoot < secondRoot) {
+            roots = firstRoot + ";" + secondRoot;
+        } else {
+            roots = secondRoot + ";" + firstRoot;
+        }
 
-            return "Количество решений: 2. " + "Корни: " + roots;
+        return "Количество решений: 2. " + "Корни: " + roots;
     }
 }
