@@ -52,10 +52,62 @@ package com.walking.intensive.chapter2.task9;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getPascalTriangle(5));
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+
+        // Проверка на корректность входных данных
+        if (n < 1) {
+            return "";  // Возвращаем пустую строку при некорректных данных
+        }
+
+        StringBuilder result = new StringBuilder();
+        int maxWidthLine = 0;
+
+        // Генерация строк треугольника
+        for (int i = 0; i < n; i++) {
+            String line = generateTriangleLine(i);
+            if (line.length() > maxWidthLine) {
+                maxWidthLine = line.length();
+            }
+            result.append(line).append("\n");
+        }
+
+        // Форматирование строк с пробелами
+        String[] lines = result.toString().split("\n");
+        StringBuilder pascalTriangle = new StringBuilder();
+
+        for (String line : lines) {
+            int leftSpaces = (maxWidthLine - line.length()) / 2;
+            pascalTriangle.append(generateSpaces(leftSpaces)).append(line).append("\n");
+        }
+
+        return pascalTriangle.toString();
+    }
+
+    static String generateSpaces(int count) {
+
+        // Генерация строки пробелов
+        StringBuilder voids = new StringBuilder();
+
+        for (int i = 0; i < count; i++) {
+            voids.append(" ");
+        }
+        return voids.toString();
+    }
+
+    static String generateTriangleLine(int n) {
+
+        StringBuilder line = new StringBuilder();
+        int triangleElement = 1;
+
+        line.append(triangleElement); // Первый элемент строки (C0)
+
+        for (int k = 1; k <= n; k++) {
+            triangleElement = triangleElement * (n - k + 1) / k;
+            line.append(" ").append(triangleElement);
+        }
+        return line.toString();
     }
 }
