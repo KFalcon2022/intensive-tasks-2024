@@ -51,11 +51,75 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getPascalTriangle(15));
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+        if (n < 1) {
+            return "";
+        }
+
+        String result = "";
+        int lastLineLength = 0;
+
+        for (int i = 1; i <= n; i++) {
+            lastLineLength += getLength(getBinomCoeff(i, n));
+
+            if (i != n) {
+                lastLineLength++;
+            }
+        }
+
+        for (int m = 1; m <= n; m++) {
+            int lineLength = 0;
+            String line = "";
+
+            for (int i = 1; i <= m; i++) {
+                int binomCoeff = getBinomCoeff(i, m);
+                line += binomCoeff;
+                lineLength += getLength(binomCoeff);
+
+                if (i != m) {
+                    line += " ";
+                    lineLength++;
+                }
+            }
+
+            int spaceNumber = (lastLineLength - lineLength) / 2;
+            for (int i = 0; i < spaceNumber; i++) {
+                line = " " + line;
+            }
+
+            result += line;
+
+            if (m != n) {
+                result += "\n";
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Биномиальный коэффициент, стоящий на i-м месте в m-й строке
+     */
+    static int getBinomCoeff(int i, int m) {
+        if (i == 1 || i == m) {
+            return 1;
+        }
+
+        return getBinomCoeff(i - 1, m - 1) + getBinomCoeff(i, m - 1);
+    }
+
+    static int getLength(int k) {
+        int result = 0;
+        int restNumber = k;
+
+        while (restNumber != 0) {
+            restNumber /= 10;
+            result++;
+        }
+
+        return result;
     }
 }
