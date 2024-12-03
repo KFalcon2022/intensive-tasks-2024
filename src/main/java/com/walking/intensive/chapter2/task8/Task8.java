@@ -26,25 +26,25 @@ public class Task8 {
 
     static double getHappyTicketChance() {
         // Ваш код
-        int maxCifra = 9;
+        int maxNumber = 9;
         int[] sums = new int[28];
 
-        for (int h1 = 0; h1 <= maxCifra; h1++) {
-            for (int h2 = 0; h2 <= maxCifra; h2++) {
-                for (int h3 = 0; h3 <= maxCifra; h3++) {
-                    int sum = h1 + h2 + h3;
+        for (int i = 0; i <= maxNumber; i++) {
+            for (int j = 0; j <= maxNumber; j++) {
+                for (int k = 0; k <= maxNumber; k++) {
+                    int sum = i + j + k;
                     sums[sum]++;
                 }
             }
         }
 
-        int winningcount = 0;
+        int numberOfLuckyTicket = 0;
+
         for (int count : sums) {
-            winningcount = winningcount + count * count;
+            numberOfLuckyTicket = numberOfLuckyTicket + count * count;
         }
 
-        double allcount = 1000000.0;
-        double p = winningcount / allcount;
-        return p;
+        double probability = numberOfLuckyTicket / 1000000.0;
+        return probability;
     }
 }
