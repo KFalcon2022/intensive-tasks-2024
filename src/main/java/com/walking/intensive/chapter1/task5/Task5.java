@@ -13,7 +13,6 @@ import java.util.Arrays;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        getAngles(2,3,2.5);
     }
 
     /**
