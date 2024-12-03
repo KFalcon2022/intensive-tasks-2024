@@ -118,14 +118,15 @@ public class Task5 {
      */
     static double[] getAngles(double a, double b, double c) {
         if (isCheck(a, b, c)) {
-            double angleA = Math.cos(b * b + c * c - a * a) / 2 * b * c;
-            double res = Math.toDegrees(angleA);
-            /*double bisA = Math.pow(c * b * (a + b + c) * (c + b - a), 0.5) / (c + b);
-            double bisB = Math.pow(a * c * (a + b + c) * (a + c - b), 0.5) / (a + c);
-            double bisC = Math.pow(a * b * (a + b + c) * (a + b - c), 0.5) / (a + b);
-            double[] bis = {bisA, bisB, bisC};
-            Arrays.sort(bis);*/
-            return new double[]{res, res*180.0d/Math.PI, 0};
+            double angleA = Math.acos((b * b + c * c - a * a) / (2 * b * c));
+            double angleB = Math.acos((a * a + c * c - b * b) / (2 * a * c));
+            double angleC = Math.acos((b * b + a * a - c * c) / (2 * b * a));
+            angleA = Math.toDegrees(angleA);
+            angleB = Math.toDegrees(angleB);
+            angleC = Math.toDegrees(angleC);
+            double[] angles = {angleA, angleB, angleC};
+            Arrays.sort(angles);
+            return angles;
         }
         return new double[0];
     }
