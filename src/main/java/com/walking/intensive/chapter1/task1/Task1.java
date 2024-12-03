@@ -28,13 +28,12 @@ public class Task1 {
         int lastOneDigit = age % 10;
         int lastTwoDigits = age % 100;
 
-        if ((lastTwoDigits >= 11 && lastTwoDigits <= 14) || lastOneDigit == 0 || lastOneDigit >= 5) {
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 14 || lastOneDigit == 0 || lastOneDigit >= 5) {
             return "Вам " + age + " лет";
         }
         if (lastOneDigit == 1) {
             return "Вам " + age + " год";
-        } else
+        }
             return "Вам " + age + " года";
     }
-
 }
