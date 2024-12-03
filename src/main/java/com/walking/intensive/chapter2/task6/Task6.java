@@ -52,7 +52,7 @@ public class Task6 {
     }
 
     static boolean isValid(int n, int m) {
-        return m > 0 || n > 0;
+        return m > 0 && n > 0;
     }
 
     static int getGcdSet(int m, int n) {
@@ -65,7 +65,7 @@ public class Task6 {
         while (n % x != 0) {
             x = n % x;
         }
-        
+
         return x;
     }
 }
