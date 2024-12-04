@@ -44,7 +44,40 @@ public class Task15 {
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+        int n = city.length;
+        if (n == 0) {
+            return -1;
+        }
+
+        for (int[] row : city) {
+            if (row.length != n) {
+                return -1;
+            }
+
+            for (int i = 0; i < n; i++) {
+                if (row[i] < 0) {
+                    return -1;
+                }
+            }
+        }
+
+        int result = 0;
+        int[] maxInRow = new int[n];
+        int[] maxInColumn = new int[n];
+
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < n; c++) {
+                maxInRow[r] = Math.max(maxInRow[r], city[r][c]);
+                maxInColumn[c] = Math.max(maxInColumn[c], city[r][c]);
+            }
+        }
+
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < n; c++) {
+                result += Math.min(maxInRow[r], maxInColumn[c]) - city[r][c];
+            }
+        }
+
+        return result;
     }
 }
