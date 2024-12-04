@@ -53,7 +53,28 @@ public class Task13 {
     }
 
     static int getStepsCount(int[] plants, int wateringCanVolume) {
-        // Ваш код
-        return 0;
+        if (wateringCanVolume < 1) {
+            return -1;
+        }
+
+        for (int plant : plants) {
+            if (plant < 1 || plant > wateringCanVolume) {
+                return -1;
+            }
+        }
+
+        int steps = 0;
+        int water = wateringCanVolume;
+
+        for (int i = 0; i < plants.length; i++) {
+            steps++;
+            water -= plants[i];
+
+            if (i != plants.length - 1 && plants[i + 1] > water) {
+                steps += 2 * (i + 1);
+            }
+        }
+
+        return steps;
     }
 }
