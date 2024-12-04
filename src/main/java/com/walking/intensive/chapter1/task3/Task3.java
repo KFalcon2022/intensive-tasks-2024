@@ -31,10 +31,10 @@ public class Task3 {
         if (year <= 0) {
             return false;
         }
-        if (year % 100 == 0 && year % 400 != 0) {
+        if (year % 100 == 0 && year % 400 != 0 || year % 4 != 0) {
             return false;
-        } else {
-            return year % 4 == 0;
         }
+        return true;
     }
 }
+
