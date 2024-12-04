@@ -14,8 +14,8 @@ import javax.xml.transform.Source;
 public class Task10 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        System.out.println(isPalindrome("Про?Сто, Очен. Стёчк!"));
-        System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум."));
+        System.out.println(isPalindrome("Ежу хуже,!"));
+        System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум.!"));
     }
 
     static boolean isPalindrome(String inputString) {
@@ -23,28 +23,29 @@ public class Task10 {
             return false;
         }
 
-        String parsedString = removeSpecialCharacters(inputString);
-        String backwardString = "";
+        int stringLength = inputString.length() - 1;
+        int a = 0, z = stringLength;
+        while (a < stringLength) {
 
-        for (int i = 0; i < parsedString.length(); i++) {
-            char c = parsedString.charAt(i);
-            backwardString = c + backwardString;
-        }
-
-        return parsedString.equalsIgnoreCase(backwardString);
-    }
-
-    static String removeSpecialCharacters(String inputString) {
-        String parsedString = "";
-
-        for (int i = 0; i < inputString.length(); i++) {
-            char c = inputString.charAt(i);
-
-            if ((c >= 'А' && c <= 'Я') || (c >= 'а' && c <= 'я')) {
-                parsedString += c;
+            char c = inputString.charAt(a);
+            if (!Character.isLetterOrDigit(c)) {
+                a++;
+                continue;
             }
+
+            char d = inputString.charAt(z);
+            if (!Character.isLetterOrDigit(d)) {
+                z--;
+                continue;
+            }
+
+            if (Character.toLowerCase(c) != Character.toLowerCase(d)) {
+                return false;
+            }
+
+            a++; z--;
         }
 
-        return parsedString;
+        return true;
     }
 }
