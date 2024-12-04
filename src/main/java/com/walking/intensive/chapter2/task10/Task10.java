@@ -25,7 +25,7 @@ public class Task10 {
 
         int stringLength = inputString.length() - 1;
         int a = 0, z = stringLength;
-        while (a < stringLength) {
+        while (a < stringLength / 2) {
 
             char c = inputString.charAt(a);
             if (!Character.isLetterOrDigit(c)) {
