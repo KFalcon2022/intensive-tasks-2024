@@ -47,6 +47,7 @@ public class Task7 {
                 return i;
             }
         }
+
         return 0;
     }
 
@@ -56,6 +57,7 @@ public class Task7 {
 
     static int getSumOfDivisors(int n) {
         int sumOfDivisors = 0;
+
         for (int i = 1; i < n; i++) {
             if (n % i == 0) {
                 sumOfDivisors += i;
