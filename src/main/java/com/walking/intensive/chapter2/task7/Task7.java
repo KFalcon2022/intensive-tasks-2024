@@ -28,9 +28,24 @@ package com.walking.intensive.chapter2.task7;
 public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int n = 200;
+        int n = 0;
 
         System.out.println(getFriendlyPair(n));
+    }
+
+    static int getSumOfDivisors(int number) {
+        int sumOfDivisors = 1;
+
+        for (int j = 2; j <= Math.sqrt((number)); j++) {
+            if (number % j == 0) {
+                sumOfDivisors += j;
+                if (j != number / j) {
+                    sumOfDivisors += number / j;
+                }
+            }
+        }
+
+        return sumOfDivisors;
     }
 
     static int getFriendlyPair(int n) {
@@ -39,41 +54,24 @@ public class Task7 {
         }
 
         int maxSum = 0;
-        int result = 0;
+        int friendlyPair = 0;
 
         for (int a = 1; a < n; a++) {
-            int sumA = 1;
-            for (int j = 2; j <= Math.sqrt((a)); j++) {
-                if (a % j == 0) {
-                    sumA += j;
-                    if (j != a / j) {
-                        sumA += a / j;
-                    }
-                }
-            }
-
+            int sumA = getSumOfDivisors(a);
             int b = sumA;
+
             if (b > a && b < n) {
-                int sumB = 1;
-                for (int j = 2; j <= Math.sqrt(b); j++) {
-                    if (b % j == 0) {
-                        sumB += j;
-                        if (j != b / j) {
-                            sumB += b / j;
-                        }
-                    }
-                }
+                int sumB = getSumOfDivisors(b);
                 if (sumB == a) {
                     int sum = a + b;
                     if (sum > maxSum) {
                         maxSum = sum;
-                        result = b;
+                        friendlyPair = b;
                     }
                 }
-
             }
-
         }
-        return result;
+
+        return friendlyPair;
     }
 }
