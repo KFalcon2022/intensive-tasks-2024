@@ -1,6 +1,5 @@
 package com.walking.intensive.chapter3.task11;
 
-import java.util.Arrays;
 
 /**
  * Реализуйте метод getOddSubArraysElementsSum() с учетом условий ниже.
