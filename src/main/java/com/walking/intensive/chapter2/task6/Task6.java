@@ -9,7 +9,7 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int m = -45;
+        int m = 45;
         int n = 80;
         System.out.println(getLcm(m, n));
         System.out.println(getGcd(m, n));
@@ -33,9 +33,7 @@ public class Task6 {
             return -1;
         }
 
-        int lcm = m / getGcd(m, n) * n;
-
-        return lcm;
+        return m / getGcd(m, n) * n;
     }
 
     /**
@@ -47,7 +45,6 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
         // Ваш код
-
         if (!isConditionNumber(m, n)) {
             return -1;
         }
@@ -74,16 +71,12 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
         // Ваш код
-        if (!isConditionNumber(m,n)) {
-            return -1;
-        }
-
         int remainder = m % n;
 
         if (remainder == 0) {
             return n;
-        } else {
-            return getGcdByEuclideanAlgorithm(n, remainder);
         }
+
+        return getGcdByEuclideanAlgorithm(n, remainder);
     }
 }
