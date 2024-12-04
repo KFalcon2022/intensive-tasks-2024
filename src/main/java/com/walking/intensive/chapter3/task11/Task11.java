@@ -46,7 +46,38 @@ public class Task11 {
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        // Ваш код
-        return 0;
+        int arrayLength = array.length;
+
+        if (arrayLength == 0) {
+            return 0;
+        }
+
+        if (!isArrayValid(array)) {
+            return -1;
+        }
+
+        int arraySum = 0;
+        for (int i = 0; i < arrayLength; i++) {
+            int sum = array[i];
+            arraySum += sum;
+
+            for (int j = i + 2; j < arrayLength; j += 2) {
+                sum += array[j] + array[j - 1];
+                arraySum += sum;
+            }
+        }
+
+        return arraySum;
     }
+
+    static boolean isArrayValid(int[] array) {
+        for (int num : array) {
+            if (num < 0 ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
