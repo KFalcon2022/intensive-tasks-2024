@@ -32,7 +32,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -47,7 +47,32 @@ public class Task14 {
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+        for (int[] object : objectLocations) {
+            if (object.length != 2) {
+                return new int[]{};
+            }
+        }
+
+        for (int[] radar : radars) {
+            if (radar.length != 3 || radar[2] < 0) {
+                return new int[]{};
+            }
+        }
+
+        int[] detectedObjects = new int[radars.length];
+
+        for (int i = 0; i < radars.length; i++) {
+            for (int[] object : objectLocations) {
+                if (radars[i][2] >= getDistance(object, radars[i][0], radars[i][1])) {
+                    detectedObjects[i]++;
+                }
+            }
+        }
+
+        return detectedObjects;
+    }
+
+    static double getDistance(int[] object, int x, int y) {
+        return Math.sqrt(Math.pow(Math.abs(object[0] - x), 2) + Math.pow(Math.abs(object[1] - y), 2));
     }
 }
