@@ -61,10 +61,10 @@ public class Task9 {
             return "";
         }
 
-        String pascalTriangle = getTriangleLine(n);
+        String pascalTriangle = getTriangleLine(n-1);
         int baseLength = pascalTriangle.length();
 
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = n - 2; i >= 0; i--) {
             String triangleLine = getTriangleLine(i);
             int spacesAmount = (baseLength - triangleLine.length()) / 2;
             pascalTriangle = " ".repeat(spacesAmount) + triangleLine + "\n" + pascalTriangle;
@@ -73,7 +73,6 @@ public class Task9 {
     }
 
     static String getTriangleLine(int i) {
-
         String triangleLine = "1";
         int c = 1;
         for (int j = 1; j <= i; j++) {
