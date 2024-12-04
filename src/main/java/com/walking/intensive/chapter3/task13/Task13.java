@@ -50,10 +50,53 @@ package com.walking.intensive.chapter3.task13;
 public class Task13 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getStepsCount(new int[]{2, 2, 3, 3}, 5));
+        System.out.println(getStepsCount(new int[]{1, 1, 1, 4, 2, 3}, 4));
     }
 
     static int getStepsCount(int[] plants, int wateringCanVolume) {
-        // Ваш код
-        return 0;
+        if (plants == null || plants.length == 0) {
+            return 0;
+        }
+        if (!isPositive(plants, wateringCanVolume)) {
+            return -1;
+        }
+
+        int remainingWater = wateringCanVolume;
+        int stepsCount = 0;
+        for (int i = 0; i < plants.length; i++) {
+            if (remainingWater > 0) {
+                stepsCount++;
+                //грядка не полита?
+                if (plants[i] > 0) {
+                    plants[i] = plants[i] - remainingWater;
+
+                    if (plants[i] < 0) {
+                        remainingWater = Math.abs(plants[i]);
+                        plants[i] = 0;
+                    } else {
+                        //вода кончилась, идем к реке
+                        remainingWater = wateringCanVolume;
+                        stepsCount += i;
+                        i = 0;
+                    }
+                }
+                //если полита, переходим к следующей
+            }
+        }
+
+        return stepsCount;
+    }
+
+    private static boolean isPositive(int[] plants, int wateringCanVolume) {
+        if (wateringCanVolume < 1) {
+            return false;
+        }
+        for (int plant : plants) {
+            if (plant < 1) {
+                return false;
+            }
+        }
+        return true;
     }
 }
