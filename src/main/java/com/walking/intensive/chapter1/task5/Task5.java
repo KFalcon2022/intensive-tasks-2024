@@ -1,6 +1,6 @@
 package com.walking.intensive.chapter1.task5;
 
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -14,16 +14,10 @@ import java.util.Arrays;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        //System.out.println(getAreaByHeron(3,4,5));
-        //System.out.println(getHeights(3,4,5));
     }
 
     static boolean isCheck(double a, double b, double c) {
-        boolean result = true;
-        if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-            result = false;
-        }
-        return result;
+        return !(a <= 0) && !(b <= 0) && !(c <= 0) && !(a + b <= c) && !(a + c <= b) && !(b + c <= a);
     }
 
 
@@ -176,8 +170,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return 0; // Заглушка. При реализации - удалить
+        if (isCheck(a, b, c)) {
+            double cosA = (b * b + c * c - a * a) / (2 * b * c);
+            double sinA = Math.pow(1 - cosA * cosA, 0.5);
+            return 0.5 * b * c * sinA;
+        }
+        return -1;
     }
 }
