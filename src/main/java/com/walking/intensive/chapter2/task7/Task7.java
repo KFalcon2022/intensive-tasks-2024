@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task7;
 
+import java.util.Scanner;
+
 /**
  * Пятиклассник Ваня придумал забаву. Он ввел понятие «дружественной пары» чисел.
  * Два различных натуральных числа N и M он назвал дружественными, если сумма делителей числа N
@@ -25,13 +27,41 @@ package com.walking.intensive.chapter2.task7;
  *
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
+
 public class Task7 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите число: ");
+        int n = in.nextInt();
+        System.out.println("Наибольшее число из пары: " + getFriendlyPair(n));
     }
 
     static int getFriendlyPair(int n) {
-        // Ваш код
+        if (!isValid(n)) {
+            return -1;
+        }
+
+        for (int i = n - 1; i > 0; i--) {
+            int friendlyNumber1 = getSumOfDivisors(i);
+            if (i == getSumOfDivisors(friendlyNumber1) && i > friendlyNumber1) {
+                return i;
+            }
+        }
         return 0;
+    }
+
+    static boolean isValid(int n) {
+        return n > 0 && n <= 1000000;
+    }
+
+    static int getSumOfDivisors(int n) {
+        int sumOfDivisors = 0;
+        for (int i = 1; i < n; i++) {
+            if (n % i == 0) {
+                sumOfDivisors += i;
+            }
+        }
+
+        return sumOfDivisors;
     }
 }
