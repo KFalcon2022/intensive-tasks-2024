@@ -50,18 +50,18 @@ public class Task11 {
         System.out.println(getOddSubArraysElementsSum(array));
     }
 
+    static int getSumm(int[] sumArray) {
+        int sum = 0;
+        for (int i : sumArray) {
+            sum += i;
+        }
+
+        return sum;
+    }
+
     static int getOddSubArraysElementsSum(int[] array) {
         // Ваш код
 
-        if (array.length % 2 > 0) {
-            int sum = 0;
-
-            for (int i = 0; i < array.length; i++) {
-                sum += array[i];
-            }
-
-            return sum;
-        }
-        return 0;
+        return getSumm(array);
     }
 }
