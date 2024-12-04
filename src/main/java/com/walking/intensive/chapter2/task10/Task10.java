@@ -23,8 +23,8 @@ public class Task10 {
             return false;
         }
 
-        int stringLength = inputString.length() - 1;
-        int a = 0, z = stringLength;
+        int stringLength = inputString.length();
+        int a = 0, z = stringLength - 1;
         while (a < stringLength / 2) {
 
             char c = inputString.charAt(a);
