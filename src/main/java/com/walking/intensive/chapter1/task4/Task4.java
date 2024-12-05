@@ -25,7 +25,7 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 0;
+        double a = 1;
         double b = 0;
         double c = 0;
 
@@ -35,7 +35,79 @@ public class Task4 {
 
     static String solveEquation(double a, double b, double c) {
         //        Место для вашего кода
+// ax² + bx + c = 0
+// Формула дискриминанта D = b^b - 4ac
+        String outputString = "";
+        double discriminant = b * b - 4 * a * c;
+        double x;
+        double x1, x2;
+//Дальше смотрим чему равен дискриминант
+ /*
+         Если больше 0 то для нахождения корней используем формулы для x1 и x2
+                x1 = -b + корень из D / 2a
+                x2 = -b - корень из D / 2a
+        Если дискриминант равен 0 - одно решение
+                x = -b / 2a
+        Если дискриминант меньше 0 то корней нет
 
-        return null; // Заглушка. При реализации - удалить
+        Бесконечное множество решений возможно только если все коэффициенты равны 0
+ */
+        if (a == 0 && b == 0 && c == 0) {
+            outputString = "Бесконечное множество решений.";
+            return outputString;
+        }
+
+//      По определению a != 0
+        if (discriminant > 0 && a != 0) {
+
+            String endString;
+
+
+            x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+            x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+            if (x1 < x2) {
+                endString = x1 + ";" + x2;
+            } else {
+                endString = x2 + ";" + x1;
+            }
+            outputString = "Количество решений: 2. Корни: " + endString;
+
+        }
+
+        if (discriminant == 0) {
+
+            if (b == 0 && a == 0) {
+//  Тогда с = 0
+                outputString = "Количество решений: 0.";
+                return outputString;
+            }
+
+            x = -b / (2 * a);
+
+//        Не знаю почему, но вместо обычного 0 программа возвращает в печать отрицательный 0 т.е. (-0.0)
+//        возможно из-за приведения типа к строке?
+//        поэтому возвращаем положительный???? 0
+            if (x == 0) {
+                x = 0;
+            }
+
+            outputString = "Количество решений: 1. Корень: " + x;
+        }
+
+        if (discriminant < 0) {
+            outputString = "Количество решений: 0.";
+        }
+
+//    Если a равно 0, то это уже не квадратное уравнение, линейное bx+c =0
+        if (a == 0) {
+
+            x = -c / b;
+
+            outputString = "Количество решений: 1. Корень: " + x;
+        }
+
+
+        return outputString;
+
     }
 }
