@@ -37,8 +37,41 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        //проверяем данные
+        if (floorAmount <= 0 | entranceAmount <= 0 | flatNumber <= 0) {
+            return "Некорректные входные данные";
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        int apartmentsAmount = floorAmount * entranceAmount * 4;
+        if (flatNumber > apartmentsAmount) {
+            return "Такой квартиры не существует";
+        }
+
+        //находим подъезд
+        int entrance;
+        int amountApartmentsOnFloor = 4;
+        int apartmentsAmountEntrance = floorAmount * amountApartmentsOnFloor;
+        if (flatNumber % apartmentsAmountEntrance == 0) {
+            entrance = flatNumber / apartmentsAmountEntrance;
+        } else {
+            entrance = (flatNumber / apartmentsAmountEntrance) + 1;
+        }
+
+        //находим этаж
+        int floor;
+        if (flatNumber % amountApartmentsOnFloor == 0) {
+            floor = (flatNumber - (apartmentsAmountEntrance * (entrance - 1))) / amountApartmentsOnFloor;
+        } else {
+            floor = ((flatNumber - (apartmentsAmountEntrance * (entrance - 1))) / amountApartmentsOnFloor) + 1;
+        }
+
+        //возвращаем местоположение квартиры
+        return switch (flatNumber % 4) {
+            case (0) -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "справа от лифта, вправо";
+            case (1) -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "слева от лифта, влево";
+            case (2) -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "слева от лифта, вправо";
+            case (3) -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, " + "справа от лифта, влево";
+            default -> null;
+        };
     }
 }
