@@ -14,15 +14,29 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
         int age = 0;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
+        int remainder = age % 10;
+        int decimalRemainder = age % 100;
 
-        return null; // Заглушка. При реализации - удалить
+        if (age < 0) {
+            return "Некорректный ввод";
+        }
+
+        if (decimalRemainder >= 11 && decimalRemainder <= 15) {
+            return "Вам " + age + " лет";
+        }
+
+        if (remainder == 2 || remainder == 3 || remainder == 4) {
+            return "Вам " + age + " года";
+        } else if (remainder == 0 || remainder == 5 || remainder == 6 || remainder == 7 || remainder == 8 || remainder == 9) {
+            return "Вам " + age + " лет";
+        }
+
+        return "Вам " + age + " год";
     }
 }
