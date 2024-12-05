@@ -58,10 +58,6 @@ public class Task9 {
     }
 
     static int getMaxLineLength(int n) {
-        if (n < 0) {
-            return n;
-        }
-
         int maxLength = 0;
 
         for (int j = 1; j <= n; j++) {
@@ -80,9 +76,7 @@ public class Task9 {
 
             String currentLine = sb.toString().trim();
 
-            if (currentLine.length() > maxLength) {
-                maxLength = currentLine.length();
-            }
+          maxLength = Math.max(currentLine.length(), maxLength);
         }
 
         return maxLength;
@@ -95,7 +89,7 @@ public class Task9 {
             return "";
         }
 
-        int MaxLength = getMaxLineLength(n);
+        int maxLength = getMaxLineLength(n);
 
         for (int j = 1; j <= n; j++) {
             int[] array = new int[j];
@@ -112,7 +106,7 @@ public class Task9 {
             }
 
             String currentLine = sb.toString().trim();
-            int numberOfSpace = (MaxLength - currentLine.length()) / 2;
+            int numberOfSpace = (maxLength - currentLine.length()) / 2;
 
             if (j < n) {
                 for (int k = 0; k < numberOfSpace; k++) {
