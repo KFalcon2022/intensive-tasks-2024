@@ -47,37 +47,34 @@ public class Task12 {
     }
 
     static int[] getMovementsNumber(String baskets) {
-
         if (!isValid(baskets)) {
-
             return new int[0];
         }
+
         int basketsQuantity = baskets.length();
         int[] basketTarget = new int[baskets.length()];
 
         for (int i = 0; i < basketsQuantity; i++) {
 
             for (int j = i + 1; j < basketsQuantity; j++) {
-
-                basketTarget[i] += baskets.charAt(j) - '0' == 1 ? j - i : 0;
+                basketTarget[i] += baskets.charAt(j) == '1' ? j - i : 0;
             }
             for (int j = i - 1; j >= 0; j--) {
-
-                basketTarget[i] += baskets.charAt(j) - '0' == 1 ? i - j : 0;
+                basketTarget[i] += baskets.charAt(j) == '1' ? i - j : 0;
             }
         }
+
         return basketTarget;
     }
 
     private static boolean isValid(String baskets) {
-
         for (int i = 0; i < baskets.length(); i++) {
 
             if (baskets.charAt(i) - '0' > 1 || baskets.charAt(i) - '0' < 0) {
-
                 return false;
             }
         }
+
         return true;
     }
 
