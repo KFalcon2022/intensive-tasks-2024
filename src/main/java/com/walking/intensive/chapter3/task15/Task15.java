@@ -44,49 +44,56 @@ public class Task15 {
     }
 
     static int getMaxFloors(int[][] city) {
-
-        if (city == null || city.length == 0) {
+        if (!isValidInput(city)) {
             return -1;
+        }
+
+        int floorsCounter = 0;
+        int columns = city[0].length;
+        int[] columnMax = new int[columns];
+        int[] rowMax = new int[city.length];
+
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < columns; j++) {
+                columnMax[j] = Math.max(city[i][j], columnMax[j]);
+                rowMax[i] = Math.max(city[i][j], rowMax[i]);
+            }
+        }
+
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (city[i][j] < columnMax[j] && city[i][j] < rowMax[i]) {
+                    floorsCounter += Math.min(columnMax[j] - city[i][j], rowMax[i] - city[i][j]);
+                }
+            }
+        }
+
+        return floorsCounter;
+    }
+
+    static boolean isValidInput(int[][] city) {
+        if (city == null || city.length == 0) {
+            return false;
         }
 
         if (city[0] == null || city[0].length == 0) {
-            return -1;
+            return false;
         }
 
-        int overallCounter = 0;
         int columns = city[0].length;
-        int[] maxInColumn = new int[columns];
-        int[] maxInRow = new int[city.length];
 
-
-        for (int i = 0; i < city.length; i++) {
-            if (city[i] == null || city[i].length == 0 || city[i].length != columns) {
-                return -1;
+        for (int[] row : city) {
+            if (row == null || row.length != columns) {
+                return false;
             }
 
-            for (int j = 0; j < columns; j++) {
-                if (city[i][j] < 0) {
-                    return -1;
-                }
-
-                if (city[i][j] > maxInColumn[j]) {
-                    maxInColumn[j] = city[i][j];
-                }
-
-                if (city[i][j] > maxInRow[i]) {
-                    maxInRow[i] = city[i][j];
+            for (int height : row) {
+                if (height < 0) {
+                    return false;
                 }
             }
         }
 
-        for (int i = 0; i < city.length; i++) {
-            for (int j = 0; j < columns; j++) {
-                if (city[i][j] < maxInColumn[j] && city[i][j] < maxInRow[i]) {
-                    overallCounter += Math.min(maxInColumn[j] - city[i][j], maxInRow[i] - city[i][j]);
-                }
-            }
-        }
-
-        return overallCounter;
+        return true;
     }
 }
