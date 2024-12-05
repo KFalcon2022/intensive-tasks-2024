@@ -45,30 +45,21 @@ import java.util.Arrays;
  */
 public class Task14 {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(getObjectCounts(new int[][]{{1, 3}, {3, 3}, {5, 3}, {2, 2}}, new int[][]{{2, 3, 1}, {4, 3, 1}, {1, 1, 2}})));
+        int[][] objectLocations = {{1, 3}, {3, 3}, {5, 3}, {2, 2}};
+        int[][] radars = {{2, 3, 1}, {4, 3, 1}, {1, 1, 2}};
+        System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-
-        int[] emptyArray = new int[0];
-
-        if (objectLocations == null || objectLocations.length == 0 || radars == null || radars.length == 0) {
-            return emptyArray;
+        if (!isValidInput(objectLocations, radars)) {
+            return new int[0];
         }
 
         int[] objectCounts = new int[radars.length];
 
         for (int i = 0; i < radars.length; i++) {
-            if (radars[i] == null || radars[i].length != 3 || radars[i][2] < 0) {
-                return emptyArray;
-            }
-
             for (int[] objectLocation : objectLocations) {
-                if (objectLocation == null || objectLocation.length != 2) {
-                    return emptyArray;
-                }
-
-                if (isVulnerable(objectLocation[0], objectLocation[1], radars[i][0], radars[i][1], radars[i][2])) {
+                if (isVulnerable(objectLocation, radars[i])) {
                     objectCounts[i]++;
                 }
             }
@@ -77,8 +68,30 @@ public class Task14 {
         return objectCounts;
     }
 
-    static boolean isVulnerable(int objectX, int objectY, int radarX, int radarY, int radarRange) {
-        double epsilon = 1e-6;
-        return Math.sqrt((objectX - radarX) * (objectX - radarX) + (objectY - radarY) * (objectY - radarY)) < radarRange + epsilon;
+    static boolean isVulnerable(int[] objectLocation, int[] radar) {
+        int deltaX = objectLocation[0] - radar[0];
+        int deltaY = objectLocation[1] - radar[1];
+        int radarRange = radar[2];
+        return (deltaX) * (deltaX) + (deltaY) * (deltaY) <= radarRange * radarRange;
+    }
+
+    static boolean isValidInput(int[][] objectLocations, int[][] radars) {
+        if (objectLocations == null || objectLocations.length == 0 || radars == null || radars.length == 0) {
+            return false;
+        }
+
+        for (int[] radar : radars) {
+            if (radar == null || radar.length != 3 || radar[2] < 0) {
+                return false;
+            }
+        }
+
+        for (int[] objectLocation : objectLocations) {
+            if (objectLocation == null || objectLocation.length != 2) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
