@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -27,12 +29,12 @@ package com.walking.intensive.chapter3.task14;
  *
  * <p>Возвращаемое значение: objectCounts[] = [3,2,2].
  *
- * <p>Пояснение (для radars[0]):
+ * <p>Пояснение (для radars[0]):`
  *
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -44,10 +46,46 @@ package com.walking.intensive.chapter3.task14;
 public class Task14 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] pointsFour = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}};
+        int[][] queriesFour = {{1, 2, 1}, {2, 2}, {4, 3}, {4, 3}};
+        System.out.println(Arrays.toString(getObjectCounts(pointsFour, queriesFour)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
         // Ваш код
-        return new int[0];
+        if (isFailArray(objectLocations, 2) || isFailArray(radars, 3)) {
+            return new int[0];
+        }
+        int[] arrayResult = new int[radars.length];
+        for (int i = 0; i < radars.length; i++) {
+            for (int[] obj : objectLocations) {
+                if (Math.sqrt(Math.pow(obj[0] - radars[i][0], 2) + Math.pow(obj[1] - radars[i][1], 2)) <= radars[i][2]) {
+                    arrayResult[i]++;
+                }
+            }
+        }
+        return arrayResult;
+    }
+
+    static boolean isFailArray(int[][] array, int width) {
+
+        if (array.length == 0) {
+            return true;
+        }
+
+        for (int[] j : array) {
+            if (j.length != width) {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j : array[i]) {
+                if (j < 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
