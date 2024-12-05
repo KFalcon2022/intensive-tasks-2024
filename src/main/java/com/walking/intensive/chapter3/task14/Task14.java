@@ -47,7 +47,56 @@ public class Task14 {
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+        if (!isValidObjectLocations(objectLocations) || !isValidRadars(radars)) {
+            return new int[]{};
+        }
+
+        int[] objectCounts = new int[radars.length];
+
+        for (int[] object : objectLocations) {
+            for (int i = 0; i < radars.length; i++) {
+                boolean isCover = Math.abs(radars[i][0] + radars[i][1] - object[0] - object[1]) <= radars[i][2];
+
+                if (isCover) {
+                    objectCounts[i]++;
+                }
+            }
+        }
+
+        return objectCounts;
+    }
+
+    static boolean isValidObjectLocations(int[][] objectLocations) {
+        if (objectLocations == null ) {
+            return false;
+        }
+
+        for (int[] object : objectLocations) {
+            for (int element : object) {
+                if (element <= 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+    static boolean isValidRadars(int[][] radars) {
+        if (radars == null) {
+            return false;
+        }
+
+        for (int[] object : radars) {
+            if (object.length != 3) {
+                return false;
+            }
+            for (int element : object) {
+                if (element <= 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
