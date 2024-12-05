@@ -25,16 +25,34 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 0;
-        double b = 0;
-        double c = 0;
+        double a = 3;
+        double b = -14;
+        double c = -5;
 
         System.out.println(solveEquation(a, b, c));
-
     }
 
     static String solveEquation(double a, double b, double c) {
         //        Место для вашего кода
+
+        double discrDouble = (Math.pow(b,2)) - (4 * a * c);
+
+        if (discrDouble < 0) {
+            return"Kolichestvo resheniy: 0.";
+        }
+        else if (discrDouble == 0) {
+            return("Kolichestvo resheniy: 1. Koren': " + (-b / 2 * a));
+        }
+        else if (discrDouble > 0) {
+            double x1 = (-b - Math.sqrt(discrDouble)) / (2 * a);
+            double x2 = (-b + Math.sqrt(discrDouble)) / (2 * a);
+            if (x1 > x2) {
+                return("Kolichestvo resheniy: 2. Korni: " + x2 + "; " + x1);
+            }
+            else {
+                return("Kolichestvo resheniy: 2. Korni: " + x1 + "; " + x2);
+            }
+        }
 
         return null; // Заглушка. При реализации - удалить
     }
