@@ -33,12 +33,41 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        //        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        int flatOnFloor = 4;
+        int floorTotal = flatNumber / flatOnFloor;
+        int floorCounter;
+        int flatPlace = floorTotal / floorAmount;
+        int entranceCounter = 1;
 
-        return null; // Заглушка. При реализации - удалить
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            return "Некорректные входные данные";
+        }
+        if (flatNumber > floorAmount * flatOnFloor * entranceAmount) {
+            return "Такой квартиры не существует";
+        }
+        if ((flatPlace >= 1) && (flatNumber % (flatOnFloor * floorAmount) != 0)) {
+            entranceCounter = flatPlace + 1; //2+подъезд,
+        } else if ((flatPlace >= 1) && (flatNumber % (flatOnFloor * floorAmount) == 0)) {
+            entranceCounter = flatPlace; //последняя квартира каждого подъезда
+        } else if ((flatPlace < 1)) {
+            entranceCounter = flatPlace + 1; //1-й подъезд, кроме последней квартиры
+        }
+        if (flatNumber % flatOnFloor != 0) {
+            floorCounter = floorAmount - (floorAmount * entranceCounter - floorTotal) + 1;
+        } else
+            floorCounter = floorAmount - (floorAmount * entranceCounter - floorTotal);
+        if (flatNumber % flatOnFloor == 1 || flatNumber % flatOnFloor == 2) {
+            if (flatNumber % flatOnFloor == 1) {
+                return flatNumber + " кв - " + entranceCounter + " подъезд, " + floorCounter + " этаж, " + "слева от лифта, влево";
+            }
+            return flatNumber + " кв - " + entranceCounter + " подъезд, " + floorCounter + " этаж, " + "слева от лифта, вправо";
+        } else if (flatNumber % flatOnFloor == 3) {
+            return flatNumber + " кв - " + entranceCounter + " подъезд, " + floorCounter + " этаж, " + "справа от лифта, влево";
+        }
+        return flatNumber + " кв - " + entranceCounter + " подъезд, " + floorCounter + " этаж, " + "справа от лифта, вправо";
     }
 }
