@@ -24,7 +24,24 @@ public class Task8 {
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+        int[] countOfSums = new int[28];
+
+        for (int i = 0; i <= 9; i++) {
+            for (int j = 0; j <= 9; j++) {
+                for (int k = 0; k <= 9; k++) {
+                    int sum = i + j + k;
+                    countOfSums[sum]++;
+                }
+            }
+        }
+        long happyTicketCount = 0;
+        for (int sum = 0; sum <= 27; sum++) {
+            happyTicketCount += (long) countOfSums[sum] * countOfSums[sum];
+        }
+
+        final long totalTickets = 1_000_000L;
+
+        return (double) happyTicketCount / totalTickets;
+
     }
 }
