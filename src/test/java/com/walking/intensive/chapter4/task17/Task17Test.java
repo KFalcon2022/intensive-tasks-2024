@@ -20,7 +20,7 @@ public class Task17Test {
     @ParameterizedTest
     @MethodSource("sortTestSource")
     public void sortByQuicksortTest(int[] array, int[] expected) {
-        int[] result = Task17.sortByBubble(array);
+        int[] result = Task17.sortByQuicksort(array);
         assertArrayEquals(expected, result);
     }
 

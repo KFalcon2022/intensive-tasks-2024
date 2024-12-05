@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Random;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -21,7 +23,8 @@ package com.walking.intensive.chapter4.task17;
  */
 public class Task17 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getBenchmarkOn1000() + " bubble sort 1000");
+        System.out.println(getBenchmarkOn10000() + " bubble sort 10000");
     }
 
     /**
@@ -40,9 +43,33 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null || array.length < 1) {
+            return new int[]{};
+        }
+
+        boolean isFlag;
+
+        for (int i = 0; i < array.length; i++) {
+            isFlag = true;
+
+            for (int j = 1; j < array.length; j++) {
+
+                if (array[j] < array[j - 1]) {
+                    int temp = array[j];
+                    array[j] = array[j - 1];
+                    array[j - 1] = temp;
+                    isFlag = false;
+                }
+            }
+
+            if (isFlag) {
+                break;
+            }
+        }
+
+        return array;
     }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,8 +111,50 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null) {
+            return new int[]{};
+        }
+
+        return sortByQuicksort(array, 0, array.length - 1);
+    }
+
+    private static int[] sortByQuicksort(int[] array, int left, int right) {
+        if (left < right) {
+            int pivot = findPivot(array, left, right);
+
+            sortByQuicksort(array, left, pivot);
+            sortByQuicksort(array, pivot + 1, right);
+        }
+
+        return array;
+    }
+
+    private static int findPivot(int[] array, int left, int right) {
+        int pivot = array[(left + right) / 2];
+
+        while (left <= right) {
+            while (array[left] < pivot) {
+                left++;
+            }
+
+            while (array[right] > pivot) {
+                right--;
+            }
+
+            if (left >= right) {
+                break;
+            }
+
+            swap(array, left++, right--);
+        }
+
+        return right;
+    }
+
+    private static void swap(int[] array, int left, int right) {
+        int temp = array[left];
+        array[left] = array[right];
+        array[right] = temp;
     }
 
     /**
@@ -97,15 +166,33 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+        int[] ints = new int[1000];
+        arrayFill(ints, 1000);
+
+        long start = System.currentTimeMillis();
+        sortByBubble(ints);
+        long end = System.currentTimeMillis();
+
+        return end - start;
     }
 
     /**
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
-        return 0;
+        int[] ints = new int[10000];
+        arrayFill(ints, 10000);
+
+        long start = System.currentTimeMillis();
+        sortByBubble(ints);
+        long end = System.currentTimeMillis();
+
+        return end - start;
+    }
+
+    private static void arrayFill(int[] array, int n) {
+        for (int i = 0; i < n; i++) {
+            array[i] = new Random().nextInt(1000);
+        }
     }
 }
