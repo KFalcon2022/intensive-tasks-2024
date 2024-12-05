@@ -60,24 +60,16 @@ public class Task9 {
         }
 
         String result = "";
-        int lastLineLength = 0;
-
-        for (int i = 1; i <= n; i++) {
-            lastLineLength += getLength(getBinomCoeff(i, n));
-
-            if (i != n) {
-                lastLineLength++;
-            }
-        }
+        int lastLineLength = getLastLineLength(n);
 
         for (int m = 1; m <= n; m++) {
             int lineLength = 0;
             String line = "";
 
             for (int i = 1; i <= m; i++) {
-                int binomCoeff = getBinomCoeff(i, m);
-                line += binomCoeff;
-                lineLength += getLength(binomCoeff);
+                int binomialCoefficient = getBinomialCoefficient(i, m);
+                line += binomialCoefficient;
+                lineLength += getNumberLength(binomialCoefficient);
 
                 if (i != m) {
                     line += " ";
@@ -103,15 +95,15 @@ public class Task9 {
     /**
      * Биномиальный коэффициент, стоящий на i-м месте в m-й строке
      */
-    static int getBinomCoeff(int i, int m) {
+    static int getBinomialCoefficient(int i, int m) {
         if (i == 1 || i == m) {
             return 1;
         }
 
-        return getBinomCoeff(i - 1, m - 1) + getBinomCoeff(i, m - 1);
+        return getBinomialCoefficient(i - 1, m - 1) + getBinomialCoefficient(i, m - 1);
     }
 
-    static int getLength(int k) {
+    static int getNumberLength(int k) {
         int result = 0;
         int restNumber = k;
 
@@ -121,5 +113,18 @@ public class Task9 {
         }
 
         return result;
+    }
+
+    static int getLastLineLength(int n) {
+        int lastLineLength = 0;
+        for (int i = 1; i <= n; i++) {
+            lastLineLength += getNumberLength(getBinomialCoefficient(i, n));
+
+            if (i != n) {
+                lastLineLength++;
+            }
+        }
+
+        return lastLineLength;
     }
 }
