@@ -19,30 +19,45 @@ public class Task10 {
         if (isEmpty(inputString) || isChar(inputString)) {
             return false;
         }
-        char[] charArray = inputString.toUpperCase().toCharArray();
-        StringBuilder string = new StringBuilder();
-        StringBuilder invertedString = new StringBuilder();
 
-        for (char c : charArray) {
+        String string = getString(inputString);
+        int lettersQuantity = string.length();
 
-            c = Character.toUpperCase(c);
+        for (int i = 0; i < lettersQuantity; i++) {
 
-            if (c >= 'A' && c <= 'Z' || c >= 'А' && c <= 'Я' || c == 'Ё') {
-
-                string.append(c);
-                invertedString.insert(0, c);
+            if (string.charAt(i) != string.charAt(lettersQuantity - i - 1)) {
+                return false;
             }
         }
-        return string.compareTo(invertedString) == 0;
+        return true;
     }
 
     private static boolean isEmpty(String inputString) {
 
-        return inputString == null || inputString.trim().isEmpty();
+        return inputString == null || getString(inputString).isEmpty();
     }
 
     private static boolean isChar(String inputString) {
 
         return inputString.trim().length() == 1;
+    }
+
+    private static String getString(String inputString) {
+
+        StringBuilder string = new StringBuilder();
+
+        for (int i = 0; i < inputString.length(); i++) {
+
+            char letter = inputString.toUpperCase().charAt(i);
+
+            if (letter >= 'A' && letter <= 'Z'
+                    || letter >= 'А' && letter <= 'Я'
+                    || letter == 'Ё'
+                    || letter >= '0' && letter <= '9') {
+
+                string.append(letter);
+            }
+        }
+        return string.toString();
     }
 }
