@@ -1,5 +1,4 @@
 package com.walking.intensive.chapter1.task1;
-
 /**
  * Реализуйте метод getAgeString(), который будет принимать параметром целое число (возраст) и возвращать строку
  * вида: "Вам N лет". Программа должна учитывать правила русского языка.
@@ -14,15 +13,24 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
-
+        int age = -100;
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        String phraseYears = "";
+        int restOfHundred = age%100;
+        if (age < 0) {
+            phraseYears = "Некорректный ввод";
+        } else if (restOfHundred >= 5 && restOfHundred <= 20) {
+            phraseYears = "Вам " + age + " лет";
+        } else if (restOfHundred % 10 == 1) {
+            phraseYears = "Вам " + age + " год";
+        } else if (restOfHundred % 10 >= 2 && age % 10 <= 4) {
+            phraseYears = "Вам " + age + " года";
+        } else if (restOfHundred % 10 >= 5 || restOfHundred % 10 == 0) {
+            phraseYears = "Вам " + age + " лет";
+        }
+        return phraseYears;
     }
 }
