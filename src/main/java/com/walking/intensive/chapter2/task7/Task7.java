@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task7;
 
+import static java.lang.Math.max;
+
 /**
  * Пятиклассник Ваня придумал забаву. Он ввел понятие «дружественной пары» чисел.
  * Два различных натуральных числа N и M он назвал дружественными, если сумма делителей числа N
@@ -28,10 +30,49 @@ package com.walking.intensive.chapter2.task7;
 public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getFriendlyPair(10000));
     }
 
     static int getFriendlyPair(int n) {
+        if (n < 1 || n > 1_000_000) {
+            return -1;
+        }
+
+        int i = 1;
+        int maxSum = 0;
+        int maxNumber = 0;
+
+        while (++i < n) {
+            int sum = getDivisorsSum(i);
+
+            if (i == getDivisorsSum(sum) && sum != getDivisorsSum(sum)) {
+                if (maxSum < i + sum) {
+                    maxSum = i + sum;
+                    maxNumber = max(i, sum);
+                }
+            }
+        }
+
         // Ваш код
-        return 0;
+        return maxNumber;
+    }
+
+    static int getDivisorsSum(int a) {
+        int divisorsSum = 0;
+        int maxDivisor = a;
+        int i = 1;
+
+        while (++i < maxDivisor) {
+            if (a % i == 0) {
+                maxDivisor = a / i;
+                if (maxDivisor == i) {
+                    divisorsSum += i;
+                } else {
+                    divisorsSum += i + maxDivisor;
+                }
+            }
+        }
+
+        return divisorsSum + 1;
     }
 }
