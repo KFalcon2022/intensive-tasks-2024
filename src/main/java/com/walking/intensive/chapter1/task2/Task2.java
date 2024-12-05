@@ -37,8 +37,47 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            return "Некорректные входные данные";
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        final int flatsOnEntrance = floorAmount * 4;
+
+        if (flatNumber > flatsOnEntrance * entranceAmount) {
+            return "Такой квартиры не существует";
+        }
+
+
+
+        int entrance = getEntrance(entranceAmount, flatNumber, flatsOnEntrance);
+        int floor = getFloor(floorAmount, flatNumber, entrance, flatsOnEntrance);
+
+        int locationOnFloor = flatNumber - (flatsOnEntrance * (entrance - 1)) - (4 * (floor - 1));
+        return switch (locationOnFloor) {
+            case 1 -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, слева от лифта, влево";
+            case 2 -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, слева от лифта, вправо";
+            case 3 -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, справа от лифта, влево";
+            default -> flatNumber + " кв - " + entrance + " подъезд, " + floor + " этаж, справа от лифта, вправо";
+        };
+
+    }
+
+    static int getEntrance(int entranceAmount, int flatNumber, int flatsOnEntrance) {
+        for (int i = 0; i < entranceAmount - 1; i++) {
+            if (flatNumber > flatsOnEntrance * i && flatNumber <= flatsOnEntrance * (i + 1)) {
+                return i + 1;
+            }
+        }
+        return entranceAmount;
+    }
+
+    static int getFloor(int floorAmount, int flatNumber, int entrance, int flatsOnEntrance) {
+        for (int i = 0; i < floorAmount - 1; i++) {
+            if ((flatNumber - (entrance - 1) * flatsOnEntrance > 4 * i)
+                    && (flatNumber - (entrance - 1) * flatsOnEntrance <= 4 * (i + 1))) {
+                return i + 1;
+            }
+        }
+        return floorAmount;
     }
 }
