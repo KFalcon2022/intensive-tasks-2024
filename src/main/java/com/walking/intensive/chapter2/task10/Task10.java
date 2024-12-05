@@ -14,7 +14,6 @@ public class Task10 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         String inputString = " Муза! Ранясь шилом опыта, ты помолишься на разум.";
         System.out.println(isPalindrome(inputString));
-
     }
 
     static boolean isPalindrome(String inputString) {
@@ -23,11 +22,23 @@ public class Task10 {
             return false;
         }
 
-        String inputString1 = inputString.replaceAll("[\\s\\p{P}]", "");
+        String punctuationMark = ".!,;:-? ";
+        StringBuilder correctedString = new StringBuilder();
 
-        StringBuilder invertedString = new StringBuilder(new StringBuilder(inputString1).reverse().toString());
+        for (int i = 0; i < inputString.length(); i++) {
+            char currentSymbol = inputString.charAt(i);
+            if (!punctuationMark.contains(String.valueOf(currentSymbol))) {
+                correctedString.append(currentSymbol);
+            }
+        }
 
-        return inputString1.equalsIgnoreCase(new String(invertedString));
+        StringBuilder invertedString = new StringBuilder();
+
+        for (int j = correctedString.length() - 1; j >= 0; j--) {
+            invertedString.append(correctedString.charAt(j));
+        }
+
+        return correctedString.toString().equalsIgnoreCase(invertedString.toString());
 
     }
 }
