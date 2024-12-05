@@ -27,11 +27,37 @@ package com.walking.intensive.chapter2.task7;
  */
 public class Task7 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getFriendlyPair(200));
     }
 
     static int getFriendlyPair(int n) {
-        // Ваш код
-        return 0;
+        if (n > 1_000_000 || n < 1) {
+            return -1;
+        }
+
+        int result = 0;
+        int numbersSum = 0;
+
+        for (int i = 2; i < n; i++) {
+            int sum1 = 0;
+            for (int j = 1; j <= i / 2; j++) {
+                if (i % j == 0) {
+                    sum1 += j;
+                }
+            }
+            for (int i2 = 3; i2 < i; i2++) {
+                int sum2 = 0;
+                for (int j2 = 1; j2 <= i2 / 2; j2++) {
+                    if (i2 % j2 == 0) {
+                        sum2 += j2;
+                    }
+                }
+                if (sum1 == i2 && sum2 == i && i + i2 > numbersSum) {
+                    numbersSum = i + i2;
+                    result = i;
+                }
+            }
+        }
+        return result;
     }
 }
