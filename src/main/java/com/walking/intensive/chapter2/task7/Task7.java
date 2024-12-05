@@ -53,7 +53,6 @@ public class Task7 {
             }
         }
 
-        // Ваш код
         return maxNumber;
     }
 
