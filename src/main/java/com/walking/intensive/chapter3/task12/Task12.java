@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task12;
 
+import java.util.Arrays;
+
 /**
  * Девочка Света очень любит играть в мячики. Она поставила в ряд корзинки и в некоторые положила по 1 мячику.
  * За 1 раз она может переложить 1 мячик в соседнюю корзинку. В 1 корзинке может поместиться много мячиков.
@@ -41,10 +43,53 @@ package com.walking.intensive.chapter3.task12;
 public class Task12 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(Arrays.toString(getMovementsNumber("110")));
+        System.out.println(Arrays.toString(getMovementsNumber("001011")));
     }
 
     static int[] getMovementsNumber(String baskets) {
-        // Ваш код
-        return new int[]{};
+        if (baskets == null || baskets.isEmpty()) {
+            return new int[]{};
+        }
+
+        int[] array = new int[baskets.length()];
+
+        for (int i = 0; i < baskets.length(); i++) {
+            if (!Character.isDigit(baskets.charAt(i))) {
+                return new int[]{};
+            }
+            array[i] = baskets.charAt(i) - '0';
+        }
+
+        int current = 0;
+        int[] movementsNumber = new int[baskets.length()];
+        for (int i = 0; i < baskets.length(); ) {
+            if (current == i) {
+                i++;
+                continue;
+            }
+            //проверка на мячи
+            if (array[i] > 0) {
+                movementsNumber[current] += array[i];
+                int distance = Math.abs(current - i);
+                if (distance > 1) {
+                    movementsNumber[current] += (distance - 1) * array[i];
+                }
+            }
+            i++;
+
+            //проверка что все мячи посчитали для текущей корзины. Если да, переходим к новой
+            if (i == baskets.length()) {
+                current++;
+                i = 0;
+            }
+            //проверка что корзины кончились
+            if (current == baskets.length()) {
+                break;
+            }
+        }
+
+        return movementsNumber;
     }
 }
