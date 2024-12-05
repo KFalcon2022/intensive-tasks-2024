@@ -46,16 +46,20 @@ public class Task12 {
     }
 
     static int[] getMovementsNumber(String baskets) {
+        if (!isInputDataValid(baskets)) {
+            return new int[]{};
+        }
+
         int[] results = new int[baskets.length()];
 
         for (int i = 0; i < baskets.length(); i++) {
-            int element = baskets.charAt(i) - '0';
+            char element = baskets.charAt(i);
 
-            if (element != 0 && element != 1) {
+            if (element != '0' && element != '1') {
                 return new int[]{};
             }
 
-            if (element == 1) {
+            if (element == '1') {
                 for (int j = 0; j < baskets.length(); j++) {
                     results[j] += Math.abs(i - j);
                 }
@@ -63,5 +67,17 @@ public class Task12 {
         }
 
         return results;
+    }
+
+    static boolean isInputDataValid(String baskets) {
+        for (int i = 0; i < baskets.length(); i++) {
+            char element = baskets.charAt(i);
+
+            if (element != '0' && element != '1') {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
