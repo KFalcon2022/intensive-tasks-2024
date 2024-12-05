@@ -19,8 +19,17 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (ifNumbersNegative(m, n)) {
+
+            return -1;
+        }
+        int findNok = Math.max(m, n);
+        while (findNok % Math.min(m, n) != 0) {
+            findNok = findNok + Math.max(m, n);
+        }
+
+        return findNok;
+//        return (m * n) / getGcd(m, n); альтернативный вариант.
     }
 
     /**
@@ -31,8 +40,17 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (ifNumbersNegative(m, n)) {
+
+            return -1;
+        }
+        int findNod = Math.min(m, n);
+
+        while (n % findNod != 0 | m % findNod != 0) {
+            findNod--;
+        }
+
+        return findNod;
     }
 
     /**
@@ -44,7 +62,26 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (ifNumbersNegative(m, n)) {
+
+            return -1;
+        }
+
+        if (m == n) {
+
+            return m;
+        }
+
+        if (m > n) {
+
+            return getGcdByEuclideanAlgorithm(m - n, n);
+        }
+
+            return getGcdByEuclideanAlgorithm(m, n - m);
+    }
+
+    static boolean ifNumbersNegative(int m, int n) {
+
+        return (n <= 0 || m <= 0);
     }
 }
