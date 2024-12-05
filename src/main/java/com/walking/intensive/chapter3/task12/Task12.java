@@ -55,7 +55,7 @@ public class Task12 {
                 return new int[]{};
             }
 
-            if (element != 0) {
+            if (element == 1) {
                 for (int j = 0; j < baskets.length(); j++) {
                     results[j] += Math.abs(i - j);
                 }
