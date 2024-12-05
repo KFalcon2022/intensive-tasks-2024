@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task12;
 
+import java.util.Arrays;
+
 /**
  * Девочка Света очень любит играть в мячики. Она поставила в ряд корзинки и в некоторые положила по 1 мячику.
  * За 1 раз она может переложить 1 мячик в соседнюю корзинку. В 1 корзинке может поместиться много мячиков.
@@ -41,10 +43,46 @@ package com.walking.intensive.chapter3.task12;
 public class Task12 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        String line = "110";
+        int[] array = getMovementsNumber(line);
+
+        System.out.println(Arrays.toString(array));
     }
 
     static int[] getMovementsNumber(String baskets) {
-        // Ваш код
-        return new int[]{};
+        if (baskets.isEmpty()) {
+            return new int[]{};
+        }
+
+        int[] arrayBaskets = convertString2Array(baskets);
+
+        if (arrayBaskets.length == 0) {
+            return new int[]{};
+        }
+
+        int[] arraySteps = new int[arrayBaskets.length];
+        for (int currentBasket = 0; currentBasket < arraySteps.length; currentBasket++) {
+            for (int i = currentBasket + 1; i < arraySteps.length; i++) { //посчитаем шаги справа
+                arraySteps[currentBasket] += arrayBaskets[i] * (i - currentBasket);
+            }
+            if (currentBasket > 0) {
+                for (int i = currentBasket - 1; i >= 0; i--) { //посчитаем шаги слева
+                    arraySteps[currentBasket] += arrayBaskets[i] * (currentBasket - i);
+                }
+            }
+        }
+        return arraySteps;
+    }
+
+    static int[] convertString2Array(String line) {
+        int[] array = new int[line.length()];
+        for (int i = 0; i < line.length(); i++) {
+            if (Character.isDigit(line.charAt(i)) && Character.digit(line.charAt(i), 10) <= 1) {
+                array[i] = Character.digit(line.charAt(i), 10);
+            } else {
+                return new int[]{};
+            }
+        }
+        return array;
     }
 }
