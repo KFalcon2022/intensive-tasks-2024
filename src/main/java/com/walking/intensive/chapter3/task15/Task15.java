@@ -44,24 +44,11 @@ public class Task15 {
     }
 
     static int getMaxFloors(int[][] city) {
-        int n = city.length;
-        if (n == 0) {
+        if (!isInputDataValid(city)) {
             return -1;
         }
 
-        for (int[] row : city) {
-            if (row.length != n) {
-                return -1;
-            }
-
-            for (int i = 0; i < n; i++) {
-                if (row[i] < 0) {
-                    return -1;
-                }
-            }
-        }
-
-        int result = 0;
+        int n = city.length;
         int[] maxInRow = new int[n];
         int[] maxInColumn = new int[n];
 
@@ -72,6 +59,7 @@ public class Task15 {
             }
         }
 
+        int result = 0;
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < n; c++) {
                 result += Math.min(maxInRow[r], maxInColumn[c]) - city[r][c];
@@ -79,5 +67,26 @@ public class Task15 {
         }
 
         return result;
+    }
+
+    static boolean isInputDataValid(int[][] city) {
+        int n = city.length;
+        if (n == 0) {
+            return false;
+        }
+
+        for (int[] row : city) {
+            if (row.length != n) {
+                return false;
+            }
+
+            for (int i = 0; i < n; i++) {
+                if (row[i] < 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
