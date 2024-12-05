@@ -15,7 +15,39 @@ public class Task10 {
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+
+        if (isStringValid(inputString)) {
+
+            return false;
+        }
+
+        String tempString = inputString.toLowerCase();
+        StringBuilder strBuilderTemp = new StringBuilder(tempString);
+        StringBuilder strBuilderFinal = new StringBuilder();
+
+        for (int i = 0; i <= (inputString.length() - 1); i++) {
+            if (strBuilderTemp.charAt(i) >= 'а' && strBuilderTemp.charAt(i) <= 'я') {
+                strBuilderFinal.append(strBuilderTemp.charAt(i));
+            }
+        }
+        String noSpaceLowcaseNomarks = strBuilderFinal.toString();
+        int i = 0;
+        int j = (noSpaceLowcaseNomarks.length() - 1);
+        while (i < j) {
+            if (noSpaceLowcaseNomarks.charAt(i) != noSpaceLowcaseNomarks.charAt(j)) {
+
+                return false;
+            }
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+
+
+    static boolean isStringValid(String inString) {
+
+        return (inString == null || inString.length() < 2 || inString == "");
     }
 }
