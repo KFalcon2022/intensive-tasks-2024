@@ -21,10 +21,24 @@ package com.walking.intensive.chapter2.task8;
 public class Task8 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getHappyTicketChance());
     }
 
     static double getHappyTicketChance() {
         // Ваш код
-        return 0.0;
+        int collisions = 0;
+        for (int i = 0; i < 1000; i++) {
+            int sumLeft = i % 10 + i / 10 % 10 + i /100 % 10;
+
+            for (int j = 0; j < 1000; j++) {
+                int sumRight = j % 10 + j /10 % 10 + j /100 % 10;
+
+                if (sumLeft == sumRight) {
+                    collisions++;
+                }
+            }
+        }
+
+        return (float) collisions / 999_999;
     }
 }
