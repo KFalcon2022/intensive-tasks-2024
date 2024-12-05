@@ -26,11 +26,32 @@ package com.walking.intensive.chapter1.task3;
 public class Task3 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(isLeap(1356));
     }
 
     static boolean isLeap(int year) {
         //Место для вашего кода
+        if (year <= 0) {
+            return false;
+        }
 
-        return false; // Заглушка. При реализации - удалить
+// Добавим флаг для окончательного понимания какой именно год
+        int flag = 0;
+
+// Проверяем по модулю значение года с соблюдением всех условий
+        if (year % 4 == 0) {
+            flag = 1;
+        }
+
+        if (year % 4 == 0 && year % 100 == 0) {
+            flag = 0;
+        }
+
+        if (year % 4 == 0 && year % 400 == 0) {
+            flag = 1;
+        }
+        return flag == 1;
+
     }
 }
