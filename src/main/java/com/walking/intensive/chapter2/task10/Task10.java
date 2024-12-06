@@ -22,23 +22,25 @@ public class Task10 {
             return false;
         }
 
-        String punctuationMark = ".!,;:-? ";
-        StringBuilder correctedString = new StringBuilder();
+        int i = 0;
+        int j = inputString.length() - 1;
 
-        for (int i = 0; i < inputString.length(); i++) {
-            char currentSymbol = inputString.charAt(i);
-            if (!punctuationMark.contains(String.valueOf(currentSymbol))) {
-                correctedString.append(currentSymbol);
+        while (i <= j) {
+            char leftSymbol = Character.toLowerCase(inputString.charAt(i));
+            char rightSymbol = Character.toLowerCase(inputString.charAt(j));
+
+            if (Character.isLetter(leftSymbol) && Character.isLetter(rightSymbol) && leftSymbol == rightSymbol) {
+                i++;
+                j--;
+            } else if (!Character.isLetter(leftSymbol)) {
+                i++;
+            } else if (!Character.isLetter(rightSymbol)) {
+                j--;
+            } else {
+                return false;
             }
         }
 
-        StringBuilder invertedString = new StringBuilder();
-
-        for (int j = correctedString.length() - 1; j >= 0; j--) {
-            invertedString.append(correctedString.charAt(j));
-        }
-
-        return correctedString.toString().equalsIgnoreCase(invertedString.toString());
-
+        return true;
     }
 }
