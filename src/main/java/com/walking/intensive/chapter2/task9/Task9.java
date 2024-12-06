@@ -1,5 +1,6 @@
 package com.walking.intensive.chapter2.task9;
 
+
 /**
  * Реализуйте метод getPascalTriangle(). Параметром он должен принимать натуральное число N,
  * а метод возвращать строковое представление треугольника Паскаля.
@@ -52,10 +53,62 @@ package com.walking.intensive.chapter2.task9;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int n = 18;
+        System.out.println(getPascalTriangle(n));
+    }
+
+    static int getLength(int n) {
+        int currentLength = 1;
+
+        for (int i = 1; i <= n; i++) {
+
+            StringBuilder line = new StringBuilder();
+
+            int result;
+            int previous = 1;
+
+            for (int j = 1; j < i; j++) {
+                double coefficient = (double) (i - j) / j;
+                result = (int) Math.round(previous * coefficient);
+                previous = result;
+
+                line.append(result).append(" ");
+                currentLength = line.length() + 1;
+            }
+        }
+
+        return currentLength;
     }
 
     static String getPascalTriangle(int n) {
         // Ваш код
-        return null;
+        int maxlength = getLength(n);
+        StringBuilder finalResult = new StringBuilder();
+
+        for (int i = 1; i <= n; i++) {
+
+            StringBuilder line = new StringBuilder("1 ");
+            int result;
+            int previous = 1;
+
+            for (int k = 1; k < i; k++) {
+                double coefficient = (double) (i - k) / k;
+                result = (int) Math.round(previous * coefficient);
+                previous = result;
+                line.append(result).append(" ");
+            }
+
+            int currentLength = getLength(i);
+            int spaceNumber = (maxlength - currentLength) / 2;
+
+            if (i < n) {
+                for (int l = 0; l < spaceNumber; l++)
+                    finalResult.append(" ");
+            }
+
+            finalResult.append(line.toString().trim()).append("\n");
+        }
+
+        return finalResult.toString();
     }
 }
