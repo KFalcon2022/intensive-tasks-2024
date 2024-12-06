@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -32,7 +34,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -44,10 +46,57 @@ package com.walking.intensive.chapter3.task14;
 public class Task14 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] pointsTwo = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}};
+        int[][] queriesTwo = {{1, 2, 2}, {2, 2, 2}, {4, 3, 2}, {4, 3, 3}};
+        System.out.println(Arrays.toString(getObjectCounts(pointsTwo, queriesTwo)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+        if (!isValidPoints(objectLocations) || !isValidRadars(radars)) {
+            return new int[0];
+        }
+
+        int[] objectCount = new int[radars.length];
+        for (int i = 0; i < radars.length; i++) {
+            for (int[] objectLocation : objectLocations) {
+                if (getDistancePointRadar(objectLocation, radars[i]) <= radars[i][2]) {
+                    ++objectCount[i];
+                }
+            }
+        }
+
+        return objectCount;
+    }
+
+    static boolean isValidPoints(int[][] points) {
+        if (points.length == 0) {
+            return false;
+        }
+
+        for (int[] point : points) {
+            if (point.length != 2) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    static boolean isValidRadars(int[][] radars) {
+        if (radars.length == 0) {
+            return false;
+        }
+
+        for (int[] radar : radars) {
+            if (radar.length != 3 || radar[2] < 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    static double getDistancePointRadar(int[] point, int[] radar) {
+        return Math.sqrt(Math.pow(point[0] - radar[0], 2) + Math.pow(point[1] - radar[1], 2));
     }
 }
