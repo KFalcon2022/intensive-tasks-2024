@@ -49,19 +49,18 @@ public class Task15 {
         }
 
         int floorsCounter = 0;
-        int columns = city[0].length;
-        int[] columnMax = new int[columns];
+        int[] columnMax = new int[city.length];
         int[] rowMax = new int[city.length];
 
         for (int i = 0; i < city.length; i++) {
-            for (int j = 0; j < columns; j++) {
+            for (int j = 0; j < city.length; j++) {
                 columnMax[j] = Math.max(city[i][j], columnMax[j]);
                 rowMax[i] = Math.max(city[i][j], rowMax[i]);
             }
         }
 
         for (int i = 0; i < city.length; i++) {
-            for (int j = 0; j < columns; j++) {
+            for (int j = 0; j < city.length; j++) {
                 if (city[i][j] < columnMax[j] && city[i][j] < rowMax[i]) {
                     floorsCounter += Math.min(columnMax[j] - city[i][j], rowMax[i] - city[i][j]);
                 }
@@ -76,14 +75,8 @@ public class Task15 {
             return false;
         }
 
-        if (city[0] == null || city[0].length == 0) {
-            return false;
-        }
-
-        int columns = city[0].length;
-
         for (int[] row : city) {
-            if (row == null || row.length != columns) {
+            if (row == null || row.length != city.length) {
                 return false;
             }
 
