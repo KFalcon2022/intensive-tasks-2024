@@ -53,13 +53,12 @@ package com.walking.intensive.chapter2.task9;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int n = 5;
+        int n = 18;
         System.out.println(getPascalTriangle(n));
     }
 
     static int getLength(int n) {
-
-        int currentLength = 0;
+        int currentLength = 1;
 
         for (int i = 1; i <= n; i++) {
 
@@ -74,7 +73,6 @@ public class Task9 {
                 previous = result;
 
                 line.append(result).append(" ");
-
                 currentLength = line.length() + 1;
             }
         }
@@ -89,10 +87,7 @@ public class Task9 {
 
         for (int i = 1; i <= n; i++) {
 
-            int currentLength = getLength(i);
-            int spaceNumber = (maxlength - currentLength) / 2;
-
-            StringBuilder line = new StringBuilder();
+            StringBuilder line = new StringBuilder("1 ");
             int result;
             int previous = 1;
 
@@ -102,6 +97,9 @@ public class Task9 {
                 previous = result;
                 line.append(result).append(" ");
             }
+
+            int currentLength = getLength(i);
+            int spaceNumber = (maxlength - currentLength) / 2;
 
             if (i < n) {
                 for (int l = 0; l < spaceNumber; l++)
