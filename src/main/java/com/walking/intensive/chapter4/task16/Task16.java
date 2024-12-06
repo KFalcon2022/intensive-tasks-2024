@@ -3,24 +3,6 @@ package com.walking.intensive.chapter4.task16;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-/**
- * После завершения интенсива вы достаточно быстро познакомитесь с Java Collection Framework.
- * Это знакомство позволит сильно упростить работу с массивами данных.
- *
- * <p>Но пока этого не произошло - даже типовые операции приходится производить вручную.
- * Эта задача - наглядная тому демонстрация.
- *
- * <p>Удачи!
- *
- * <p>P.S. Обратите внимание: если в методе требуется как-то изменять
- * содержимое массива - метод всегда должен возвращать новый массив.
- * Массивы, передаваемые в параметрах, изменяться не должны.
- * Это связано с тем, что в реальных условиях такой входящий массив может далее
- * использоваться в каких-либо иных расчетах и ожидается, что он будет находиться
- * в своем исходном состоянии.
- *
- * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
- */
 public class Task16 {
     public static void main(String[] args) {
 
@@ -63,7 +45,7 @@ public class Task16 {
         int[] result = arr;
 
         for (int i = 0; i < arr.length; i++) {
-            result[i] += 1;
+            result[i]++;
         }
 
         return result;
@@ -223,41 +205,33 @@ public class Task16 {
         return result;
     }
 
-    /**
-     * Реализуйте метод, который принимает параметрами массив целых чисел и
-     * еще один массив целых чисел (в виде varargs).
-     * И возвращает первый массив, удалив из него все числа, которые есть во втором.
-     *
-     * <p>Пример:
-     *
-     * <p>Входные данные: [10,20,30,40,50,20,60], [20,23,30]
-     * <p>Возвращаемое значение: [10,40,50,60]
-     */
     static int[] removeAll(int[] arr, int... removingValues) {
 
-        int[] modifiedArr = arr;
-        int index = arr.length;
+        int[] markedIndex = new int[arr.length];
+        int length = 0;
 
-        for (int i = 0; i < removingValues.length; i++) {
+        for (int removingValue : removingValues) {
 
-            for (int j = 0; j < arr.length; j++) {
+            for (int i = 0; i < arr.length; i++) {
 
-                if (removingValues[i] == arr[j]) {
-
-                    for (int k = j; k < arr.length - 1; k++) {
-                        modifiedArr[k] = arr[k + 1];
-                    }
-                    index -= 1;
-
-                } else {
-                    modifiedArr[j] = arr[j];
+                if (arr[i] == removingValue) {
+                    markedIndex[i] = 1;
+                    length++;
                 }
-
             }
         }
 
-        int[] result = new int[index];
-        result = modifiedArr;
+        int index = 0;
+        int[] result = new int[arr.length - length];
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (markedIndex[i] != 1) {
+                result[index] = arr[i];
+                index++;
+
+            }
+        }
 
         return result;
     }
@@ -266,24 +240,24 @@ public class Task16 {
 
         int firstCounter = 0;
 
-        for (int i = 0; i < arr1.length; i++) {
+        for (int i : arr1) {
 
-            for (int j = 0; j < arr2.length; j++) {
+            for (int j : arr2) {
 
-                if (arr1[i] == arr2[j]) {
-                    firstCounter += 1;
+                if (i == j) {
+                    firstCounter++;
                 }
             }
         }
 
         int secondCounter = 0;
 
-        for (int i = 0; i < arr2.length; i++) {
+        for (int i : arr2) {
 
-            for (int j = 0; j < arr1.length; j++) {
+            for (int j : arr1) {
 
-                if (arr2[i] == arr1[j]) {
-                    secondCounter += 1;
+                if (i == j) {
+                    secondCounter++;
                 }
             }
         }
@@ -300,7 +274,7 @@ public class Task16 {
         int[] result = new int[arr.length];
         int lastElement = arr[arr.length - 1];
 
-        for (int i = arr.length - 1; i > 0 ; i--) {
+        for (int i = arr.length - 1; i > 0; i--) {
             result[i] = arr[i - 1];
         }
 
