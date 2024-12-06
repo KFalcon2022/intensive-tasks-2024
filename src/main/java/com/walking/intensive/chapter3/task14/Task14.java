@@ -32,7 +32,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -43,11 +43,45 @@ package com.walking.intensive.chapter3.task14;
  */
 public class Task14 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+        if (objectLocations.length == 0 || radars.length == 0) {
+            return new int[0];
+        }
+
+        int[] objectCounts = new int[radars.length];
+
+        for (int i = 0; i < objectCounts.length; i++) {
+            objectCounts[i] = getRadarObjectCounts(radars[i], objectLocations);
+            if (objectCounts[i] == -1) {
+                return new int[0];
+            }
+        }
+        return objectCounts;
+    }
+
+    static int getRadarObjectCounts(int[] radar, int[][] objectLocations) {
+        if (radar.length != 3 || radar[2] <= 0) {
+            return -1;
+        }
+
+        int radarObjectsCount = 0;
+
+        for (int[] object : objectLocations) {
+            if (object.length != 2) {
+                return -1;
+            }
+
+            if (isObjectCount(radar, object)) {
+                radarObjectsCount += 1;
+            }
+        }
+        return radarObjectsCount;
+    }
+
+    static boolean isObjectCount(int[] radar, int[] object) {
+        return radar[2] * radar[2] >= (object[0] - radar[0]) * (object[0] - radar[0])
+                + (object[1] - radar[1]) * (object[1] - radar[1]);
     }
 }
