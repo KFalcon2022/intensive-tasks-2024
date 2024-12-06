@@ -1,6 +1,7 @@
 package com.walking.intensive.chapter1.task5;
 
 //import java.lang.reflect.Array;
+
 import java.util.Arrays;
 
 /**
@@ -17,7 +18,11 @@ public class Task5 {
     }
 
     static boolean isCheck(double a, double b, double c) {
-        return !(a <= 0) && !(b <= 0) && !(c <= 0) && !(a + b <= c) && !(a + c <= b) && !(b + c <= a);
+        return ((a + b >= c) && (a + c >= b) && (b + c >= a) && (a >= 0) && (b >= 0) && (c >= 0));
+    }
+
+    static double getP(double a, double b, double c) {
+        return (a + b + c) / 2;
     }
 
 
@@ -33,11 +38,10 @@ public class Task5 {
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
         if (isCheck(a, b, c)) {
-            double p = (a + b + c) / 2;
-            double area = p * (p - a) * (p - b) * (p - c);
-            area = Math.pow(area, 0.5);
-            return area;
+            double p = getP(a, b, c);
+            return Math.sqrt(p * (p - a) * (p - b) * (p - c));
         }
+
         return -1;
     }
 
@@ -58,6 +62,7 @@ public class Task5 {
             Arrays.sort(heights);
             return heights;
         }
+
         return new double[0];
     }
 
@@ -70,13 +75,14 @@ public class Task5 {
      */
     static double[] getMedians(double a, double b, double c) {
         if (isCheck(a, b, c)) {
-            double medianA = 0.5 * Math.pow((2 * c * c + 2 * b * b - a * a), 0.5);
-            double medianB = 0.5 * Math.pow((2 * a * a + 2 * c * c - b * b), 0.5);
-            double medianC = 0.5 * Math.pow((2 * a * a + 2 * b * b - c * c), 0.5);
+            double medianA = 0.5 * Math.sqrt((2 * c * c + 2 * b * b - a * a));
+            double medianB = 0.5 * Math.sqrt((2 * a * a + 2 * c * c - b * b));
+            double medianC = 0.5 * Math.sqrt((2 * a * a + 2 * b * b - c * c));
             double[] medians = {medianA, medianB, medianC};
             Arrays.sort(medians);
             return medians;
         }
+
         return new double[0];
     }
 
@@ -89,13 +95,14 @@ public class Task5 {
      */
     static double[] getBisectors(double a, double b, double c) {
         if (isCheck(a, b, c)) {
-            double bisA = Math.pow(c * b * (a + b + c) * (c + b - a), 0.5) / (c + b);
-            double bisB = Math.pow(a * c * (a + b + c) * (a + c - b), 0.5) / (a + c);
-            double bisC = Math.pow(a * b * (a + b + c) * (a + b - c), 0.5) / (a + b);
+            double bisA = Math.sqrt(c * b * (a + b + c) * (c + b - a)) / (c + b);
+            double bisB = Math.sqrt(a * c * (a + b + c) * (a + c - b)) / (a + c);
+            double bisC = Math.sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
             double[] bis = {bisA, bisB, bisC};
             Arrays.sort(bis);
             return bis;
         }
+
         return new double[0];
     }
 
@@ -118,6 +125,7 @@ public class Task5 {
             Arrays.sort(angles);
             return angles;
         }
+
         return new double[0];
     }
 
@@ -130,11 +138,10 @@ public class Task5 {
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
         if (isCheck(a, b, c)) {
-            double p = (a + b + c) / 2;
-            double inRad = (p - a) * (p - b) * (p - c) / p;
-            inRad = Math.pow(inRad, 0.5);
-            return inRad;
+            double p = getP(a, b, c);
+            return Math.sqrt((p - a) * (p - b) * (p - c) / p);
         }
+
         return -1;
     }
 
@@ -147,11 +154,12 @@ public class Task5 {
      */
     static double getCircumradius(double a, double b, double c) {
         if (isCheck(a, b, c)) {
-            double p = (a + b + c) / 2;
-            double outRad = Math.pow(p * (p - a) * (p - b) * (p - c), 0.5);
-            outRad = 0.25 * a * b * c / outRad;
-            return outRad;
+            double p = getP(a, b, c);
+            double circumradius = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+            circumradius = 0.25 * a * b * c / circumradius;
+            return circumradius;
         }
+
         return -1;
     }
 
@@ -175,6 +183,7 @@ public class Task5 {
             double sinA = Math.pow(1 - cosA * cosA, 0.5);
             return 0.5 * b * c * sinA;
         }
+
         return -1;
     }
 }
