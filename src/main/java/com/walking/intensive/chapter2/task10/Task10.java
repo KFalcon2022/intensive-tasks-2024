@@ -14,7 +14,7 @@ import javax.xml.transform.Source;
 public class Task10 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        System.out.println(isPalindrome("Ежу хуже,!"));
+        System.out.println(isPalindrome("...............Решение неверное"));
         System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум.!"));
     }
 
@@ -23,27 +23,19 @@ public class Task10 {
             return false;
         }
 
-        int stringLength = inputString.length();
-        int a = 0, z = stringLength - 1;
-        while (a < stringLength / 2) {
+        String stringLower = inputString.toLowerCase();
 
-            char c = inputString.charAt(a);
-            if (!Character.isLetterOrDigit(c)) {
+        for (int a = 0, z = inputString.length() - 1; a < z; a++, z--) {
+            while (!Character.isLetterOrDigit(stringLower.charAt(a))) {
                 a++;
-                continue;
             }
-
-            char d = inputString.charAt(z);
-            if (!Character.isLetterOrDigit(d)) {
+            while (!Character.isLetterOrDigit(stringLower.charAt(z))) {
                 z--;
-                continue;
             }
 
-            if (Character.toLowerCase(c) != Character.toLowerCase(d)) {
+            if (stringLower.charAt(a) != stringLower.charAt(z)) {
                 return false;
             }
-
-            a++; z--;
         }
 
         return true;
