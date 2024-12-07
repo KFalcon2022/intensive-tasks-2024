@@ -21,10 +21,10 @@ public class Task1 {
     static String getAgeString(int age) {
 
         if (age >= 0) {
-            if ((age % 10 != 2 || age == 112 || age == 12)
-                    && (age % 10 != 3 || age == 113 || age == 13)
-                    && (age % 10 != 4 || age == 114 || age == 14)) {
-                if (age % 10 != 1 || (age == 11 || age == 111)) {
+            if ((age % 10 != 2 || age % 100 == 12 || age == 12)
+                    && (age % 10 != 3 || age  % 100 == 13 || age == 13)
+                    && (age % 10 != 4 || age % 100 == 14 || age == 14)) {
+                if (age % 10 != 1  || age % 100 == 11 || (age == 11)) {
                     return ("Вам " + age + " лет");
                 } else {
                     return ("Вам " + age + " год");
