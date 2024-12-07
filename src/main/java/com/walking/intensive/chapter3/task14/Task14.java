@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -32,7 +34,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -44,10 +46,53 @@ package com.walking.intensive.chapter3.task14;
 public class Task14 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] objectLocations = {{1, 3}, {3,}, {5, 3}, {2, 2}};
+        int[][] radars = {{2, 3,}, {4, 3, 1}, {1, 1, 2}};
+        System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+        if (!checkInput(objectLocations, radars)) {
+            return new int[]{};
+        }
+
+        int[] objectCounts = new int[radars.length];
+
+        for (int i = 0; i < radars.length; i++) {
+            for (int[] objectLocation : objectLocations) {
+                if (isCorrectDistance(objectLocation, radars[i])) {
+                    objectCounts[i] = objectCounts[i] + 1 ;
+                }
+            }
+        }
+
+        return objectCounts;
+    }
+
+    static boolean isCorrectDistance(int[] objectLocation, int[] radars) {
+        double distance = Math.sqrt(Math.pow(radars[0] - objectLocation[0], 2) +
+                Math.pow(radars[1] - objectLocation[1], 2));
+
+        return distance <= radars[2];
+    }
+
+    static boolean checkInput(int[][] objectLocations, int[][] radars) {
+        for (int[] objectLocation : objectLocations) {
+            for (int object : objectLocation) {
+                if (object < 0 || objectLocation.length != 2) {
+                    return false;
+                }
+            }
+        }
+
+        for (int[] radar : radars) {
+            for (int r : radar) {
+                if (r < 0 || radar.length != 3) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
