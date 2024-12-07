@@ -19,8 +19,8 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        return m * n / getGcd(m, n);
+        //return 0;
     }
 
     /**
@@ -31,8 +31,11 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (n == 0) {
+            return m;
+        }
+            return getGcd(n, m % n);
+        //return -1;
     }
 
     /**
