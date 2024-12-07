@@ -14,7 +14,6 @@ import java.util.Arrays;
  */
 public class Task5 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     static boolean isCheck(double a, double b, double c) {
@@ -36,13 +35,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
-        if (isCheck(a, b, c)) {
-            double p = getP(a, b, c);
-            return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        if (!isCheck(a, b, c)) {
+            return -1;
         }
 
-        return -1;
+        double p = getP(a, b, c);
+        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
     /**
@@ -53,17 +51,17 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        if (isCheck(a, b, c)) {
-            double area = getAreaByHeron(a, b, c);
-            double heightA = 2 * area / a;
-            double heightB = 2 * area / b;
-            double heightC = 2 * area / c;
-            double[] heights = {heightA, heightB, heightC};
-            Arrays.sort(heights);
-            return heights;
+        if (!isCheck(a, b, c)) {
+            return new double[0];
         }
 
-        return new double[0];
+        double area = getAreaByHeron(a, b, c);
+        double heightA = 2 * area / a;
+        double heightB = 2 * area / b;
+        double heightC = 2 * area / c;
+        double[] heights = {heightA, heightB, heightC};
+        Arrays.sort(heights);
+        return heights;
     }
 
     /**
@@ -74,16 +72,16 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        if (isCheck(a, b, c)) {
-            double medianA = 0.5 * Math.sqrt((2 * c * c + 2 * b * b - a * a));
-            double medianB = 0.5 * Math.sqrt((2 * a * a + 2 * c * c - b * b));
-            double medianC = 0.5 * Math.sqrt((2 * a * a + 2 * b * b - c * c));
-            double[] medians = {medianA, medianB, medianC};
-            Arrays.sort(medians);
-            return medians;
+        if (!isCheck(a, b, c)) {
+            return new double[0];
         }
 
-        return new double[0];
+        double medianA = 0.5 * Math.sqrt((2 * c * c + 2 * b * b - a * a));
+        double medianB = 0.5 * Math.sqrt((2 * a * a + 2 * c * c - b * b));
+        double medianC = 0.5 * Math.sqrt((2 * a * a + 2 * b * b - c * c));
+        double[] medians = {medianA, medianB, medianC};
+        Arrays.sort(medians);
+        return medians;
     }
 
     /**
@@ -94,16 +92,16 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        if (isCheck(a, b, c)) {
-            double bisA = Math.sqrt(c * b * (a + b + c) * (c + b - a)) / (c + b);
-            double bisB = Math.sqrt(a * c * (a + b + c) * (a + c - b)) / (a + c);
-            double bisC = Math.sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
-            double[] bis = {bisA, bisB, bisC};
-            Arrays.sort(bis);
-            return bis;
+        if (!isCheck(a, b, c)) {
+            return new double[0];
         }
 
-        return new double[0];
+        double bisA = Math.sqrt(c * b * (a + b + c) * (c + b - a)) / (c + b);
+        double bisB = Math.sqrt(a * c * (a + b + c) * (a + c - b)) / (a + c);
+        double bisC = Math.sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
+        double[] bis = {bisA, bisB, bisC};
+        Arrays.sort(bis);
+        return bis;
     }
 
     /**
@@ -114,19 +112,19 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        if (isCheck(a, b, c)) {
-            double angleA = Math.acos((b * b + c * c - a * a) / (2 * b * c));
-            double angleB = Math.acos((a * a + c * c - b * b) / (2 * a * c));
-            double angleC = Math.acos((b * b + a * a - c * c) / (2 * b * a));
-            angleA = Math.toDegrees(angleA);
-            angleB = Math.toDegrees(angleB);
-            angleC = Math.toDegrees(angleC);
-            double[] angles = {angleA, angleB, angleC};
-            Arrays.sort(angles);
-            return angles;
+        if (!isCheck(a, b, c)) {
+            return new double[0];
         }
 
-        return new double[0];
+        double angleA = Math.acos((b * b + c * c - a * a) / (2 * b * c));
+        double angleB = Math.acos((a * a + c * c - b * b) / (2 * a * c));
+        double angleC = Math.acos((b * b + a * a - c * c) / (2 * b * a));
+        angleA = Math.toDegrees(angleA);
+        angleB = Math.toDegrees(angleB);
+        angleC = Math.toDegrees(angleC);
+        double[] angles = {angleA, angleB, angleC};
+        Arrays.sort(angles);
+        return angles;
     }
 
     /**
@@ -137,12 +135,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if (isCheck(a, b, c)) {
-            double p = getP(a, b, c);
-            return Math.sqrt((p - a) * (p - b) * (p - c) / p);
+        if (!isCheck(a, b, c)) {
+            return -1;
         }
 
-        return -1;
+        double p = getP(a, b, c);
+        return Math.sqrt((p - a) * (p - b) * (p - c) / p);
     }
 
     /**
@@ -153,14 +151,14 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        if (isCheck(a, b, c)) {
-            double p = getP(a, b, c);
-            double circumradius = Math.sqrt(p * (p - a) * (p - b) * (p - c));
-            circumradius = 0.25 * a * b * c / circumradius;
-            return circumradius;
+        if (!isCheck(a, b, c)) {
+            return -1;
         }
 
-        return -1;
+        double p = getP(a, b, c);
+        double circumradius = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        circumradius = 0.25 * a * b * c / circumradius;
+        return circumradius;
     }
 
     /**
@@ -178,12 +176,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        if (isCheck(a, b, c)) {
-            double cosA = (b * b + c * c - a * a) / (2 * b * c);
-            double sinA = Math.pow(1 - cosA * cosA, 0.5);
-            return 0.5 * b * c * sinA;
+        if (!isCheck(a, b, c)) {
+            return -1;
         }
 
-        return -1;
+        double cosA = (b * b + c * c - a * a) / (2 * b * c);
+        double sinA = Math.pow(1 - cosA * cosA, 0.5);
+        return 0.5 * b * c * sinA;
     }
 }
