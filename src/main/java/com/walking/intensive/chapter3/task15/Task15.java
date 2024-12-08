@@ -1,5 +1,6 @@
 package com.walking.intensive.chapter3.task15;
 
+
 /**
  * Существует город, состоящий из N x N блоков, где каждый блок содержит одно здание в форме вертикальной
  * квадратной призмы. Линия горизонта города — это внешний контур, образованный всеми зданиями,
@@ -40,11 +41,61 @@ package com.walking.intensive.chapter3.task15;
  */
 public class Task15 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+        if (city.length == 0) {
+            return -1;
+        }
+
+        int[][] maxFloorRowColumn = new int[2][city.length];
+
+        for (int i = 0; i < city.length; i++) {
+            if (city[i].length != city.length) {
+                return -1;
+            }
+
+            maxFloorRowColumn[0][i] = getMaxFloorRow(city[i]);
+            if (maxFloorRowColumn[0][i] < 0) {
+                return -1;
+            }
+        }
+
+        for (int i = 0; i < city.length; i++) {
+            maxFloorRowColumn[1][i] = getMaxFloorColumn(city, i);
+        }
+
+        int maxFloors = 0;
+
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city.length; j++) {
+                maxFloors += Math.min(maxFloorRowColumn[0][i], maxFloorRowColumn[1][j]) - city[i][j];
+            }
+        }
+        return maxFloors;
+    }
+
+    static int getMaxFloorRow(int[] cityRow) {
+        int maxFloorRow = 0;
+        for (int building : cityRow) {
+            if (building < 0) {
+                return -1;
+            }
+
+            if (building > maxFloorRow) {
+                maxFloorRow = building;
+            }
+        }
+        return maxFloorRow;
+    }
+
+    static int getMaxFloorColumn(int[][] city, int i) {
+        int maxFloorColumn = 0;
+        for (int[] cityRow : city) {
+            if (cityRow[i] > maxFloorColumn) {
+                maxFloorColumn = cityRow[i];
+            }
+        }
+        return maxFloorColumn;
     }
 }
