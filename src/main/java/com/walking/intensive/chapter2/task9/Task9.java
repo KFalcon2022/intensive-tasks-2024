@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task9;
 
+import java.math.BigInteger;
+
 /**
  * Реализуйте метод getPascalTriangle(). Параметром он должен принимать натуральное число N,
  * а метод возвращать строковое представление треугольника Паскаля.
@@ -51,11 +53,95 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getPascalTriangle(15));
     }
 
+    /**
+     * Возвращает строковое представление треугольника Паскаля,
+     * где n - количество строк (уровней) треугольника.
+     *
+     * @param n количество строк треугольника
+     * @return строковое представление треугольника Паскаля
+     */
+
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+
+        if (n <= 0) {
+            return "";
+        }
+
+        StringBuilder result = new StringBuilder();
+        int maxRowLength = calculateMaxRowLength(n);
+
+        for (int row = 0; row < n; row++) {
+            String rowString = generateRow(row);
+            int leadingSpaces = (maxRowLength - rowString.length()) / 2;
+
+            result.append(" ".repeat(leadingSpaces));
+            result.append(rowString);
+            result.append("\n");
+        }
+
+        return result.toString();
+    }
+
+    /**
+     * Генерирует строку для заданного уровня треугольника Паскаля.
+     *
+     * @param row уровень треугольника
+     * @return строковое представление строки
+     */
+
+    private static String generateRow(int row) {
+        StringBuilder rowBuilder = new StringBuilder();
+
+        for (int i = 0; i <= row; i++) {
+            rowBuilder.append(pascal(row, i).toString());
+
+            if (i < row) {
+                rowBuilder.append(" ");
+            }
+        }
+        return rowBuilder.toString();
+    }
+
+    /**
+     * Вычисляет максимальную длину строки треугольника Паскаля,
+     * которая соответствует длине последней строки.
+     *
+     * @param n количество строк треугольника
+     * @return максимальная длина строки
+     */
+
+    private static int calculateMaxRowLength(int n) {
+        int length = 0;
+
+        for (int i = 0; i < n; i++) {
+            length += pascal(n - 1, i).toString().length();
+
+            if (i < n - 1) {
+                length += 1;
+            }
+        }
+        return length;
+    }
+
+    /**
+     * Вычисляет значение элемента треугольника Паскаля для заданного уровня и столбца.
+     * Использует рекурсивную формулу биномиального коэффициента: C(n, k) = C(n-1, k-1) + C(n-1, k).
+     *
+     * @param row номер уровня (начиная с 0)
+     * @param column номер столбца (начиная с 0)
+     * @return значение элемента треугольника Паскаля
+     */
+
+    private static BigInteger pascal(int row, int column) {
+        if (column == 0 || column == row) {
+            return BigInteger.ONE;
+        }
+
+        return pascal(row - 1, column - 1).add(pascal(row - 1, column));
     }
 }
+
+
