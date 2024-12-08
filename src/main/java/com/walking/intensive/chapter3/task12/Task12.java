@@ -1,5 +1,8 @@
 package com.walking.intensive.chapter3.task12;
 
+
+import java.util.Arrays;
+
 /**
  * Девочка Света очень любит играть в мячики. Она поставила в ряд корзинки и в некоторые положила по 1 мячику.
  * За 1 раз она может переложить 1 мячик в соседнюю корзинку. В 1 корзинке может поместиться много мячиков.
@@ -41,10 +44,59 @@ package com.walking.intensive.chapter3.task12;
 public class Task12 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(Arrays.toString(getMovementsNumber("314")));
+
     }
 
     static int[] getMovementsNumber(String baskets) {
         // Ваш код
-        return new int[]{};
+        int[] ballsInBasket = getStringToArray(baskets);
+        int basketAmount = ballsInBasket.length;
+
+        if (basketAmount == 0) {
+            return new int[] {};
+        }
+
+        int[] movementsNumber = new int[basketAmount];
+
+        for (int mainBasket = 0; mainBasket < basketAmount; mainBasket++) {
+            int moves = 0;
+
+            for (int otherBasket = 0; otherBasket < basketAmount; otherBasket++) {
+                if (otherBasket == mainBasket) {
+                    continue;
+                }
+
+                moves += ballsInBasket[otherBasket] * Math.abs(mainBasket - otherBasket);
+            }
+            movementsNumber[mainBasket] = moves;
+        }
+
+        return movementsNumber;
+    }
+
+    static int[] getStringToArray(String line) {
+        if (line == null) {
+            return new int[] {};
+        }
+
+        int length = line.length();
+
+        if (length < 1) {
+            return new int[] {};
+        }
+
+        int[] stringToArray = new int[length];
+        for (int i = 0; i < length; i++) {
+            int newElement = Character.getNumericValue(line.charAt(i));
+
+            if (newElement < 0 || newElement > 1) {
+                return new int[] {};
+            }
+
+            stringToArray[i] = newElement;
+        }
+
+        return stringToArray;
     }
 }
