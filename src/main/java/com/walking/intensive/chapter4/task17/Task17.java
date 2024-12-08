@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Arrays;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -21,28 +23,36 @@ package com.walking.intensive.chapter4.task17;
  */
 public class Task17 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        int[] array = {12, 10, 43, 6, 21, 4};
+
+        System.out.println(Arrays.toString(sortByBubble(array)));
     }
 
-    /**
-     * Сортировка пузырьком:
-     *
-     * <ol>
-     * <li> Метод заключается в попарном сравнении соседних элементов в массиве слева направо.
-     *      Сначала сравнивается 0 и 1 индексы в массиве.
-     *      Если значения элемента с 0-м индексом больше элемента с 1-м индексом -
-     *      элементы меняются местами.
-     * <li> Потом сравниваются 1 и 2 индексы, и так последовательно попарно сравниваются все элементы массива.
-     *      При этом максимальный элемент массива окажется самым правым в массиве.
-     * <li> Далее массивом будем считать неотсортированную часть массива,
-     *      то есть без последнего самого правого элемента.
-     * <li> Повторяем шаги 1 и 2 до полной сортировки массива.
-     * </ol>
-     */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+
+        if (!isValid(array)) {
+            return new int[0];
+        }
+
+        int tempValue;
+        int len = array.length - 1;
+
+        for (int j = len; j >= 1; j--) {
+
+            for (int i = 0; i < len; i++) {
+
+                if (array[i] > array[i + 1]) {
+                    tempValue = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = tempValue;
+                }
+            }
+        }
+
+        return array;
     }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,8 +94,29 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+
+        if (!isValid(array)) {
+            return new int[0];
+        }
+
+        int index = getSorting(array, 0, array.length - 1);
+        int len = array.length - index -1;
+
+        if (index > 2) {
+
+            int[] arr1 = new int[index];
+
+            for (int i = 0; i < index - 1; i++) {
+                arr1[i] = array[i];
+            }
+
+            getSorting(arr1, 0, index - 1);
+
+            int[] arr2 = new int[]
+        }
+
+
+        return array;
     }
 
     /**
@@ -107,5 +138,59 @@ public class Task17 {
     static long getBenchmarkOn10000() {
         // Ваш код
         return 0;
+    }
+
+    static boolean isValid(int[] array) {
+
+        if (array == null) {
+            return false;
+        }
+
+        if (array.length < 1) {
+            return false;
+        }
+
+        return true;
+    }
+
+    static int getMediumValue (int[] array) {
+
+        int min = 0;
+        int max = 0;
+
+        for (int arr : array) {
+
+            if (arr < min) {
+                 min = arr;
+            }
+
+            if (arr > max) {
+                max = arr;
+            }
+        }
+
+        return (min + max) / 2;
+    }
+
+    static int getSorting (int[] array, int left, int right) {
+
+        int separator = getMediumValue(array);
+        int temp;
+
+        while (array[left] < separator) {
+            left++;
+        }
+
+        while (array[right] > separator) {
+            right--;
+        }
+
+        if (left <= right) {
+            temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+        }
+
+        return right;
     }
 }
