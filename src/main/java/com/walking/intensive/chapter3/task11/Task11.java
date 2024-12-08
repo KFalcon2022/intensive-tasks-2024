@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task11;
 
+import java.util.Arrays;
+
 /**
  * Реализуйте метод getOddSubArraysElementsSum() с учетом условий ниже.
  *
@@ -43,10 +45,55 @@ package com.walking.intensive.chapter3.task11;
 public class Task11 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[] a = {1,4,2,5,3};
+        System.out.println(getOddSubArraysElementsSum(a));
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
         // Ваш код
-        return 0;
+        if (array == null) {
+            return 0;
+        }
+
+        if (!isArrayValid(array)) {
+            return -1;
+        }
+
+        int length = array.length;
+        int oddSubArraysElementsSum = 0;
+
+        for (int j = length; j >= 3; j--) {
+            if (j % 2 == 0) {
+                continue;
+            }
+
+            for (int i = 0; i <= length - j; i++) {
+                int[] smallArray = Arrays.copyOfRange(array, i, j + i);
+                oddSubArraysElementsSum += getSumOfArray(smallArray);
+            }
+        }
+
+        oddSubArraysElementsSum += getSumOfArray(array);
+        return oddSubArraysElementsSum;
+    }
+
+    static int getSumOfArray(int[] array) {
+        int sumOfArray = 0;
+
+        for (int j : array) {
+            sumOfArray += j;
+        }
+
+        return sumOfArray;
+    }
+
+    static boolean isArrayValid(int[] array) {
+        for (int i : array) {
+            if (i < 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
