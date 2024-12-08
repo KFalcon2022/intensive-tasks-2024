@@ -12,8 +12,10 @@ package com.walking.intensive.chapter2.task10;
 public class Task10 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        String testString = "Ты, милок, иди яром: у дороги мина, за дорогой огород," +
-                " а за ним и город у моря; иди, коли мыт";
+//        String testString = "Ты, милок, иди яром: у дороги мина, за дорогой огород," +
+//                " а за ним и город у моря; иди, коли мыт";
+
+        String testString = "A";
 
         if (isPalindrome(testString)) {
             System.out.println("Palindrome");
@@ -24,8 +26,16 @@ public class Task10 {
 
     static boolean isPalindrome(String inputString) {
         // Ваш код
+        if (inputString == null) {
+            return false;
+        }
+
         String pureString = removePunctuation(inputString).toLowerCase();
         int stringLength = pureString.length();
+
+        if (stringLength < 2) {
+            return false;
+        }
 
         for (int i = 0; i < stringLength; i++) {
             if (pureString.charAt(i) != pureString.charAt(stringLength - i - 1)) {
