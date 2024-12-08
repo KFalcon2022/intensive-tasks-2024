@@ -1,32 +1,16 @@
 package com.walking.intensive.chapter4.task17;
 
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * Смауг, живущий в пещере с золотом, был заперт внутри горы.
- * Чтобы занять свое время, он развлекал себя следующей игрой.
- * Он складывал произвольное количество одинаковых монеток по мешочкам,
- * расставлял их в ряд произвольным образом и придумывал алгоритмы,
- * которыми он будет пользоваться для того, чтобы расставить мешочки в порядке возрастания ценности.
- * Времени было много и у него получилось придумать десятки алгоритмов
- * с целью выбрать лучший, который справится с сортировкой за минимальное количество действий.
- *
- * <p>Сортировка — алгоритм расположения элементов массива по неубыванию (возрастанию, если элементы не повторяются).
- *
- * <p>Создайте два метода сортировки: пузырьком и quicksort. Описание алгоритмов вы найдете ниже.
- *
- * <p>
- * При использовании встроенных методов сортировок, коллекций, Stream API и иного материала,
- * выходящего за рамки пройденного курса, задача не принимается к проверке.
- *
- * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
- */
 public class Task17 {
     public static void main(String[] args) {
 
-        int[] array = {12, 10, 43, 6, 21, 4};
+        int[] array = {65, 66, 121, 4, 24, 7, 3, 12, 84, 56, 0, 1, -2};
 
-        System.out.println(Arrays.toString(sortByBubble(array)));
+//        System.out.println(Arrays.toString(array));
+//        System.out.println(Arrays.toString(sortByQuicksort(array)));
+        System.out.println(getBenchmarkOn1000());
     }
 
     static int[] sortByBubble(int[] array) {
@@ -53,68 +37,13 @@ public class Task17 {
         return array;
     }
 
-    /**
-     * Быстрая сортировка, она же QuickSort:
-     *
-     * <p>Это рекурсивный метод, основанный на разделении 1 массива на 2 подмассива
-     * по принципу поиска опорного элемента. Далее каждый из двух массивов снова
-     * рекурсивно вызывает тот же метод сортировки.
-     *
-     * <p>Разбиение 1 массива на 2 подмассива происходит поиском «опорного элемента».
-     *
-     * <p>Опорный элемент делит массив таким образом, что элементы, меньшие опорного,
-     * помещаются перед ним(левее), а большие или равные — после(правее).
-     * При этом сам опорный элемент не обязан быть элементом массива.
-     *
-     * <p>Вопрос выбора лучшего опорного элемента пока остается открытым в математике.
-     * Цель опорного элемента — попытаться разделить массив пополам,
-     * тогда сортировка пройдет максимально быстро.
-     * В задаче опорный элемент = (max + min) / 2
-     * (считается каждый раз для каждого нового подмассива).
-     * Где max и min — максимальный и минимальный элементы массива (подмассива).
-     *
-     * <ol>
-     * <li> В одном цикле два итератора: i слева направо от left до right,
-     *      j – справа налево от right до left, где left и right индексы,
-     *      вставляемые в метод в качестве аргументов. Ищем значение опорного элемента.
-     * <li> Пока i <= j: двигаем i, пока не встретим элемент, который >= опорного элемента.
-     *      Двигаем j, пока не встретим элемент, который <= опорного элемента.
-     *      Если i <= j, то делаем обмен элементов по этим индексам.
-     *      Нужно добиться, чтобы каждый элемент слева от опорного элемента
-     *      был <= опорного элемента, а каждый элемент справа от
-     *      опорного элемента был >= опорного элемента.
-     *      Таким способом мы найдем индекс опорного элемента в массиве или
-     *      2 соседних индекса, если опорного элемента в массиве нет.
-     * <li> Мы узнали индекс опорного элемента и добились того, что опорный элемент
-     *      поделил массив на 2 массива. Осталось каждый подмассив поставить
-     *      в качестве аргумента вызывая рекурсию.
-     * <li> Выход из рекурсии: массив длины 2 – если нужно,
-     *      меняем эти два элемента местами.
-     *      Если длина входного массива меньше двух, выходим.
-     * </ol>
-     */
     static int[] sortByQuicksort(int[] array) {
 
         if (!isValid(array)) {
             return new int[0];
         }
 
-        int index = getSorting(array, 0, array.length - 1);
-        int len = array.length - index -1;
-
-        if (index > 2) {
-
-            int[] arr1 = new int[index];
-
-            for (int i = 0; i < index - 1; i++) {
-                arr1[i] = array[i];
-            }
-
-            getSorting(arr1, 0, index - 1);
-
-            int[] arr2 = new int[]
-        }
-
+        arraySorting(array, 0, array.length - 1);
 
         return array;
     }
@@ -128,8 +57,26 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+
+        int[] array = new int[1000];
+
+        for (int i = 0; i < 1000; i++) {
+            array[i] = ThreadLocalRandom.current().nextInt();
+        }
+
+        long startTime = System.currentTimeMillis();
+        sortByBubble(array);
+        long stopTime = System.currentTimeMillis();
+        long elapsedTimeByBubble = stopTime - startTime;
+        System.out.println(elapsedTimeByBubble);
+
+        startTime = System.currentTimeMillis();
+        sortByQuicksort(array);
+        stopTime = System.currentTimeMillis();
+        long elapsedTimeByQuick = stopTime - startTime;
+
+
+        return elapsedTimeByBubble - elapsedTimeByQuick;
     }
 
     /**
@@ -142,55 +89,75 @@ public class Task17 {
 
     static boolean isValid(int[] array) {
 
-        if (array == null) {
-            return false;
-        }
-
-        if (array.length < 1) {
-            return false;
-        }
-
-        return true;
+        return array != null && array.length >= 1;
     }
 
-    static int getMediumValue (int[] array) {
+    static int getAverage(int[] array, int i, int j) {
 
-        int min = 0;
-        int max = 0;
+        int min = array[i];
+        int max = array[i];
 
-        for (int arr : array) {
+        for (int k = i; k <= j; k++) {
 
-            if (arr < min) {
-                 min = arr;
+            if (array[k] < min) {
+                min = array[k];
             }
 
-            if (arr > max) {
-                max = arr;
+            if (array[k] > max) {
+                max = array[k];
             }
         }
 
         return (min + max) / 2;
     }
 
-    static int getSorting (int[] array, int left, int right) {
+    static void elementsSwap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }
 
-        int separator = getMediumValue(array);
-        int temp;
+    static void arraySorting(int[] array, int left, int right) {
 
-        while (array[left] < separator) {
-            left++;
+        if (array.length == 0 || left > right) {
+            return;
         }
 
-        while (array[right] > separator) {
-            right--;
-        }
+        int i = left;
+        int j = right;
+        int separator = getAverage(array, i, j);
 
-        if (left <= right) {
-            temp = array[left];
-            array[left] = array[right];
-            array[right] = temp;
-        }
+        while (i < j) {
 
-        return right;
+            while (array[i] < separator) {
+                i++;
+            }
+
+            while (array[j] > separator) {
+                j--;
+            }
+
+            if (i < j) {
+                elementsSwap(array, i, j);
+
+//                System.out.println("Меняем "+ array[j] + " - " + array[i]);
+//                System.out.println(Arrays.toString(array));
+                i++;
+                j--;
+            }
+
+            if (i == j) {
+                i++;
+                j--;
+            }
+
+            if (left < j) {
+                arraySorting(array, left, j);
+            }
+
+            if (right > i) {
+                arraySorting(array, i, right);
+            }
+        }
     }
 }
