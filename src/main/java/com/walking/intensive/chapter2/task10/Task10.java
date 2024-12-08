@@ -11,11 +11,36 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(isPalindrome(null));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+
+        if (inputString == null || inputString.length() <= 1) {
+            return false;
+        }
+
+        String firstString = "";
+        String secondString = "";
+        String cyrillic = "ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
+
+        for (int i = 0; i < inputString.length(); i++) {
+            for (int j = 0; j < cyrillic.length(); j++) {
+                if (inputString.charAt(i) == cyrillic.charAt(j)) {
+                    firstString += inputString.charAt(i);
+                }
+            }
+        }
+
+        for (int k = inputString.length() - 1; k >= 0; k--) {
+            for (int l = 0; l < cyrillic.length(); l++) {
+                if (inputString.charAt(k) == cyrillic.charAt(l)) {
+                    secondString += inputString.charAt(k);
+                }
+            }
+        }
+
+        return firstString.equalsIgnoreCase(secondString);
     }
 }
