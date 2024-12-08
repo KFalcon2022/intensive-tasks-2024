@@ -11,11 +11,27 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        String inputString = "Муза, ранясь шилом опыта, ты помолишься на разум";
+        boolean result = isPalindrome(inputString);
+        System.out.println(result);
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+        String ignorePunctuationSpacesCase = inputString.replaceAll("[^a-zA-Zа-яА-ЯёЁ0-9]", "").toLowerCase();
+
+        int leftPartLine = 0;
+        int rightPartLine = ignorePunctuationSpacesCase.length() - 1;
+
+        while ((leftPartLine < rightPartLine)) {
+
+            if (ignorePunctuationSpacesCase.charAt(leftPartLine) != ignorePunctuationSpacesCase.charAt(rightPartLine)) {
+                return false;
+            }
+
+            leftPartLine++;
+            rightPartLine--;
+        }
+
+        return true;
     }
 }
