@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task8;
 
+import java.util.Locale;
+
 /**
  * Добираясь в школу на трамвае Вова проверяет, является ли купленный билет счастливым.
  * Если является, то нужно загадать желание и съесть билетик.
@@ -20,11 +22,42 @@ package com.walking.intensive.chapter2.task8;
  */
 public class Task8 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getHappyTicketChance());
     }
 
-    static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+    /**
+     * решение через биноминальные коэффициенты и замену 3-х цифр билета их дополнением до 9,
+     * чтобы получить сумму цифр билета = 27
+     * подсмотренно на сайте https://www.ega-math.narod.ru/Quant/Tickets.htm раздел "Счастливые
+     * троллейбусные билеты"
+     */
+
+    static Double getHappyTicketChance() {
+
+        Locale.setDefault(Locale.ENGLISH);
+
+        double uniqueNumAmount = 10; // количество используемых уникальных цифр от 0 до 9 включительно
+        double sizeTicket = 6;  // количество цифр в билетике
+        double maxHalfSum = sizeTicket * (uniqueNumAmount - 1) / 2; // максимальная сумма на половину йифр билета
+        double diffTicketsNum = Math.pow(uniqueNumAmount, sizeTicket); // количество уникальных комбинаций цифр в билетиках
+        double happyTicketAmount = 0;
+
+        for (int i = 0; i < 3; i++) {
+            double bin = maxHalfSum + sizeTicket - uniqueNumAmount * i - 1;
+            happyTicketAmount += Math.pow(-1, i) * getBinomCoef(sizeTicket, i) * getBinomCoef(bin, sizeTicket - 1);
+        }
+
+        return Double.parseDouble(String.format("%.6f", happyTicketAmount / diffTicketsNum));
+    }
+
+    static double getFactorial(double n) {
+        if (n <= 1) {
+            return 1;
+        }
+        return n * getFactorial(n - 1);
+    }
+
+    static double getBinomCoef(double n, double k) {
+        return getFactorial(n) / (getFactorial(k) * getFactorial(n - k));
     }
 }
