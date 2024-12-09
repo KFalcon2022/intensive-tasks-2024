@@ -21,10 +21,37 @@ package com.walking.intensive.chapter2.task8;
 public class Task8 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        getDigitsSum(987);
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+        int happyTicketsCount = 0;
+
+        for (int i = 0; i < 1000000; i++) {
+            if (isHappy(i)) {
+                happyTicketsCount++;
+            }
+        }
+
+        return happyTicketsCount / 1000000.0;
+    }
+
+    static boolean isHappy(int number) {
+        int firstDigits = number / 1000;
+        int lastDigits = number % 1000;
+
+        return getDigitsSum(firstDigits) == getDigitsSum(lastDigits);
+    }
+
+    static int getDigitsSum(int n) {
+        int sum = 0;
+
+        while (n != 0) {
+            sum += n % 10;
+            System.out.println("sum = " + sum);
+            n /= 10;
+            System.out.println("n = " + n);
+        }
+        return sum;
     }
 }
