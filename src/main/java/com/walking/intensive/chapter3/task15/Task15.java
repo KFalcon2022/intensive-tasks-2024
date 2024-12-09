@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task15;
 
+import java.util.Arrays;
+
 /**
  * Существует город, состоящий из N x N блоков, где каждый блок содержит одно здание в форме вертикальной
  * квадратной призмы. Линия горизонта города — это внешний контур, образованный всеми зданиями,
@@ -41,10 +43,75 @@ package com.walking.intensive.chapter3.task15;
 public class Task15 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] city2 = {{}, {}, {}};
+        System.out.println(getMaxFloors(city2));
     }
 
+
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+        if (!checkInput(city)) {
+            return -1;
+        }
+
+        int maxFloor = 0;
+
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city[i].length; j++) {
+                int maxRow = getMaxRow(city[i]);
+                int maxColumn = getMaxColumn(city, j);
+                if (maxColumn > maxRow) {
+                    maxFloor = maxFloor + (maxRow - city[i][j]);
+                } else {
+                    maxFloor = maxFloor + (maxColumn - city[i][j]);
+                }
+            }
+        }
+
+        return maxFloor;
+    }
+
+    static int getMaxRow(int[] city) {
+        int maxrow = 0;
+
+        for (int i : city) {
+            if (maxrow < i) {
+                maxrow = i;
+            }
+        }
+
+        return maxrow;
+    }
+
+    static int getMaxColumn(int[][] city, int col) {
+        int maxcol = 0;
+
+        for (int i = 0; i < city.length; i++) {
+            if (maxcol < city[i][col]) {
+                maxcol = city[i][col];
+            }
+
+        }
+
+        return maxcol;
+    }
+
+    static boolean checkInput(int[][] city) {
+        if (city.length == 0) {
+            return false;
+        }
+
+        for (int i = 0; i < city.length; i++) {
+            if (city[i].length == 0) {
+                return false;
+            }
+            for (int j = 0; j < city[i].length; j++) {
+                if (city[i][j] < 0 || city[i].length != city.length) {
+                    return false;
+                }
+
+            }
+        }
+
+        return true;
     }
 }
