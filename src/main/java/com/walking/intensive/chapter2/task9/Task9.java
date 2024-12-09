@@ -52,10 +52,49 @@ package com.walking.intensive.chapter2.task9;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getPascalTriangle(10));
+    }
+
+    static int[] getBinomialCoefficient(int n) {
+        int[] values = new int[n + 1];
+        values[0] = 1;
+        if (n == 0) {
+            return new int[]{1};
+        }
+        int value = 1;
+
+        for (int k = 1; k <= n; k++) {
+            value = value * (n - k + 1) / k;
+            values[k] = value;
+        }
+        return values;
     }
 
     static String getPascalTriangle(int n) {
         // Ваш код
-        return null;
+        if (n <= 0) {
+            return " ";
+        }
+
+        String[] lines = new String[n];
+
+        for (int i = n - 1; i >= 0; i--) {
+            int[] numbers = getBinomialCoefficient(i);
+            StringBuilder resultLine = new StringBuilder();
+
+            for (int num : numbers) {
+                resultLine.append(num).append(" ");
+            }
+            lines[i] = resultLine.toString().trim();
+        }
+
+        var maxLength = lines[lines.length - 1].length();
+
+        for (int i = 0; i < lines.length; i++) {
+            var str = lines[i];
+            var length = str.length();
+            lines[i] = " ".repeat((maxLength - length) / 2) + str;
+        }
+        return String.join("\n", lines);
     }
 }
