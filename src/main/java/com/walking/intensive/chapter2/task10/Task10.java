@@ -12,10 +12,29 @@ package com.walking.intensive.chapter2.task10;
 public class Task10 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(isPalindrome("ротор"));
+        System.out.println(isPalindrome("ротkр"));
     }
 
     static boolean isPalindrome(String inputString) {
         // Ваш код
-        return false;
+        if (inputString == null || inputString.length() < 2) {
+            return false;
+        }
+
+        String str = inputString.toLowerCase()
+                .replace(" ", "")
+                .replace("!", "")
+                .replace("?", "")
+                .replace(",", "");
+
+
+        for (int i = 0; i < (str.length() - 1) / 2; i++) {
+            int j = str.length() - i - 1;
+            if (str.charAt(i) != str.charAt(j)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
