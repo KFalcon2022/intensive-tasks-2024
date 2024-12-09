@@ -79,10 +79,6 @@ public class Task18 {
     }
 
     private static boolean isValid(int[] arr) {
-        if (arr == null || arr.length < 1) {
-            return false;
-        }
-
-        return true;
+        return arr != null && arr.length >= 1;
     }
 }
