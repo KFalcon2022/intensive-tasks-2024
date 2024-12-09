@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task6;
 
+import java.util.Arrays;
+
 /**
  * Реализуйте представленные ниже методы для расчета
  * НОК (наименьшее общее кратное) и НОД (наибольший общий делитель).
@@ -19,8 +21,19 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (!isValidate(m, n)) {
+            return -1;
+        }
+
+        int a = Math.max(m, n);
+        int b = Math.min(m, n);
+        int i = a;
+
+        while (a % b != 0) {
+            a += i;
+        }
+
+        return a;
     }
 
     /**
@@ -31,8 +44,19 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (!isValidate(m, n)) {
+            return -1;
+        }
+
+        int i = Math.min(m, n);
+
+        while (i != 1) {
+            if (m % i == 0 && n % i == 0) {
+                break;
+            }
+            i -= 1;
+        }
+        return i;
     }
 
     /**
@@ -44,7 +68,29 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (!isValidate(m, n)) {
+            return -1;
+        }
+
+        int a = Math.max(m, n);
+        int b = Math.min(m, n);
+
+        if (a % b == 0) {
+            return b;
+        }
+
+        int i = a % b;
+
+        while (i != 0) {
+            a = b;
+            b = i;
+            i = a % b;
+        }
+
+        return b;
+    }
+
+    static boolean isValidate(int m, int n) {
+        return (m > 0 && n > 0);
     }
 }
