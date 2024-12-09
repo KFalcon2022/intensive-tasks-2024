@@ -40,11 +40,69 @@ package com.walking.intensive.chapter3.task15;
  */
 public class Task15 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] city = {{2,1},{1,3}};
+        System.out.println(getMaxFloors(city));
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+        if (!isValid(city)) {
+            return -1;
+        }
+
+        int n = city.length;
+
+        int[] maxFromNorth = new int[n];
+        int[] maxFromSouth = new int[n];
+        int[] maxFromWest = new int[n];
+        int[] maxFromEast = new int[n];
+
+        for (int c = 0; c < n; c++) {
+            int maxNorth = 0;
+            int maxSouth = 0;
+            for (int r = 0; r < n; r++) {
+                maxNorth = Math.max(maxNorth, city[r][c]);
+                maxSouth = Math.max(maxSouth, city[n - 1 - r][c]);
+            }
+            maxFromNorth[c] = maxNorth;
+            maxFromSouth[c] = maxSouth;
+        }
+
+        for (int r = 0; r < n; r++) {
+            int maxWest = 0;
+            int maxEast = 0;
+            for (int c = 0; c < n; c++) {
+                maxWest = Math.max(maxWest, city[r][c]);
+                maxEast = Math.max(maxEast, city[r][n - 1 - c]);
+            }
+            maxFromWest[r] = maxWest;
+            maxFromEast[r] = maxEast;
+        }
+
+        int totalFloors = 0;
+
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < n; c++) {
+                int maxHeight = Math.min(Math.min(maxFromNorth[c], maxFromSouth[c]),
+                        Math.min(maxFromWest[r], maxFromEast[r]));
+                totalFloors += maxHeight - city[r][c];
+            }
+        }
+
+        return totalFloors;
+    }
+
+    static boolean isValid(int[][] city) {
+        if (city == null || city.length == 0 || city.length != city[0].length) {
+            return false;
+        }
+        for (int[] row : city) {
+            for (int height : row) {
+                if (height < 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
