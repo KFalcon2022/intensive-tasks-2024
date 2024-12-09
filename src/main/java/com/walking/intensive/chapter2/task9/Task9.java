@@ -51,11 +51,46 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int n = 3;
+        System.out.println(getPascalTriangle(n));
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+
+        if (isValid(n)) {
+            return "";
+        }
+
+        String trianglePascal = "";
+        for (int i = n; i >= 1; i--) {
+            int count = 0;
+            for (int j = 1; j <= n + n - 1; j++) {
+
+                if (j < i || j > n + n - i || (j - i) % 2 != 0) {
+                    trianglePascal = trianglePascal + " ";
+                    continue;
+                }
+
+                count++;
+                int m = count - 1;
+                int k = n - i;
+                trianglePascal = trianglePascal + (getFactorial(k) / (getFactorial(m) * getFactorial(k - m)));
+            }
+            trianglePascal = trianglePascal + "\n";
+        }
+        return trianglePascal;
+    }
+
+    static long getFactorial(int f) {
+
+        if (f <= 1) {
+            return 1;
+        }
+
+        return f * getFactorial(f - 1);
+    }
+
+    static boolean isValid(int n) {
+        return n <= 0;
     }
 }
