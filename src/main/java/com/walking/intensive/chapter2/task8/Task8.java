@@ -47,9 +47,7 @@ public class Task8 {
 
         while (n != 0) {
             sum += n % 10;
-            System.out.println("sum = " + sum);
             n /= 10;
-            System.out.println("n = " + n);
         }
         return sum;
     }
