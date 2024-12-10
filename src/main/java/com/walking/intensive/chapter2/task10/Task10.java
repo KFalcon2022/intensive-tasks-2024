@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task10;
 
+import javax.xml.transform.Source;
+
 /**
  * Реализуйте метод isPalindrome(), который проверяет, является ли строка палиндромом.
  *
@@ -12,10 +14,30 @@ package com.walking.intensive.chapter2.task10;
 public class Task10 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(isPalindrome("...............Решение неверное"));
+        System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум.!"));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+        if (inputString == null || inputString.length() <= 1) {
+            return false;
+        }
+
+        String stringLower = inputString.toLowerCase();
+
+        for (int a = 0, z = inputString.length() - 1; a < z; a++, z--) {
+            while (!Character.isLetterOrDigit(stringLower.charAt(a))) {
+                a++;
+            }
+            while (!Character.isLetterOrDigit(stringLower.charAt(z))) {
+                z--;
+            }
+
+            if (stringLower.charAt(a) != stringLower.charAt(z)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
