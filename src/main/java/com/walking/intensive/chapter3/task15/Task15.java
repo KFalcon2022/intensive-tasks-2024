@@ -44,7 +44,55 @@ public class Task15 {
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+        if (!isValidCity(city)) {
+            return -1;
+        }
+
+        int maxFloors = 0;
+        int[] maxHeightRawArray = new int[city.length];
+        int[] maxHeightColArray = new int[city.length];
+        for (int i = 0; i < city.length; i++) {
+            int maxHeightR = city[i][0];
+            int maxHeightC = city[0][i];
+            for (int j = 0; j < city[i].length; j++) {
+                if (maxHeightR < city[i][j]) {
+                    maxHeightR = city[i][j];
+                }
+                if (maxHeightC < city[j][i]) {
+                    maxHeightC = city[j][i];
+                }
+            }
+            maxHeightRawArray[i] = maxHeightR;
+            maxHeightColArray[i] = maxHeightC;
+        }
+
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city.length; j++) {
+                if (Math.min(maxHeightRawArray[i], maxHeightColArray[j]) - city[i][j] > 0) {
+                    maxFloors += Math.min(maxHeightRawArray[i], maxHeightColArray[j]) - city[i][j];
+                }
+            }
+        }
+
+        return maxFloors;
+    }
+
+    static boolean isValidCity(int[][] city) {
+        if (city.length == 0) {
+            return false;
+        }
+
+        for (int[] street : city) {
+            if (street.length != city.length) {
+                return false;
+            }
+            for (int height : street) {
+                if (height < 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
