@@ -56,24 +56,24 @@ public class Task13 {
             return 0;
         }
 
-        if (wateringCanVolume <= 0) {
-            return -1;
-        }
-
         int stepsCount = 0;
         int waterCurrentLevel = wateringCanVolume;
 
         for (int i = 0; i < plants.length; i++) {
-            if (plants[i] <= 0 || plants[i] > wateringCanVolume) {
+            if (!isPlantValid(plants[i], wateringCanVolume)) {
                 return -1;
             }
 
-            stepsCount += 1;
+            stepsCount++;
             waterCurrentLevel -= plants[i];
             if (i < plants.length - 1 && waterCurrentLevel < plants[i + 1]) {
                 stepsCount += (i + 1) * 2;
             }
         }
         return stepsCount;
+    }
+
+    static boolean isPlantValid(int plant, int wateringCanVolume) {
+        return plant > 0 && plant <= wateringCanVolume;
     }
 }
