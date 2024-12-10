@@ -30,8 +30,33 @@ public class Task7 {
 //        Для собственных проверок можете делать любые изменения в этом методе
     }
 
-    static int getFriendlyPair(int n) {
-        // Ваш код
-        return 0;
+    static int getFriendlyPair(int N) {
+        if (N < 1 || N > 1_000_000) {
+            return -1;
+        }
+        int maxNumber = 0;
+
+        for (int i = N - 1; i >= 1; i--) {
+            int sumDivisorsI = sumOfDivisors(i);
+            if (sumDivisorsI < N && sumDivisorsI != i) {
+                int sumDivisorsJ = sumOfDivisors(sumDivisorsI);
+                if (sumDivisorsJ == i) {
+                    // Найдена дружественная пара (i, sumDivisorsI)
+                    maxNumber = Math.max(maxNumber, sumDivisorsI);
+                }
+            }
+        }
+
+        return maxNumber;
+    }
+
+    static int sumOfDivisors(int num) {
+        int sum = 0;
+        for (int j = 1; j <= num / 2; j++) {
+            if (num % j == 0) {
+                sum += j;
+            }
+        }
+        return sum;
     }
 }
