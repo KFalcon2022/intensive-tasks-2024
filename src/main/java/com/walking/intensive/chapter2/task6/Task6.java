@@ -8,7 +8,7 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getLcm(0, 20));
     }
 
     /**
@@ -19,8 +19,8 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        int gcd = getGcdByEuclideanAlgorithm(m, n);
+        return gcd > 0 ? m * n / gcd : -1;
     }
 
     /**
@@ -31,9 +31,20 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+        while (m != 0) {
+            if (m >= n) {
+                m -= n;
+            } else {
+                n -= m;
+            }
+
+        }
+        return n;
     }
+
 
     /**
      * Реализуйте метод, который будет возвращать НОД для чисел, переданных параметрами.
@@ -44,7 +55,17 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+
+        while (m != 0 && n != 0) {
+            if (m >= n) {
+                m %= n;
+            } else {
+                n %= m;
+            }
+        }
+        return Math.max(m, n);
     }
 }
