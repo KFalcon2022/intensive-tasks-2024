@@ -43,7 +43,7 @@ import java.util.Arrays;
 public class Task12 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        String baskets = "110";
+        String baskets = "001011";
         System.out.println(Arrays.toString(getMovementsNumber(baskets)));
     }
 
@@ -61,21 +61,30 @@ public class Task12 {
             array[i] = Character.getNumericValue(baskets.charAt(i));
         }
 
-//        for (int i = 0; i < array.length - 1; i++) {
-//            int countForward = 0;
-//            for (int j = i + 1; j < array.length; j++) {
-//                countForward += array[j] * j;
-//            }
-
-        int[] line = new int[array.length];
-        for (int i = 0; i < array.length; i++) {
-            int countBack = 0;
-            for (int k = array.length - 1; k >= 0; k--) {
-                countBack += array[k] * (array.length - 1 - k);
+        int[] rightBall = new int[array.length];
+        for (int i = 0; i < array.length - 1; i++) {
+            int countForward = 0;
+            for (int j = i + 1; j < array.length; j++) {
+                countForward += array[j] * (j - i);
             }
-            line[array.length - 1] = countBack;
+            rightBall[i] = countForward;
         }
-        return line;
+
+        int[] leftBall = new int[array.length];
+        for (int i = array.length - 1; i >= 0; i--) {
+            int countBack = 0;
+            for (int j = 0; j <= i; j++) {
+                countBack += array[j] * (i - j);
+            }
+            leftBall[i] = countBack;
+        }
+
+        int[] result = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            result[i] = rightBall[i] + leftBall[i];
+        }
+
+        return result;
     }
 }
 
