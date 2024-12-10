@@ -11,6 +11,10 @@ public class Task6 {
 //        Для собственных проверок можете делать любые изменения в этом методе
     }
 
+    static boolean isCheck(int m, int n) {
+        return m < 1 || n < 1;
+    }
+
     /**
      * Реализуйте метод, который будет возвращать НОК для чисел, переданных параметрами.
      *
@@ -18,9 +22,13 @@ public class Task6 {
      *
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
+
     static int getLcm(int m, int n) {
+        if (isCheck(m, n)) {
+            return -1;
+        }
+
         return m * n / getGcd(m, n);
-        //return 0;
     }
 
     /**
@@ -31,11 +39,18 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        if (n == 0) {
-            return m;
+        if (isCheck(m, n)) {
+            return -1;
         }
-            return getGcd(n, m % n);
-        //return -1;
+
+        while (n != 0) {
+            m = m % n;
+            int temp = m;
+            m = n;
+            n = temp;
+        }
+
+        return m;
     }
 
     /**
@@ -47,7 +62,14 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isCheck(m, n)) {
+            return -1;
+        }
+
+        if (m % n == 0) {
+            return n;
+        }
+
+        return getGcdByEuclideanAlgorithm(n, m % n);
     }
 }
