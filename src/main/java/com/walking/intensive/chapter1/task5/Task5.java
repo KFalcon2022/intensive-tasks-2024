@@ -13,6 +13,7 @@ import java.util.Arrays;
 public class Task5 {
     public static void main(String[] args) {
         getInscribedCircleRadius(13, 12, 5);
+        getHeights(13, 12, 5);
     }
 
     /**
@@ -51,10 +52,9 @@ public class Task5 {
             return new double[0];
         }
 
-
         triangleHeights[0] = getHeight(a, b, c);
-        triangleHeights[1] = getHeight(a, b, c);
-        triangleHeights[2] = getHeight(a, b, c);
+        triangleHeights[1] = getHeight(b, c, a);
+        triangleHeights[2] = getHeight(c, a, b);
         Arrays.sort(triangleHeights);
 
         return triangleHeights;
@@ -130,10 +130,6 @@ public class Task5 {
         double cosB = (Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) / (2 * a * c);
         double cosC = (Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b);
 
-        if (cosA < -1 || cosA > 1 || cosB < -1 || cosB > 1 || cosC < -1 || cosC > 1) {
-            return new double[0];
-        }
-
         triangleAngles[0] = Math.acos(cosA) * 180 / Math.PI;
         triangleAngles[1] = Math.acos(cosB) * 180 / Math.PI;
         triangleAngles[2] = Math.acos(cosC) * 180 / Math.PI;
@@ -174,11 +170,12 @@ public class Task5 {
         }
 
         double halfPerimeter = (a + b + c) / 2;
-        return (a * b * c) / (4 * Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c)));
+        return (a * b * c) /
+                (4 * Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c)));
     }
 
     private static boolean isInorrectValue(double a, double b, double c) {
-        return  (a + b <= c || a + c <= b || c + b <= a);
+        return (a + b <= c || a + c <= b || c + b <= a);
     }
 
     /**
