@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Random;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -21,7 +23,8 @@ package com.walking.intensive.chapter4.task17;
  */
 public class Task17 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getBenchmarkOn1000());
+        System.out.println(getBenchmarkOn10000());
     }
 
     /**
@@ -40,9 +43,25 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null || array.length == 0) {
+            return new int[]{};
+        }
+
+        int[] sortedArray = array;
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 1; j < array.length - i; j++) {
+                if (sortedArray[j] < sortedArray[j - 1]) {
+                    int temp = sortedArray[j];
+                    sortedArray[j] = sortedArray[j - 1];
+                    sortedArray[j - 1] = temp;
+                }
+            }
+        }
+
+        return sortedArray;
     }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,8 +103,73 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null || array.length == 0) {
+            return new int[]{};
+        }
+
+        int[] sortedArray = array;
+        quicksort(sortedArray, 0, array.length - 1);
+        return sortedArray;
+    }
+
+    static void quicksort(int[] array, int left, int right) {
+        if (right - left < 1) {
+            return;
+        }
+        if (right - left == 1) {
+            if (array[left] > array[right]) {
+                int temp = array[left];
+                array[left] = array[right];
+                array[right] = temp;
+            }
+
+            return;
+        }
+
+        int supportingElement = getSupportingElement(array, left, right);
+
+        int i = left;
+        int j = right;
+        int temp;
+
+        while (i < j) {
+            if (array[i] >= supportingElement && array[j] <= supportingElement) {
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            if (array[i] < supportingElement) {
+                i++;
+            }
+            if (array[j] > supportingElement) {
+                j--;
+            }
+
+        }
+
+        if (i == j) {
+            quicksort(array, left, i - 1);
+            quicksort(array, i + 1, right);
+        } else {
+            quicksort(array, left, j);
+            quicksort(array, i, right);
+        }
+    }
+
+    static int getSupportingElement(int[] array, int left, int right) {
+        int max = array[0];
+        int min = array[0];
+
+        for (int i = left; i <= right; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+
+        return (min + max) / 2;
     }
 
     /**
@@ -97,15 +181,39 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+        int[] array = new int[1000];
+        Random random = new Random();
+        for (int i = 0; i < 1000; i++) {
+            array[i] = random.nextInt();
+        }
+
+        long startSort = System.currentTimeMillis();
+        sortByQuicksort(array);
+        long quickSortTime = System.currentTimeMillis() - startSort;
+
+        startSort = System.currentTimeMillis();
+        sortByBubble(array);
+        long bubbleSortTime = System.currentTimeMillis() - startSort;
+
+        return bubbleSortTime - quickSortTime;
     }
 
     /**
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
-        return 0;
+        int[] array = new int[10000];
+        Random random = new Random();
+        for (int i = 0; i < 10000; i++) {
+            array[i] = random.nextInt();
+        }
+
+        long startSort = System.currentTimeMillis();
+        sortByQuicksort(array);
+        long quickSortTime = System.currentTimeMillis() - startSort;
+
+        startSort = System.currentTimeMillis();
+        sortByBubble(array);
+        return System.currentTimeMillis() - startSort - quickSortTime;
     }
 }
