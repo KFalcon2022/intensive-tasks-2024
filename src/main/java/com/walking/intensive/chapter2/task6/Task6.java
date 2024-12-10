@@ -19,8 +19,19 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (!isValid(m, n)) {
+            return -1;
+        }
+
+        int a = Math.max(m, n);
+        int b = Math.min(m, n);
+        int lcm = a;
+
+        while (lcm % b != 0) {
+            lcm += a;
+        }
+
+        return lcm;
     }
 
     /**
@@ -31,8 +42,19 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (!isValid(m, n)) {
+            return -1;
+        }
+
+        while (m != 0 && n != 0) {
+            if (m > n) {
+                m = m % n;
+            } else {
+                n = n % m;
+            }
+        }
+
+        return m + n;
     }
 
     /**
@@ -44,7 +66,19 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (!isValid(m, n)) {
+            return -1;
+        }
+
+        while (n != 0) {
+            int tmp = m % n;
+            m = n;
+            n = tmp;
+        }
+        return m;
+    }
+
+    static boolean isValid(int m, int n) {
+        return (m > 0 && n > 0);
     }
 }
