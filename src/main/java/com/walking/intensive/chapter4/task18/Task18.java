@@ -22,7 +22,6 @@ package com.walking.intensive.chapter4.task18;
  */
 public class Task18 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     /**
@@ -54,7 +53,38 @@ public class Task18 {
      * </ul>
      */
     static int find(int[] girlAges, int targetAge) {
-        // Ваш код
-        return 0;
+        if (!isInputDataValid(girlAges, targetAge)) {
+            return -1;
+        }
+
+        int left = 0;
+        int right = girlAges.length;
+
+        while (left < right - 1) {
+            int mid = (right + left) / 2;
+            if (girlAges[mid] == targetAge) {
+                return girlAges[mid];
+            }
+            if (girlAges[mid] > targetAge) {
+                right = mid;
+            }
+            if (girlAges[mid] < targetAge) {
+                left = mid;
+            }
+        }
+
+        return girlAges[left];
+    }
+
+    static boolean isInputDataValid(int[] girlAges, int targetAge) {
+        if (girlAges.length == 0 || targetAge <= 0) {
+            return false;
+        }
+        for (int i : girlAges) {
+            if (i <= 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
