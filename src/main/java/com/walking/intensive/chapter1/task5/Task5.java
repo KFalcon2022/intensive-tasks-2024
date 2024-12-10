@@ -11,6 +11,9 @@ package com.walking.intensive.chapter1.task5;
 public class Task5 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        double a = 2;
+        double b = 4;
+        double c = 1;
     }
 
     /**
@@ -23,9 +26,15 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return 0; // Заглушка. При реализации - удалить
+//        if ((a + b) > c || (a + c) > b || (b + c) > a) {
+//            double p = (a + b + c) / 2;
+//            double s = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+//            System.out.println("Площадь треугольника = " + s);
+        //    return "Площадь треугольника = " + "1";
+//        }
+//        else
+//        return -1;
+        return 0;
     }
 
     /**
