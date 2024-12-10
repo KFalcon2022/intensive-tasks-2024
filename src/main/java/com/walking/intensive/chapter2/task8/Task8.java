@@ -24,7 +24,31 @@ public class Task8 {
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+        int happyTicketsCount = 0;
+
+        for (int i = 0; i < 1000000; i++) {
+            if (isHappy(i)) {
+                happyTicketsCount++;
+            }
+        }
+
+        return happyTicketsCount / 1000000.0;
+    }
+
+    static boolean isHappy(int number) {
+        int firstDigits = number / 1000;
+        int lastDigits = number % 1000;
+
+        return getDigitsSum(firstDigits) == getDigitsSum(lastDigits);
+    }
+
+    static int getDigitsSum(int n) {
+        int sum = 0;
+
+        while (n != 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
     }
 }
