@@ -34,8 +34,33 @@ public class Task4 {
     }
 
     static String solveEquation(double a, double b, double c) {
-        //        Место для вашего кода
+        if (a == 0 && b == 0 && c == 0) {
+            return "Бесконечное множество решений.";
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        if (a == 0 && b == 0) {
+            return "Количество решений: 0.";
+        }
+
+        if (a == 0) {
+            return "Количество решений: 1. Корень: %s".formatted(-c / b);
+        }
+
+        double d = b * b - 4 * a * c;
+
+        if (d < 0) {
+            return "Количество решений: 0.";
+        }
+
+        if (d == 0) {
+            double root = (-b + Math.sqrt(d)) / (2 * a);
+            return "Количество решений: 1. Корень: %s".formatted(root);
+        }
+
+        double[] roots = new double[2];
+        roots[0] = (-b + Math.sqrt(d)) / (2 * a);
+        roots[1] = (-b - Math.sqrt(d)) / (2 * a);
+        java.util.Arrays.sort(roots);
+        return "Количество решений: 2. Корни: %s;%s".formatted(roots[0], roots[1]);
     }
 }
