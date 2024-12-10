@@ -46,42 +46,56 @@ public class Task14 {
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        if (objectLocations.length == 0 || radars.length == 0) {
+        if (!isArgsValid(objectLocations, radars)) {
             return new int[0];
         }
 
         int[] objectCounts = new int[radars.length];
 
         for (int i = 0; i < objectCounts.length; i++) {
-            objectCounts[i] = getRadarObjectCounts(radars[i], objectLocations);
-            if (objectCounts[i] == -1) {
-                return new int[0];
-            }
+            objectCounts[i] = countRadarObjects(radars[i], objectLocations);
         }
         return objectCounts;
     }
 
-    static int getRadarObjectCounts(int[] radar, int[][] objectLocations) {
-        if (radar.length != 3 || radar[2] <= 0) {
-            return -1;
+    static boolean isArgsValid(int[][] objectLocations, int[][] radars) {
+        if (objectLocations.length == 0 || radars.length == 0) {
+            return false;
         }
 
-        int radarObjectsCount = 0;
+        for (int[] radar : radars) {
+            if (radar.length != 3 || radar[2] <= 0) {
+                return false;
+            }
+        }
 
         for (int[] object : objectLocations) {
             if (object.length != 2) {
-                return -1;
-            }
-
-            if (isObjectCount(radar, object)) {
-                radarObjectsCount += 1;
+                return false;
             }
         }
-        return radarObjectsCount;
+        return true;
+    }
+
+    static int countRadarObjects(int[] radar, int[][] objectLocations) {
+        int radarObjects = 0;
+
+        for (int[] object : objectLocations) {
+            if (isObjectCount(radar, object)) {
+                radarObjects++;
+            }
+        }
+        return radarObjects;
     }
 
     static boolean isObjectCount(int[] radar, int[] object) {
-        return radar[2] * radar[2] >= (object[0] - radar[0]) * (object[0] - radar[0])
-                + (object[1] - radar[1]) * (object[1] - radar[1]);
+        int objectX = object[0];
+        int objectY = object[1];
+        int radarX = radar[0];
+        int radarY = radar[1];
+        int radarRadius = radar[2];
+
+        return radarRadius * radarRadius >= (objectX - radarX) * (objectX - radarX)
+                + (objectY - radarY) * (objectY - radarY);
     }
 }
