@@ -43,21 +43,39 @@ import java.util.Arrays;
 public class Task12 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        String baskets = "0110";
+        String baskets = "110";
         System.out.println(Arrays.toString(getMovementsNumber(baskets)));
     }
 
     static int[] getMovementsNumber(String baskets) {
         // Ваш код
         for (int i = 0; i < baskets.length(); i++) {
-            if (Character.getNumericValue(baskets.charAt(i)) < 0 || Character.getNumericValue(baskets.charAt(i)) > 1) {
+            char currentChar = baskets.charAt(i);
+            if (currentChar != '0' && currentChar != '1') {
                 return new int[]{};
             }
         }
+
         int[] array = new int[baskets.length()];
         for (int i = 0; i < baskets.length(); i++) {
             array[i] = Character.getNumericValue(baskets.charAt(i));
         }
-        return array;
+
+//        for (int i = 0; i < array.length - 1; i++) {
+//            int countForward = 0;
+//            for (int j = i + 1; j < array.length; j++) {
+//                countForward += array[j] * j;
+//            }
+
+        int[] line = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            int countBack = 0;
+            for (int k = array.length - 1; k >= 0; k--) {
+                countBack += array[k] * (array.length - 1 - k);
+            }
+            line[array.length - 1] = countBack;
+        }
+        return line;
     }
 }
+
