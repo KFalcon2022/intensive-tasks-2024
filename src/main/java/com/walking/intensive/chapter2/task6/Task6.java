@@ -8,7 +8,13 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int m = 96;
+        int n = 140;
+        System.out.printf("НОД для %d и %d итеративному Евклиду: %d \n", m, n, getGcd(m, n));
+        System.out.printf("НОД для %d и %d итеративному Евклиду: %d \n", n, m, getGcd(m, n));
+        System.out.printf("НОД для %d и %d рекурсивному Евклиду: %d \n", m, n, getGcd(m, n));
+        System.out.printf("НОД для %d и %d рекурсивному Евклиду: %d \n", n, m, getGcd(m, n));
+        System.out.printf("НОК для %d и %d : %d \n", n, m, getLcm(m, n));
     }
 
     /**
@@ -19,8 +25,10 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isInvalidArg(m, n)) {
+            return -1;
+        }
+        return m * n / getGcd(m, n);
     }
 
     /**
@@ -31,8 +39,18 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isInvalidArg(m, n)) {
+            return -1;
+        }
+
+        int gcd = n;
+        while (n != 0) {
+            gcd = n;
+            n = m % n;
+            m = gcd;
+        }
+
+        return gcd;
     }
 
     /**
@@ -44,7 +62,18 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (isInvalidArg(m, n)) {
+            return -1;
+        }
+
+        if (m % n == 0) {
+            return n;
+        }
+
+        return getGcdByEuclideanAlgorithm(n, m % n);
+    }
+
+    static boolean isInvalidArg(int m, int n) {
+        return m < 1 || n < 1;
     }
 }
