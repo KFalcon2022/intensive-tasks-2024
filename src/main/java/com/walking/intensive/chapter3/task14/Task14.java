@@ -47,7 +47,35 @@ public class Task14 {
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+        for (int[] i : objectLocations) {
+            if (i.length != 2) {
+                return new int[0];
+            }
+        }
+
+        for (int[] i : radars) {
+            if (i.length != 3 || i[2] < 0) {
+                return new int[0];
+            }
+        }
+
+        int[] objectCounts = new int[radars.length];
+        int count = 0;
+
+        for (int[] radar : radars) {
+            for (int[] object : objectLocations) {
+                if (Math.abs(radar[0] - object[0]) <= radar[2] && radar[1] == object[1]) {
+                    objectCounts[count]++;
+                } else if (radar[0] == object[0] && Math.abs(radar[1] - object[1]) <= radar[2]) {
+                    objectCounts[count]++;
+                } else if (Math.abs(radar[0] - object[0]) < radar[2] && Math.abs(radar[1] - object[1]) < radar[2]) {
+                    objectCounts[count]++;
+                }
+            }
+
+            count++;
+        }
+
+        return objectCounts;
     }
 }
