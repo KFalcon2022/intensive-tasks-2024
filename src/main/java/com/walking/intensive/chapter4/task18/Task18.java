@@ -22,7 +22,7 @@ package com.walking.intensive.chapter4.task18;
  */
 public class Task18 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(find(new int[]{1, 3, 5, 7, 9, 11, 13}, 11));
     }
 
     /**
@@ -54,7 +54,34 @@ public class Task18 {
      * </ul>
      */
     static int find(int[] girlAges, int targetAge) {
-        // Ваш код
-        return 0;
+        if (!isValid(girlAges)) {
+            return -1;
+        }
+
+        int left = 0;
+        int right = girlAges.length - 1;
+        int mid = 0;
+
+        while (left <= right) {
+            mid = (right + left) / 2;
+
+            if (girlAges[mid] == targetAge) {
+                return girlAges[mid];
+            }
+
+            if (targetAge > girlAges[mid]) {
+                left = mid + 1;
+            }
+
+            if (targetAge < girlAges[mid]) {
+                right = mid - 1;
+            }
+        }
+
+        return girlAges[mid - 1];
+    }
+
+    private static boolean isValid(int[] arr) {
+        return arr != null && arr.length >= 1;
     }
 }
