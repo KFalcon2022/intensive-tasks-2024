@@ -52,18 +52,15 @@ public class Task13 {
     }
 
     static int getStepsCount(int[] plants, int wateringCanVolume) {
-        if (plants.length == 0) {
-            return 0;
+        int validation = validArgs(plants, wateringCanVolume);
+        if (validation <= 0) {
+            return validation;
         }
 
         int stepsCount = 0;
         int waterCurrentLevel = wateringCanVolume;
 
         for (int i = 0; i < plants.length; i++) {
-            if (!isPlantValid(plants[i], wateringCanVolume)) {
-                return -1;
-            }
-
             stepsCount++;
             waterCurrentLevel -= plants[i];
             if (i < plants.length - 1 && waterCurrentLevel < plants[i + 1]) {
@@ -73,7 +70,20 @@ public class Task13 {
         return stepsCount;
     }
 
-    static boolean isPlantValid(int plant, int wateringCanVolume) {
-        return plant > 0 && plant <= wateringCanVolume;
+    static int validArgs(int[] plants, int wateringCanVolume) {
+        if (plants.length == 0) {
+            return 0;
+        }
+
+        if (wateringCanVolume <= 0) {
+            return -1;
+        }
+
+        for (int plant : plants) {
+            if (plant <= 0 || plant > wateringCanVolume) {
+                return -1;
+            }
+        }
+        return 1;
     }
 }
