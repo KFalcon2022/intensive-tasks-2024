@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task16;
 
+import java.util.Arrays;
+
 /**
  * После завершения интенсива вы достаточно быстро познакомитесь с Java Collection Framework.
  * Это знакомство позволит сильно упростить работу с массивами данных.
@@ -28,7 +30,7 @@ public class Task16 {
      * В остальных случаях - false.
      */
     static boolean isEqualSize(int[] arr1, int[] arr2) {
-        return arr1.length != 0 && arr2.length != 0 && arr1.length == arr2.length;
+        return arr1.length != 0 && arr1.length == arr2.length;
     }
 
     /**
@@ -64,12 +66,12 @@ public class Task16 {
      * <p>Возвращаемое значение: [11,21,31,41,51,21,61]
      */
     static int[] incrementEach(int[] arr) {
-        int[] incrementArr = new int[arr.length];
+        int[] incrementedArr = new int[arr.length];
 
         for (int i = 0; i < arr.length; i++) {
-            incrementArr[i] = arr[i] + 1;
+            incrementedArr[i] = arr[i] + 1;
         }
-        return incrementArr;
+        return incrementedArr;
     }
 
     /**
@@ -294,24 +296,18 @@ public class Task16 {
      * <p>Возвращаемое значение: [10,40,50,60]
      */
     static int[] removeAll(int[] arr, int... removingValues) {
-        int[] temp = new int[arr.length];
+        int[] result = new int[arr.length];
         int matchCounter = 0;
 
         for (int i = 0; i < arr.length; i++) {
             if (isContains(removingValues, arr[i])) {
                 matchCounter++;
             } else {
-                temp[i - matchCounter] = arr[i];
+                result[i - matchCounter] = arr[i];
             }
         }
 
-        int[] result = new int[arr.length - matchCounter];
-
-        for (int i = 0; i < result.length; i++) {
-            result[i] = temp[i];
-        }
-
-        return result;
+        return Arrays.copyOf(result, arr.length - matchCounter);
     }
 
     /**
@@ -321,15 +317,18 @@ public class Task16 {
      * При этом индексы элементов могут не совпадать.
      */
     static boolean isSimilar(int[] arr1, int[] arr2) {
-        if (arr1.length != arr2.length) {
-            return false;
-        }
-
-        for (int i = 0; i < arr1.length; i++) {
-            if (!isContains(arr2, arr1[i])) {
+        for (int j : arr1) {
+            if (!isContains(arr2, j)) {
                 return false;
             }
         }
+
+        for (int j : arr2) {
+            if (!isContains(arr1, j)) {
+                return false;
+            }
+        }
+
         return true;
     }
 
