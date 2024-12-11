@@ -1,6 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
@@ -22,9 +23,11 @@ import java.util.Random;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task17 {
+    private static final Logger logger = Logger.getLogger(Task17.class.getName());
+
     public static void main(String[] args) {
-        System.out.println(getBenchmarkOn1000() + " bubble sort 1000");
-        System.out.println(getBenchmarkOn10000() + " bubble sort 10000");
+        logger.info(getBenchmarkOn1000() + " bubble sort 1000");
+        logger.info(getBenchmarkOn10000() + " bubble sort 10000");
     }
 
     /**
@@ -47,12 +50,10 @@ public class Task17 {
             return new int[]{};
         }
 
-        boolean isFlag;
-
         for (int i = 0; i < array.length; i++) {
-            isFlag = true;
+            boolean isFlag = true;
 
-            for (int j = 1; j < array.length; j++) {
+            for (int j = 1; j < array.length - i; j++) {
 
                 if (array[j] < array[j - 1]) {
                     int temp = array[j];
@@ -191,8 +192,10 @@ public class Task17 {
     }
 
     private static void arrayFill(int[] array, int n) {
+        Random random = new Random();
+
         for (int i = 0; i < n; i++) {
-            array[i] = new Random().nextInt(1000);
+            array[i] = random.nextInt(1000);
         }
     }
 }
