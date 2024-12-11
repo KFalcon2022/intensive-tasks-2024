@@ -229,11 +229,10 @@ public class Task16 {
         }
 
         int[] result = new int[arr.length];
-        int lastElement = arr[arr.length - 1];
+        result[0] = arr[arr.length - 1];
         for (int i = arr.length - 1; i > 0; i--) {
             result[i] = arr[i - 1];
         }
-        result[0] = lastElement;
         return result;
     }
 }
