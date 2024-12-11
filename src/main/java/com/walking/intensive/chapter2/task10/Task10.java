@@ -12,7 +12,22 @@ package com.walking.intensive.chapter2.task10;
 public class Task10 {
     public static void main(String[] args) {
 
-        System.out.println(isPalindrome(null));
+        System.out.println(isPalindrome("Муза, ранясь шилом опыта, ты помолишься на разумы"));
+    }
+
+    static String getStringLetters(String inputString) {
+
+        StringBuilder stringLetters = new StringBuilder();
+
+        for (int i = 0; i < inputString.length(); i++) {
+            char symbol = inputString.toLowerCase().charAt(i);
+
+            if (Character.isLetter(symbol)) {
+                stringLetters.append(symbol);
+            }
+        }
+
+        return stringLetters.toString();
     }
 
     static boolean isPalindrome(String inputString) {
@@ -21,26 +36,19 @@ public class Task10 {
             return false;
         }
 
-        String firstString = "";
-        String secondString = "";
-        String cyrillic = "ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
+        String s = getStringLetters(inputString);
+        boolean result = true;
 
-        for (int i = 0; i < inputString.length(); i++) {
-            for (int j = 0; j < cyrillic.length(); j++) {
-                if (inputString.charAt(i) == cyrillic.charAt(j)) {
-                    firstString += inputString.charAt(i);
-                }
+        for (int i = 0; i < s.length(); i++) {
+            char symbolLeft = s.charAt(i);
+            char symbolRight = s.charAt(s.length() - 1 - i);
+
+            if (symbolLeft != symbolRight) {
+                result = false;
+                break;
             }
         }
 
-        for (int k = inputString.length() - 1; k >= 0; k--) {
-            for (int l = 0; l < cyrillic.length(); l++) {
-                if (inputString.charAt(k) == cyrillic.charAt(l)) {
-                    secondString += inputString.charAt(k);
-                }
-            }
-        }
-
-        return firstString.equalsIgnoreCase(secondString);
+        return result;
     }
 }
