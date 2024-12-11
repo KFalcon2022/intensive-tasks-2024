@@ -27,7 +27,7 @@ public class Task17 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int[] arr = {1, 4, 5, 5, 7, 7, 88, 7, 7, 8, 87, 54, 54, 544, 5, 7, 7, 7};
         System.out.println(Arrays.toString(sortByBubble(arr)));
-        int[] arr2 = {7,1,4,2,5,6,6,5,7,7,7,8,8,5,4,4,5,5,4,48,5,5,5,5};
+        int[] arr2 = {7, 1, 4, 2, 5, 6, 6, 5, 7, 7, 7, 8, 8, 5, 4, 4, 5, 5, 4, 48, 5, 5, 5, 5};
         System.out.println(Arrays.toString(sortByQuicksort(arr2)));
 
         System.out.println(getBenchmarkOn1000());
@@ -59,25 +59,15 @@ public class Task17 {
             return array;
         }
 
-        int n = array.length - 1;
+        for (int i = array.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
 
-        while (n >= 1) {
-
-            boolean isSorted = true;
-
-            for (int i = 0; i < n; i++) {
-
-                if (array[i] > array[i + 1]) {
-                    swapElements(array, i, i + 1);
-                    isSorted = false;
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
                 }
             }
-
-            if (isSorted) {
-                return array;
-            }
-
-            n--;
         }
 
         return array;
@@ -138,20 +128,24 @@ public class Task17 {
         return array;
     }
 
-    static void swapElements(int[] arr, int firstIndex, int secondIndex) {
+    /*   static void swapElements(int[] arr, int firstIndex, int secondIndex) {
         int temp = arr[firstIndex];
         arr[firstIndex] = arr[secondIndex];
         arr[secondIndex] = temp;
-    }
+    } */
 
     static void sortByQuicksort(int[] arr, int leftIndex, int rightIndex) {
 
-        if (leftIndex >= rightIndex) return;
+        if (leftIndex >= rightIndex) {
+            return;
+        }
 
         if (rightIndex - leftIndex == 1) {
 
             if (arr[leftIndex] > arr[rightIndex]) {
-                swapElements(arr, leftIndex, rightIndex);
+                int temp = arr[leftIndex];
+                arr[leftIndex] = arr[rightIndex];
+                arr[rightIndex] = temp;
             }
 
             return;
@@ -164,13 +158,18 @@ public class Task17 {
 
         while (i < j) {
 
-            while (arr[i] < pivot) i++;
-            while (arr[j] > pivot) j--;
+            while (arr[i] < pivot) {
+                i++;
+            }
+
+            while (arr[j] > pivot) {
+                j--;
+            }
 
             if (i < j) {
-                swapElements(arr, i, j);
-                i++;
-                j--;
+                int temp = arr[i];
+                arr[j--] = arr[i];
+                arr[i++] = temp;
             } else if (i == j) {
                 i++;
                 j--;
@@ -229,7 +228,8 @@ public class Task17 {
 
         int[] array2 = Arrays.copyOf(array1, array1.length);
 
-        long bubbleSortMillis, quickSortMillis;
+        long bubbleSortMillis;
+        long quickSortMillis;
 
         bubbleSortMillis = System.currentTimeMillis();
         sortByBubble(array1);
