@@ -8,18 +8,18 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class Task17Test {
+class Task17Test {
 
     @ParameterizedTest
     @MethodSource("sortTestSource")
-    public void sortByBubbleTest(int[] array, int[] expected) {
+    void sortByBubbleTest(int[] array, int[] expected) {
         int[] result = Task17.sortByBubble(array);
         assertArrayEquals(expected, result);
     }
 
     @ParameterizedTest
     @MethodSource("sortTestSource")
-    public void sortByQuicksortTest(int[] array, int[] expected) {
+    void sortByQuicksortTest(int[] array, int[] expected) {
         int[] result = Task17.sortByQuicksort(array);
         assertArrayEquals(expected, result);
     }
