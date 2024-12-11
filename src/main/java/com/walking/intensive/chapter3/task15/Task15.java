@@ -1,5 +1,6 @@
 package com.walking.intensive.chapter3.task15;
 
+
 /**
  * Существует город, состоящий из N x N блоков, где каждый блок содержит одно здание в форме вертикальной
  * квадратной призмы. Линия горизонта города — это внешний контур, образованный всеми зданиями,
@@ -40,11 +41,52 @@ package com.walking.intensive.chapter3.task15;
  */
 public class Task15 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] city = {{3, 0, 8, 4}, {2, 4, 5, 7}, {9, 2, 6, 3}, {0, 3, 1, 0}};
+        System.out.println(getMaxFloors(city));
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+        if (!isValid(city)) {
+            return -1;
+        }
+        // найдем максимальную высоту здания в каждой строке и в каждом столбце
+        int[] maxRows = new int[city.length];
+        int[] maxCols = new int[city[0].length];
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city[i].length; j++) {
+                maxRows[i] = Math.max(maxRows[i], city[i][j]);
+                maxCols[j] = Math.max(maxCols[j], city[i][j]);
+            }
+        }
+
+        int res = 0;
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city[i].length; j++) {
+                res += Math.min(maxRows[i], maxCols[j]) - city[i][j];
+            }
+        }
+
+        return res;
+    }
+
+    static boolean isValid(int[][] city) {
+        //пустой город
+        if (city.length == 0) {
+            return false;
+        }
+        int firstRowLength = city[0].length;
+        for (int i = 0; i < city.length; i++) {
+            // город из пустых строк или разная длина строк
+            if (city[i].length == 0 || city[i].length != firstRowLength) {
+                return false;
+            }
+            //отрицательная высота
+            for (int j = 0; j < city[i].length; j++) {
+                if (city[i][j] < 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
