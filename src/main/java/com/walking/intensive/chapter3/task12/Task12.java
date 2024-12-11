@@ -40,11 +40,40 @@ package com.walking.intensive.chapter3.task12;
  */
 public class Task12 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        for (int move : getMovementsNumber("235")) {
+            System.out.print(move + " ");
+        }
     }
 
     static int[] getMovementsNumber(String baskets) {
-        // Ваш код
-        return new int[]{};
+
+        if (baskets == null || !baskets.matches("[01]*")) {
+            return new int[0];
+        }
+
+        int n = baskets.length();
+        int[] movementsNumber = new int[n];
+        int totalBalls = 0;
+
+        for (char value : baskets.toCharArray()) {
+            totalBalls += (value - '0');
+        }
+
+        if (totalBalls == 0) {
+            return new int[n];
+        }
+
+        // Подсчет перемещений для каждой корзинки
+        for (int i = 0; i < n; i++) {
+            int currentMoves = 0;
+            for (int j = 0; j < n; j++) {
+                if (baskets.charAt(j) == '1') {
+                    currentMoves += Math.abs(i - j);
+                }
+            }
+            movementsNumber[i] = currentMoves;
+        }
+        return movementsNumber;
     }
 }
