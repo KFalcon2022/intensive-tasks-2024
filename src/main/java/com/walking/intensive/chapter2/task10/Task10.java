@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task10;
 
+import java.util.Locale;
+
 /**
  * Реализуйте метод isPalindrome(), который проверяет, является ли строка палиндромом.
  *
@@ -11,11 +13,48 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        String inputString = "   Муза,   ранясь !!! )шилом (опыта), ты помолишься на разум!?!   ";
+
+        System.out.println(isPalindrome(inputString));
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+        if (inputString == null) {
+            return false;
+        }
+
+        // Удаляем пробелы и знаки препинания, затем переводим всё в нижний регистр
+        inputString = inputString.replace(" ", "");
+        inputString = inputString.replace(".", "");
+        inputString = inputString.replace("!", "");
+        inputString = inputString.replace(",", "");
+        inputString = inputString.replace("?", "");
+        inputString = inputString.replace("'", "");
+        inputString = inputString.replace("(", "");
+        inputString = inputString.replace(")", "");
+        inputString = inputString.replace("-", "");
+        inputString = inputString.replace("_", "");
+
+        inputString = inputString.toLowerCase();
+
+        if (inputString.length() <= 1) {
+            return false;
+        }
+
+        int halfLength = inputString.length() / 2;
+        int odd = inputString.length() % 2 == 0 // Чётность приведённой строки. Чтобы проверить лишь до половины строки.
+                ? 1
+                : 0;
+
+        for (int i = 0; i <= halfLength; i++) {
+            char leftLetter = inputString.charAt(i);
+            char rightLetter = inputString.charAt(halfLength * 2 - odd - i);
+
+            if (leftLetter != rightLetter) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
