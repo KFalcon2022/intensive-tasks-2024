@@ -23,7 +23,9 @@ package com.walking.intensive.chapter4.task18;
  */
 public class Task18 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(find(new int[]{1, 8, 10, 20, 30, 40, 45}, 90));
+        System.out.println(find(new int[]{1, 8, 10, 20, 30, 40, 45}, 41));
     }
 
     /**
@@ -55,7 +57,43 @@ public class Task18 {
      * </ul>
      */
     static int find(int[] girlAges, int targetAge) {
-        // Ваш код
-        return 0;
+
+        if (girlAges == null || girlAges.length < 1) {
+            return -1;
+        }
+        for (int i = 0; i < girlAges.length - 1; i++) {
+
+            if (girlAges[i] >= girlAges[i + 1]) {
+                return -1;
+            }
+        }
+
+        int index = binarySearch(girlAges, targetAge, 0, girlAges.length - 1);
+
+        if (index < 0) {
+            return -1;
+        }
+
+        return girlAges[index];
+    }
+
+    static int binarySearch(int[] girlAges, int age, int left, int right) {
+
+        if (left == right) {
+            return (girlAges[left] > age) ? left - 1 : left;
+        }
+
+        int middleIndex = left + (right - left) / 2;
+
+        if (age > girlAges[middleIndex]) {
+            return binarySearch(girlAges, age, middleIndex + 1, right);
+        }
+
+        if (girlAges[middleIndex] > age) {
+            return binarySearch(girlAges, age, left, middleIndex - 1);
+        }
+
+        return middleIndex;
     }
 }
+
