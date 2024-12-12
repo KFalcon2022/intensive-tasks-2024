@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -44,10 +46,39 @@ package com.walking.intensive.chapter3.task14;
 public class Task14 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] objectLocations = {{1,3},{3,3},{5,3},{2,2}};
+        int[][] radars = {{2,3,1},{4,3,1},{1,1,2}};
+        System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
         // Ваш код
-        return new int[0];
+        if (objectLocations.length < 1 || radars.length < 1) {
+            return new int[0];
+        }
+
+        int[] objectCounts = new int[radars.length];
+        for (int i = 0; i < radars.length; i++) {
+            for (int[] objectLocation : objectLocations) {
+                if (isObjectWithinCoverage(objectLocation, radars[i])) {
+                    objectCounts[i]++;
+                }
+            }
+        }
+
+        return objectCounts;
+    }
+
+    static boolean isObjectWithinCoverage(int[] objectLocation, int[] radar) {
+        int radarX = radar[0];
+        int radarY = radar[1];
+        int radarRadius = radar[2];
+        int objectX = objectLocation[0];
+        int objectY = objectLocation[1];
+
+//        FIXME: radar radius should be circle, not square.
+
+        return  objectX >= radarX - radarRadius && objectX <= radarX + radarRadius &&
+                objectY >= radarY - radarRadius && objectY <= radarY + radarRadius;
     }
 }
