@@ -44,59 +44,47 @@ import java.util.Arrays;
 public class Task12 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        System.out.println(Arrays.toString(getMovementsNumber("314")));
+        System.out.println(Arrays.toString(getMovementsNumber("001011")));
 
     }
 
     static int[] getMovementsNumber(String baskets) {
         // Ваш код
-        int[] ballsInBasket = getStringToArray(baskets);
-        int basketAmount = ballsInBasket.length;
+        int length = baskets.length();
 
-        if (basketAmount == 0) {
-            return new int[] {};
+        if (length == 0) {
+            return new int[0];
         }
 
-        int[] movementsNumber = new int[basketAmount];
+        int[] movementsNumber = new int[length];
 
-        for (int mainBasket = 0; mainBasket < basketAmount; mainBasket++) {
-            int moves = 0;
+        for (int i = 0; i < length; i++) {
+            if (isSymbolInvalid(baskets.charAt(i))) {
+                return new int[0];
+            }
 
-            for (int otherBasket = 0; otherBasket < basketAmount; otherBasket++) {
-                if (otherBasket == mainBasket) {
+            for (int j = 0; j < length; j++) {
+                if (j == i) {
                     continue;
                 }
 
-                moves += ballsInBasket[otherBasket] * Math.abs(mainBasket - otherBasket);
+                char character = baskets.charAt(j);
+
+                if (j > i && isSymbolInvalid(character)) {
+                    return new int[0];
+                }
+
+                if (character == '1') {
+                    movementsNumber[i] += Math.abs(i - j);
+                }
             }
-            movementsNumber[mainBasket] = moves;
         }
 
         return movementsNumber;
     }
 
-    static int[] getStringToArray(String line) {
-        if (line == null) {
-            return new int[] {};
-        }
-
-        int length = line.length();
-
-        if (length < 1) {
-            return new int[] {};
-        }
-
-        int[] stringToArray = new int[length];
-        for (int i = 0; i < length; i++) {
-            int newElement = Character.getNumericValue(line.charAt(i));
-
-            if (newElement < 0 || newElement > 1) {
-                return new int[] {};
-            }
-
-            stringToArray[i] = newElement;
-        }
-
-        return stringToArray;
+    static boolean isSymbolInvalid(char symbol) {
+        return symbol != '0' && symbol != '1';
     }
+
 }
