@@ -20,8 +20,8 @@ package com.walking.intensive.chapter4.task18;
 public class Task18 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] arr = {1,2,5,7,12,13,49,56,72,106};
-        System.out.println(find(arr, 18));
+        int[] arr = {2, 5, 7, 12, 13, 49, 56, 72, 106};
+        System.out.println(find(arr, 1));
     }
 
     /**
@@ -58,19 +58,24 @@ public class Task18 {
             return -1;
         }
 
-        return find(girlAges, targetAge, 0, girlAges.length - 1) ? targetAge : -1;
+        return find(girlAges, targetAge, 0, girlAges.length - 1);
     }
 
-    static boolean find(int[] arr, int targetAge, int left, int right) {
+    static int find(int[] arr, int targetAge, int left, int right) {
 
-        if (left == right) {
-            return arr[left] == targetAge;
+        if (left >= right) {
+
+            if (arr[left] > targetAge) {
+                return left == 0 ? -1 : arr[left - 1];
+            }
+
+            return arr[left];
         }
 
         int pivotIndex = (right + left) / 2;
 
         if (arr[pivotIndex] == targetAge) {
-            return true;
+            return targetAge;
         }
 
         if (arr[pivotIndex] > targetAge) {
