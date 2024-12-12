@@ -68,7 +68,7 @@ public class Task9 {
         StringBuilder pascalTriangle = new StringBuilder();
         int lineLength = 0;
 
-        for (int i = n; i >= 0 ; i--) {
+        for (int i = n; i >= 0; i--) {
             StringBuilder line = new StringBuilder();
             if (i != 0) {
                 line.append("1 ");
@@ -87,7 +87,7 @@ public class Task9 {
 
             int spacesToInsert = (lineLength - line.length()) / 2;
 
-            line.insert(0," ".repeat(spacesToInsert));
+            line.insert(0, " ".repeat(spacesToInsert));
             line.append("\n");
             pascalTriangle.insert(0, line);
         }
@@ -96,11 +96,7 @@ public class Task9 {
     }
 
     static long getFactorial(int a) {
-        if (a < 1) {
-            return 0;
-        }
-
-        if (a == 1) {
+        if (a <= 1) {
             return a;
         }
 
