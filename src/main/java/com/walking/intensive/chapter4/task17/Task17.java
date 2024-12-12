@@ -1,5 +1,6 @@
 package com.walking.intensive.chapter4.task17;
 
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -40,8 +41,34 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        int n = array.length;
+        int[] sorted = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            sorted[i] = array[i];
+        }
+        for (int i = 0; i < n - 1; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (sorted[j] > sorted[j + 1]) {
+
+                    int temp = sorted[j];
+                    sorted[j] = sorted[j + 1];
+                    sorted[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+
+            if (!swapped) {
+                break;
+            }
+        }
+
+        return sorted;
     }
     /**
      * Быстрая сортировка, она же QuickSort:
@@ -84,8 +111,41 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+        return quicksort(array, 0, array.length - 1);
+    }
+
+    static int[] quicksort(int[] array, int left, int right) {
+        if (left < right) {
+            int pivot = (array[left] + array[right]) / 2;
+            int i = left;
+            int j = right;
+
+            while (i <= j) {
+                while (array[i] < pivot) {
+                    i++;
+                }
+
+                while (array[j] > pivot) {
+                    j--;
+                }
+
+                if (i <= j) {
+                    int temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                    i++;
+                    j--;
+                }
+            }
+
+            quicksort(array, left, j);
+            quicksort(array, i, right);
+        }
+
+        return array;
     }
 
     /**
@@ -97,15 +157,45 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+        int[] randomNumbers = new int[1000];
+
+        for (int i = 0; i < 1000; i++) {
+            randomNumbers[i] = (int)(Math.random() * 100_000) + 1;
+        }
+
+        long startTimeOne = System.currentTimeMillis();
+        sortByBubble(randomNumbers);
+        long endTimeOne = System.currentTimeMillis();
+        long timeElapsedOne = endTimeOne - startTimeOne;
+
+        long startTimeTwo = System.currentTimeMillis();
+        sortByQuicksort(randomNumbers);
+        long endTimeTwo = System.currentTimeMillis();
+        long timeElapsedTwo = endTimeTwo - startTimeTwo;
+
+        return timeElapsedOne - timeElapsedTwo;
     }
 
     /**
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
-        return 0;
+        int[] randomNumbers = new int[10000];
+
+        for (int i = 0; i < 10000; i++) {
+            randomNumbers[i] = (int)(Math.random() * 1_000_000) + 1;
+        }
+
+        long startTimeOne = System.currentTimeMillis();
+        sortByBubble(randomNumbers);
+        long endTimeOne = System.currentTimeMillis();
+        long timeElapsedOne = endTimeOne - startTimeOne;
+
+        long startTimeTwo = System.currentTimeMillis();
+        sortByQuicksort(randomNumbers);
+        long endTimeTwo = System.currentTimeMillis();
+        long timeElapsedTwo = endTimeTwo - startTimeTwo;
+
+        return timeElapsedOne - timeElapsedTwo;
     }
 }
