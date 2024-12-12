@@ -15,7 +15,23 @@ public class Task10 {
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+
+        if (inputString == null || inputString.length() < 2) {
+            return false;
+        }
+
+        String cleanedStr = inputString.replaceAll("[^а-яА-Я]", "").toLowerCase();
+
+        int left = 0;
+        int right = cleanedStr.length() - 1;
+
+        while (left < right) {
+            if (cleanedStr.charAt(left) != cleanedStr.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
     }
 }
