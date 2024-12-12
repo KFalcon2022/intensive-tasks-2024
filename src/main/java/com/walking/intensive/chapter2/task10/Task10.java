@@ -10,18 +10,15 @@ package com.walking.intensive.chapter2.task10;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task10 {
+    final static String PUNCTUATION = " !@#$%^&*()-=+_[]{};:'\",.<>/?\\";
+
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-//        String testString = "Ты, милок, иди яром: у дороги мина, за дорогой огород," +
-//                " а за ним и город у моря; иди, коли мыт";
+        String testString = "Ты, милок, иди яром: у дороги мина, за дорогой огород," +
+                " а за ним и город у моря; иди, коли мыт";
 
-        String testString = "A";
-
-        if (isPalindrome(testString)) {
-            System.out.println("Palindrome");
-        } else {
-            System.out.println("Not a palindrome");
-        }
+        String outString = isPalindrome(testString) ? "Palindrome" : "Not a palindrome";
+        System.out.println(outString);
     }
 
     static boolean isPalindrome(String inputString) {
@@ -48,7 +45,7 @@ public class Task10 {
     static String removePunctuation(String inputString) {
         StringBuilder removedPunctuation = new StringBuilder();
 
-        for (int i = 0; i <inputString.length() ; i++) {
+        for (int i = 0; i < inputString.length(); i++) {
             char symbol = inputString.charAt(i);
 
             if (isPunctuation(symbol)) {
@@ -62,8 +59,6 @@ public class Task10 {
     }
 
     static boolean isPunctuation(char symbol) {
-        final String PUNCTUATION = " !@#$%^&*()-=+_[]{};:'\",.<>/?\\";
-
         for (int i = 0; i < PUNCTUATION.length(); i++) {
             if (symbol == PUNCTUATION.charAt(i)) {
                 return true;
