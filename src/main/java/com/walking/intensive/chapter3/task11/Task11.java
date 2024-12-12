@@ -45,7 +45,7 @@ import java.util.Arrays;
 public class Task11 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] a = {1,4,2,5,3};
+        int[] a = {1, 4, 2, 5, 3};
         System.out.println(getOddSubArraysElementsSum(a));
     }
 
@@ -60,24 +60,22 @@ public class Task11 {
         }
 
         int length = array.length;
+        int largestOddArray = (length % 2 == 0) ? length - 1 : length;
         int oddSubArraysElementsSum = 0;
 
-        for (int j = length; j >= 3; j--) {
-            if (j % 2 == 0) {
-                continue;
-            }
+        for (int i = largestOddArray; i >= 3; i -= 2) {
 
-            for (int i = 0; i <= length - j; i++) {
-                int[] smallArray = Arrays.copyOfRange(array, i, j + i);
-                oddSubArraysElementsSum += getSumOfArray(smallArray);
+            for (int j = 0; j <= length - i; j++) {
+                int[] smallArray = Arrays.copyOfRange(array, j, i + j);
+                oddSubArraysElementsSum += getElementsSum(smallArray);
             }
         }
 
-        oddSubArraysElementsSum += getSumOfArray(array);
+        oddSubArraysElementsSum += getElementsSum(array);
         return oddSubArraysElementsSum;
     }
 
-    static int getSumOfArray(int[] array) {
+    static int getElementsSum(int[] array) {
         int sumOfArray = 0;
 
         for (int j : array) {
