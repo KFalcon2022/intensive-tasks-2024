@@ -1,5 +1,8 @@
 package com.walking.intensive.chapter2.task6;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 /**
  * Реализуйте представленные ниже методы для расчета
  * НОК (наименьшее общее кратное) и НОД (наибольший общий делитель).
@@ -9,6 +12,7 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getGcdByEuclideanAlgorithm(51,35));
     }
 
     /**
@@ -20,7 +24,23 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
         // Ваш код
-        return 0;
+        if (isDataInvalid(m, n)) {
+            return -1;
+        }
+
+        int multiplierForM = 0;
+        int increasedM, increasedN;
+
+        while (true) {
+            increasedM = m * ++multiplierForM;
+            int multiplierForN = 0;
+            do {
+                increasedN = n * ++multiplierForN;
+                if (increasedN == increasedM) {
+                    return increasedM;
+                }
+            } while (increasedN < increasedM);
+        }
     }
 
     /**
@@ -32,7 +52,11 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
         // Ваш код
-        return 0;
+        if (isDataInvalid(m, n)) {
+            return -1;
+        }
+
+        return m * n / getLcm(m, n);
     }
 
     /**
@@ -45,6 +69,20 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
         // Ваш код
-        return 0;
+        if (isDataInvalid(m, n)) {
+            return -1;
+        }
+
+        int greater = max(m, n);
+        int lower = min(m, n);
+
+        if (greater % lower == 0) {
+            return lower;
+        }
+        return getGcdByEuclideanAlgorithm(lower, greater % lower);
+    }
+
+    static boolean isDataInvalid(int m, int n) {
+        return m < 1 || n < 1;
     }
 }
