@@ -25,14 +25,16 @@ package com.walking.intensive.chapter1.task3;
  */
 public class Task3 {
     public static void main(String[] args) {
-        System.out.println(isLeap(2100));
+        System.out.println(isLeap(3000));
     }
 
     static boolean isLeap(int year) {
 
-        if ((year > 0 || year < 3000) && year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
-            return true;
+        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
+
+            return year > 0 && year < 3000;
         }
+
         return false;
     }
 }
