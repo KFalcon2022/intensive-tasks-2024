@@ -1,8 +1,6 @@
 package com.walking.intensive.chapter2.task6;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-
+import java.lang.Math;
 /**
  * Реализуйте представленные ниже методы для расчета
  * НОК (наименьшее общее кратное) и НОД (наибольший общий делитель).
@@ -12,7 +10,8 @@ import static java.lang.Math.min;
 public class Task6 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        System.out.println(getGcdByEuclideanAlgorithm(51,35));
+        System.out.println(getLcm(17, 5));
+//        System.out.println(getGcdByEuclideanAlgorithm(51,35));
     }
 
     /**
@@ -28,19 +27,16 @@ public class Task6 {
             return -1;
         }
 
-        int multiplierForM = 0;
-        int increasedM, increasedN;
+        int greater = Math.max(m,n);
+        int lower = Math.min(m, n);
 
-        while (true) {
-            increasedM = m * ++multiplierForM;
-            int multiplierForN = 0;
-            do {
-                increasedN = n * ++multiplierForN;
-                if (increasedN == increasedM) {
-                    return increasedM;
-                }
-            } while (increasedN < increasedM);
+        for (int i = 1; i < m * n; i++) {
+            if (greater * i % lower == 0) {
+                return greater * i;
+            }
         }
+
+        return greater * lower;
     }
 
     /**
@@ -73,8 +69,8 @@ public class Task6 {
             return -1;
         }
 
-        int greater = max(m, n);
-        int lower = min(m, n);
+        int greater = Math.max(m, n);
+        int lower = Math.min(m, n);
 
         if (greater % lower == 0) {
             return lower;
