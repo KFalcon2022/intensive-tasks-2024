@@ -28,10 +28,10 @@ public class Task8 {
         // Ваш код
         int collisions = 0;
         for (int i = 0; i < 1000; i++) {
-            int sumLeft = i % 10 + i / 10 % 10 + i /100 % 10;
+            int sumLeft = getSumOfDigits(i);
 
             for (int j = 0; j < 1000; j++) {
-                int sumRight = j % 10 + j /10 % 10 + j /100 % 10;
+                int sumRight = getSumOfDigits(j);
 
                 if (sumLeft == sumRight) {
                     collisions++;
@@ -39,6 +39,12 @@ public class Task8 {
             }
         }
 
-        return (float) collisions / 999_999;
+        return (double) collisions / 1_000_000;
+    }
+
+    static int getSumOfDigits(int number) {
+        return number % 10
+                + number / 10 % 10
+                + number / 100 % 10;
     }
 }
