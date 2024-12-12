@@ -41,10 +41,39 @@ package com.walking.intensive.chapter3.task15;
 public class Task15 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] city = {{2, 1}, {1, 3}};
+        System.out.println(getMaxFloors(city));
     }
 
     static int getMaxFloors(int[][] city) {
         // Ваш код
-        return 0;
+        int size = city.length;
+        if (size == 0 || size != city[0].length) {
+            return -1;
+        }
+
+        int[] maxX = new int[size];
+        int[] maxY = new int[size];
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                if (city[x][y] < 0) {
+                    return -1;
+                }
+
+                maxX[x] = Math.max(maxX[x], city[x][y]);
+                maxY[y] = Math.max(maxY[y], city[x][y]);
+            }
+        }
+
+        int maxFloors = 0;
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                int differenceToMaxX = maxX[x] - city[x][y];
+                int differenceToMaxY = maxY[y] - city[x][y];
+                maxFloors += Math.min(differenceToMaxX, differenceToMaxY);
+            }
+        }
+
+        return maxFloors;
     }
 }
