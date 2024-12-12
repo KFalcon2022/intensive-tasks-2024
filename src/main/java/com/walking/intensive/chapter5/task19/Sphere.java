@@ -10,10 +10,6 @@ public class Sphere {
         this.r = r;
     }
 
-    public int[] getSphereCenterCoordinates () {
-        return new int[] {x, y, z};
-    }
-
     public int getX() {
         return x;
     }

@@ -19,27 +19,20 @@ import static java.lang.Math.*;
  */
 public class Task19 {
     public static void main(String[] args) {
-        Sphere s = new Sphere(-1, -1, -1, 1);
-        Parallelepiped p = new Parallelepiped(0, 0, 0, 1, 1, 1);
+        Sphere s = new Sphere(-5, -5, -5, 5 );
+        Parallelepiped p = new Parallelepiped(0, 0, 0, 10, 10, 10);
 
         System.out.println(isIntersected(s, p));
     }
 
     static boolean isIntersected(Sphere s, Parallelepiped p) {
 
-        // Если центр сферы внутри параллелепипеда и сфера полностью вписана или описана
-        if (isPointInsideParallepiped(p, s.getX(), s.getY(), s.getZ())) {
+        // Если центр сферы внутри параллелепипеда
+        if (s.getX() >= p.getX1() && s.getX() <= p.getX2() &&
+                s.getY() > p.getY1() && s.getY() < p.getY2() &&
+                s.getZ() > p.getZ1() && s.getZ() < p.getZ2()) {
 
-            int leftDownCornerSphereInCubeX = s.getX() - s.getR();
-            int leftDownCornerSphereInCubeY = s.getY() - s.getR();
-            int leftDownCornerSphereInCubeZ = s.getZ() - s.getR();
-            int rightUpCornerSphereInCubeX = s.getX() + s.getR();
-            int rightUpCornerSphereInCubeY = s.getY() + s.getR();
-            int rightUpCornerSphereInCubeZ = s.getZ() + s.getR();
-
-            return (!isPointInsideParallepiped(p, leftDownCornerSphereInCubeX, leftDownCornerSphereInCubeY, leftDownCornerSphereInCubeZ)
-                    || !isPointInsideParallepiped(p, rightUpCornerSphereInCubeX, rightUpCornerSphereInCubeY, rightUpCornerSphereInCubeZ))
-                    && !(getMaxDistanceCornerCenter(s, p) < s.getR());
+            return true;
         }
 
         // Если центр сферы внутри внешнего сектора в направлении луча из центра параллелепипеда в угол
@@ -47,7 +40,7 @@ public class Task19 {
                 (s.getY() <= p.getY1() || s.getY() >= p.getY2()) &&
                 (s.getZ() <= p.getZ1() || s.getZ() >= p.getZ2())) {
             {
-                return s.getR() >= getMinDistanceCornerCenter(s, p) && s.getR() <= getMaxDistanceCornerCenter(s, p);
+                return s.getR() >= getDistanceSphereCenterNearestCorner(s, p);
             }
         }
 
@@ -68,7 +61,7 @@ public class Task19 {
                 minDistance = min(minDistance, distanceEdge[i]);
             }
 
-            return s.getR() >= minDistance && s.getR() <= getMaxDistanceCornerCenter(s, p);
+            return s.getR() >= minDistance;
         }
 
         // Если центр сферы внутри внешнего сектора в направлении луча из центра параллелепипеда в ребро в плоскости XY
@@ -88,7 +81,7 @@ public class Task19 {
                 minDistance = min(minDistance, distanceEdge[i]);
             }
 
-            return s.getR() >= minDistance && s.getR() <= getMaxDistanceCornerCenter(s, p);
+            return s.getR() >= minDistance;
         }
 
         // Центр сферы вне параллепипеда - Проверяем каждую сторону параллелепипеда
@@ -109,35 +102,14 @@ public class Task19 {
             minDistanceToFlat = s.getZ() - p.getZ2();
         }
 
-        return s.getR() >= minDistanceToFlat && s.getR() <= getMaxDistanceCornerCenter(s, p);
+        return s.getR() >= minDistanceToFlat;
     }
 
-
-    static boolean isPointInsideParallepiped(Parallelepiped p, int x, int y, int z) {
-
-        return x > p.getX1() && x < p.getX2() &&
-                y > p.getY1() && y < p.getY2() &&
-                z > p.getZ1() && z < p.getZ2();
-    }
-
-    static double getMaxDistanceCornerCenter(Sphere s, Parallelepiped p) {
-
-        double maxDistance = 0;
-        int[][] corners = p.getCornersCoordinates();
-        int[] sphereCenter = s.getSphereCenterCoordinates();
-
-        for (int[] corner : corners) {
-            maxDistance = max(maxDistance, getDistanceTwoPoints3D(sphereCenter, corner));
-        }
-
-        return maxDistance;
-    }
-
-    static double getMinDistanceCornerCenter(Sphere s, Parallelepiped p) {
+    static double getDistanceSphereCenterNearestCorner (Sphere s, Parallelepiped p) {
 
         double minDistance = Double.MAX_VALUE;
         int[][] corners = p.getCornersCoordinates();
-        int[] sphereCenter = s.getSphereCenterCoordinates();
+        int[] sphereCenter = new int[] {s.getX(), s.getY(), s.getZ()};
 
         for (int[] corner : corners) {
             minDistance = min(minDistance, getDistanceTwoPoints3D(sphereCenter, corner));
