@@ -24,6 +24,8 @@ package com.walking.intensive.chapter4.task18;
 public class Task18 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[] arr = {2, 5, 7, 12, 13, 49, 56, 72, 106};
+        System.out.println(find(arr, 1));
     }
 
     /**
@@ -35,7 +37,7 @@ public class Task18 {
      *
      * <p>Пример:
      *
-     * <p>Входные данные: [1,2,5,7,12,13,18,49,56,72,106], 18
+     * <p>Входные данные: [1,2,5,7,12,13,49,56,72,106], 18
      *
      * <p>Возвращаемое значение: 18
      *
@@ -55,7 +57,35 @@ public class Task18 {
      * </ul>
      */
     static int find(int[] girlAges, int targetAge) {
-        // Ваш код
-        return 0;
+
+        if (girlAges.length == 0) {
+            return -1;
+        }
+
+        return find(girlAges, targetAge, 0, girlAges.length - 1);
+    }
+
+    static int find(int[] arr, int targetAge, int left, int right) {
+
+        if (left >= right) {
+
+            if (arr[left] > targetAge) {
+                return left == 0 ? -1 : arr[left - 1];
+            }
+
+            return arr[left];
+        }
+
+        int pivotIndex = (right + left) / 2;
+
+        if (arr[pivotIndex] == targetAge) {
+            return targetAge;
+        }
+
+        if (arr[pivotIndex] > targetAge) {
+            return find(arr, targetAge, left, pivotIndex - 1);
+        }
+
+        return find(arr, targetAge, pivotIndex + 1, right);
     }
 }
