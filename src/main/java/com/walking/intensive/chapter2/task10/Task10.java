@@ -12,22 +12,7 @@ package com.walking.intensive.chapter2.task10;
 public class Task10 {
     public static void main(String[] args) {
 
-        System.out.println(isPalindrome("Муза, ранясь шилом опыта, ты помолишься на разумы"));
-    }
-
-    static String getStringLetters(String inputString) {
-
-        StringBuilder stringLetters = new StringBuilder();
-
-        for (int i = 0; i < inputString.length(); i++) {
-            char symbol = inputString.toLowerCase().charAt(i);
-
-            if (Character.isLetter(symbol)) {
-                stringLetters.append(symbol);
-            }
-        }
-
-        return stringLetters.toString();
+        System.out.println(isPalindrome("!Мут, / !т У,м"));
     }
 
     static boolean isPalindrome(String inputString) {
@@ -36,19 +21,19 @@ public class Task10 {
             return false;
         }
 
-        String s = getStringLetters(inputString);
-        boolean result = true;
+        for (int i = 0, j = inputString.length() - 1; i < j; i++, j--) {
 
-        for (int i = 0; i < s.length(); i++) {
-            char symbolLeft = s.charAt(i);
-            char symbolRight = s.charAt(s.length() - 1 - i);
+            char symbolLeft = inputString.toLowerCase().charAt(i);
+            char symbolRight = inputString.toLowerCase().charAt(j);
 
-            if (symbolLeft != symbolRight) {
-                result = false;
-                break;
+            if (!Character.isLetter(symbolLeft)) {
+                j++;
+            } else if (!Character.isLetter(symbolRight)) {
+                i--;
+            } else if (symbolLeft != symbolRight) {
+                return false;
             }
         }
-
-        return result;
+        return true;
     }
 }
