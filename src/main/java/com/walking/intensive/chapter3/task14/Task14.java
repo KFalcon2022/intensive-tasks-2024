@@ -34,7 +34,7 @@ import java.util.Arrays;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -46,8 +46,8 @@ import java.util.Arrays;
 public class Task14 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[][] objectLocations = {{1,3},{3,3},{5,3},{2,2}};
-        int[][] radars = {{2,3,1},{4,3,1},{1,1,2}};
+        int[][] objectLocations = {{1, 3}, {3, 3}, {5, 3}, {2, 2}};
+        int[][] radars = {{2, 3, 1}, {4, 3, 1}, {1, 1, 2}};
         System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
     }
 
@@ -59,7 +59,15 @@ public class Task14 {
 
         int[] objectCounts = new int[radars.length];
         for (int i = 0; i < radars.length; i++) {
+            if (radars[i].length != 3 || radars[i][2] < 0) {
+                return new int[0];
+            }
+
             for (int[] objectLocation : objectLocations) {
+                if (objectLocation.length != 2) {
+                    return new int[0];
+                }
+
                 if (isObjectWithinCoverage(objectLocation, radars[i])) {
                     objectCounts[i]++;
                 }
@@ -76,9 +84,15 @@ public class Task14 {
         int objectX = objectLocation[0];
         int objectY = objectLocation[1];
 
-//        FIXME: radar radius should be circle, not square.
+        int legX = Math.abs(radarX - objectX);
+        int legY = Math.abs(radarY - objectY);
 
-        return  objectX >= radarX - radarRadius && objectX <= radarX + radarRadius &&
-                objectY >= radarY - radarRadius && objectY <= radarY + radarRadius;
+//        чтобы зря не проводить дальнейшие рассчеты
+        if (legX > radarRadius || legY > radarRadius) {
+            return false;
+        }
+
+        double hypotenuse = Math.sqrt(Math.pow(legX, 2) + Math.pow(legY, 2));
+        return hypotenuse <= radarRadius;
     }
 }
