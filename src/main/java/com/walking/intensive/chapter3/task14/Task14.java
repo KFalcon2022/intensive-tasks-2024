@@ -63,13 +63,13 @@ public class Task14 {
 
             int count = 0;
 
-            for (int j = 0; j < objectLocations.length; j++) {
-                if (objectLocations[j].length != 2) {
+            for (int[] objectLocation : objectLocations) {
+                if (objectLocation.length != 2) {
                     return new int[]{};
                 }
 
-                int objectX = objectLocations[j][0];
-                int objectY = objectLocations[j][1];
+                int objectX = objectLocation[0];
+                int objectY = objectLocation[1];
                 int radarX = radars[i][0];
                 int radarY = radars[i][1];
                 int radius = radars[i][2];
