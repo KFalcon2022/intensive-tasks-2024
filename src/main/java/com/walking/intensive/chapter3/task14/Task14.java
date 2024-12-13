@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -32,7 +34,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -44,10 +46,34 @@ package com.walking.intensive.chapter3.task14;
 public class Task14 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] objectLocations = new int[][]{{1, 3}, {3, 3}, {5, 3}, {2, 2}};
+        int[][] radars = new int[][]{{2, 3, 1}, {4, 3, 1}, {1, 1, 2}};
+        System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
         // Ваш код
-        return new int[0];
+
+        int[] objectCounts = new int[radars.length];
+
+        for (int i = 0; i < radars.length; i++) {  //по строкам objectLocations
+            int count = 0;
+            for (int[] objectLocation : objectLocations) {
+                int objectX = objectLocation[0];
+                int objectY = objectLocation[1];
+                int radarX = radars[i][0];
+                int radarY = radars[i][1];
+                int radius = radars[i][2];
+                double distance = Math.sqrt(Math.pow(objectX - radarX, 2) + Math.pow(objectY - radarY, 2));
+                if (distance <= radius) {
+                    count++;
+                }
+
+            }
+            objectCounts[i]=count;
+
+        }
+        System.out.println(Arrays.toString(objectCounts));
+        return new int[]{};
     }
 }
