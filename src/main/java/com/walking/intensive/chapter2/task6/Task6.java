@@ -70,12 +70,15 @@ public class Task6 {
             return -1;
         }
 
-        while (n != 0) {
-            int tmp = m % n;
-            m = n;
-            n = tmp;
+        return getGcdByEuclideanAlgorithmWithoutValidation(n, m % n);
+    }
+
+    static int getGcdByEuclideanAlgorithmWithoutValidation(int m, int n) {
+        if (n == 0) {
+            return m;
         }
-        return m;
+
+        return getGcdByEuclideanAlgorithmWithoutValidation(n, m % n);
     }
 
     static boolean isValid(int m, int n) {
