@@ -48,32 +48,40 @@ public class Task14 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int[][] objectLocations = new int[][]{{1, 3}, {3, 3}, {5, 3}, {2, 2}};
         int[][] radars = new int[][]{{2, 3, 1}, {4, 3, 1}, {1, 1, 2}};
+
         System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
         // Ваш код
-
         int[] objectCounts = new int[radars.length];
 
-        for (int i = 0; i < radars.length; i++) {  //по строкам objectLocations
+        for (int i = 0; i < radars.length; i++) {
+            if (radars[i].length != 3 || radars[i][2] < 0) {
+                return new int[]{};
+            }
+
             int count = 0;
-            for (int[] objectLocation : objectLocations) {
-                int objectX = objectLocation[0];
-                int objectY = objectLocation[1];
+
+            for (int j = 0; j < objectLocations.length; j++) {
+                if (objectLocations[j].length != 2) {
+                    return new int[]{};
+                }
+
+                int objectX = objectLocations[j][0];
+                int objectY = objectLocations[j][1];
                 int radarX = radars[i][0];
                 int radarY = radars[i][1];
                 int radius = radars[i][2];
+
                 double distance = Math.sqrt(Math.pow(objectX - radarX, 2) + Math.pow(objectY - radarY, 2));
                 if (distance <= radius) {
                     count++;
                 }
-
             }
-            objectCounts[i]=count;
-
+            objectCounts[i] = count;
         }
-        System.out.println(Arrays.toString(objectCounts));
-        return new int[]{};
+
+        return objectCounts;
     }
 }
