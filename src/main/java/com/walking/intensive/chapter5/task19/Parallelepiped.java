@@ -18,13 +18,13 @@ public class Parallelepiped {
         int[][] coordinates = new int[8][3];
 
         coordinates [0] = new int[] {x1,y1,z1};
-        coordinates [1] = new int[] {x1+x2,y1,z1};
-        coordinates [2] = new int[] {x1,y1+y2,z1};
-        coordinates [3] = new int[] {x1+x2,y1+y2,z1};
-        coordinates [4] = new int[] {x2-x1,y2,z2};
-        coordinates [5] = new int[] {x2,y2-y1,z2};
-        coordinates [6] = new int[] {x2-x1,y2-y1,z2};
-        coordinates [7] = new int[] {x2,y2,z2};
+        coordinates [1] = new int[] {x1,y2,z1};
+        coordinates [2] = new int[] {x1,y1,z2};
+        coordinates [3] = new int[] {x1,y2,z2};
+        coordinates [4] = new int[] {x2,y2,z2};
+        coordinates [5] = new int[] {x2,y2,z1};
+        coordinates [6] = new int[] {x2,y1,z2};
+        coordinates [7] = new int[] {x2,y2,z1};
 
         return coordinates;
     }

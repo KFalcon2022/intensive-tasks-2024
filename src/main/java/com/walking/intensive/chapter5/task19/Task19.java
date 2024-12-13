@@ -19,8 +19,8 @@ import static java.lang.Math.*;
  */
 public class Task19 {
     public static void main(String[] args) {
-        Sphere s = new Sphere(-5, -5, -5, 5 );
-        Parallelepiped p = new Parallelepiped(0, 0, 0, 10, 10, 10);
+        Sphere s = new Sphere(-1, 0, 0, 2);
+        Parallelepiped p = new Parallelepiped(-1, -1, -1, 1, 1, 1);
 
         System.out.println(isIntersected(s, p));
     }
@@ -29,17 +29,18 @@ public class Task19 {
 
         // Если центр сферы внутри параллелепипеда
         if (s.getX() >= p.getX1() && s.getX() <= p.getX2() &&
-                s.getY() > p.getY1() && s.getY() < p.getY2() &&
-                s.getZ() > p.getZ1() && s.getZ() < p.getZ2()) {
+                s.getY() >= p.getY1() && s.getY() <= p.getY2() &&
+                s.getZ() >= p.getZ1() && s.getZ() <= p.getZ2()) {
 
             return true;
         }
 
         // Если центр сферы внутри внешнего сектора в направлении луча из центра параллелепипеда в угол
-        if ((s.getX() <= p.getX1() || s.getX() >= p.getX2()) &&
-                (s.getY() <= p.getY1() || s.getY() >= p.getY2()) &&
-                (s.getZ() <= p.getZ1() || s.getZ() >= p.getZ2())) {
+        if ((s.getX() < p.getX1() || s.getX() > p.getX2()) &&
+                (s.getY() < p.getY1() || s.getY() > p.getY2()) &&
+                (s.getZ() < p.getZ1() || s.getZ() > p.getZ2())) {
             {
+
                 return s.getR() >= getDistanceSphereCenterNearestCorner(s, p);
             }
         }
@@ -48,7 +49,7 @@ public class Task19 {
 
         if ((s.getX() <= p.getX1() || s.getX() >= p.getX2()) &&
                 (s.getY() <= p.getY1() || s.getY() >= p.getY2()) &&
-                (s.getZ() > p.getZ1() && s.getZ() < p.getZ2())) {
+                (s.getZ() >= p.getZ1() && s.getZ() <= p.getZ2())) {
 
             double minDistance = Double.MAX_VALUE;
             double[] distanceEdge = new double[4];
@@ -68,7 +69,7 @@ public class Task19 {
 
         if ((s.getZ() <= p.getZ1() || s.getZ() >= p.getZ2()) &&
                 (s.getY() <= p.getY1() || s.getY() >= p.getY2()) &&
-                (s.getX() > p.getX1() && s.getX() < p.getX2())) {
+                (s.getX() >= p.getX1() && s.getX() <= p.getX2())) {
 
             double minDistance = Double.MAX_VALUE;
             double[] distanceEdge = new double[4];
@@ -105,11 +106,11 @@ public class Task19 {
         return s.getR() >= minDistanceToFlat;
     }
 
-    static double getDistanceSphereCenterNearestCorner (Sphere s, Parallelepiped p) {
+    static double getDistanceSphereCenterNearestCorner(Sphere s, Parallelepiped p) {
 
         double minDistance = Double.MAX_VALUE;
         int[][] corners = p.getCornersCoordinates();
-        int[] sphereCenter = new int[] {s.getX(), s.getY(), s.getZ()};
+        int[] sphereCenter = new int[]{s.getX(), s.getY(), s.getZ()};
 
         for (int[] corner : corners) {
             minDistance = min(minDistance, getDistanceTwoPoints3D(sphereCenter, corner));
