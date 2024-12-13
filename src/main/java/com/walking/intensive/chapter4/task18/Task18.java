@@ -65,9 +65,11 @@ public class Task18 {
             if (girlAges[mid] == targetAge) {
                 return girlAges[mid];
             }
+
             if (girlAges[mid] > targetAge) {
                 right = mid;
             }
+
             if (girlAges[mid] < targetAge) {
                 left = mid;
             }
@@ -77,14 +79,16 @@ public class Task18 {
     }
 
     static boolean isInputDataValid(int[] girlAges, int targetAge) {
-        if (girlAges.length == 0 || targetAge <= 0) {
+        if (girlAges.length == 0 || girlAges[0] <= 0 || targetAge <= 0) {
             return false;
         }
-        for (int i : girlAges) {
-            if (i <= 0) {
+
+        for (int i = 1; i < girlAges.length; i++) {
+            if (girlAges[i] <= girlAges[i - 1]) {
                 return false;
             }
         }
+
         return true;
     }
 }
