@@ -56,24 +56,15 @@ public class Task12 {
             return new int[0];
         }
 
+        if (!isBasketStringValid(baskets)) {
+            return new int[0];
+        }
+
         int[] movementsNumber = new int[length];
 
         for (int i = 0; i < length; i++) {
-            if (isSymbolInvalid(baskets.charAt(i))) {
-                return new int[0];
-            }
-
             for (int j = 0; j < length; j++) {
-                if (j == i) {
-                    continue;
-                }
-
                 char character = baskets.charAt(j);
-
-                if (j > i && isSymbolInvalid(character)) {
-                    return new int[0];
-                }
-
                 if (character == '1') {
                     movementsNumber[i] += Math.abs(i - j);
                 }
@@ -83,8 +74,14 @@ public class Task12 {
         return movementsNumber;
     }
 
-    static boolean isSymbolInvalid(char symbol) {
-        return symbol != '0' && symbol != '1';
+    static boolean isBasketStringValid(String baskets) {
+        for (int i = 0; i < baskets.length(); i++) {
+            if (baskets.charAt(i) != '0' && baskets.charAt(i) != '1') {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
