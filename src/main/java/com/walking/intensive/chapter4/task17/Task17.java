@@ -1,5 +1,9 @@
 package com.walking.intensive.chapter4.task17;
 
+//import java.util.Arrays;
+
+import java.util.Random;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -22,6 +26,9 @@ package com.walking.intensive.chapter4.task17;
 public class Task17 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+//        System.out.println(Arrays.toString(sortByBubble(new int[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 10, 10, 10})));
+//        System.out.println(getBenchmarkOn1000());
+//        System.out.println(getBenchmarkOn10000());
     }
 
     /**
@@ -40,9 +47,29 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null) {
+            return new int[0];
+        }
+
+        int lengthArray = array.length;
+
+        for (int i = 0; i < lengthArray; i++) {
+            int numberComparisons = 0;
+            for (int j = 1; j < lengthArray - i; j++) {
+                if (array[j - 1] > array[j]) {
+                    numberComparisons = 0;
+                    swapElementArray(array, j, j - 1);
+                }
+                numberComparisons++;
+            }
+            if (numberComparisons == lengthArray - i) {
+                break;
+            }
+        }
+
+        return array;
     }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,8 +111,21 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+        int lengthArray = array.length;
+
+        switch (lengthArray) {
+            case 0, 1:
+                return array;
+            case 2:
+                if (array[0] > array[1]) {
+                    swapElementArray(array, 0, 1);
+                }
+                return array;
+        }
+
+        quickSort(array, 0, lengthArray - 1);
+
+        return array;
     }
 
     /**
@@ -97,15 +137,90 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+        int[] randomNums = new int[1000];
+        Random random = new Random();
+
+        for (int i = 0; i < 1000; i++) {
+            randomNums[i] = random.nextInt(1000);
+        }
+
+//      Сортировка Пузырьком
+        long timeStart1 = System.currentTimeMillis();
+//        System.out.println(Arrays.toString(sortByBubble(randomNums)));
+        sortByBubble(randomNums);
+        long timeFinish1 = System.currentTimeMillis();
+//      Быстрая Сортировка
+        long timeStart2 = System.currentTimeMillis();
+//        System.out.println(Arrays.toString(sortByQuicksort(randomNums)));
+        sortByQuicksort(randomNums);
+        long timeFinish2 = System.currentTimeMillis();
+
+        return (timeFinish1 - timeStart1) - (timeFinish2 - timeStart2);
     }
 
     /**
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
-        return 0;
+        int[] randomNums = new int[10000];
+        Random random = new Random();
+
+        for (int i = 0; i < 10000; i++) {
+            randomNums[i] = random.nextInt(10000);
+        }
+
+//      Сортировка Пузырьком
+        long timeStart1 = System.currentTimeMillis();
+//        System.out.println(Arrays.toString(sortByBubble(randomNums)));
+        sortByBubble(randomNums);
+        long timeFinish1 = System.currentTimeMillis();
+//      Быстрая Сортировка
+        long timeStart2 = System.currentTimeMillis();
+//        System.out.println(Arrays.toString(sortByQuicksort(randomNums)));
+        sortByQuicksort(randomNums);
+        long timeFinish2 = System.currentTimeMillis();
+
+        return (timeFinish1 - timeStart1) - (timeFinish2 - timeStart2);
+    }
+
+    private static int getSupportElementArray(int[] array, int indexStart, int indexEnd) {
+        int maxElementArray = array[indexStart];
+        int minElementArray = array[indexStart];
+
+        for (int i = indexStart; i < indexEnd; i++) {
+            maxElementArray = Math.max(maxElementArray, array[i]);
+            minElementArray = Math.min(minElementArray, array[i]);
+        }
+
+        return (maxElementArray + minElementArray) / 2;
+    }
+
+    private static void swapElementArray(int[] array, int indexNumArray1, int indexNumArray2) {
+        int temporaryVariable = array[indexNumArray1];
+        array[indexNumArray1] = array[indexNumArray2];
+        array[indexNumArray2] = temporaryVariable;
+    }
+
+    private static void quickSort(int[] array, int indexStart, int indexEnd) {
+        if (indexEnd - indexStart > 1) {
+            int supportElementArray = getSupportElementArray(array, indexStart, indexEnd);
+            int i = indexStart;
+            int j = indexEnd;
+
+            while (i <= j) {
+                if (array[i] < supportElementArray) {
+                    i++;
+                } else {
+                    if (array[j] <= supportElementArray) {
+                        swapElementArray(array, i, j);
+                        i++;
+                    }
+                    j--;
+                }
+            }
+
+            quickSort(array, indexStart, i - 1);
+            quickSort(array, i, indexEnd);
+        }
     }
 }
