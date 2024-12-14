@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter3.task11;
 
-import java.util.Arrays;
-
 /**
  * Реализуйте метод getOddSubArraysElementsSum() с учетом условий ниже.
  *
@@ -60,34 +58,33 @@ public class Task11 {
         }
 
         int length = array.length;
-        int largestOddArray = (length % 2 == 0) ? length - 1 : length;
+        int largestOddArray = length % 2 == 0 ? length - 1 : length;
         int oddSubArraysElementsSum = 0;
 
         for (int i = largestOddArray; i >= 3; i -= 2) {
 
             for (int j = 0; j <= length - i; j++) {
-                int[] smallArray = Arrays.copyOfRange(array, j, i + j);
-                oddSubArraysElementsSum += getElementsSum(smallArray);
+                oddSubArraysElementsSum += getElementsSum(array, j, j + i - 1);
             }
         }
 
-        oddSubArraysElementsSum += getElementsSum(array);
+        oddSubArraysElementsSum += getElementsSum(array, 0, length - 1);
         return oddSubArraysElementsSum;
     }
 
-    static int getElementsSum(int[] array) {
-        int sumOfArray = 0;
+    static int getElementsSum(int[] array, int firstElement, int lastElement) {
+        int elementsSum = 0;
 
-        for (int j : array) {
-            sumOfArray += j;
+        for (int j = firstElement; j <= lastElement; j++) {
+            elementsSum += array[j];
         }
 
-        return sumOfArray;
+        return elementsSum;
     }
 
     static boolean isArrayValid(int[] array) {
-        for (int i : array) {
-            if (i < 0) {
+        for (int number : array) {
+            if (number < 0) {
                 return false;
             }
         }
