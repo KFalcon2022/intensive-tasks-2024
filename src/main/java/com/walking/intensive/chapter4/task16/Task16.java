@@ -21,6 +21,9 @@ package com.walking.intensive.chapter4.task16;
 public class Task16 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[] array1 = new int[]{1, 2, 3, 4};
+        int[] array2 = new int[]{1, 1, 2, 3, 4};
+        System.out.println(isSimilar(array1, array2));
     }
 
     /**
@@ -45,6 +48,7 @@ public class Task16 {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -62,7 +66,9 @@ public class Task16 {
      */
     static int[] incrementEach(int[] arr) {
         // Ваш код
-        if (arr == null || arr.length == 0) return new int[0];
+        if (arr == null || arr.length == 0) {
+            return new int[0];
+        }
 
         int[] afterIncrement = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
@@ -265,19 +271,19 @@ public class Task16 {
      * <li>Возвращаемое значение: -1
      * </ul>
      */
-        static int getLastIndex(int[] arr, int value) {
-            if (arr == null || arr.length == 0) {
-                return -1;
-            }
-
-            for (int i = arr.length - 1; i >= 0; i--) {
-                if (arr[i] == value) {
-                    return i;
-                }
-            }
-
+    static int getLastIndex(int[] arr, int value) {
+        if (arr == null || arr.length == 0) {
             return -1;
         }
+
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] == value) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 
     /**
      * Реализуйте метод, который принимает параметрами массив целых чисел и целое число - индекс.
@@ -335,6 +341,7 @@ public class Task16 {
                     break;
                 }
             }
+
             if (!toRemove) {
                 count++;
             }
@@ -350,6 +357,7 @@ public class Task16 {
                     break;
                 }
             }
+
             if (!toRemove) {
                 result[index++] = value;
             }
@@ -369,17 +377,20 @@ public class Task16 {
         if ((arr1 == null || arr1.length == 0) && (arr2 == null || arr2.length == 0)) {
             return true;
         }
-        if (arr1 == null || arr2 == null || arr1.length != arr2.length) {
+        if (arr1 == null || arr2 == null || arr1.length < 1 || arr2.length < 1) {
             return false;
         }
 
-        int[] sortedArr1 = arr1.clone();
-        int[] sortedArr2 = arr2.clone();
-        java.util.Arrays.sort(sortedArr1);
-        java.util.Arrays.sort(sortedArr2);
+        for (int j : arr1) {
+            boolean found = false;
+            for (int number : arr2) {
+                if (number == j) {
+                    found = true;
+                    break;
+                }
+            }
 
-        for (int i = 0; i < sortedArr1.length; i++) {
-            if (sortedArr1[i] != sortedArr2[i]) {
+            if (!found) {
                 return false;
             }
         }
@@ -403,6 +414,7 @@ public class Task16 {
         if (arr == null || arr.length == 0) {
             return new int[0];
         }
+
         if (arr.length == 1) {
             return arr;
         }
