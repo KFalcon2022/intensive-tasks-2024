@@ -14,15 +14,28 @@ package com.walking.intensive.chapter1.task1;
  */
 public class Task1 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
+        int age = 55;
 
         System.out.println(getAgeString(age));
     }
 
     static String getAgeString(int age) {
-//        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
+        if (age < 0) {
+            return ("Некорректный ввод");
+            // проверка негативного сценария
+        }
+        else {
+            int ageLastNumber = age % 10;
+            // последнее число возраста
+            if (ageLastNumber == 0||ageLastNumber>= 5 && ageLastNumber <=9) {
+                return "Вам " + age + " лет";}
+            else if ((age % 100 >= 11) && (age % 100 <= 14)) {
+                return "Вам " + age + " лет";}
+            //доп проверка на диапазон 11-14
+            else if (ageLastNumber == 1) {
+                return "Вам " + age + " год";}
+            else {
+                return "Вам " + age + " года";}
+            }
+        }
     }
-}
