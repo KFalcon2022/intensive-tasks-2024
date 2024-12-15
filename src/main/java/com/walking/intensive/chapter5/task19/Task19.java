@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter5.task19;
 
+import java.util.Random;
+
 /**
  * Создайте классы фигур: класс сфера и параллелепипед.
  * Объект «Сфера» должен задаваться по координате точки центра
@@ -16,12 +18,35 @@ package com.walking.intensive.chapter5.task19;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task19 {
+    private final static Random random = new Random();
+
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        Point a = getRandomPoint();
+        Point b = getRandomPoint();
+        Point c = getRandomPoint();
+        int r = getRandomInt();
+
+        Parallelepiped parallelepiped = new Parallelepiped(a, b);
+        Sphere sphere = new Sphere(c, r);
+
+        System.out.println("Параллелепипед:");
+        System.out.println("A = " + a);
+        System.out.println("B = " + b);
+        System.out.println("Сфера:");
+        System.out.println("Центр = " + c);
+        System.out.println("Радиус = " + r);
+        System.out.println("Пересекаются? " + isIntersected(sphere, parallelepiped));
     }
 
-    static boolean isIntersected(Sphere sphere, Parallelepiped parallelepiped) {
-        // Ваш код
-        return false;
+    public static boolean isIntersected(Sphere sphere, Parallelepiped parallelepiped) {
+        return sphere.getCenter().getDistanceTo(parallelepiped.getNearestPointTo(sphere.getCenter())) <= sphere.getRadius();
+    }
+
+    private static Point getRandomPoint() {
+        return new Point(getRandomInt(), getRandomInt(), getRandomInt());
+    }
+
+    private static int getRandomInt() {
+        return random.nextInt(-9, 10);
     }
 }
