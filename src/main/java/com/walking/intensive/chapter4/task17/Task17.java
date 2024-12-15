@@ -193,6 +193,9 @@ public class Task17 {
      */
     static long getBenchmarkOn10000() {
         // Ваш код
+        // я бы вызвал предыдущий метод и указал бы length = 10_000 в качестве параметра.
+        // Но судя по ТЗ - нужно просто сделать copy-paste с увеличенным массивом.
+
         int length = 10_000;
         int[] randomArray1 = new int[length];
         int[] randomArray2 = new int[length];
