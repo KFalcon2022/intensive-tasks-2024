@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter5.task20;
 
+import java.util.Arrays;
+
 /**
  * Создайте метод, возвращающий определитель матрицы (R) ранга N и дополнительный метод валидации,
  * который будет определять, что матрица является квадратной и у нее может быть рассчитан определитель.
@@ -24,7 +26,9 @@ package com.walking.intensive.chapter5.task20;
  */
 public class Task20 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] m = {{2, -5, 3}, {1, 4, 0}, {-3, 7, 5}};
+        System.out.println(Arrays.deepToString(m));
+        System.out.println(getDeterminant(m));
     }
 
     /**
@@ -40,8 +44,22 @@ public class Task20 {
      * До тех пор приходится находить обходные пути для обозначения ситуаций, когда что-то пошло не по плану.
      */
     static Integer getDeterminant(int[][] matrix) {
-        // Ваш код
-        return null;
+        if (!isValid(matrix)) {
+            return null;
+        }
+
+        int n = matrix.length;
+        int det = 0;
+
+        if (n == 1) {
+            return matrix[0][0];
+        }
+
+        for (int j = 0; j < n; j++) {
+            det += (j % 2 == 0 ? 1 : -1) * matrix[0][j] * getDeterminant(getSubMatrix(matrix, 0, j));
+        }
+
+        return det;
     }
 
     /**
@@ -53,6 +71,30 @@ public class Task20 {
      * getDeterminant() должен использовать isValid().
      */
     static boolean isValid(int[][] matrix) {
-        return false;
+        if (matrix.length < 1) {
+            return false;
+        }
+
+        for (int[] row : matrix) {
+            if (row.length != matrix.length) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static int[][] getSubMatrix(int[][] matrix, int rowToDelete, int columnToDelete) {
+        int[][] subMatrix = new int[matrix.length - 1][matrix.length - 1];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (i != rowToDelete && j != columnToDelete) {
+                    subMatrix[i < rowToDelete ? i : i - 1][j < columnToDelete ? j : j - 1] = matrix[i][j];
+                }
+            }
+        }
+
+        return subMatrix;
     }
 }
