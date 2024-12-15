@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Arrays;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -21,7 +23,11 @@ package com.walking.intensive.chapter4.task17;
  */
 public class Task17 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(Arrays.toString(sortByBubble(new int[]{5, 4, 17, 2})));
+        System.out.println(Arrays.toString(sortByQuicksort(new int[]{5, 4, 17, 2})));
+        System.out.println(Arrays.toString(sortByQuicksort(new int[]{3, 2, 3, 5, 2, 1, 2, 1})));
+        System.out.println(getBenchmarkOn1000());
+        System.out.println(getBenchmarkOn10000());
     }
 
     /**
@@ -40,9 +46,27 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null) {
+            return new int[]{};
+        }
+
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 1; j < array.length - i; j++) {
+                if (array[j - 1] > array[j]) {
+                    swap(array, j - 1, j);
+                }
+            }
+        }
+
+        return array;
     }
+
+    static void swap(int[] array, int index1, int index2) {
+        array[index1] = array[index1] ^ array[index2];
+        array[index2] = array[index1] ^ array[index2];
+        array[index1] = array[index1] ^ array[index2];
+    }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,8 +108,55 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null) {
+            return new int[]{};
+        }
+
+        quickSort(array, 0, array.length - 1);
+
+        return array;
+    }
+
+    static void quickSort(int[] array, int left, int right) {
+        if (right - left < 1) {
+            return;
+        }
+
+        if (right - left == 1) {
+            if (array[left] > array[right]) {
+                swap(array, left, right);
+            }
+
+            return;
+        }
+
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+
+        for (int i = left; i <= right; i++) {
+            max = Math.max(max, array[i]);
+            min = Math.min(min, array[i]);
+        }
+
+        int reference = (max + min) / 2;
+        int i = left;
+        int j = right;
+
+        while (i < j) {
+            if ((array[i] >= reference) && (array[j] <= reference)) {
+                swap(array, i, j);
+            }
+
+            if (array[i] <= reference) {
+                i++;
+            }
+            if (array[j] >= reference) {
+                j--;
+            }
+        }
+
+        quickSort(array, left, i);
+        quickSort(array, j, right);
     }
 
     /**
@@ -97,15 +168,32 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+        return getBenchmarkOnN(1000);
     }
 
     /**
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
-        return 0;
+        return getBenchmarkOnN(10000);
+    }
+
+    static long getBenchmarkOnN(int n) {
+        int[] array1 = new int[n];
+        int[] array2 = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            array1[i] = (int) ((Math.random() - 0.5) * Integer.MAX_VALUE);
+            array2[i] = array1[i];
+        }
+
+        long currentTime = System.currentTimeMillis();
+        sortByBubble(array1);
+        long bubbleSortTime = System.currentTimeMillis() - currentTime;
+        currentTime = System.currentTimeMillis();
+        sortByQuicksort(array2);
+        long quickSortTime = System.currentTimeMillis() - currentTime;
+
+        return bubbleSortTime - quickSortTime;
     }
 }
