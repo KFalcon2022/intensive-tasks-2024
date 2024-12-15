@@ -23,7 +23,12 @@ package com.walking.intensive.chapter4.task18;
  */
 public class Task18 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[] girls = new int[]{1, 2, 5, 7, 12, 13, 18, 49, 56, 72, 106};
+        int[] girls2 = new int[]{1, 3, 5, 7, 9, 11, 13};
+        int[] girls3 = new int[]{1, 8, 10, 20, 30, 40, 45};
+        System.out.println(find(girls, 18));
+        System.out.println(find(girls2, 8));
+        System.out.println(find(girls3, 41));
     }
 
     /**
@@ -55,7 +60,35 @@ public class Task18 {
      * </ul>
      */
     static int find(int[] girlAges, int targetAge) {
-        // Ваш код
-        return 0;
+        if (girlAges == null || girlAges.length < 1) {
+            return -1;
+        }
+
+        int middleElem = girlAges.length / 2;
+
+        //если точно попали в искомый возраст - сразу вернем
+        if (girlAges[middleElem] == targetAge) {
+            return targetAge;
+        }
+        //если неточно, но осталось 1 или 2 значения - вернем меньшее
+        if (girlAges.length <= 2) {
+            return girlAges[0];
+        }
+
+        int newGirlAgesLength = girlAges.length % 2 == 1 ? middleElem + 1 : middleElem;
+        int[] halfGirlAges = new int[newGirlAgesLength];
+
+        //спрашиваем возраст средней девчонки. Копируем с исходного массива нужных и отправляем в рекурсию
+        if (girlAges[middleElem] > targetAge) {
+            for (int i = 0; i < newGirlAgesLength; i++) {
+                halfGirlAges[i] = girlAges[i];
+            }
+        } else {
+            for (int i = 0; i < newGirlAgesLength; i++) {
+                halfGirlAges[i] = girlAges[middleElem + i];
+            }
+        }
+
+        return find(halfGirlAges, targetAge);
     }
 }
