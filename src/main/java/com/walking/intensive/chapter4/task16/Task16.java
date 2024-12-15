@@ -71,9 +71,7 @@ public class Task16 {
         }
 
         if (arr1.length > arr2.length) {
-            for (int i = minLength; i < maxLength; i++) {
-                result[i] = arr1[i];
-            }
+            System.arraycopy(arr1, minLength, result, minLength, maxLength - minLength);
         } else {
             for (int i = minLength; i < maxLength; i++) {
                 result[i] = -arr2[i];
@@ -106,21 +104,13 @@ public class Task16 {
 
         int[] result = new int[arr.length + 1];
         int maxLength = Math.max(arr.length, index);
-        for (int i = maxLength; i > index; i--) {
-            result[i] = arr[i - 1];
-        }
+        System.arraycopy(arr, index, result, index + 1, maxLength - index);
         result[index] = newValue;
-        for (int i = 0; i < index; i++) {
-            result[i] = arr[i];
-        }
+        System.arraycopy(arr, 0, result, 0, index);
         return result;
     }
 
     static boolean isContains(int[] arr, int value) {
-        if (arr.length == 0) {
-            return false;
-        }
-
         for (int element : arr) {
             if (element == value) {
                 return true;
@@ -161,35 +151,34 @@ public class Task16 {
         }
 
         if (index > arr.length) {
-            return arr;
+            int[] arr1 = new int[arr.length];
+            System.arraycopy(arr, 0, arr1, 0, arr.length);
+            return arr1;
         }
 
         int[] result = new int[arr.length - 1];
-        for (int i = 0; i < index; i++) {
-            result[i] = arr[i];
-        }
-        for (int i = index; i < arr.length - 1; i++) {
-            result[i] = arr[i + 1];
+        System.arraycopy(arr, 0, result, 0, index);
+
+        if (arr.length - 1 - index >= 0) {
+            System.arraycopy(arr, index + 1, result, index, arr.length - 1 - index);
         }
         return result;
     }
 
     static int[] removeAll(int[] arr, int... removingValues) {
         boolean[] markedIndex = new boolean[arr.length];
-        int length = 0;
+        int lengthLessening = 0;
         for (int removingValue : removingValues) {
             for (int i = 0; i < arr.length; i++) {
-
                 if (arr[i] == removingValue) {
                     markedIndex[i] = true;
-                    length++;
+                    lengthLessening++;
                 }
             }
         }
         int index = 0;
-        int[] result = new int[arr.length - length];
+        int[] result = new int[arr.length - lengthLessening];
         for (int i = 0; i < arr.length; i++) {
-
             if (!markedIndex[i]) {
                 result[index] = arr[i];
                 index++;
@@ -206,12 +195,10 @@ public class Task16 {
                     firstCounter++;
                 }
             }
+            if (firstCounter == 0) {
+                return false;
+            }
         }
-
-        if (firstCounter == 0) {
-            return false;
-        }
-
         int secondCounter = 0;
         for (int i : arr2) {
             for (int j : arr1) {
@@ -230,9 +217,7 @@ public class Task16 {
 
         int[] result = new int[arr.length];
         result[0] = arr[arr.length - 1];
-        for (int i = arr.length - 1; i > 0; i--) {
-            result[i] = arr[i - 1];
-        }
+        System.arraycopy(arr, 0, result, 1, arr.length - 1);
         return result;
     }
 }
