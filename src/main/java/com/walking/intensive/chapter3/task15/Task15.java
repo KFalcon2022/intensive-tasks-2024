@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task15;
 
+import java.util.Arrays;
+
 /**
  * Существует город, состоящий из N x N блоков, где каждый блок содержит одно здание в форме вертикальной
  * квадратной призмы. Линия горизонта города — это внешний контур, образованный всеми зданиями,
@@ -41,10 +43,14 @@ package com.walking.intensive.chapter3.task15;
 public class Task15 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] city = new int[][] {{2,1},{1,3}};
+        System.out.println(getMaxFloors(city));
     }
 
     static int getMaxFloors(int[][] city) {
         // Ваш код
+
+        int n = 0;
         return 0;
     }
 }
