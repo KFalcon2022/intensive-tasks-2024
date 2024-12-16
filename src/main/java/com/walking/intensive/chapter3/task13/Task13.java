@@ -66,7 +66,7 @@ public class Task13 {
         int newVolume = wateringCanVolume;
 
         while (i < plants.length) {
-            if (plants[i] > wateringCanVolume || plants[i]<1) {
+            if (plants[i] > wateringCanVolume || plants[i] < 1) {
                 return -1;
             }
             if (newVolume >= plants[i]) {
@@ -80,5 +80,6 @@ public class Task13 {
         }
 
         return count;
+
     }
 }
