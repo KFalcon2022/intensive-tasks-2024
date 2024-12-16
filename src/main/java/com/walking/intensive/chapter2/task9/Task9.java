@@ -59,28 +59,27 @@ public class Task9 {
 
     static String getPascalTriangle(int n) {
         // Ваш код
-        int maxlength = getLength(n);
+        int maxLength = getLength(n);
         StringBuilder finalResult = new StringBuilder();
 
         for (int i = 1; i <= n; i++) {
-
-            StringBuilder line = new StringBuilder("1 ");
+            StringBuilder line = new StringBuilder("1");
             int previous = 1;
 
             for (int j = 1; j < i; j++) {
                 previous = getResult(previous, i, j);
-
-                line.append(previous).append(" ");
+                line.append(" ").append(previous);
             }
 
-            int spaceNumber = (maxlength - getLength(i)) / 2;
+            int spaceNumber = (maxLength - line.length()) / 2;
 
             if (i < n) {
-                for (int k = 0; k < spaceNumber; k++)
+                for (int k = 0; k < spaceNumber; k++) {
                     finalResult.append(" ");
+                }
             }
 
-            finalResult.append(line.toString().trim()).append("\n");
+            finalResult.append(line).append("\n");
         }
 
         return finalResult.toString();
@@ -93,21 +92,18 @@ public class Task9 {
     }
 
     static int getLength(int n) {
-        int currentLength = 1;
+        StringBuilder line = new StringBuilder();
+        int previous = 1;
 
-        for (int i = 1; i <= n; i++) {
-
-            StringBuilder line = new StringBuilder();
-            int previous = 1;
-
-            for (int j = 1; j < i; j++) {
-                previous = getResult(previous, i, j);
-
-                line.append(previous).append(" ");
-                currentLength = line.length() + 1;
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                line.append(previous);
+            } else {
+                previous = getResult(previous, n, i);
+                line.append(" ").append(previous);
             }
         }
 
-        return currentLength;
+        return line.length();
     }
 }
