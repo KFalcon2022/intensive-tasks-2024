@@ -24,6 +24,8 @@ package com.walking.intensive.chapter4.task18;
 public class Task18 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[] array = {1, 3, 5, 7, 9, 11, 13};
+        System.out.println(find(array, 8));
     }
 
     /**
@@ -56,6 +58,42 @@ public class Task18 {
      */
     static int find(int[] girlAges, int targetAge) {
         // Ваш код
-        return 0;
+        return findBinary(girlAges, targetAge, 0, girlAges.length - 1);
+    }
+
+    static int findBinary(int[] array, int target, int start, int end) {
+        if (array.length == 0) {
+            return -1;
+        }
+
+        if (end - start == 1) {
+            // осталось 2 элемента в массиве. Вернем искомый или меньший.
+            if (target == array[end]) {
+                return array[end];
+            }
+            return array[start];
+        }
+
+        if (end == start) {
+            // остался один элемент в массиве. Вернём его, если он искомый, либо меньший, если он есть.
+            if (target == array[start]) {
+                return array[start];
+            }
+            if (start == 0) {
+                return -1;
+            }
+            return array[start - 1];
+        }
+
+        int middle = (start + end) / 2;
+
+        if (target == array[middle]) {
+            return array[middle];
+        }
+        if (target > array[middle]) {
+            return findBinary(array, target, middle + 1, end);
+        }
+        // target < array[middle]
+        return findBinary(array, target, start, middle - 1);
     }
 }
