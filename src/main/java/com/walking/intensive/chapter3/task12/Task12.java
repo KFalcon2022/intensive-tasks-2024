@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task12;
 
+import java.util.Arrays;
+
 /**
  * Девочка Света очень любит играть в мячики. Она поставила в ряд корзинки и в некоторые положила по 1 мячику.
  * За 1 раз она может переложить 1 мячик в соседнюю корзинку. В 1 корзинке может поместиться много мячиков.
@@ -40,40 +42,50 @@ package com.walking.intensive.chapter3.task12;
  */
 public class Task12 {
     public static void main(String[] args) {
-
-        for (int move : getMovementsNumber("235")) {
-            System.out.print(move + " ");
-        }
+        System.out.println(Arrays.toString(getMovementsNumber("110")));
     }
 
     static int[] getMovementsNumber(String baskets) {
 
-        if (baskets == null || !baskets.matches("[01]*")) {
-            return new int[0];
+        if (baskets == null || baskets.isEmpty()) {
+            return new int[]{};
         }
 
-        int n = baskets.length();
-        int[] movementsNumber = new int[n];
-        int totalBalls = 0;
-
-        for (char value : baskets.toCharArray()) {
-            totalBalls += (value - '0');
-        }
-
-        if (totalBalls == 0) {
-            return new int[n];
-        }
-
-        // Подсчет перемещений для каждой корзинки
-        for (int i = 0; i < n; i++) {
-            int currentMoves = 0;
-            for (int j = 0; j < n; j++) {
-                if (baskets.charAt(j) == '1') {
-                    currentMoves += Math.abs(i - j);
-                }
+        for (int i = 0; i < baskets.length(); i++) {
+            char currentChar = baskets.charAt(i);
+            if (currentChar != '0' && currentChar != '1') {
+                return new int[]{};
             }
-            movementsNumber[i] = currentMoves;
         }
-        return movementsNumber;
+
+        int[] ballsArray = new int[baskets.length()];
+        for (int i = 0; i < baskets.length(); i++) {
+            ballsArray[i] = Character.getNumericValue(baskets.charAt(i));
+        }
+
+        int[] movementsRight = new int[ballsArray.length];
+        for (int i = 0; i < ballsArray.length - 1; i++) {
+            int forwardCount = 0;
+            for (int j = i + 1; j < ballsArray.length; j++) {
+                forwardCount += ballsArray[j] * (j - i);
+            }
+            movementsRight[i] = forwardCount;
+        }
+
+        int[] movementsLeft = new int[ballsArray.length];
+        for (int i = ballsArray.length - 1; i >= 0; i--) {
+            int backwardCount = 0;
+            for (int j = 0; j <= i; j++) {
+                backwardCount += ballsArray[j] * (i - j);
+            }
+            movementsLeft[i] = backwardCount;
+        }
+
+        int[] movementNumber = new int[ballsArray.length];
+        for (int i = 0; i < ballsArray.length; i++) {
+            movementNumber[i] = movementsRight[i] + movementsLeft[i];
+        }
+
+        return movementNumber;
     }
 }
