@@ -41,10 +41,55 @@ package com.walking.intensive.chapter3.task15;
 public class Task15 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] city1 = {{3, 0, 8, 4}, {2, 4, 5, 7}, {9, 2, 6, 3}, {0, 3, 1, 0}};
+        System.out.println(getMaxFloors(city1));
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+        if (isNoValid(city)) {
+            return -1;
+        }
+
+        int[] maxInRows = new int[city.length];
+        int[] maxInColumns = new int[city.length];
+
+        for (int r = 0; r < city.length; r++) {
+            for (int c = 0; c < city.length; c++) {
+                maxInRows[r] = Math.max(maxInRows[r], city[r][c]);
+                maxInColumns[c] = Math.max(maxInColumns[c], city[r][c]);
+            }
+        }
+
+        int addedFloors = 0;
+
+        for (int r = 0; r < city.length; r++) {
+            for (int c = 0; c < city.length; c++) {
+                addedFloors += Math.min(maxInRows[r], maxInColumns[c]) - city[r][c];
+            }
+        }
+
+        return addedFloors;
+    }
+
+    static boolean isNoValid(int[][] city){
+        if (city == null || city.length == 0) {
+            return true;
+        }
+
+        int rowLength = city[0].length;
+
+        for (int[] row : city) {
+            if(row.length == 0 || rowLength != row.length) {
+                return true;
+            }
+
+            for (int column : row) {
+                if (column < 0) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
