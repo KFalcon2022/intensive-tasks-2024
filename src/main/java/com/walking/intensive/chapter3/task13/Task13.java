@@ -50,10 +50,54 @@ package com.walking.intensive.chapter3.task13;
 public class Task13 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getStepsCount(new int[]{2, 2, 3, 3}, 5));
+        System.out.println(getStepsCount(new int[]{1, 1, 1, 4, 2, 3}, 4));
     }
 
     static int getStepsCount(int[] plants, int wateringCanVolume) {
-        // Ваш код
-        return 0;
+        if (plants == null || plants.length == 0) {
+            return 0;
+        }
+        if (!isVolumePositive(wateringCanVolume) || !arePlantsPositive(plants)) {
+            return -1;
+        }
+
+        int remainingWater = wateringCanVolume;
+        int stepdCount = 0;
+
+        for (int i = 0; i < plants.length; i++) {
+            if (remainingWater > 0) {
+                stepdCount++;
+                if (plants[i] > 0) {
+                    plants[i] -= remainingWater;
+
+                    if (plants[i] < 0) {
+                        remainingWater = Math.abs(plants[i]);
+                        plants[i] = 0;
+                    } else {
+                        remainingWater = wateringCanVolume;
+                        stepdCount += i;
+                        i = -1; // Сброс индекса, чтобы начать с первого растения
+                    }
+                }
+            }
+        }
+
+        return stepdCount;
+    }
+
+    // Проверка на положительность объёма канистры
+    private static boolean isVolumePositive(int volume) {
+        return volume > 0;
+    }
+
+    // Проверка на положительность высоты растений
+    private static boolean arePlantsPositive(int[] plants) {
+        for (int plant : plants) {
+            if (plant < 1) {
+                return false;
+            }
+        }
+        return true;
     }
 }
