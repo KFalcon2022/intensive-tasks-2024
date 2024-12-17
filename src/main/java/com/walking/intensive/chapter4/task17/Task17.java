@@ -22,6 +22,10 @@ package com.walking.intensive.chapter4.task17;
 public class Task17 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        //int[] arr1 = {20,10,5,15};
+        //System.out.println(Arrays.toString(sortByBubble(sortByBubble(arr1))));
+
+        getBenchmarkOn1000();
     }
 
     /**
@@ -40,8 +44,26 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+
+        if(array == null || array.length == 0){
+            return new int[]{};
+        }
+
+        boolean changed;
+
+        do {
+            changed = false;
+            for (int i = 0; i < array.length - 1; i++) {
+                if (array[i] > array[i + 1]) {
+                    int tmp = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = tmp;
+                    changed = true;
+                }
+            }
+        } while (changed);
+
+        return array;
     }
     /**
      * Быстрая сортировка, она же QuickSort:
@@ -84,8 +106,12 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+
+        if(array == null || array.length == 0){
+            return new int[]{};
+        }
+
+        return quickSort(array, 0, array.length-1);
     }
 
     /**
@@ -97,7 +123,44 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
+        int[] array = new int[100000];
+        int min = 0;
+        int max = 1000;
+        for(int i = 0; i < array.length; i++){
+            array[i] = (int) (Math.random() * ++max) + min;
+        }
+
+        System.out.println("Пузырьковый метод: ");
+        System.out.println("__________________ ");
+        long start = System.currentTimeMillis();
+        System.out.println("Время старта: " + start);
+
+        sortByBubble(array);
+
+        long finish = System.currentTimeMillis();
+        System.out.println("Время окончания обработки: " + finish);
+
+        long time = finish - start;
+
+        System.out.println("Время обработки: " + time);
+        System.out.println("__________________ ");
+
+
+        System.out.println("QuickSort: ");
+        System.out.println("__________________ ");
+        start = System.currentTimeMillis();
+        System.out.println("Время старта: " + start);
+
+        sortByQuicksort(array);
+
+        finish = System.currentTimeMillis();
+        System.out.println("Время окончания обработки: " + finish);
+
+        time = finish - start;
+
+        System.out.println("Время обработки: " + time);
+        System.out.println("__________________ ");
+
         return 0;
     }
 
@@ -107,5 +170,33 @@ public class Task17 {
     static long getBenchmarkOn10000() {
         // Ваш код
         return 0;
+    }
+
+    public static int[] quickSort(int[] arr, int left, int right){
+        if(left < right){
+            int p = arr[(left + right) / 2];
+            int i = left;
+            int j = right;
+
+            while (i<=j){
+                while (arr[i] < p){
+                    i++;
+                }
+                while (arr[j] > p){
+                    j--;
+                }
+                if(i<=j){
+                    int tmp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = tmp;
+                    i++;
+                    j--;
+                }
+            }
+
+            quickSort(arr,left, j);
+            quickSort(arr,i, right);
+        }
+        return arr;
     }
 }
