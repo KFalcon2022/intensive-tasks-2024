@@ -21,7 +21,7 @@ public class Task18 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int[] arr = {2, 5, 7, 12, 13, 49, 56, 72, 106};
-        System.out.println(find(arr, 1));
+        System.out.println(find(arr, 107));
     }
 
     /**
@@ -53,7 +53,6 @@ public class Task18 {
      * </ul>
      */
     static int find(int[] girlAges, int targetAge) {
-
         if (girlAges.length == 0) {
             return -1;
         }
@@ -62,13 +61,10 @@ public class Task18 {
     }
 
     static int find(int[] arr, int targetAge, int left, int right) {
-
         if (left >= right) {
-
             if (arr[left] > targetAge) {
                 return left == 0 ? -1 : arr[left - 1];
             }
-
             return arr[left];
         }
 
@@ -78,10 +74,7 @@ public class Task18 {
             return targetAge;
         }
 
-        if (arr[pivotIndex] > targetAge) {
-            return find(arr, targetAge, left, pivotIndex - 1);
-        }
-
-        return find(arr, targetAge, pivotIndex + 1, right);
+        return arr[pivotIndex] > targetAge ? find(arr, targetAge, left, pivotIndex - 1) :
+                find(arr, targetAge, pivotIndex + 1, right);
     }
 }
