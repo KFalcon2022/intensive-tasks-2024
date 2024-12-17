@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter3.task15;
 
-import java.util.Arrays;
-
 /**
  * Существует город, состоящий из N x N блоков, где каждый блок содержит одно здание в форме вертикальной
  * квадратной призмы. Линия горизонта города — это внешний контур, образованный всеми зданиями,
@@ -43,14 +41,47 @@ import java.util.Arrays;
 public class Task15 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[][] city = new int[][] {{2,1},{1,3}};
+        int[][] city = new int[][]{{3, 0, 8, 4}, {2, 4, 5, 7}, {9, 2, 6, 3}, {0, 3, 1, 0}};
         System.out.println(getMaxFloors(city));
     }
 
     static int getMaxFloors(int[][] city) {
         // Ваш код
+        for (int[] ints : city) {
+            if (city[0].length != city.length) {
+                return -1;
+            }
+            for (int j = 0; j < city.length; j++) {
+                if (ints.length != city[j].length || ints[j] < 0) {
+                    return -1;
+                }
+            }
+        }
 
-        int n = 0;
-        return 0;
+        int countFloor = 0;
+        for (int i = 0; i < city.length; i++) {
+            int maxRow = city[i][0];
+            int maxColumn = city[0][i];
+
+            for (int j = 0; j < city[i].length; j++) {
+                if (city[i][j] > maxRow) {
+                    maxRow = city[i][j];
+                }
+            }
+
+            for (int j = 0; j < city.length; j++) {
+                if (city[j][i] > maxColumn) {
+                    maxColumn = city[j][i];
+                }
+            }
+
+            for (int j = 0; j < city[i].length; j++) {
+                if (city[i][j] < maxRow && city[j][i] < maxColumn) {
+                    countFloor += Math.min(maxRow - city[i][j], maxColumn - city[j][i]);
+                }
+            }
+        }
+
+        return  countFloor;
     }
 }
