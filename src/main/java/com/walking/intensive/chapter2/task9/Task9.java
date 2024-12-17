@@ -51,15 +51,14 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
         System.out.println(getPascalTriangle(5));
     }
 
     static String getPascalTriangle(int n) {
 
-        // Проверка на корректность входных данных
         if (n < 1) {
-            return "";  // Возвращаем пустую строку при некорректных данных
+            return "";
         }
 
         StringBuilder result = new StringBuilder();
@@ -75,12 +74,19 @@ public class Task9 {
         }
 
         // Форматирование строк с пробелами
-        String[] lines = result.toString().split("\n");
         StringBuilder pascalTriangle = new StringBuilder();
 
-        for (String line : lines) {
+        // Разделяем результат на строки и форматируем их
+        int startIndex = 0;
+        while (startIndex < result.length()) {
+            int endIndex = result.indexOf("\n", startIndex);
+            if (endIndex == -1) {
+                endIndex = result.length(); // Если это последняя строка
+            }
+            String line = result.substring(startIndex, endIndex);
             int leftSpaces = (maxWidthLine - line.length()) / 2;
             pascalTriangle.append(generateSpaces(leftSpaces)).append(line).append("\n");
+            startIndex = endIndex + 1; // Переход к следующей строке
         }
 
         return pascalTriangle.toString();
@@ -89,12 +95,7 @@ public class Task9 {
     static String generateSpaces(int count) {
 
         // Генерация строки пробелов
-        StringBuilder voids = new StringBuilder();
-
-        for (int i = 0; i < count; i++) {
-            voids.append(" ");
-        }
-        return voids.toString();
+        return " ".repeat(Math.max(0, count));
     }
 
     static String generateTriangleLine(int n) {
