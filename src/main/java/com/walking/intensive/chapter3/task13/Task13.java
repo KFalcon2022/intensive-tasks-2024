@@ -77,7 +77,6 @@ public class Task13 {
                         remainingWater = Math.abs(plants[i]);
                         plants[i] = 0;
                     } else {
-                        //вода кончилась, идем к реке
                         remainingWater = wateringCanVolume;
                         stepsCount += i;
                         i = 0;
