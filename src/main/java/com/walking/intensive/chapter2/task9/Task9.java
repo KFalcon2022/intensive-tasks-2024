@@ -51,45 +51,46 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-        int n = 18;
+        int n = 15;
 
         System.out.println(getPascalTriangle(n));
     }
 
     static int binominalCoefficient(int n, int x) {
-        int result = 1;
-        for (int i = 0; i < x; i++) {
-            result *= (n - 1);
-            result /= (i + 1);
+        if (x > n) {
+            return 0;
         }
 
-        return result;
+        if (x == 0 || x == n) {
+            return 1;
+        }
+
+        return binominalCoefficient(n - 1, x - 1) + binominalCoefficient(n - 1, x);
     }
 
     static String getPascalTriangle(int n) {
         if (n <= 0) {
-            return " ";
+            return "";
         }
 
         StringBuilder result = new StringBuilder();
 
         int maxWidth = String.valueOf(binominalCoefficient(n - 1, (n - 1) / 2)).length();
+        int lastLineWidth = maxWidth * (n - 1) + (n - 1);
 
         for (int i = 0; i < n; i++) {
-            int number = 1;
 
-            int numberOfSpaces = (maxWidth * (n - i - 1)) / 2;
+            int numberOfSpaces = (lastLineWidth - (maxWidth * i + (i))) / 2;
             result.append(" ".repeat(numberOfSpaces));
 
             for (int j = 0; j <= i; j++) {
-                result.append(String.format("%" + maxWidth + "d", number));
+                result.append(String.format("%" + maxWidth + "d", binominalCoefficient(i, j)));
 
                 if (j < i) {
                     result.append(" ");
                 }
-
-                number = (number * (i - j)) / (j + 1);
             }
+
             result.append("\n");
         }
 
