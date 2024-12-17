@@ -19,8 +19,8 @@ import static java.lang.Math.*;
  */
 public class Task19 {
     public static void main(String[] args) {
-        Sphere s = new Sphere(-1, 0, 0, 2);
-        Parallelepiped p = new Parallelepiped(-1, -1, -1, 1, 1, 1);
+        Sphere s = new Sphere(12, 12, 12, 4);
+        Parallelepiped p = new Parallelepiped(0, 0, 0, 10, 10, 10);
 
         System.out.println(isIntersected(s, p));
     }
@@ -31,7 +31,6 @@ public class Task19 {
         if (s.getX() >= p.getX1() && s.getX() <= p.getX2() &&
                 s.getY() >= p.getY1() && s.getY() <= p.getY2() &&
                 s.getZ() >= p.getZ1() && s.getZ() <= p.getZ2()) {
-
             return true;
         }
 
@@ -39,50 +38,30 @@ public class Task19 {
         if ((s.getX() < p.getX1() || s.getX() > p.getX2()) &&
                 (s.getY() < p.getY1() || s.getY() > p.getY2()) &&
                 (s.getZ() < p.getZ1() || s.getZ() > p.getZ2())) {
-            {
-
-                return s.getR() >= getDistanceSphereCenterNearestCorner(s, p);
-            }
-        }
-
-        // Если центр сферы внутри внешнего сектора в направлении луча из центра параллелепипеда в ребро в плоскости YZ
-
-        if ((s.getX() <= p.getX1() || s.getX() >= p.getX2()) &&
-                (s.getY() <= p.getY1() || s.getY() >= p.getY2()) &&
-                (s.getZ() >= p.getZ1() && s.getZ() <= p.getZ2())) {
-
-            double minDistance = Double.MAX_VALUE;
-            double[] distanceEdge = new double[4];
-            distanceEdge[0] = getDistanceTwoPoints2D(s.getY(), s.getZ(), p.getY1(), p.getZ1());
-            distanceEdge[1] = getDistanceTwoPoints2D(s.getY(), s.getZ(), p.getY1(), p.getZ2());
-            distanceEdge[2] = getDistanceTwoPoints2D(s.getY(), s.getZ(), p.getY2(), p.getZ1());
-            distanceEdge[3] = getDistanceTwoPoints2D(s.getY(), s.getZ(), p.getY2(), p.getZ2());
-
-            for (int i = 0; i < 4; i++) {
-                minDistance = min(minDistance, distanceEdge[i]);
-            }
-
-            return s.getR() >= minDistance;
+            return s.getR() >= getDistanceSphereCenterNearestCorner(s, p);
         }
 
         // Если центр сферы внутри внешнего сектора в направлении луча из центра параллелепипеда в ребро в плоскости XY
 
+        if ((s.getX() <= p.getX1() || s.getX() >= p.getX2()) &&
+                (s.getY() <= p.getY1() || s.getY() >= p.getY2()) &&
+                (s.getZ() >= p.getZ1() && s.getZ() <= p.getZ2())) {
+            return s.getR() >= getDistanceSphereCenterNearestEdge2D(s.getX(), s.getY(), p.getX1(), p.getY1(), p.getX2(), p.getY2());
+        }
+
+        // Если центр сферы внутри внешнего сектора в направлении луча из центра параллелепипеда в ребро в плоскости YZ
+
         if ((s.getZ() <= p.getZ1() || s.getZ() >= p.getZ2()) &&
                 (s.getY() <= p.getY1() || s.getY() >= p.getY2()) &&
                 (s.getX() >= p.getX1() && s.getX() <= p.getX2())) {
+            return s.getR() >= getDistanceSphereCenterNearestEdge2D(s.getY(), s.getZ(), p.getY1(), p.getZ1(), p.getY2(), p.getZ2());
+        }
 
-            double minDistance = Double.MAX_VALUE;
-            double[] distanceEdge = new double[4];
-            distanceEdge[0] = getDistanceTwoPoints2D(s.getY(), s.getX(), p.getY1(), p.getX1());
-            distanceEdge[1] = getDistanceTwoPoints2D(s.getY(), s.getX(), p.getY1(), p.getX2());
-            distanceEdge[2] = getDistanceTwoPoints2D(s.getY(), s.getX(), p.getY2(), p.getX1());
-            distanceEdge[3] = getDistanceTwoPoints2D(s.getY(), s.getX(), p.getY2(), p.getX2());
-
-            for (int i = 0; i < 4; i++) {
-                minDistance = min(minDistance, distanceEdge[i]);
-            }
-
-            return s.getR() >= minDistance;
+// Если центр сферы внутри внешнего сектора в направлении луча из центра параллелепипеда в ребро в плоскости XZ
+        if ((s.getX() <= p.getX1() || s.getX() >= p.getX2()) &&
+                (s.getZ() <= p.getZ1() || s.getZ() >= p.getZ2()) &&
+                (s.getY() >= p.getY1() && s.getY() <= p.getY2())) {
+            return s.getR() >= getDistanceSphereCenterNearestEdge2D(s.getX(), s.getZ(), p.getX1(), p.getZ1(), p.getX2(), p.getZ2());
         }
 
         // Центр сферы вне параллепипеда - Проверяем каждую сторону параллелепипеда
@@ -120,13 +99,23 @@ public class Task19 {
     }
 
     static double getDistanceTwoPoints3D(int[] coordinate1, int[] coordinate2) {
-
         return sqrt(pow(coordinate1[0] - coordinate2[0], 2) + pow(coordinate1[1] - coordinate2[1], 2) +
                 pow(coordinate1[2] - coordinate2[2], 2));
     }
 
     static double getDistanceTwoPoints2D(int x1, int y1, int x2, int y2) {
-
         return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+    }
+
+    static double getDistanceSphereCenterNearestEdge2D(int x, int y, int x1, int y1, int x2, int y2) {
+
+        double minDistance = Double.MAX_VALUE;
+
+        minDistance = min(minDistance, getDistanceTwoPoints2D(x, y, x1, y1));
+        minDistance = min(minDistance, getDistanceTwoPoints2D(x, y, x1, y2));
+        minDistance = min(minDistance, getDistanceTwoPoints2D(x, y, x2, y1));
+        minDistance = min(minDistance, getDistanceTwoPoints2D(x, y, x2, y2));
+
+        return minDistance;
     }
 }
