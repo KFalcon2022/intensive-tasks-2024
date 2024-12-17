@@ -11,20 +11,47 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-        String inputString = "Муза, ранясь шилом опыта, ты помолишься на разум";
+        String inputString = null;
         boolean result = isPalindrome(inputString);
         System.out.println(result);
     }
 
     static boolean isPalindrome(String inputString) {
-        String ignorePunctuationSpacesCase = inputString.replaceAll("[^a-zA-Zа-яА-ЯёЁ0-9]", "").toLowerCase();
+        if (inputString == null || inputString.length() < 2) {
+            return false;
+        }
 
+        int n = inputString.length();
         int leftPartLine = 0;
-        int rightPartLine = ignorePunctuationSpacesCase.length() - 1;
+        int rightPartLine = n - 1;
 
-        while ((leftPartLine < rightPartLine)) {
+        while (leftPartLine < rightPartLine) {
 
-            if (ignorePunctuationSpacesCase.charAt(leftPartLine) != ignorePunctuationSpacesCase.charAt(rightPartLine)) {
+            while (leftPartLine < n) {
+                char leftChar = inputString.charAt(leftPartLine);
+                if (Character.isLetterOrDigit(leftChar)) {
+                    break;
+                }
+                leftPartLine++;
+            }
+
+            while (rightPartLine >= 0) {
+                char rightChar = inputString.charAt(rightPartLine);
+
+                if (Character.isLetterOrDigit(rightChar)) {
+                    break;
+                }
+                rightPartLine--;
+            }
+
+            if (leftPartLine >= rightPartLine) {
+                break;
+            }
+
+            char leftChar = Character.toLowerCase(inputString.charAt(leftPartLine));
+            char rightChar = Character.toLowerCase(inputString.charAt(rightPartLine));
+
+            if (leftChar != rightChar) {
                 return false;
             }
 
