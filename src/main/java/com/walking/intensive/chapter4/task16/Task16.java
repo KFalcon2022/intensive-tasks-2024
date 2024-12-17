@@ -49,6 +49,7 @@ public class Task16 {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -69,12 +70,13 @@ public class Task16 {
             return arr;
         }
 
-        int[] result = new int[arr.length];
+        int[] each = new int[arr.length];
 
         for (int i = 0; i < arr.length; i++) {
-            result[i] = arr[i] + 1;
+            each[i] = arr[i] + 1;
         }
-        return result;
+
+        return each;
     }
 
     /**
@@ -97,18 +99,20 @@ public class Task16 {
             return arr1;
         }
 
-        int[] result = new int[Math.max(arr1.length, arr2.length)];
+        int[] each = new int[Math.max(arr1.length, arr2.length)];
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] = getArrValue(arr1, i) * getArrValue(arr2, i);
+        for (int i = 0; i < each.length; i++) {
+            each[i] = getArrValue(arr1, i) * getArrValue(arr2, i);
         }
-        return result;
+
+        return each;
     }
 
     static int getArrValue(int[] arr, int i) {
         if (arr.length < i + 1) {
             return 0;
         }
+
         return arr[i];
     }
 
@@ -140,12 +144,13 @@ public class Task16 {
             return arr1;
         }
 
-        int[] result = new int[Math.max(arr1.length, arr2.length)];
+        int[] each = new int[Math.max(arr1.length, arr2.length)];
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] = getArrValue(arr1, i) - getArrValue(arr2, i);
+        for (int i = 0; i < each.length; i++) {
+            each[i] = getArrValue(arr1, i) - getArrValue(arr2, i);
         }
-        return result;
+
+        return each;
     }
 
     /**
@@ -165,12 +170,13 @@ public class Task16 {
             return arr;
         }
 
-        int[] result = new int[arr.length];
+        int[] reversed = new int[arr.length];
 
         for (int i = 0; i < arr.length; i++) {
-            result[i] = arr[arr.length - 1 - i];
+            reversed[i] = arr[arr.length - 1 - i];
         }
-        return result;
+
+        return reversed;
     }
 
     /**
@@ -225,8 +231,13 @@ public class Task16 {
             return true;
         }
 
-        sort(arr);
-        return isContainsBinarySearch(arr, value);
+        for (int element : arr) {
+            if (element == value) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     static boolean isContainsBinarySearch(int[] arr, int value) {
@@ -245,6 +256,7 @@ public class Task16 {
                 low = mid + 1;
             }
         }
+
         return false;
     }
 
@@ -300,6 +312,7 @@ public class Task16 {
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -333,6 +346,7 @@ public class Task16 {
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -357,16 +371,17 @@ public class Task16 {
             return arr;
         }
 
-        int[] result = new int[arr.length - 1];
-        for (int i = 0; i < result.length; i++) {
+        int[] indexArr = new int[arr.length - 1];
+        for (int i = 0; i < indexArr.length; i++) {
 
             if (i < index) {
-                result[i] = arr[i];
+                indexArr[i] = arr[i];
             } else {
-                result[i] = arr[i + 1];
+                indexArr[i] = arr[i + 1];
             }
         }
-        return result;
+
+        return indexArr;
     }
 
     /**
@@ -407,6 +422,7 @@ public class Task16 {
         for (int i = 0; i < result.length; i++) {
             result[i] = tempArr[i];
         }
+
         return result;
     }
 
@@ -423,6 +439,7 @@ public class Task16 {
 
         sort(arr1);
         sort(arr2);
+
         return isSimilarSearch(arr1, arr2) && isSimilarSearch(arr2, arr1);
     }
 
@@ -435,6 +452,7 @@ public class Task16 {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -461,6 +479,7 @@ public class Task16 {
         for (int i = 1; i < arr.length; i++) {
             result[i] = arr[i - 1];
         }
+
         return result;
     }
 }
