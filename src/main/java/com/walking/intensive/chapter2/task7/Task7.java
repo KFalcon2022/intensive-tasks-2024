@@ -31,6 +31,10 @@ public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         System.out.println(getFriendlyPair(10000));
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(i + "; " + getDivisorsSum(i));
+        }
+
     }
 
     static int getFriendlyPair(int n) {
@@ -38,14 +42,14 @@ public class Task7 {
             return -1;
         }
 
-        int i = 1;
         int maxSum = 0;
         int maxNumber = 0;
 
-        while (++i < n) {
+        for (int i = 1; i < n; i++) {
             int sum = getDivisorsSum(i);
+            int sum2 = getDivisorsSum(sum);
 
-            if (i == getDivisorsSum(sum) && sum != getDivisorsSum(sum)) {
+            if (i == sum2 && sum != sum2) {
                 if (maxSum < i + sum) {
                     maxSum = i + sum;
                     maxNumber = max(i, sum);
@@ -57,21 +61,16 @@ public class Task7 {
     }
 
     static int getDivisorsSum(int a) {
-        int divisorsSum = 0;
+        int divisorsSum = 1;
         int maxDivisor = a;
-        int i = 1;
 
-        while (++i < maxDivisor) {
+        for (int i = 2; i < maxDivisor; i++) {
             if (a % i == 0) {
                 maxDivisor = a / i;
-                if (maxDivisor == i) {
-                    divisorsSum += i;
-                } else {
-                    divisorsSum += i + maxDivisor;
-                }
+                divisorsSum = maxDivisor == i ? divisorsSum + i : divisorsSum + i + maxDivisor;
             }
         }
 
-        return divisorsSum + 1;
+        return divisorsSum;
     }
 }
