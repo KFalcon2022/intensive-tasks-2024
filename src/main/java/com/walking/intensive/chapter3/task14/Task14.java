@@ -43,11 +43,71 @@ package com.walking.intensive.chapter3.task14;
  */
 public class Task14 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] objectLocations = {{1, 3}, {3, 3}, {5, 3}, {2, 2}};
+        int[][] radars = {{2, 3, 1}, {4, 3, 1}, {1, 1, 2}};
+
+        int[] result = getObjectCounts(objectLocations, radars);
+
+        // Вывод результата
+        for (int count : result) {
+            System.out.print(count + " ");
+        }
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+
+
+        // Проверка на корректность входных данных
+        if (objectLocations == null || radars == null) {
+            return new int[0];
+        }
+
+        int[] objectCounts = new int[radars.length];
+
+        // Проходим по каждому радару
+        for (int j = 0; j < radars.length; j++) {
+            if (radars[j].length != 3) {
+                return new int[0];
+            }
+
+            int radarX = radars[j][0]; // Координата X радара
+            int radarY = radars[j][1]; // Координата Y радара
+            int radarRadius = radars[j][2]; // Радиус действия радара
+
+            // Проверка на положительность радиуса
+            if (radarRadius < 0) {
+                return new int[0];
+            }
+
+            // Счётчик объектов, видимых на текущем радаре
+            int count = 0;
+
+            for (int[] objectLocation : objectLocations) {
+                if (objectLocation.length != 2) {
+                    return new int[0];
+                }
+
+                int objectX = objectLocation[0]; // Координата X объекта
+                int objectY = objectLocation[1]; // Координата Y объекта
+
+                // Находится ли объект в радиусе действия радара
+                if (isInRadarRange(objectX, objectY, radarX, radarY, radarRadius)) {
+                    count++; // если видим
+                }
+            }
+            objectCounts[j] = count; // Количество видимых объектов
+        }
+
+        return objectCounts;
+    }
+
+    // Находится ли объект в радиусе действия радара
+    private static boolean isInRadarRange(int objectX, int objectY, int radarX, int radarY, int radarRadius) {
+
+        // Вычисляем квадрат расстояния между объектом и радаром
+        int distanceSquared = (objectX - radarX) * (objectX - radarX) + (objectY - radarY) * (objectY - radarY);
+        int radiusSquared = radarRadius * radarRadius; // Квадрат радиуса
+
+        return distanceSquared <= radiusSquared;
     }
 }
