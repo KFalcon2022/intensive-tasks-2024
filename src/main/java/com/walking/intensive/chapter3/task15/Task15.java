@@ -44,21 +44,14 @@ public class Task15 {
     }
 
     static int getMaxFloors(int[][] city) {
-        if (city.length == 0) {
+        if (!isValid(city)) {
             return -1;
         }
 
         int[][] maxFloorRowColumn = new int[2][city.length];
 
         for (int i = 0; i < city.length; i++) {
-            if (city[i].length != city.length) {
-                return -1;
-            }
-
             maxFloorRowColumn[0][i] = getMaxFloorRow(city[i]);
-            if (maxFloorRowColumn[0][i] < 0) {
-                return -1;
-            }
         }
 
         for (int i = 0; i < city.length; i++) {
@@ -75,16 +68,29 @@ public class Task15 {
         return maxFloors;
     }
 
+    static boolean isValid(int[][] city) {
+        if (city.length == 0) {
+            return false;
+        }
+
+        for (int[] cityRow : city) {
+            if (cityRow.length != city.length) {
+                return false;
+            }
+
+            for (int building : cityRow) {
+                if (building < 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     static int getMaxFloorRow(int[] cityRow) {
         int maxFloorRow = 0;
         for (int building : cityRow) {
-            if (building < 0) {
-                return -1;
-            }
-
-            if (building > maxFloorRow) {
-                maxFloorRow = building;
-            }
+            maxFloorRow = Math.max(maxFloorRow, building);
         }
         return maxFloorRow;
     }
@@ -92,9 +98,7 @@ public class Task15 {
     static int getMaxFloorColumn(int[][] city, int i) {
         int maxFloorColumn = 0;
         for (int[] cityRow : city) {
-            if (cityRow[i] > maxFloorColumn) {
-                maxFloorColumn = cityRow[i];
-            }
+            maxFloorColumn = Math.max(maxFloorColumn, cityRow[i]);
         }
         return maxFloorColumn;
     }
