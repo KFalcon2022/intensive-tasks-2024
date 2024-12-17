@@ -85,7 +85,9 @@ public class Task9 {
             }
             String line = result.substring(startIndex, endIndex);
             int leftSpaces = (maxWidthLine - line.length()) / 2;
-            pascalTriangle.append(generateSpaces(leftSpaces)).append(line).append("\n");
+            pascalTriangle
+                    .append(generateSpaces(leftSpaces))
+                    .append(line).append("\n");
             startIndex = endIndex + 1; // Переход к следующей строке
         }
 
