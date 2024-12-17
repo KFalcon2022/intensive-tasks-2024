@@ -18,13 +18,13 @@ import java.util.Random;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task19 {
-    private final static Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
         Point a = getRandomPoint();
         Point b = getRandomPoint();
         Point c = getRandomPoint();
-        int r = getRandomInt();
+        int r = RANDOM.nextInt(1, 10);
 
         Parallelepiped parallelepiped = new Parallelepiped(a, b);
         Sphere sphere = new Sphere(c, r);
@@ -39,7 +39,18 @@ public class Task19 {
     }
 
     public static boolean isIntersected(Sphere sphere, Parallelepiped parallelepiped) {
-        return sphere.getCenter().getDistanceTo(parallelepiped.getNearestPointTo(sphere.getCenter())) <= sphere.getRadius();
+        Point nearestToSphereCenterPointOnParallelepiped = parallelepiped.getNearestPointTo(sphere.getCenter());
+
+        double minDistanceBetweenSphereCenterAndParallelepiped = sphere.getCenter()
+                .getDistanceTo(nearestToSphereCenterPointOnParallelepiped);
+
+        Point farthestFromSphereCenterPointOnParallelepiped = parallelepiped.getFarthestPointTo(sphere.getCenter());
+
+        double maxDistanceBetweenSphereCenterAndParallelepiped = sphere.getCenter()
+                .getDistanceTo(farthestFromSphereCenterPointOnParallelepiped);
+
+        return minDistanceBetweenSphereCenterAndParallelepiped <= sphere.getRadius()
+                && maxDistanceBetweenSphereCenterAndParallelepiped >= sphere.getRadius();
     }
 
     private static Point getRandomPoint() {
@@ -47,6 +58,6 @@ public class Task19 {
     }
 
     private static int getRandomInt() {
-        return random.nextInt(-9, 10);
+        return RANDOM.nextInt(-9, 10);
     }
 }

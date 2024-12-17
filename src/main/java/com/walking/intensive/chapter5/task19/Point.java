@@ -1,9 +1,11 @@
 package com.walking.intensive.chapter5.task19;
 
+import static java.lang.Math.*;
+
 public class Point {
-    private int x;
-    private int y;
-    private int z;
+    private final int x;
+    private final int y;
+    private final int z;
 
     public Point(int x, int y, int z) {
         this.x = x;
@@ -15,24 +17,12 @@ public class Point {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public int getZ() {
         return z;
-    }
-
-    public void setZ(int z) {
-        this.z = z;
     }
 
     @Override
@@ -41,10 +31,6 @@ public class Point {
     }
 
     public double getDistanceTo(Point other) {
-        return Math.sqrt(
-                Math.pow(other.getX() - this.getX(), 2) +
-                        Math.pow(other.getY() - this.getY(), 2) +
-                        Math.pow(other.getZ() - this.getZ(), 2)
-        );
+        return sqrt(pow(other.getX() - x, 2) + pow(other.getY() - y, 2) + pow(other.getZ() - z, 2));
     }
 }
