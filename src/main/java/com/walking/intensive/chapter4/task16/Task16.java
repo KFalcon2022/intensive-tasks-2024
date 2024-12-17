@@ -70,13 +70,13 @@ public class Task16 {
             return arr;
         }
 
-        int[] each = new int[arr.length];
+        int[] incremented = new int[arr.length];
 
         for (int i = 0; i < arr.length; i++) {
-            each[i] = arr[i] + 1;
+            incremented[i] = arr[i] + 1;
         }
 
-        return each;
+        return incremented;
     }
 
     /**
@@ -99,13 +99,13 @@ public class Task16 {
             return arr1;
         }
 
-        int[] each = new int[Math.max(arr1.length, arr2.length)];
+        int[] multiplyed = new int[Math.max(arr1.length, arr2.length)];
 
-        for (int i = 0; i < each.length; i++) {
-            each[i] = getArrValue(arr1, i) * getArrValue(arr2, i);
+        for (int i = 0; i < multiplyed.length; i++) {
+            multiplyed[i] = getArrValue(arr1, i) * getArrValue(arr2, i);
         }
 
-        return each;
+        return multiplyed;
     }
 
     static int getArrValue(int[] arr, int i) {
@@ -144,13 +144,13 @@ public class Task16 {
             return arr1;
         }
 
-        int[] each = new int[Math.max(arr1.length, arr2.length)];
+        int[] subtracted = new int[Math.max(arr1.length, arr2.length)];
 
-        for (int i = 0; i < each.length; i++) {
-            each[i] = getArrValue(arr1, i) - getArrValue(arr2, i);
+        for (int i = 0; i < subtracted.length; i++) {
+            subtracted[i] = getArrValue(arr1, i) - getArrValue(arr2, i);
         }
 
-        return each;
+        return subtracted;
     }
 
     /**
@@ -240,7 +240,7 @@ public class Task16 {
         return false;
     }
 
-    static boolean isContainsBinarySearch(int[] arr, int value) {
+    static boolean isSimilarBinarySearch(int[] arr, int value) {
         int low = 0;
         int high = arr.length - 1;
 
@@ -371,17 +371,17 @@ public class Task16 {
             return arr;
         }
 
-        int[] indexArr = new int[arr.length - 1];
-        for (int i = 0; i < indexArr.length; i++) {
+        int[] removed = new int[arr.length - 1];
+        for (int i = 0; i < removed.length; i++) {
 
             if (i < index) {
-                indexArr[i] = arr[i];
+                removed[i] = arr[i];
             } else {
-                indexArr[i] = arr[i + 1];
+                removed[i] = arr[i + 1];
             }
         }
 
-        return indexArr;
+        return removed;
     }
 
     /**
@@ -417,13 +417,13 @@ public class Task16 {
             }
         }
 
-        int[] result = new int[tempArrIndex];
+        int[] removed = new int[tempArrIndex];
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] = tempArr[i];
+        for (int i = 0; i < removed.length; i++) {
+            removed[i] = tempArr[i];
         }
 
-        return result;
+        return removed;
     }
 
     /**
@@ -448,7 +448,7 @@ public class Task16 {
             if (i > 0 && arr1[i] == arr1[i - 1]) {
                 continue;
             }
-            if (!isContainsBinarySearch(arr2, arr1[i])) {
+            if (!isSimilarBinarySearch(arr2, arr1[i])) {
                 return false;
             }
         }
@@ -473,13 +473,13 @@ public class Task16 {
             return arr;
         }
 
-        int[] result = new int[arr.length];
-        result[0] = arr[arr.length - 1];
+        int[] shifted = new int[arr.length];
+        shifted[0] = arr[arr.length - 1];
 
         for (int i = 1; i < arr.length; i++) {
-            result[i] = arr[i - 1];
+            shifted[i] = arr[i - 1];
         }
 
-        return result;
+        return shifted;
     }
 }
