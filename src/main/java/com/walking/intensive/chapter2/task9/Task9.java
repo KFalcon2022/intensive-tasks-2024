@@ -1,5 +1,6 @@
 package com.walking.intensive.chapter2.task9;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -54,7 +55,7 @@ import java.util.Scanner;
 public class Task9 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Введите колчество строк: ");
+        System.out.print("Введите колчество строк: ");
         int n = in.nextInt();
         in.close();
 
@@ -63,10 +64,8 @@ public class Task9 {
 
     static String getPascalTriangle(int n) {
         int[][] pascalTriangle = new int[n][];
-        int[] line1 = {1};
-        int[] line2 = {1, 1};
-        pascalTriangle[0] = line1;
-        pascalTriangle[1] = line2;
+        pascalTriangle[0] = new int[]{1};
+        pascalTriangle[1] = new int[]{1, 1};
 
         for (int i = 2; i < pascalTriangle.length; i++) {
             for (int j = 0; j <= i; j++) {
@@ -74,15 +73,12 @@ public class Task9 {
                     pascalTriangle[i][j] = 1;
                 } else {
                     pascalTriangle[i][j] = pascalTriangle[i - 1][j] + pascalTriangle[i - 1][j - 1];
-                    String line = "";
-                    line += pascalTriangle[i][j];
-                    return line + "\n";
                 }
 
             }
 
         }
 
-        return "";
+        return Arrays.toString(pascalTriangle);
     }
 }
