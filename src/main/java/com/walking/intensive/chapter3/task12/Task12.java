@@ -42,7 +42,7 @@ import java.util.Arrays;
  */
 public class Task12 {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(getMovementsNumber("110")));
+        System.out.println(Arrays.toString(getMovementsNumber("001011")));
     }
 
     static int[] getMovementsNumber(String baskets) {
@@ -51,39 +51,24 @@ public class Task12 {
             return new int[]{};
         }
 
-        for (int i = 0; i < baskets.length(); i++) {
-            char currentChar = baskets.charAt(i);
-            if (currentChar != '0' && currentChar != '1') {
+        int length = baskets.length();
+        int[] movementNumber = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            if (baskets.charAt(i) != '0' && baskets.charAt(i) != '1') {
                 return new int[]{};
             }
         }
 
-        int[] ballsArray = new int[baskets.length()];
-        for (int i = 0; i < baskets.length(); i++) {
-            ballsArray[i] = Character.getNumericValue(baskets.charAt(i));
-        }
+        for (int i = 0; i < length; i++) {
+            int currentMovements = 0;
 
-        int[] movementsRight = new int[ballsArray.length];
-        for (int i = 0; i < ballsArray.length - 1; i++) {
-            int forwardCount = 0;
-            for (int j = i + 1; j < ballsArray.length; j++) {
-                forwardCount += ballsArray[j] * (j - i);
+            for (int j = 0; j < length; j++) {
+                if (baskets.charAt(j) == '1') {
+                    currentMovements += Math.abs(i - j);
+                }
             }
-            movementsRight[i] = forwardCount;
-        }
-
-        int[] movementsLeft = new int[ballsArray.length];
-        for (int i = ballsArray.length - 1; i >= 0; i--) {
-            int backwardCount = 0;
-            for (int j = 0; j <= i; j++) {
-                backwardCount += ballsArray[j] * (i - j);
-            }
-            movementsLeft[i] = backwardCount;
-        }
-
-        int[] movementNumber = new int[ballsArray.length];
-        for (int i = 0; i < ballsArray.length; i++) {
-            movementNumber[i] = movementsRight[i] + movementsLeft[i];
+            movementNumber[i] = currentMovements;
         }
 
         return movementNumber;
