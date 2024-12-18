@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task16;
 
+import java.util.Arrays;
+
 /**
  * После завершения интенсива вы достаточно быстро познакомитесь с Java Collection Framework.
  * Это знакомство позволит сильно упростить работу с массивами данных.
@@ -21,6 +23,19 @@ package com.walking.intensive.chapter4.task16;
 public class Task16 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        int[] arr = new int[]{1, 2, 3, 4, 6, 12, 66, 35, 78};
+        int[] arr1 = new int[]{6, -2};
+        int[] arr2 = new int[]{4, 2, 3};
+        int index = 15;
+        int newValue = 18;
+
+//        System.out.println(isEqualSize(arr1, arr2));
+//        System.out.println(isEquals(arr1, arr2));
+//        System.out.println(Arrays.toString(incrementEach(arr)));
+//        System.out.println(Arrays.toString(multiplyEach(arr1, arr2)));
+//        System.out.println(Arrays.toString(subtractEach(arr1, arr2)));
+//        System.out.println(Arrays.toString(reverse(arr)));
+        System.out.println(Arrays.toString(add(arr, index, newValue)));
     }
 
     /**
@@ -30,7 +45,7 @@ public class Task16 {
      */
     static boolean isEqualSize(int[] arr1, int[] arr2) {
         // Ваш код
-        return false;
+        return arr1.length != 0 && arr2.length != 0 && arr1.length == arr2.length;
     }
 
     /**
@@ -42,7 +57,17 @@ public class Task16 {
      */
     static boolean isEquals(int[] arr1, int[] arr2) {
         // Ваш код
-        return false;
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -59,7 +84,17 @@ public class Task16 {
      */
     static int[] incrementEach(int[] arr) {
         // Ваш код
-        return null;
+        if (arr.length == 0) {
+            return new int[]{};
+        }
+
+        int[] newArr = new int[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i] + 1;
+        }
+
+        return newArr;
     }
 
     /**
@@ -79,7 +114,19 @@ public class Task16 {
      */
     static int[] multiplyEach(int[] arr1, int[] arr2) {
         // Ваш код
-        return null;
+        if (arr1.length == 0 && arr2.length == 0) {
+            return new int[]{};
+        }
+
+        int maxlength = Math.max(arr1.length, arr2.length);
+        int[] newArr1 = getNewArray(arr1, maxlength);
+        int[] newArr2 = getNewArray(arr2, maxlength);
+        int[] result = new int[maxlength];
+
+        for (int i = 0; i < maxlength; i++) {
+            result[i] = newArr1[i] * newArr2[i];
+        }
+        return result;
     }
 
     /**
@@ -99,7 +146,19 @@ public class Task16 {
      */
     static int[] subtractEach(int[] arr1, int[] arr2) {
         // Ваш код
-        return null;
+        if (arr1.length == 0 && arr2.length == 0) {
+            return new int[]{};
+        }
+
+        int maxlength = Math.max(arr1.length, arr2.length);
+        int[] newArr1 = getNewArray(arr1, maxlength);
+        int[] newArr2 = getNewArray(arr2, maxlength);
+        int[] result = new int[maxlength];
+
+        for (int i = 0; i < maxlength; i++) {
+            result[i] = newArr1[i] - newArr2[i];
+        }
+        return result;
     }
 
     /**
@@ -116,7 +175,17 @@ public class Task16 {
      */
     static int[] reverse(int[] arr) {
         // Ваш код
-        return null;
+        if (arr.length == 0) {
+            return new int[]{};
+        }
+
+        int[] newArray = new int[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            newArray[i] = arr[arr.length - i - 1];
+        }
+
+        return newArray;
     }
 
     /**
@@ -135,7 +204,30 @@ public class Task16 {
      */
     static int[] add(int[] arr, int index, int newValue) {
         // Ваш код
-        return null;
+        if (index < 0) {
+            return new int[]{};
+        }
+
+        int[] newArray = new int[arr.length + 1];
+
+        if (index > arr.length) {
+            for (int i = 0; i < arr.length; i++) {
+                newArray[i] = arr[i];
+                newArray[newArray.length - 1] = newValue;
+            }
+        } else {
+
+            for (int i = 0; i < arr.length; i++) {
+                newArray[i] = arr[i];
+            }
+            newArray[index] = newValue;
+
+            for (int i = index + 1; i < newArray.length; i++) {
+                newArray[i] = arr[i - 1];
+            }
+        }
+
+        return newArray;
     }
 
     /**
@@ -257,4 +349,16 @@ public class Task16 {
         // Ваш код
         return null;
     }
+
+    static int[] getNewArray(int[] array, int newLength) {
+        int[] newArray = new int[newLength];
+        for (int i = 0; i < array.length; i++) {
+            newArray[i] = array[i];
+        }
+        for (int i = array.length; i < newLength; i++) {
+            newArray[i] = 0;
+        }
+        return newArray;
+    }
+
 }
