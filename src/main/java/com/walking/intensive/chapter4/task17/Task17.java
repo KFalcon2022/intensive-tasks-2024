@@ -13,15 +13,20 @@ public class Task17 {
             return new int[0];
         }
 
-        int tempValue;
-        int len = array.length - 1;
-        for (int j = len; j >= 1; j--) {
-            for (int i = 0; i < len; i++) {
-                if (array[i] > array[i + 1]) {
-                    tempValue = array[i];
-                    array[i] = array[i + 1];
-                    array[i + 1] = tempValue;
+        int comparisonRange = array.length - 1;
+        boolean isSwapped;
+        for (int i = 0; i < comparisonRange; i++) {
+            isSwapped = false;
+            for (int j = 0; j < comparisonRange - i; j++) {
+                if (array[j] > array[j + 1]) {
+                    int tempValue = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = tempValue;
+                    isSwapped = true;
                 }
+            }
+            if (!isSwapped) {
+                break;
             }
         }
         return array;
