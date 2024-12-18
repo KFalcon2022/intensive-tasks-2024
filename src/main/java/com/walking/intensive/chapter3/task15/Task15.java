@@ -41,16 +41,21 @@ package com.walking.intensive.chapter3.task15;
 public class Task15 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[][] city = new int[][]{{3, 0, 8, 4}, {2, 4, 5, 7}, {9, 2, 6, 3}, {0, 3, 1, 0}};
+        int[][] city = new int[][]{};
         System.out.println(getMaxFloors(city));
     }
 
     static int getMaxFloors(int[][] city) {
         // Ваш код
+        if (city.length==0) {
+            return -1;
+        }
+
         for (int[] ints : city) {
             if (city[0].length != city.length) {
                 return -1;
             }
+
             for (int j = 0; j < city.length; j++) {
                 if (ints.length != city[j].length || ints[j] < 0) {
                     return -1;
@@ -60,8 +65,7 @@ public class Task15 {
 
         int countFloor = 0;
         for (int i = 0; i < city.length; i++) {
-            int maxRow = city[i][0];
-            int maxColumn = city[0][i];
+            int maxRow = 0;
 
             for (int j = 0; j < city[i].length; j++) {
                 if (city[i][j] > maxRow) {
@@ -69,19 +73,21 @@ public class Task15 {
                 }
             }
 
-            for (int j = 0; j < city.length; j++) {
-                if (city[j][i] > maxColumn) {
-                    maxColumn = city[j][i];
-                }
-            }
-
             for (int j = 0; j < city[i].length; j++) {
-                if (city[i][j] < maxRow && city[j][i] < maxColumn) {
-                    countFloor += Math.min(maxRow - city[i][j], maxColumn - city[j][i]);
+                int maxColumn = 0;
+
+                for (int k = 0; k < city.length; k++) {
+                    if (city[k][j] > maxColumn) {
+                        maxColumn = city[k][j];
+                    }
+                }
+
+                if (city[i][j] < maxRow && city[i][j] < maxColumn) {
+                    countFloor += Math.min(maxRow - city[i][j], maxColumn - city[i][j]);
                 }
             }
         }
 
-        return  countFloor;
+        return countFloor;
     }
 }
