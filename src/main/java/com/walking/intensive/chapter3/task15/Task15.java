@@ -64,26 +64,26 @@ public class Task15 {
         }
 
         int countFloor = 0;
-        for (int i = 0; i < city.length; i++) {
+        for (int[] ints : city) {
             int maxRow = 0;
 
-            for (int j = 0; j < city[i].length; j++) {
-                if (city[i][j] > maxRow) {
-                    maxRow = city[i][j];
+            for (int anInt : ints) {
+                if (anInt > maxRow) {
+                    maxRow = anInt;
                 }
             }
 
-            for (int j = 0; j < city[i].length; j++) {
+            for (int j = 0; j < ints.length; j++) {
                 int maxColumn = 0;
 
-                for (int k = 0; k < city.length; k++) {
-                    if (city[k][j] > maxColumn) {
-                        maxColumn = city[k][j];
+                for (int[] value : city) {
+                    if (value[j] > maxColumn) {
+                        maxColumn = value[j];
                     }
                 }
 
-                if (city[i][j] < maxRow && city[i][j] < maxColumn) {
-                    countFloor += Math.min(maxRow - city[i][j], maxColumn - city[i][j]);
+                if (ints[j] < maxRow && ints[j] < maxColumn) {
+                    countFloor += Math.min(maxRow - ints[j], maxColumn - ints[j]);
                 }
             }
         }
