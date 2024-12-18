@@ -37,9 +37,9 @@ public class Task16 {
             return new int[0];
         }
 
-        int[] result = arr;
+        int[] result = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
-            result[i]++;
+            result[i] = arr[i] + 1;
         }
         return result;
     }
@@ -72,6 +72,7 @@ public class Task16 {
 
         if (arr1.length > arr2.length) {
             System.arraycopy(arr1, minLength, result, minLength, maxLength - minLength);
+            return result;
         } else {
             for (int i = minLength; i < maxLength; i++) {
                 result[i] = -arr2[i];
@@ -166,21 +167,17 @@ public class Task16 {
     }
 
     static int[] removeAll(int[] arr, int... removingValues) {
-        boolean[] markedIndex = new boolean[arr.length];
-        int lengthLessening = 0;
-        for (int removingValue : removingValues) {
-            for (int i = 0; i < arr.length; i++) {
-                if (arr[i] == removingValue) {
-                    markedIndex[i] = true;
-                    lengthLessening++;
-                }
+        int lesseningLength = 0;
+        for (int removingValue : arr) {
+            if (isContains(removingValues, removingValue)) {
+                lesseningLength++;
             }
         }
         int index = 0;
-        int[] result = new int[arr.length - lengthLessening];
-        for (int i = 0; i < arr.length; i++) {
-            if (!markedIndex[i]) {
-                result[index] = arr[i];
+        int[] result = new int[arr.length - lesseningLength];
+        for (int value : arr) {
+            if (!isContains(removingValues, value)) {
+                result[index] = value;
                 index++;
             }
         }
@@ -188,26 +185,17 @@ public class Task16 {
     }
 
     static boolean isSimilar(int[] arr1, int[] arr2) {
-        int firstCounter = 0;
         for (int i : arr1) {
-            for (int j : arr2) {
-                if (i == j) {
-                    firstCounter++;
-                }
-            }
-            if (firstCounter == 0) {
+            if (!isContains(arr2, i)) {
                 return false;
             }
         }
-        int secondCounter = 0;
         for (int i : arr2) {
-            for (int j : arr1) {
-                if (i == j) {
-                    secondCounter++;
-                }
+            if (!isContains(arr1, i)) {
+                return false;
             }
         }
-        return firstCounter == arr1.length && secondCounter == arr2.length;
+        return true;
     }
 
     static int[] shiftIndex(int[] arr) {
