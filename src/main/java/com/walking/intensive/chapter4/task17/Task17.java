@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Arrays;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -20,8 +22,8 @@ package com.walking.intensive.chapter4.task17;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task17 {
+
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
     }
 
     /**
@@ -40,9 +42,34 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (!isValid(array)) {
+            return new int[0];
+        }
+
+        int loopCount = array.length;
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 1; j < loopCount; j++) {
+                if (array[j - 1] > array[j]) {
+                    swap(array, j, j - 1);
+                }
+            }
+            loopCount -= 1;
+        }
+
+        return array;
     }
+
+    private static boolean isValid(int[] array) {
+        return array != null && array.length != 0;
+    }
+
+    static void swap(int[] array, int index1, int index2) {
+        int temp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = temp;
+    }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,9 +111,67 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (!isValid(array)) {
+            return new int[0];
+        }
+
+        quickSort(array, 0, array.length - 1);
+
+        return array;
     }
+
+    static void quickSort(int[] array, int leftIndex, int rightIndex) {
+        if (leftIndex >= rightIndex) {
+            return;
+        }
+
+        if (leftIndex == rightIndex + 1 && array[leftIndex] > array[rightIndex]) {
+            swap(array, leftIndex, rightIndex);
+            return;
+        }
+
+        int divider = getDivider(array, leftIndex, rightIndex);
+
+        quickSort(array, leftIndex, divider - 1);
+        quickSort(array, divider + 1, rightIndex);
+    }
+
+    static int getDivider(int[] array, int leftIndex, int rightIndex) {
+        int pivot = getPivot(array, leftIndex, rightIndex);
+        int leftMarker = leftIndex;
+        int rightMarker = rightIndex;
+
+        while (leftMarker <= rightMarker) {
+            while (array[leftMarker] < pivot) {
+                leftMarker++;
+            }
+
+            while (array[rightMarker] > pivot) {
+                rightMarker--;
+            }
+
+            if (leftMarker <= rightMarker) {
+                swap(array, leftMarker, rightMarker);
+                leftMarker++;
+                rightMarker--;
+            }
+        }
+
+        return leftIndex;
+    }
+
+    static int getPivot(int[] array, int leftIndex, int rightIndex) {
+        int minElement = array[leftIndex];
+        int maxElement = array[leftIndex];
+
+        for (int i = leftIndex + 1; i <= rightIndex; i++) {
+            minElement = Math.min(minElement, array[i]);
+            maxElement = Math.max(maxElement, array[i]);
+        }
+
+        return (minElement + maxElement) / 2;
+    }
+
 
     /**
      * Создайте массив случайных целых чисел из 1 000 элементов и сравните время,
@@ -97,15 +182,39 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+        int[] randomArray = new int[1000];
+
+        for (int i = 0; i < randomArray.length; i++) {
+            randomArray[i] = (int) (Math.random() * 100_000_000);
+        }
+
+        return getTimeDifference(randomArray);
+    }
+
+    static long getTimeDifference(int[] array) {
+        long startTime = System.currentTimeMillis();
+        int[] sortedArray = sortByBubble(array);
+        long stopTime = System.currentTimeMillis();
+        long bubbleSortTime = stopTime - startTime;
+
+        startTime = System.currentTimeMillis();
+        sortedArray = sortByQuicksort(array);
+        stopTime = System.currentTimeMillis();
+        long quickSortTime = stopTime - startTime;
+
+        return bubbleSortTime - quickSortTime;
     }
 
     /**
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
-        return 0;
+        int[] randomArray = new int[10000];
+
+        for (int i = 0; i < randomArray.length; i++) {
+            randomArray[i] = (int) (Math.random() * 100_000_000);
+        }
+
+        return getTimeDifference(randomArray);
     }
 }
