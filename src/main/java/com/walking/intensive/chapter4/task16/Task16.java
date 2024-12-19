@@ -379,29 +379,8 @@ public class Task16 {
         }
 
         int[] newArr = new int[arr.length - count];
-        int index = 0;
+        int newIndex = 0;
 
-
-        for (int k : arr) {
-            boolean included = false;
-
-            for (int removingValue : removingValues) {
-                if (k == removingValue) {
-                    included = true;
-                    break;
-                }
-            }
-
-            if (!included) {
-                newArr[index] = k;
-                index++;
-            }
-        }
-
-        return newArr;
-    }
-
-    static boolean isMatches(int[] arr, int... removingValues) {
         for (int i : arr) {
             boolean included = false;
 
@@ -411,8 +390,14 @@ public class Task16 {
                     break;
                 }
             }
+
+            if (!included) {
+                newArr[newIndex] = i;
+                newIndex++;
+            }
         }
-        return false;
+
+        return newArr;
     }
 
     /**
