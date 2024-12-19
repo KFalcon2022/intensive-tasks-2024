@@ -40,11 +40,62 @@ package com.walking.intensive.chapter3.task15;
  */
 public class Task15 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        int[][] city = {{2, 1}, {1, 3}};
+        System.out.println(getMaxFloors(city));
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+
+        if (!isValidCity(city)) {
+            return -1;
+        }
+
+        int n = city.length;
+        int m = city[0].length;
+
+        int[] maxRow = new int[n];
+        int[] maxCol = new int[m];
+
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < m; c++) {
+                maxRow[r] = Math.max(maxRow[r], city[r][c]);
+                maxCol[c] = Math.max(maxCol[c], city[r][c]);
+            }
+        }
+
+        int totalFloors = 0;
+
+        for (int r = 0; r < n; r++) {
+            for (int c = 0; c < m; c++) {
+                int maxAllowedHeight = Math.min(maxRow[r], maxCol[c]);
+                totalFloors += maxAllowedHeight - city[r][c];
+            }
+        }
+
+        return totalFloors;
+    }
+
+    private static boolean isValidCity(int[][] city) {
+
+        if (city.length == 0) {
+            return false;
+        }
+
+        int cityLength = city.length;
+
+        for (int i = 0; i < cityLength - 1; i++) {
+            if (city[i].length != cityLength) {
+                return false;
+            }
+
+            for (int j = 0; j < cityLength; j++) {
+                if (city[i][j] < 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
