@@ -36,11 +36,11 @@ public class Task16 {
 //        System.out.println(Arrays.toString(multiplyEach(arr1, arr2)));
 //        System.out.println(Arrays.toString(subtractEach(arr1, arr2)));
 //        System.out.println(Arrays.toString(reverse(arr)));
-        System.out.println(Arrays.toString(add(arr, index, newValue)));
+//        System.out.println(Arrays.toString(add(arr, index, newValue)));
 //        System.out.println(isContains(arr, value));
 //        System.out.println(getFirstIndex(arr, value));
 //        System.out.println(getLastIndex(arr, value));
-//        System.out.println(Arrays.toString(removeByIndex(arr, index)));
+        System.out.println(Arrays.toString(removeByIndex(arr, index)));
     }
 
     /**
