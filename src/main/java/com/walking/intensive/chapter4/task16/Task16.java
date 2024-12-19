@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task16;
 
+import java.util.Arrays;
+
 /**
  * После завершения интенсива вы достаточно быстро познакомитесь с Java Collection Framework.
  * Это знакомство позволит сильно упростить работу с массивами данных.
@@ -21,9 +23,9 @@ package com.walking.intensive.chapter4.task16;
 public class Task16 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] arr = new int[]{5, 7, 3, 4, 78, 55, 66, 35, 3};
+        int[] arr = new int[]{5, 7, 3, 4, 78, 55};
         int[] arr1 = new int[]{4, 2, 4, 3, 4, 1};
-        int[] arr2 = new int[]{4, 2, 3, 1, };
+        int[] arr2 = new int[]{4, 2, 3, 1,};
         int[] removingValues = new int[]{20, 4, 66, 250};
         int index = 4;
         int newValue = 18;
@@ -42,7 +44,8 @@ public class Task16 {
 //        System.out.println(getLastIndex(arr, value));
 //        System.out.println(Arrays.toString(removeByIndex(arr, index)));
 //        System.out.println(Arrays.toString(removeAll(arr, removingValues)));
-        System.out.println(isSimilar(arr1, arr2));
+//        System.out.println(isSimilar(arr1, arr2));
+        System.out.println(Arrays.toString(shiftIndex(arr)));
     }
 
     /**
@@ -126,8 +129,8 @@ public class Task16 {
         }
 
         int maxlength = Math.max(arr1.length, arr2.length);
-        int[] newArr1 = getNewArray(arr1, maxlength);
-        int[] newArr2 = getNewArray(arr2, maxlength);
+        int[] newArr1 = getNewArrayWithZero(arr1, maxlength);
+        int[] newArr2 = getNewArrayWithZero(arr2, maxlength);
         int[] result = new int[maxlength];
 
         for (int i = 0; i < maxlength; i++) {
@@ -158,8 +161,8 @@ public class Task16 {
         }
 
         int maxlength = Math.max(arr1.length, arr2.length);
-        int[] newArr1 = getNewArray(arr1, maxlength);
-        int[] newArr2 = getNewArray(arr2, maxlength);
+        int[] newArr1 = getNewArrayWithZero(arr1, maxlength);
+        int[] newArr2 = getNewArrayWithZero(arr2, maxlength);
         int[] result = new int[maxlength];
 
         for (int i = 0; i < maxlength; i++) {
@@ -407,7 +410,49 @@ public class Task16 {
      */
     static boolean isSimilar(int[] arr1, int[] arr2) {
         // Ваш код
-        return (isMatches(arr1, arr2) && isMatches(arr2,arr1));
+        return (isMatches(arr1, arr2) && isMatches(arr2, arr1));
+    }
+
+    /**
+     * Реализуйте метод, который принимает параметром массив целых чисел.
+     * И возвращает массив, сдвинув все элементы входящего массива на следующий индекс.
+     * При этом последний элемент будет перенесен на нулевой индекс.
+     *
+     * <p> Для пустого массива должен быть возвращен пустой массив.
+     *
+     * <p>Пример:
+     *
+     * <p>Входные данные: [1,2,3,4]
+     * <p>Возвращаемое значение: [4,1,2,3]
+     */
+    static int[] shiftIndex(int[] arr) {
+        // Ваш код
+        if (arr.length == 0) {
+            return new int[]{};
+        }
+
+        int[] newArr = new int[arr.length];
+        newArr[0] = arr[arr.length - 1];
+        int newIndex = 1;
+
+        for (int i = 0; i < arr.length-1; i++) {
+            newArr[newIndex]=arr[i];
+            newIndex++;
+        }
+
+        return newArr;
+    }
+
+    static int[] getNewArrayWithZero(int[] array, int newLength) {
+        int[] newArray = new int[newLength];
+
+        for (int i = 0; i < array.length; i++) {
+            newArray[i] = array[i];
+        }
+        for (int i = array.length; i < newLength; i++) {
+            newArray[i] = 0;
+        }
+        return newArray;
     }
 
     static boolean isMatches(int[] array1, int[] array2) {
@@ -425,34 +470,6 @@ public class Task16 {
             }
         }
         return true;
-    }
-
-    /**
-     * Реализуйте метод, который принимает параметром массив целых чисел.
-     * И возвращает массив, сдвинув все элементы входящего массива на следующий индекс.
-     * При этом последний элемент будет перенесен на нулевой индекс.
-     *
-     * <p> Для пустого массива должен быть возвращен пустой массив.
-     *
-     * <p>Пример:
-     *
-     * <p>Входные данные: [1,2,3,4]
-     * <p>Возвращаемое значение: [4,1,2,3]
-     */
-    static int[] shiftIndex(int[] arr) {
-        // Ваш код
-        return null;
-    }
-
-    static int[] getNewArray(int[] array, int newLength) {
-        int[] newArray = new int[newLength];
-        for (int i = 0; i < array.length; i++) {
-            newArray[i] = array[i];
-        }
-        for (int i = array.length; i < newLength; i++) {
-            newArray[i] = 0;
-        }
-        return newArray;
     }
 
 }
