@@ -51,7 +51,7 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-        int n = 15;
+        int n = 10;
 
         System.out.println(getPascalTriangle(n));
     }
@@ -75,12 +75,11 @@ public class Task9 {
 
         StringBuilder result = new StringBuilder();
 
-        int maxWidth = String.valueOf(binominalCoefficient(n - 1, (n - 1) / 2)).length();
-        int lastLineWidth = maxWidth * (n - 1) + (n - 1);
+        int maxWidth = String.valueOf(binominalCoefficient(n - 1, n - 1) / 2).length();
 
         for (int i = 0; i < n; i++) {
 
-            int numberOfSpaces = (lastLineWidth - (maxWidth * i + (i))) / 2;
+            int numberOfSpaces = (n - i - 1) * (maxWidth + 1) / 2;
             result.append(" ".repeat(numberOfSpaces));
 
             for (int j = 0; j <= i; j++) {
@@ -92,8 +91,10 @@ public class Task9 {
             }
 
             result.append("\n");
+
         }
 
         return result.toString();
+
     }
 }
