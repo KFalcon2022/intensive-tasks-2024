@@ -31,20 +31,20 @@ public class Task16 {
         int newValue = 18;
         int value = -78;
 
-//        System.out.println(isEqualSize(arr1, arr2));
-//        System.out.println(isEquals(arr1, arr2));
-//        System.out.println(Arrays.toString(incrementEach(arr)));
-//        System.out.println(Arrays.toString(multiplyEach(arr1, arr2)));
-//        System.out.println(Arrays.toString(subtractEach(arr1, arr2)));
-//        System.out.println(Arrays.toString(reverse(arr)));
-//        System.out.println(Arrays.toString(add(arr, index, newValue)));
-//        System.out.println(isContains(arr, value));
-//        System.out.println(getFirstIndex(arr, value));
-//        System.out.println(getLastIndex(arr, value));
-//        System.out.println(Arrays.toString(removeByIndex(arr, index)));
+        System.out.println(isEqualSize(arr1, arr2));
+        System.out.println(isEquals(arr1, arr2));
+        System.out.println(Arrays.toString(incrementEach(arr)));
+        System.out.println(Arrays.toString(multiplyEach(arr1, arr2)));
+        System.out.println(Arrays.toString(subtractEach(arr1, arr2)));
+        System.out.println(Arrays.toString(reverse(arr)));
+        System.out.println(Arrays.toString(add(arr, index, newValue)));
+        System.out.println(isContains(arr, value));
+        System.out.println(getFirstIndex(arr, value));
+        System.out.println(getLastIndex(arr, value));
+        System.out.println(Arrays.toString(removeByIndex(arr, index)));
         System.out.println(Arrays.toString(removeAll(arr, removingValues)));
-//        System.out.println(isSimilar(arr1, arr2));
-//        System.out.println(Arrays.toString(shiftIndex(arr)));
+        System.out.println(isSimilar(arr1, arr2));
+        System.out.println(Arrays.toString(shiftIndex(arr)));
     }
 
     /**
