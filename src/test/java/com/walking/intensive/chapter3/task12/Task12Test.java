@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import static com.walking.intensive.chapter3.task12.Task12.getMovementsNumber;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task12Test {
 

@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import static com.walking.intensive.chapter3.task14.Task14.getObjectCounts;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test for {@link Task14}.
