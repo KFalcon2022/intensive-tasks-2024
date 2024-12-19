@@ -51,11 +51,50 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int n = 10;
+
+        System.out.println(getPascalTriangle(n));
+    }
+
+    static int binominalCoefficient(int n, int x) {
+        if (x > n) {
+            return 0;
+        }
+
+        if (x == 0 || x == n) {
+            return 1;
+        }
+
+        return binominalCoefficient(n - 1, x - 1) + binominalCoefficient(n - 1, x);
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+        if (n <= 0) {
+            return "";
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        int maxWidth = String.valueOf(binominalCoefficient(n - 1, n - 1) / 2).length();
+
+        for (int i = 0; i < n; i++) {
+
+            int numberOfSpaces = (n - i - 1) * (maxWidth + 1) / 2;
+            result.append(" ".repeat(numberOfSpaces));
+
+            for (int j = 0; j <= i; j++) {
+                result.append(String.format("%" + maxWidth + "d", binominalCoefficient(i, j)));
+
+                if (j < i) {
+                    result.append(" ");
+                }
+            }
+
+            result.append("\n");
+
+        }
+
+        return result.toString();
+
     }
 }
