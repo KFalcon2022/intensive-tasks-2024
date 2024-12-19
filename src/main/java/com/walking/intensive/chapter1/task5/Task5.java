@@ -17,10 +17,10 @@ public class Task5 {
     }
 
     static boolean isCheck(double a, double b, double c) {
-        return ((a + b >= c) && (a + c >= b) && (b + c >= a) && (a >= 0) && (b >= 0) && (c >= 0));
+        return a + b >= c && a + c >= b && b + c >= a && a >= 0 && b >= 0 && c >= 0;
     }
 
-    static double getP(double a, double b, double c) {
+    static double getHalfPerimeter(double a, double b, double c) {
         return (a + b + c) / 2;
     }
 
@@ -39,7 +39,7 @@ public class Task5 {
             return -1;
         }
 
-        double p = getP(a, b, c);
+        double p = getHalfPerimeter(a, b, c);
         return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
@@ -61,6 +61,7 @@ public class Task5 {
         double heightC = 2 * area / c;
         double[] heights = {heightA, heightB, heightC};
         Arrays.sort(heights);
+
         return heights;
     }
 
@@ -96,12 +97,12 @@ public class Task5 {
             return new double[0];
         }
 
-        double bisA = Math.sqrt(c * b * (a + b + c) * (c + b - a)) / (c + b);
-        double bisB = Math.sqrt(a * c * (a + b + c) * (a + c - b)) / (a + c);
-        double bisC = Math.sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
-        double[] bis = {bisA, bisB, bisC};
-        Arrays.sort(bis);
-        return bis;
+        double bisectorA = Math.sqrt(c * b * (a + b + c) * (c + b - a)) / (c + b);
+        double bisectorB = Math.sqrt(a * c * (a + b + c) * (a + c - b)) / (a + c);
+        double bisectorC = Math.sqrt(a * b * (a + b + c) * (a + b - c)) / (a + b);
+        double[] bisector = {bisectorA, bisectorB, bisectorC};
+        Arrays.sort(bisector);
+        return bisector;
     }
 
     /**
@@ -139,7 +140,7 @@ public class Task5 {
             return -1;
         }
 
-        double p = getP(a, b, c);
+        double p = getHalfPerimeter(a, b, c);
         return Math.sqrt((p - a) * (p - b) * (p - c) / p);
     }
 
@@ -155,7 +156,7 @@ public class Task5 {
             return -1;
         }
 
-        double p = getP(a, b, c);
+        double p = getHalfPerimeter(a, b, c);
         double circumradius = Math.sqrt(p * (p - a) * (p - b) * (p - c));
         circumradius = 0.25 * a * b * c / circumradius;
         return circumradius;
@@ -181,7 +182,7 @@ public class Task5 {
         }
 
         double cosA = (b * b + c * c - a * a) / (2 * b * c);
-        double sinA = Math.pow(1 - cosA * cosA, 0.5);
+        double sinA = Math.sqrt(1 - cosA * cosA);
         return 0.5 * b * c * sinA;
     }
 }
