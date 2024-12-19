@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Random;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -21,7 +23,12 @@ package com.walking.intensive.chapter4.task17;
  */
 public class Task17 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        long timeDifference1000 = getBenchmarkOn1000();
+        System.out.println("Разница при 1000 элементов" + timeDifference1000);
+
+        long timeDifference10000 = getBenchmarkOn10000();
+        System.out.println("Разница при 10000 элементов" + timeDifference10000);
     }
 
     /**
@@ -40,9 +47,33 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+
+        if (array == null) {
+            return new int[]{};
+        }
+
+        int n = array.length;
+        boolean deal;
+
+        for (int i = 0; i < n - 1; i++) {
+            deal = false;
+
+            for (int j = 0; j < n - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    deal = true;
+                }
+            }
+
+            if (!deal) {
+                break;
+            }
+        }
+        return array;
     }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,8 +115,9 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+
+        quicksort(array, 0, array.length - 1);
+        return array;
     }
 
     /**
@@ -97,15 +129,75 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+
+        return benchmark(1000);
     }
 
     /**
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
-        return 0;
+
+        return benchmark(10000);
+    }
+
+    private static void quicksort(int[] array, int left, int right) {
+
+        if (left < right) {
+            int pivotIndex = partition(array, left, right);
+            quicksort(array, left, pivotIndex - 1);
+            quicksort(array, pivotIndex + 1, right);
+        }
+    }
+
+    //Метод разбиения массива на две части и нахождения индекса опорного (pivot) элемента
+    private static int partition(int[] array, int left, int right) {
+
+        int pivot = array[(left + right) / 2];
+        while (left <= right) {
+            while (array[left] < pivot) {
+                left++;
+            }
+            while (array[right] > pivot) {
+                right--;
+            }
+            if (left <= right) {
+                swap(array, left, right);
+                left++;
+                right--;
+            }
+        }
+        return left;
+    }
+
+    private static void swap(int[] array, int i, int j) {
+
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    private static long benchmark(int size) {
+
+        int[] array = new int[size];
+        Random random = new Random();
+        for (int i = 0; i < array.length; i++) {
+            array[i] = random.nextInt(10000);
+        }
+
+        int[] bubbleSortArray = array.clone();
+        int[] quickSortArray = array.clone();
+
+        long startBubble = System.currentTimeMillis();
+        sortByBubble(bubbleSortArray);
+        long endBubble = System.currentTimeMillis();
+        long bubbleSortTime = endBubble - startBubble;
+
+        long startQuick = System.currentTimeMillis();
+        sortByQuicksort(quickSortArray);
+        long endQuick = System.currentTimeMillis();
+        long quickSortTime = endQuick - startQuick;
+
+        return bubbleSortTime - quickSortTime;
     }
 }
