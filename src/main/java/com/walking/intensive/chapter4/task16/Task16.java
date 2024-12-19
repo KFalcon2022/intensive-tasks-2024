@@ -23,14 +23,13 @@ import java.util.Arrays;
 public class Task16 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] arr = new int[]{5, 7, 3, 4, 78, 55};
+        int[] arr = new int[]{1, 2, 4, 15, 66, 80};
         int[] arr1 = new int[]{4, 2, 4, 3, 4, 1};
         int[] arr2 = new int[]{4, 2, 3, 1,};
         int[] removingValues = new int[]{20, 4, 66, 250};
         int index = 4;
         int newValue = 18;
         int value = -78;
-
 
 //        System.out.println(isEqualSize(arr1, arr2));
 //        System.out.println(isEquals(arr1, arr2));
@@ -43,9 +42,9 @@ public class Task16 {
 //        System.out.println(getFirstIndex(arr, value));
 //        System.out.println(getLastIndex(arr, value));
 //        System.out.println(Arrays.toString(removeByIndex(arr, index)));
-//        System.out.println(Arrays.toString(removeAll(arr, removingValues)));
+        System.out.println(Arrays.toString(removeAll(arr, removingValues)));
 //        System.out.println(isSimilar(arr1, arr2));
-        System.out.println(Arrays.toString(shiftIndex(arr)));
+//        System.out.println(Arrays.toString(shiftIndex(arr)));
     }
 
     /**
@@ -136,6 +135,7 @@ public class Task16 {
         for (int i = 0; i < maxlength; i++) {
             result[i] = newArr1[i] * newArr2[i];
         }
+
         return result;
     }
 
@@ -168,6 +168,7 @@ public class Task16 {
         for (int i = 0; i < maxlength; i++) {
             result[i] = newArr1[i] - newArr2[i];
         }
+
         return result;
     }
 
@@ -230,12 +231,14 @@ public class Task16 {
             for (int i = 0, j = 0; i < newArray.length; i++, j++) {
                 if (i == index) {
                     newArray[i] = newValue;
-                    j--; // Уменьшаем j, чтобы пропустить новый элемент в исходном массиве
+                    j--;
                 } else {
+
                     newArray[i] = arr[j];
                 }
             }
         }
+
         return newArray;
     }
 
@@ -251,6 +254,7 @@ public class Task16 {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -312,6 +316,7 @@ public class Task16 {
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -366,17 +371,11 @@ public class Task16 {
         int count = 0;
 
         for (int i : arr) {
-            boolean included = false;
-
             for (int j : removingValues) {
                 if (i == j) {
-                    included = true;
+                    count++;
                     break;
                 }
-            }
-
-            if (included) {
-                count++;
             }
         }
 
@@ -435,8 +434,8 @@ public class Task16 {
         newArr[0] = arr[arr.length - 1];
         int newIndex = 1;
 
-        for (int i = 0; i < arr.length-1; i++) {
-            newArr[newIndex]=arr[i];
+        for (int i = 0; i < arr.length - 1; i++) {
+            newArr[newIndex] = arr[i];
             newIndex++;
         }
 
@@ -449,9 +448,11 @@ public class Task16 {
         for (int i = 0; i < array.length; i++) {
             newArray[i] = array[i];
         }
+
         for (int i = array.length; i < newLength; i++) {
             newArray[i] = 0;
         }
+
         return newArray;
     }
 
@@ -469,6 +470,7 @@ public class Task16 {
                 return isEqual;
             }
         }
+
         return true;
     }
 
