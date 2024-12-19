@@ -23,12 +23,14 @@ import java.util.Arrays;
 public class Task16 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] arr = new int[]{1, 2, 3, 4, 78, 55, 66, 35, 3};
+        int[] arr = new int[]{5, 7, 3, 4, 78, 55, 66, 35, 3};
         int[] arr1 = new int[]{6, -2};
         int[] arr2 = new int[]{4, 2, 3};
+        int[] removingValues = new int[]{20, 4, 66, 250};
         int index = 4;
         int newValue = 18;
         int value = -78;
+
 
 //        System.out.println(isEqualSize(arr1, arr2));
 //        System.out.println(isEquals(arr1, arr2));
@@ -40,7 +42,8 @@ public class Task16 {
 //        System.out.println(isContains(arr, value));
 //        System.out.println(getFirstIndex(arr, value));
 //        System.out.println(getLastIndex(arr, value));
-        System.out.println(Arrays.toString(removeByIndex(arr, index)));
+//        System.out.println(Arrays.toString(removeByIndex(arr, index)));
+        System.out.println(Arrays.toString(removeAll(arr, removingValues)));
     }
 
     /**
@@ -358,7 +361,58 @@ public class Task16 {
      */
     static int[] removeAll(int[] arr, int... removingValues) {
         // Ваш код
-        return null;
+        int count = 0;
+
+        for (int i : arr) {
+            boolean included = false;
+
+            for (int j : removingValues) {
+                if (i == j) {
+                    included = true;
+                    break;
+                }
+            }
+
+            if (included) {
+                count++;
+            }
+        }
+
+        int[] newArr = new int[arr.length - count];
+        int index = 0;
+
+
+        for (int k : arr) {
+            boolean included = false;
+
+            for (int removingValue : removingValues) {
+                if (k == removingValue) {
+                    included = true;
+                    break;
+                }
+            }
+
+            if (!included) {
+                newArr[index] = k;
+                index++;
+            }
+        }
+
+        return newArr;
+    }
+
+    static boolean isMatches(int[] arr, int... removingValues) {
+        for (int i : arr) {
+            boolean included = false;
+
+            for (int j : removingValues) {
+                if (i == j) {
+                    included = true;
+                    break;
+                }
+            }
+        }
+        return false;
     }
 
     /**
