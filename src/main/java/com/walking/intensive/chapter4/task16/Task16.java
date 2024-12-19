@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter4.task16;
 
-import java.util.Arrays;
-
 /**
  * После завершения интенсива вы достаточно быстро познакомитесь с Java Collection Framework.
  * Это знакомство позволит сильно упростить работу с массивами данных.
@@ -24,8 +22,8 @@ public class Task16 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         int[] arr = new int[]{5, 7, 3, 4, 78, 55, 66, 35, 3};
-        int[] arr1 = new int[]{6, -2};
-        int[] arr2 = new int[]{4, 2, 3};
+        int[] arr1 = new int[]{4, 2, 4, 3, 4, 1};
+        int[] arr2 = new int[]{4, 2, 3, 1, };
         int[] removingValues = new int[]{20, 4, 66, 250};
         int index = 4;
         int newValue = 18;
@@ -43,7 +41,8 @@ public class Task16 {
 //        System.out.println(getFirstIndex(arr, value));
 //        System.out.println(getLastIndex(arr, value));
 //        System.out.println(Arrays.toString(removeByIndex(arr, index)));
-        System.out.println(Arrays.toString(removeAll(arr, removingValues)));
+//        System.out.println(Arrays.toString(removeAll(arr, removingValues)));
+        System.out.println(isSimilar(arr1, arr2));
     }
 
     /**
@@ -408,7 +407,24 @@ public class Task16 {
      */
     static boolean isSimilar(int[] arr1, int[] arr2) {
         // Ваш код
-        return false;
+        return (isMatches(arr1, arr2) && isMatches(arr2,arr1));
+    }
+
+    static boolean isMatches(int[] array1, int[] array2) {
+        for (int i : array1) {
+            boolean isEqual = false;
+
+            for (int j : array2) {
+                if (i == j) {
+                    isEqual = true;
+                }
+            }
+
+            if (!isEqual) {
+                return isEqual;
+            }
+        }
+        return true;
     }
 
     /**
