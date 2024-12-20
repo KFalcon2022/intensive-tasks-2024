@@ -39,11 +39,11 @@ public class Task10 {
                 leftIndex++;
             } else if (!Character.isLetter(right)) {
                 rightIndex--;
-            }
-
-            boolean equal = left == right;
-            if (!equal) {
-                return false;
+            } else if (Character.isLetter(left) && Character.isLetter(right)) {
+                boolean equal = left == right;
+                if (!equal) {
+                    return false;
+                }
             }
 
             rightIndex--;
