@@ -1,6 +1,5 @@
 package com.walking.intensive.chapter2.task7;
 
-import static java.lang.Math.max;
 
 /**
  * Пятиклассник Ваня придумал забаву. Он ввел понятие «дружественной пары» чисел.
@@ -31,10 +30,6 @@ public class Task7 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
         System.out.println(getFriendlyPair(10000));
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(i + "; " + getDivisorsSum(i));
-        }
-
     }
 
     static int getFriendlyPair(int n) {
@@ -42,22 +37,21 @@ public class Task7 {
             return -1;
         }
 
-        int maxSum = 0;
-        int maxNumber = 0;
+        int sum;
+        int sum2;
 
-        for (int i = 1; i < n; i++) {
-            int sum = getDivisorsSum(i);
-            int sum2 = getDivisorsSum(sum);
+        do {
+            n--;
 
-            if (i == sum2 && sum != sum2) {
-                if (maxSum < i + sum) {
-                    maxSum = i + sum;
-                    maxNumber = max(i, sum);
-                }
+            if (n == 0) {
+                return 0;
             }
-        }
 
-        return maxNumber;
+            sum = getDivisorsSum(n);
+            sum2 = getDivisorsSum(sum);
+        } while (n != sum2 || sum == sum2 || sum > n);
+
+        return n;
     }
 
     static int getDivisorsSum(int a) {
