@@ -44,7 +44,29 @@ public class Task12 {
     }
 
     static int[] getMovementsNumber(String baskets) {
-        // Ваш код
-        return new int[]{};
+        // Проверка входных данных: строка должна состоять только из цифр
+        for (int i = 0; i < baskets.length(); i++) {
+            char ch = baskets.charAt(i);
+            if (!Character.isDigit(ch)) {
+                return new int[0];
+            }
+        }
+
+        int n = baskets.length();
+        int[] result = new int[n];
+
+        // Проходим по каждой корзинке и считаем минимальное количество операций для перемещения всех мячиков в эту корзинку
+        for (int i = 0; i < n; i++) {
+            int totalMoves = 0;
+            for (int j = 0; j < n; j++) {
+                if (baskets.charAt(j) != '0') {
+                    int ballsInBin = baskets.charAt(j) - '0';
+                    totalMoves += ballsInBin * Math.abs(i - j);
+                }
+            }
+            result[i] = totalMoves;
+        }
+
+        return result;
     }
 }
