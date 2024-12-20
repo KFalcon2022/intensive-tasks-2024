@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter2.task10;
 
+import java.util.Scanner;
+
 /**
  * Реализуйте метод isPalindrome(), который проверяет, является ли строка палиндромом.
  *
@@ -11,11 +13,41 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите фразу: ");
+        String phrase = in.nextLine();
+        in.close();
+
+        isPalindrome(phrase);
+
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+        inputString.toLowerCase();
+        int leftIndex = 0;
+        int rightIndex = inputString.length() - 1;
+
+        while (rightIndex > leftIndex) {
+            char left = inputString.charAt(leftIndex);
+            char right = inputString.charAt(rightIndex);
+            if (!Character.isLetter(left)) {
+                leftIndex++;
+            } else if (!Character.isLetter(right)) {
+                rightIndex--;
+            }
+
+            boolean equal = left == right;
+            if (!equal) {
+                return false;
+            }
+
+        }
+
+        rightIndex--;
+        leftIndex++;
+
+        return true;
     }
+
+
 }
