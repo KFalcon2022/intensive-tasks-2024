@@ -38,13 +38,6 @@ public class Task10 {
             return false;
         }
 
-        for (int i = 0; i < inputString.length(); i++) {
-            boolean isLetter = Character.isLetter(inputString.charAt(i));
-            if (isLetter) {
-                break;
-            }
-            return false;
-        }
 
         while (rightIndex > leftIndex) {
 
