@@ -46,8 +46,6 @@ public class Task10 {
             leftIndex++;
         }
 
-
-
         return true;
     }
 
