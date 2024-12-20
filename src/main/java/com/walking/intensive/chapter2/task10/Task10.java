@@ -29,6 +29,10 @@ public class Task10 {
         char left = inputString.charAt(leftIndex);
         char right = inputString.charAt(rightIndex);
 
+        if (leftIndex == rightIndex) {
+            return false;
+        }
+
         while (rightIndex > leftIndex) {
 
             if (!Character.isLetter(left)) {
@@ -48,6 +52,4 @@ public class Task10 {
 
         return true;
     }
-
-
 }
