@@ -18,7 +18,7 @@ public class Task10 {
         String phrase = in.nextLine();
         in.close();
 
-        isPalindrome(phrase);
+        System.out.println(isPalindrome(phrase));
 
     }
 
@@ -26,10 +26,11 @@ public class Task10 {
         inputString.toLowerCase();
         int leftIndex = 0;
         int rightIndex = inputString.length() - 1;
+        char left = inputString.charAt(leftIndex);
+        char right = inputString.charAt(rightIndex);
 
         while (rightIndex > leftIndex) {
-            char left = inputString.charAt(leftIndex);
-            char right = inputString.charAt(rightIndex);
+
             if (!Character.isLetter(left)) {
                 leftIndex++;
             } else if (!Character.isLetter(right)) {
