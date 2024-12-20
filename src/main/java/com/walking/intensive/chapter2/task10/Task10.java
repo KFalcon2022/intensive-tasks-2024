@@ -23,6 +23,11 @@ public class Task10 {
     }
 
     static boolean isPalindrome(String inputString) {
+
+        if (inputString == null || inputString.isEmpty()) {
+            return false;
+        }
+
         inputString = inputString.toLowerCase();
         int leftIndex = 0;
         int rightIndex = inputString.length() - 1;
@@ -30,6 +35,14 @@ public class Task10 {
         char right = inputString.charAt(rightIndex);
 
         if (leftIndex == rightIndex) {
+            return false;
+        }
+
+        for (int i = 0; i < inputString.length(); i++) {
+            boolean isLetter = Character.isLetter(inputString.charAt(i));
+            if (isLetter) {
+                break;
+            }
             return false;
         }
 
