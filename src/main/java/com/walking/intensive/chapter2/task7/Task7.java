@@ -49,7 +49,10 @@ public class Task7 {
 
             sum = getDivisorsSum(n);
             sum2 = getDivisorsSum(sum);
-        } while (n != sum2 || sum == sum2 || sum > n);
+
+        } while (n != sum2 
+              || sum == sum2
+              || sum > n);
 
         return n;
     }
@@ -58,11 +61,16 @@ public class Task7 {
         int divisorsSum = 1;
         int maxDivisor = a;
 
-        for (int i = 2; i < maxDivisor; i++) {
+        int i = 2;
+        while (i < maxDivisor) {
             if (a % i == 0) {
                 maxDivisor = a / i;
-                divisorsSum = maxDivisor == i ? divisorsSum + i : divisorsSum + i + maxDivisor;
+                divisorsSum = maxDivisor == i
+                        ? divisorsSum + i
+                        : divisorsSum + i + maxDivisor;
             }
+
+            i++;
         }
 
         return divisorsSum;
