@@ -26,20 +26,16 @@ public class Task10 {
         int rightSym = inputString.length() - 1;
 
         while (leftSym < rightSym) {
-            char leftSymbol = inputString.charAt(leftSym);
-            char rightSymbol = inputString.charAt(rightSym);
-
-            while (leftSym < rightSym && !Character.isLetter(leftSymbol)) {
+            while (leftSym < rightSym && !Character.isLetter(inputString.charAt(leftSym))) {
                 leftSym++;
             }
 
-            while (leftSym < rightSym && !Character.isLetter(rightSymbol)) {
+            while (leftSym < rightSym && !Character.isLetter(inputString.charAt(rightSym))) {
                 rightSym--;
             }
-            leftSymbol = inputString.charAt(leftSym);
-            rightSymbol = inputString.charAt(rightSym);
-            
-            if (Character.toLowerCase(leftSymbol) != Character.toLowerCase(rightSymbol)) {
+
+            if (Character.toLowerCase(inputString.charAt(leftSym))
+                    != Character.toLowerCase(inputString.charAt(rightSym))) {
                 return false;
             }
 
