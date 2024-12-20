@@ -1,5 +1,8 @@
 package com.walking.intensive.chapter3.task12;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * Девочка Света очень любит играть в мячики. Она поставила в ряд корзинки и в некоторые положила по 1 мячику.
  * За 1 раз она может переложить 1 мячик в соседнюю корзинку. В 1 корзинке может поместиться много мячиков.
@@ -40,11 +43,48 @@ package com.walking.intensive.chapter3.task12;
  */
 public class Task12 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        String baskets = "110";
+        int[] result = getMovementsNumber(baskets);
+        System.out.println(Arrays.toString(result));
+    }
+
+    static boolean validBaskets(String baskets) {
+        for (char c : baskets.toCharArray()) {
+            if (c != '0' && c != '1') {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     static int[] getMovementsNumber(String baskets) {
-        // Ваш код
-        return new int[]{};
+        if (!validBaskets(baskets) || baskets == null) {
+            return new int[]{};
+        }
+
+        int length = baskets.length();
+        int[] arr = new int[length];
+        int[] numberOfBallsInBaskets = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            numberOfBallsInBaskets[i] = baskets.charAt(i) - '0';
+        }
+
+        for (int i = 0; i < length; i++) {
+            int totalMoves = 0;
+
+            for (int j = 0; j < i; j++) {
+                totalMoves += numberOfBallsInBaskets[j] * (i - j);
+            }
+
+            for (int j = i + 1; j < length; j++) {
+                totalMoves += numberOfBallsInBaskets[j] * (j - i);
+            }
+
+            arr[i] = totalMoves;
+        }
+
+        return arr;
     }
 }
