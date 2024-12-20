@@ -50,9 +50,9 @@ public class Task7 {
             sum = getDivisorsSum(n);
             sum2 = getDivisorsSum(sum);
 
-        } while (n != sum2 
-              || sum == sum2
-              || sum > n);
+        } while (n != sum2
+                || sum == sum2
+                || sum > n);
 
         return n;
     }
