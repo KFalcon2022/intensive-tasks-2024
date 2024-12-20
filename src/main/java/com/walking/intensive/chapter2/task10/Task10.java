@@ -23,7 +23,7 @@ public class Task10 {
     }
 
     static boolean isPalindrome(String inputString) {
-        inputString.toLowerCase();
+        inputString = inputString.toLowerCase();
         int leftIndex = 0;
         int rightIndex = inputString.length() - 1;
         char left = inputString.charAt(leftIndex);
@@ -42,10 +42,11 @@ public class Task10 {
                 return false;
             }
 
+            rightIndex--;
+            leftIndex++;
         }
 
-        rightIndex--;
-        leftIndex++;
+
 
         return true;
     }
