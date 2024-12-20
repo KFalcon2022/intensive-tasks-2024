@@ -15,7 +15,6 @@ public class Task10 {
         String inputString2 = "Ежу хуже";
         String inputString = "!!!!гаа12г";
         System.out.println(isPalindrome(inputString));
-        //символы нижней кириллицы: [1072,1103] + 1105
     }
 
     static boolean isPalindrome(String inputString) {
@@ -23,31 +22,31 @@ public class Task10 {
             return false;
         }
 
-        inputString = inputString.toLowerCase();
+        int leftSym = 0;
+        int rightSym = inputString.length() - 1;
 
-        int leftSymbol = 0;
-        int rightSymbol = inputString.length() - 1;
-
-        while (leftSymbol < rightSymbol) {
-            while (leftSymbol < rightSymbol && !isCyrillicLetter((inputString.charAt(leftSymbol)))) {
-                leftSymbol++;
+        while (leftSym < rightSym) {
+            while (leftSym < rightSym && Character.isLetter(leftSym)) {
+                leftSym++;
             }
 
-            while (leftSymbol < rightSymbol && !isCyrillicLetter((inputString.charAt(rightSymbol)))) {
-                rightSymbol--;
+            while (leftSym < rightSym && Character.isLetter(rightSym)) {
+                rightSym--;
             }
 
-            if (inputString.charAt(leftSymbol) != inputString.charAt(rightSymbol)) {
+            if (Character.toLowerCase(inputString.charAt(leftSym))
+                    != Character.toLowerCase(inputString.charAt(rightSym))) {
+
                 return false;
             }
 
-            leftSymbol++;
-            rightSymbol--;
+            leftSym++;
+            rightSym--;
         }
 
         return true;
     }
-
+//    Пусть два нижних метода останутся мне на память.
     static boolean isCyrillicLetter(char letter) {
         return (int) letter >= 1072 && (int) letter <= 1105 && (int) letter != 1104;
     }
