@@ -13,7 +13,7 @@ public class Task10 {
     public static void main(String[] args) {
         String inputString1 = "   Муза,   ранясь !!! )шилом (опыта), ты помолишься на разум!?!   ";
         String inputString2 = "Ежу хуже";
-        String inputString = "!!!!гаа12г";
+        String inputString = "!!!!гаа12г ";
         System.out.println(isPalindrome(inputString));
     }
 
@@ -26,17 +26,20 @@ public class Task10 {
         int rightSym = inputString.length() - 1;
 
         while (leftSym < rightSym) {
-            while (leftSym < rightSym && Character.isLetter(leftSym)) {
+            char leftSymbol = inputString.charAt(leftSym);
+            char rightSymbol = inputString.charAt(rightSym);
+
+            while (leftSym < rightSym && !Character.isLetter(leftSymbol)) {
                 leftSym++;
             }
 
-            while (leftSym < rightSym && Character.isLetter(rightSym)) {
+            while (leftSym < rightSym && !Character.isLetter(rightSymbol)) {
                 rightSym--;
             }
-
-            if (Character.toLowerCase(inputString.charAt(leftSym))
-                    != Character.toLowerCase(inputString.charAt(rightSym))) {
-
+            leftSymbol = inputString.charAt(leftSym);
+            rightSymbol = inputString.charAt(rightSym);
+            
+            if (Character.toLowerCase(leftSymbol) != Character.toLowerCase(rightSymbol)) {
                 return false;
             }
 
@@ -46,7 +49,8 @@ public class Task10 {
 
         return true;
     }
-//    Пусть два нижних метода останутся мне на память.
+
+    //    Пусть два нижних метода останутся мне на память.
     static boolean isCyrillicLetter(char letter) {
         return (int) letter >= 1072 && (int) letter <= 1105 && (int) letter != 1104;
     }
