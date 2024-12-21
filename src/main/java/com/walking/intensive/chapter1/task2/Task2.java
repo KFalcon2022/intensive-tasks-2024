@@ -32,13 +32,29 @@ package com.walking.intensive.chapter1.task2;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task2 {
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-    }
+	}
 
-    static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
-
-        return null; // Заглушка. При реализации - удалить
-    }
+	static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
+		// Привязка к количеству этажей в подъезде, при изменении этого числа код работать не будет
+		if (floorAmount < 1 || entranceAmount < 1 || flatNumber < 1) {
+			return "Некорректные входные данные";
+		}
+		int maxFlatPerFloor = 4;
+		int flatsPerEntrance = maxFlatPerFloor * floorAmount;
+		if (flatNumber > flatsPerEntrance * entranceAmount) {
+			return "Такой квартиры не существует";
+		}
+		int entrance = (flatNumber - 1) / flatsPerEntrance + 1;
+		int localFlatNumber = (flatNumber - 1) % flatsPerEntrance + 1;
+		int floorNumber = (localFlatNumber - 1) / maxFlatPerFloor + 1;
+		String elevatorSide = (localFlatNumber % 2 == 0) ? "справа" : "слева";
+		String afterElevatorSide = (localFlatNumber % 2 == 0) ? "вправо" : "влево";
+		return flatNumber + " кв - "
+				+ entrance + " подъезд, "
+				+ floorNumber + " этаж, "
+				+ elevatorSide + " от лифта, "
+				+ afterElevatorSide;
+	}
 }
